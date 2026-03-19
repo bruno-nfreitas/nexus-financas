@@ -1,3 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c5cfc"/>
+      <stop offset="100%" style="stop-color:#5e3de8"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.7"/>
+    </linearGradient>
+    <linearGradient id="shine2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.2"/>
+    </linearGradient>
+  </defs>
+  <!-- Background with rounded corners -->
+  <rect width="180" height="180" rx="40" fill="url(#bg)"/>
+  <!-- Subtle inner glow -->
+  <rect width="180" height="180" rx="40" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+  <!-- Diamond shape - main -->
+  <polygon points="90,28 142,80 90,152 38,80" fill="url(#shine)"/>
+  <!-- Diamond top facet (darker to create 3D) -->
+  <polygon points="90,28 142,80 90,80" fill="url(#shine2)"/>
+  <!-- Diamond sparkle top right -->
+  <line x1="148" y1="32" x2="148" y2="44" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="142" y1="38" x2="154" y2="38" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"/>
+  <!-- Small sparkle bottom left -->
+  <line x1="36" y1="118" x2="36" y2="126" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="32" y1="122" x2="40" y2="122" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -7,479 +37,477 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Nexus">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%237c5cfc'/%3E%3Cpolygon points='50,18 72,42 50,82 28,42' fill='white' opacity='.95'/%3E%3Cpolygon points='50,18 72,42 50,42' fill='white' opacity='.45'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%237c5cfc'/%3E%3Cpolygon points='90,32 134,76 90,148 46,76' fill='white' opacity='.95'/%3E%3Cpolygon points='90,32 134,76 90,76' fill='white' opacity='.45'/%3E%3C/svg%3E">
 <title>Nexus — Finanças Inteligentes</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<!-- Supabase SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-  :root {
-    --bg:#0a0a0f; --bg2:#12121a; --bg3:#1a1a26;
-    --card:#16161f; --card2:#1e1e2e;
-    --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.12);
-    --accent:#7c5cfc; --accent2:#a78bfa; --accent3:#c4b5fd;
-    --green:#22d3a5; --red:#f87171; --yellow:#fbbf24; --blue:#38bdf8;
-    --text:#f1f0f8; --text2:#9e9bb8; --text3:#6b6885;
-    --radius:16px; --radius2:12px; --radius3:8px;
-    --ease:0.22s cubic-bezier(0.4,0,0.2,1);
-    --sidebar-w:230px; --bottom-h:64px;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;min-height:100vh;overflow-x:hidden}
-  h1,h2,h3,h4{font-family:'Syne',sans-serif;font-weight:700}
-  ::-webkit-scrollbar{width:4px;height:4px}
-  ::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:2px}
+:root{
+  --bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a26;
+  --card:#16161f;--card2:#1e1e2e;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --accent:#7c5cfc;--accent2:#a78bfa;
+  --green:#22d3a5;--red:#f87171;--yellow:#fbbf24;--blue:#38bdf8;
+  --text:#f1f0f8;--text2:#9e9bb8;--text3:#6b6885;
+  --r:16px;--r2:12px;--r3:8px;
+  --ease:0.22s cubic-bezier(0.4,0,0.2,1);
+  --sw:230px;--bh:64px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;min-height:100vh;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;font-weight:700}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:2px}
 
-  /* ANIMATIONS */
-  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-  @keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
-  @keyframes notifIn{from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1}}
-  @keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes notifIn{from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes typing{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
 
-  /* LOADING SCREEN */
-  #loading-screen{
-    position:fixed;inset:0;background:var(--bg);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    z-index:9999;gap:20px;
-  }
-  .loader-logo{font-size:48px;animation:fadeIn .5s ease}
-  .loader-title{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;background:linear-gradient(135deg,var(--accent2),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  .loader-spin{width:32px;height:32px;border:2px solid var(--bg3);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
-  .loader-msg{font-size:13px;color:var(--text3)}
+/* LOADING */
+#ls{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:20px}
+.ll{font-size:48px;animation:fadeIn .5s ease}
+.lt{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;background:linear-gradient(135deg,var(--accent2),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ls{width:32px;height:32px;border:2px solid var(--bg3);border-top-color:var(--yellow);border-radius:50%;animation:spin .8s linear infinite}
 
-  /* AUTH */
-  #auth-screen{
-    position:fixed;inset:0;background:var(--bg);
-    display:none;flex-direction:column;align-items:center;justify-content:center;
-    z-index:1000;overflow-y:auto;padding:20px;
-  }
-  .auth-orb{position:fixed;border-radius:50%;filter:blur(100px);opacity:.18;pointer-events:none;z-index:0}
-  .auth-orb.o1{width:380px;height:380px;background:var(--accent);top:-100px;left:-100px}
-  .auth-orb.o2{width:320px;height:320px;background:var(--green);bottom:-80px;right:-80px}
-  .auth-card{
-    background:var(--card);border:1px solid var(--border2);
-    border-radius:24px;padding:40px 34px;
-    width:100%;max-width:400px;
-    display:flex;flex-direction:column;
-    position:relative;z-index:1;animation:fadeUp .4s ease;
-    box-shadow:0 24px 64px rgba(0,0,0,.5);
-  }
-  .auth-logo{display:flex;align-items:center;gap:10px;margin-bottom:30px}
-  .auth-logo-icon{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--accent),var(--green));display:flex;align-items:center;justify-content:center;font-size:17px}
-  .auth-logo-text{font-family:'Syne',sans-serif;font-size:21px;font-weight:800;background:linear-gradient(135deg,var(--accent2),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  .auth-title{font-size:22px;margin-bottom:5px}
-  .auth-sub{color:var(--text2);font-size:13px;margin-bottom:26px}
-  .auth-err{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);border-radius:var(--radius3);padding:10px 14px;font-size:13px;color:var(--red);margin-bottom:16px;display:none}
+/* AUTH */
+#auth-screen{position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:1000;overflow-y:auto;padding:20px}
+.aorb{position:fixed;border-radius:50%;filter:blur(100px);opacity:.15;pointer-events:none;z-index:0}
+.aorb.o1{width:360px;height:360px;background:var(--accent);top:-100px;left:-100px}
+.aorb.o2{width:300px;height:300px;background:var(--green);bottom:-80px;right:-80px}
+.auth-card{background:var(--card);border:1px solid var(--border2);border-radius:24px;padding:40px 34px;width:100%;max-width:400px;display:flex;flex-direction:column;position:relative;z-index:1;animation:fadeUp .4s ease;box-shadow:0 24px 64px rgba(0,0,0,.5)}
+.alo{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+.ali{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--accent),var(--green));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.alt{font-family:'Syne',sans-serif;font-size:21px;font-weight:800;background:linear-gradient(135deg,var(--accent2),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.atitle{font-size:22px;margin-bottom:5px}
+.asub{color:var(--text2);font-size:13px;margin-bottom:24px}
+.aerr{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);border-radius:var(--r3);padding:10px 14px;font-size:13px;color:var(--red);margin-bottom:14px;display:none}
+.aswitch{text-align:center;margin-top:16px;font-size:13px;color:var(--text2)}
+.aswitch a{color:var(--accent2);cursor:pointer}
 
-  /* FORMS */
-  .fg{margin-bottom:15px}
-  .fl{display:block;font-size:11px;font-weight:600;color:var(--text2);margin-bottom:6px;letter-spacing:.04em;text-transform:uppercase}
-  .fi{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius3);padding:12px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;transition:border-color var(--ease),box-shadow var(--ease);outline:none;-webkit-appearance:none}
-  .fi:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,92,252,.15)}
-  .fi::placeholder{color:var(--text3)}
-  select.fi{cursor:pointer}
-  select.fi option{background:var(--bg2)}
-  .fr{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+/* FORMS */
+.fg{margin-bottom:14px}
+.fl{display:block;font-size:11px;font-weight:600;color:var(--text2);margin-bottom:6px;letter-spacing:.04em;text-transform:uppercase}
+.fi{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r3);padding:12px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;transition:border-color var(--ease),box-shadow var(--ease);outline:none;-webkit-appearance:none}
+.fi:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,92,252,.15)}
+.fi::placeholder{color:var(--text3)}
+select.fi{cursor:pointer}
+select.fi option{background:var(--bg2)}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
-  /* BUTTONS */
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:12px 20px;border-radius:var(--radius3);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;border:none;transition:all var(--ease);outline:none;user-select:none}
-  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
-  .btn-p{background:linear-gradient(135deg,var(--accent),#5e3de8);color:#fff;width:100%;box-shadow:0 6px 20px rgba(124,92,252,.3)}
-  .btn-p:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 10px 26px rgba(124,92,252,.4)}
-  .btn-s{background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
-  .btn-s:hover{background:var(--card2);color:var(--text)}
-  .btn-g{background:linear-gradient(135deg,var(--green),#0d9488);color:#fff;width:100%;box-shadow:0 5px 16px rgba(34,211,165,.25)}
-  .btn-g:hover:not(:disabled){transform:translateY(-1px)}
-  .btn-sm{padding:7px 14px;font-size:13px}
-  .btn-loading{position:relative;color:transparent!important}
-  .btn-loading::after{content:'';position:absolute;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+/* number input with editable display */
+.num-wrap{position:relative}
+.num-wrap .fi{padding-right:70px}
+.num-unit{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--text3);pointer-events:none}
 
-  .auth-switch{text-align:center;margin-top:18px;font-size:13px;color:var(--text2)}
-  .auth-switch a{color:var(--accent2);cursor:pointer}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:12px 20px;border-radius:var(--r3);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;border:none;transition:all var(--ease);outline:none;user-select:none}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+.btn-p{background:linear-gradient(135deg,var(--accent),#5e3de8);color:#fff;width:100%;box-shadow:0 6px 20px rgba(124,92,252,.3)}
+.btn-p:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 10px 26px rgba(124,92,252,.4)}
+.btn-y{background:linear-gradient(135deg,var(--accent),#5e3de8);color:#fff;font-weight:600;box-shadow:0 6px 20px rgba(124,92,252,.3)}
+.btn-y:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 10px 26px rgba(124,92,252,.4)}
+.btn-s{background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
+.btn-s:hover{background:var(--card2);color:var(--text)}
+.btn-g{background:linear-gradient(135deg,var(--green),#0d9488);color:#fff;width:100%;box-shadow:0 5px 16px rgba(34,211,165,.25)}
+.btn-g:hover:not(:disabled){transform:translateY(-1px)}
+.btn-sm{padding:7px 14px;font-size:13px}
+.btn-ld{position:relative;color:transparent!important}
+.btn-ld::after{content:'';position:absolute;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
 
-  /* MOBILE AUTH FIX */
-  @media(max-width:480px){
-    #auth-screen{padding:16px;align-items:flex-start;padding-top:40px}
-    .auth-card{padding:28px 20px;border-radius:20px}
-    .auth-logo{margin-bottom:22px}
-    .auth-title{font-size:20px}
-    .auth-sub{font-size:13px;margin-bottom:20px}
-    .fi{font-size:16px;padding:13px 14px} /* 16px evita zoom no iOS */
-    .btn{font-size:15px;padding:14px 20px}
-  }
+/* PROFILE */
+#profile-screen{position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:flex-start;z-index:900;overflow-y:auto;padding:24px 20px 48px}
+.pcard{background:var(--card);border:1px solid var(--border2);border-radius:24px;padding:34px 30px;width:100%;max-width:500px;animation:fadeUp .4s ease;box-shadow:0 24px 60px rgba(0,0,0,.4);margin-top:16px}
+.sbar{display:flex;gap:5px;margin-bottom:26px}
+.sseg{height:3px;flex:1;background:var(--bg3);border-radius:2px;transition:background .3s}
+.sseg.act{background:var(--accent)}
+.sseg.dn{background:var(--green)}
+.ps{display:none;animation:fadeIn .25s ease}
+.ps.active{display:block}
+.pt{font-size:20px;margin-bottom:4px}
+.psb{color:var(--text2);font-size:13px;margin-bottom:20px;line-height:1.5}
+.rg{display:flex;gap:7px;flex-wrap:wrap}
+.rb{padding:7px 15px;border:1px solid var(--border);border-radius:30px;cursor:pointer;font-size:13px;color:var(--text2);transition:all var(--ease);user-select:none}
+.rb:hover{border-color:var(--accent);color:var(--accent2)}
+.rb.sel{background:rgba(124,92,252,.15);border-color:var(--accent);color:var(--accent2)}
+.sact{display:flex;gap:10px;margin-top:16px}
+.sact .btn-p{flex:2}.sact .btn-s{flex:1}
 
-  /* PROFILE SETUP */
-  #profile-screen{position:fixed;inset:0;background:var(--bg);display:none;align-items:flex-start;justify-content:center;z-index:900;overflow-y:auto;padding:24px 20px 48px}
-  .profile-card{background:var(--card);border:1px solid var(--border2);border-radius:24px;padding:34px 30px;width:100%;max-width:500px;animation:fadeUp .4s ease;box-shadow:0 24px 60px rgba(0,0,0,.4);margin-top:16px}
-  .step-bar{display:flex;gap:5px;margin-bottom:28px}
-  .step-seg{height:3px;flex:1;background:var(--bg3);border-radius:2px;transition:background .3s}
-  .step-seg.active{background:var(--accent)}
-  .step-seg.done{background:var(--green)}
-  .ps{display:none;animation:fadeIn .25s ease}
-  .ps.active{display:block}
-  .ps-title{font-size:20px;margin-bottom:4px}
-  .ps-sub{color:var(--text2);font-size:13px;margin-bottom:22px;line-height:1.5}
-  .radio-group{display:flex;gap:7px;flex-wrap:wrap}
-  .rb{padding:7px 15px;border:1px solid var(--border);border-radius:30px;cursor:pointer;font-size:13px;color:var(--text2);transition:all var(--ease);user-select:none}
-  .rb:hover{border-color:var(--accent);color:var(--accent2)}
-  .rb.sel{background:rgba(124,92,252,.15);border-color:var(--accent);color:var(--accent2)}
-  .step-actions{display:flex;gap:10px;margin-top:18px}
-  .step-actions .btn-p{flex:2}
-  .step-actions .btn-s{flex:1}
+/* APP */
+#app{display:none;min-height:100vh}
+#app.v{display:flex}
 
-  /* APP SHELL */
-  #app{display:none;min-height:100vh}
-  #app.v{display:flex}
+/* SIDEBAR */
+.sidebar{width:var(--sw);background:var(--card);border-right:1px solid var(--border);height:100vh;position:fixed;left:0;top:0;display:flex;flex-direction:column;z-index:100;transition:transform var(--ease)}
+.sblogo{padding:22px 18px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.sbli{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--green));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sblt{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;background:linear-gradient(135deg,var(--accent2),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sbnav{flex:1;padding:14px 8px;overflow-y:auto}
+.nlbl{font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--text3);padding:10px 12px 6px;text-transform:uppercase}
+.ni{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r3);cursor:pointer;color:var(--text2);font-size:13px;font-weight:500;transition:all var(--ease);margin-bottom:2px;position:relative}
+.ni:hover{background:var(--bg3);color:var(--text)}
+.ni.act{background:rgba(124,92,252,.12);color:var(--accent2)}
+.ni.act::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:18px;border-radius:0 3px 3px 0;background:var(--accent)}
+.ni-i{font-size:16px;flex-shrink:0}
+.nbadge{margin-left:auto;background:var(--accent);color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:20px}
+.sbfoot{padding:12px 8px;border-top:1px solid var(--border)}
+.upill{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:var(--r3);background:var(--bg3);cursor:pointer;transition:background var(--ease)}
+.upill:hover{background:var(--card2)}
+.uav{width:30px;height:30px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--accent),var(--green));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff}
+.sdot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;margin-right:5px;animation:pulse 2s ease infinite}
 
-  /* SIDEBAR */
-  .sidebar{width:var(--sidebar-w);background:var(--card);border-right:1px solid var(--border);height:100vh;position:fixed;left:0;top:0;display:flex;flex-direction:column;z-index:100;transition:transform var(--ease)}
-  .sb-logo{padding:22px 18px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
-  .sb-logo-icon{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--green));display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
-  .sb-logo-text{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;background:linear-gradient(135deg,var(--accent2),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  .sb-nav{flex:1;padding:14px 8px;overflow-y:auto}
-  .nav-lbl{font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--text3);padding:10px 12px 6px;text-transform:uppercase}
-  .ni{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius3);cursor:pointer;color:var(--text2);font-size:13px;font-weight:500;transition:all var(--ease);margin-bottom:2px;position:relative}
-  .ni:hover{background:var(--bg3);color:var(--text)}
-  .ni.act{background:rgba(124,92,252,.12);color:var(--accent2)}
-  .ni.act::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:18px;border-radius:0 3px 3px 0;background:var(--accent)}
-  .ni-icon{font-size:16px;flex-shrink:0}
-  .nbadge{margin-left:auto;background:var(--accent);color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:20px}
-  .sb-foot{padding:12px 8px;border-top:1px solid var(--border)}
-  .user-pill{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:var(--radius3);background:var(--bg3);cursor:pointer;transition:background var(--ease)}
-  .user-pill:hover{background:var(--card2)}
-  .u-av{width:30px;height:30px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--accent),var(--green));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+/* MAIN */
+.main{margin-left:var(--sw);flex:1;min-height:100vh;display:flex;flex-direction:column;background:var(--bg)}
+.topbar{height:58px;background:rgba(10,10,15,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:12px;position:sticky;top:0;z-index:50}
+.tbtitle{font-size:16px;font-weight:700;flex:1}
+.ib{width:34px;height:34px;background:var(--card);border:1px solid var(--border);border-radius:var(--r3);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all var(--ease);position:relative;flex-shrink:0}
+.ib:hover{background:var(--card2);border-color:var(--border2)}
+.ndot{position:absolute;top:5px;right:5px;width:7px;height:7px;background:var(--accent);border-radius:50%;border:2px solid var(--bg)}
+.mobt{display:none;width:34px;height:34px;background:var(--card);border:1px solid var(--border);border-radius:var(--r3);align-items:center;justify-content:center;font-size:15px;cursor:pointer;flex-shrink:0}
 
-  /* MAIN */
-  .main{margin-left:var(--sidebar-w);flex:1;min-height:100vh;display:flex;flex-direction:column;background:var(--bg)}
+/* PAGES */
+.page{display:none;padding:22px;animation:fadeUp .3s ease}
+.page.act{display:block}
+.ph{margin-bottom:20px}
+.ph h2{font-size:21px}
+.ph p{color:var(--text2);font-size:13px;margin-top:3px}
 
-  /* TOPBAR */
-  .topbar{height:58px;background:rgba(10,10,15,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:12px;position:sticky;top:0;z-index:50}
-  .topbar-title{font-size:16px;font-weight:700;flex:1}
-  .ib{width:34px;height:34px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius3);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all var(--ease);position:relative;flex-shrink:0}
-  .ib:hover{background:var(--card2);border-color:var(--border2)}
-  .ndot{position:absolute;top:5px;right:5px;width:7px;height:7px;background:var(--accent);border-radius:50%;border:2px solid var(--bg)}
-  .mob-toggle{display:none;width:34px;height:34px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius3);align-items:center;justify-content:center;font-size:15px;cursor:pointer;flex-shrink:0}
+/* STAT CARDS */
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;transition:all var(--ease);animation:fadeUp .4s ease both}
+.sc:hover{border-color:var(--border2);transform:translateY(-1px)}
+.sclbl{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.scval{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin:6px 0 4px}
+.scd{font-size:11px;display:flex;align-items:center;gap:3px;color:var(--text3)}
+.scd.up{color:var(--green)}.scd.dn{color:var(--red)}
 
-  /* PAGES */
-  .page{display:none;padding:22px;animation:fadeUp .3s ease}
-  .page.act{display:block}
-  .ph{margin-bottom:22px}
-  .ph h2{font-size:21px}
-  .ph p{color:var(--text2);font-size:13px;margin-top:3px}
+/* CHART CARDS */
+.cc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;animation:fadeUp .4s ease both;margin-bottom:14px}
+.cch{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.cct{font-size:13px;font-weight:600}
+.ccs{font-size:11px;color:var(--text3);margin-top:2px}
+.badge{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px}
+.bg{background:rgba(34,211,165,.1);color:var(--green)}
+.by{background:rgba(251,191,36,.1);color:var(--yellow)}
+.bp{background:rgba(124,92,252,.12);color:var(--accent2)}
+.br{background:rgba(248,113,113,.1);color:var(--red)}
 
-  /* STAT CARDS */
-  .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
-  .sc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;position:relative;overflow:hidden;transition:all var(--ease);animation:fadeUp .4s ease both}
-  .sc:hover{border-color:var(--border2);transform:translateY(-1px)}
-  .sc-lbl{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
-  .sc-val{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin:6px 0 4px}
-  .sc-d{font-size:11px;display:flex;align-items:center;gap:3px;color:var(--text3)}
-  .sc-d.up{color:var(--green)} .sc-d.dn{color:var(--red)}
+/* ALERTS */
+.ai{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:13px 15px;display:flex;align-items:flex-start;gap:11px;margin-bottom:9px;transition:all var(--ease);animation:fadeUp .3s ease both}
+.ai:hover{border-color:var(--border2)}
+.aiico{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.aw{background:rgba(251,191,36,.12)}.ainfo{background:rgba(56,189,248,.12)}.aok{background:rgba(34,211,165,.12)}.adng{background:rgba(248,113,113,.12)}
+.aititle{font-size:13px;font-weight:600;margin-bottom:2px}
+.aidesc{font-size:12px;color:var(--text2);line-height:1.5}
+.aitime{font-size:10px;color:var(--text3);white-space:nowrap;margin-top:2px}
 
-  /* CHART CARDS */
-  .cc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;animation:fadeUp .4s ease both;margin-bottom:14px}
-  .cc-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-  .cc-t{font-size:13px;font-weight:600}
-  .cc-s{font-size:11px;color:var(--text3);margin-top:2px}
-  .badge{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px}
-  .badge-g{background:rgba(34,211,165,.1);color:var(--green)}
-  .badge-p{background:rgba(124,92,252,.12);color:var(--accent2)}
-  .badge-y{background:rgba(251,191,36,.1);color:var(--yellow)}
+/* EXPENSES */
+.expl{display:grid;grid-template-columns:1fr 330px;gap:18px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.ptt{font-size:14px;font-weight:600;margin-bottom:16px}
+.ei{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--border);animation:fadeUp .25s ease}
+.ei:last-child{border-bottom:none}
+.eico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.cf{background:rgba(251,191,36,.12)}.ct{background:rgba(56,189,248,.12)}.cl{background:rgba(167,139,250,.12)}
+.cb{background:rgba(248,113,113,.12)}.ch{background:rgba(34,211,165,.12)}.ce{background:rgba(124,92,252,.12)}.co{background:rgba(156,163,175,.12)}
+.edel{background:none;border:none;cursor:pointer;color:var(--text3);font-size:14px;padding:3px;transition:color var(--ease)}
+.edel:hover{color:var(--red)}
 
-  /* ALERTS */
-  .ai{background:var(--card);border:1px solid var(--border);border-radius:var(--radius2);padding:13px 15px;display:flex;align-items:flex-start;gap:11px;margin-bottom:9px;transition:all var(--ease);animation:fadeUp .3s ease both}
-  .ai:hover{border-color:var(--border2)}
-  .ai-icon{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
-  .aw{background:rgba(251,191,36,.12)} .ainfo{background:rgba(56,189,248,.12)} .aok{background:rgba(34,211,165,.12)} .adng{background:rgba(248,113,113,.12)}
-  .ai-title{font-size:13px;font-weight:600;margin-bottom:2px}
-  .ai-desc{font-size:12px;color:var(--text2);line-height:1.5}
-  .ai-time{font-size:10px;color:var(--text3);white-space:nowrap;margin-top:2px}
+/* INVESTMENTS */
+.invsumm{background:linear-gradient(135deg,rgba(124,92,252,.1),rgba(34,211,165,.06));border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-bottom:18px}
+.invtlbl{font-size:12px;color:var(--text2);margin-bottom:5px}
+.invtval{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;background:linear-gradient(135deg,var(--accent2),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px}
+.imr{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.imc{background:var(--bg2);border-radius:var(--r3);padding:11px}
+.imcl{font-size:11px;color:var(--text3);margin-bottom:3px}
+.imcv{font-size:15px;font-weight:700;font-family:'Syne',sans-serif}
+.invg{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+.icard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;transition:all var(--ease);animation:fadeUp .4s ease both}
+.icard:hover{border-color:var(--border2);transform:translateY(-1px)}
+.ictop{display:flex;align-items:center;gap:9px;margin-bottom:11px}
+.icico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.icval{font-family:'Syne',sans-serif;font-size:19px;font-weight:700;margin-bottom:7px}
+.icbar{height:3px;background:var(--bg3);border-radius:2px;margin-bottom:6px;overflow:hidden}
+.icbf{height:100%;border-radius:2px}
+.icmeta{display:flex;justify-content:space-between;font-size:11px;color:var(--text3)}
 
-  /* EXPENSES */
-  .exp-layout{display:grid;grid-template-columns:1fr 330px;gap:18px;align-items:start}
-  .panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
-  .pt{font-size:14px;font-weight:600;margin-bottom:16px}
-  .ei{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--border);animation:fadeUp .25s ease}
-  .ei:last-child{border-bottom:none}
-  .ei-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-  .c-food{background:rgba(251,191,36,.12)} .c-transport{background:rgba(56,189,248,.12)} .c-leisure{background:rgba(167,139,250,.12)}
-  .c-bills{background:rgba(248,113,113,.12)} .c-health{background:rgba(34,211,165,.12)} .c-education{background:rgba(124,92,252,.12)} .c-other{background:rgba(156,163,175,.12)}
-  .edel{background:none;border:none;cursor:pointer;color:var(--text3);font-size:14px;padding:3px;transition:color var(--ease)}
-  .edel:hover{color:var(--red)}
+/* GOALS */
+.gg{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.gc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;transition:all var(--ease);animation:fadeUp .4s ease both}
+.gc:hover{border-color:var(--border2)}
+.gctop{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.gcemo{font-size:26px;margin-bottom:7px}
+.gcname{font-size:15px;font-weight:700}
+.gctgt{font-size:12px;color:var(--text2);margin-top:2px}
+.gdel{background:none;border:none;cursor:pointer;color:var(--text3);font-size:13px;padding:3px;transition:color var(--ease)}
+.gdel:hover{color:var(--red)}
+.pbar{height:6px;background:var(--bg3);border-radius:3px;margin:9px 0 7px;overflow:hidden}
+.pfill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width 1s cubic-bezier(.4,0,.2,1)}
+.girow{display:flex;justify-content:space-between;font-size:12px}
 
-  /* INVESTMENTS */
-  .inv-summ{background:linear-gradient(135deg,rgba(124,92,252,.1),rgba(34,211,165,.06));border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:18px}
-  .inv-tot-lbl{font-size:12px;color:var(--text2);margin-bottom:5px}
-  .inv-tot-val{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;background:linear-gradient(135deg,var(--accent2),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px}
-  .imr{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .imc{background:var(--bg2);border-radius:var(--radius3);padding:11px}
-  .imc-l{font-size:11px;color:var(--text3);margin-bottom:3px}
-  .imc-v{font-size:15px;font-weight:700;font-family:'Syne',sans-serif}
-  .inv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
-  .icard{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:all var(--ease);animation:fadeUp .4s ease both}
-  .icard:hover{border-color:var(--border2);transform:translateY(-1px)}
-  .ic-top{display:flex;align-items:center;gap:9px;margin-bottom:11px}
-  .ic-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px}
-  .ic-val{font-family:'Syne',sans-serif;font-size:19px;font-weight:700;margin-bottom:7px}
-  .ic-bar{height:3px;background:var(--bg3);border-radius:2px;margin-bottom:6px;overflow:hidden}
-  .ic-bar-fill{height:100%;border-radius:2px}
-  .ic-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--text3)}
+/* MODAL */
+.mov{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center;z-index:600;padding:0}
+.mov.open{display:flex}
+.mcard{background:var(--card);border:1px solid var(--border2);border-radius:22px 22px 0 0;padding:26px 22px 40px;width:100%;max-width:480px;animation:slideUp .3s ease;box-shadow:0 -16px 50px rgba(0,0,0,.5)}
+.mhdl{width:36px;height:3px;background:var(--bg3);border-radius:2px;margin:0 auto 20px}
+.mt{font-size:17px;margin-bottom:3px}
+.msb{font-size:12px;color:var(--text2);margin-bottom:18px}
+.ma{display:flex;gap:8px;margin-top:18px}
+.ma .btn{flex:1}
 
-  /* GOALS */
-  .gg{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
-  .gc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:all var(--ease);animation:fadeUp .4s ease both}
-  .gc:hover{border-color:var(--border2)}
-  .gc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
-  .gc-emoji{font-size:26px;margin-bottom:7px}
-  .gc-name{font-size:15px;font-weight:700}
-  .gc-target{font-size:12px;color:var(--text2);margin-top:2px}
-  .gdel{background:none;border:none;cursor:pointer;color:var(--text3);font-size:13px;padding:3px;transition:color var(--ease)}
-  .gdel:hover{color:var(--red)}
-  .pbar{height:6px;background:var(--bg3);border-radius:3px;margin:9px 0 7px;overflow:hidden}
-  .pfill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width 1s cubic-bezier(.4,0,.2,1)}
-  .gi-row{display:flex;justify-content:space-between;font-size:12px}
+/* SIMULATOR */
+.siml{display:grid;grid-template-columns:300px 1fr;gap:18px;align-items:start}
+.simp{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.srh{text-align:center;padding:22px 14px;border-bottom:1px solid var(--border);margin-bottom:18px}
+.srl{font-size:11px;color:var(--text2);margin-bottom:7px;text-transform:uppercase;letter-spacing:.04em}
+.srv{font-family:'Syne',sans-serif;font-size:34px;font-weight:800;background:linear-gradient(135deg,var(--accent2),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.srs{font-size:12px;color:var(--text3);margin-top:5px}
+.sbk{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px}
+.sbc{background:var(--bg2);border-radius:var(--r3);padding:13px;text-align:center}
+.sbcl{font-size:11px;color:var(--text3);margin-bottom:4px}
+.sbcv{font-family:'Syne',sans-serif;font-size:16px;font-weight:700}
+.rng{margin-bottom:16px}
+.rnt{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
+.rnl{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.04em}
+.rnc{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--accent2)}
+input[type=range]{width:100%;-webkit-appearance:none;height:3px;background:var(--bg3);border-radius:2px;outline:none;margin:3px 0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 0 4px rgba(124,92,252,.2)}
+.re{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:2px}
+.stg{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:4px}
+.stb{padding:8px 6px;border:1px solid var(--border);border-radius:var(--r3);cursor:pointer;font-size:11px;font-weight:500;color:var(--text2);transition:all var(--ease);text-align:center;user-select:none;line-height:1.4}
+.stb:hover{border-color:var(--accent);color:var(--accent2)}
+.stb.act{background:rgba(124,92,252,.12);border-color:var(--accent);color:var(--accent2)}
+/* editable sim inputs */
+.sim-input-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.sim-edit{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r3);padding:6px 10px;color:var(--text);font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--accent2);width:120px;outline:none;-webkit-appearance:none}
+.sim-edit:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(124,92,252,.15)}
 
-  /* MODAL */
-  .moverlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center;z-index:600;padding:0}
-  .moverlay.open{display:flex}
-  .mcard{background:var(--card);border:1px solid var(--border2);border-radius:22px 22px 0 0;padding:26px 22px 40px;width:100%;max-width:480px;animation:slideUp .3s ease;box-shadow:0 -16px 50px rgba(0,0,0,.5)}
-  .mhandle{width:36px;height:3px;background:var(--bg3);border-radius:2px;margin:0 auto 20px}
-  .mt{font-size:17px;margin-bottom:3px}
-  .ms{font-size:12px;color:var(--text2);margin-bottom:18px}
-  .ma{display:flex;gap:8px;margin-top:18px}
-  .ma .btn{flex:1}
+/* CRYPTO */
+.cg{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+.csc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;animation:fadeUp .4s ease both;transition:all var(--ease);cursor:pointer}
+.csc:hover{border-color:var(--border2);transform:translateY(-1px)}
+.csctop{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.cscl{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;font-family:'Syne',sans-serif;font-weight:700}
+.cscp{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:3px}
+.cscc{font-size:12px;font-weight:600}
+.cscm{font-size:11px;color:var(--text3);margin-top:2px}
+.pos{color:var(--green)}.neg{color:var(--red)}
+.fgcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:18px}
+.cnitem{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:13px 15px;margin-bottom:9px;cursor:pointer;transition:all var(--ease);animation:fadeUp .3s ease both;text-decoration:none;display:block;color:inherit}
+.cnitem:hover{border-color:var(--border2);background:var(--card2)}
+.cntag{font-size:10px;font-weight:700;color:#fbbf24;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.cntitle{font-size:13px;font-weight:600;line-height:1.4;margin-bottom:4px}
+.cnmeta{font-size:11px;color:var(--text3)}
+.ref-btn{display:flex;align-items:center;gap:7px;padding:7px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r3);cursor:pointer;font-size:12px;font-weight:500;color:var(--text2);transition:all var(--ease)}
+.ref-btn:hover{background:var(--card2);color:var(--text);border-color:var(--border2)}
+.ref-btn.spinning .ref-ico{animation:spin .7s linear infinite}
 
-  /* SIMULATOR */
-  .sim-layout{display:grid;grid-template-columns:300px 1fr;gap:18px;align-items:start}
-  .sim-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
-  .srh{text-align:center;padding:22px 14px;border-bottom:1px solid var(--border);margin-bottom:18px}
-  .srl{font-size:11px;color:var(--text2);margin-bottom:7px;text-transform:uppercase;letter-spacing:.04em}
-  .srv{font-family:'Syne',sans-serif;font-size:34px;font-weight:800;background:linear-gradient(135deg,var(--accent2),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  .srs{font-size:12px;color:var(--text3);margin-top:5px}
-  .sbk{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px}
-  .sbc{background:var(--bg2);border-radius:var(--radius3);padding:13px;text-align:center}
-  .sbc-l{font-size:11px;color:var(--text3);margin-bottom:4px}
-  .sbc-v{font-family:'Syne',sans-serif;font-size:16px;font-weight:700}
-  .rg{margin-bottom:16px}
-  .rt{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
-  .rl{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.04em}
-  .rc{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--accent2)}
-  input[type=range]{width:100%;-webkit-appearance:none;height:3px;background:var(--bg3);border-radius:2px;outline:none;margin:3px 0}
-  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 0 4px rgba(124,92,252,.2)}
-  .re{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:2px}
-  .stg{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:4px}
-  .stb{padding:8px 6px;border:1px solid var(--border);border-radius:var(--radius3);cursor:pointer;font-size:11px;font-weight:500;color:var(--text2);transition:all var(--ease);text-align:center;user-select:none}
-  .stb:hover{border-color:var(--accent);color:var(--accent2)}
-  .stb.act{background:rgba(124,92,252,.12);border-color:var(--accent);color:var(--accent2)}
+/* STOCKS */
+.skcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;animation:fadeUp .4s ease both;transition:all var(--ease);cursor:pointer;margin-bottom:10px}
+.skcard:hover{border-color:var(--border2);background:var(--card2)}
+.skrow{display:flex;align-items:center;gap:12px}
+.skico{width:38px;height:38px;border-radius:10px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;border:1px solid var(--border)}
+.skticker{font-family:'Syne',sans-serif;font-size:14px;font-weight:700}
+.skname{font-size:11px;color:var(--text3)}
+.skprice{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;text-align:right}
+.skchg{font-size:11px;text-align:right;margin-top:2px}
+.mktab{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.mktab-btn{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text2);transition:all var(--ease)}
+.mktab-btn.act{background:rgba(124,92,252,.12);border-color:var(--accent);color:var(--accent2)}
 
-  /* CRYPTO */
-  .cg{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
-  .csc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;animation:fadeUp .4s ease both;transition:all var(--ease);cursor:pointer}
-  .csc:hover{border-color:var(--border2);transform:translateY(-1px)}
-  .csc-top{display:flex;align-items:center;gap:9px;margin-bottom:10px}
-  .csc-logo{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;font-family:'Syne',sans-serif;font-weight:700}
-  .csc-price{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:3px}
-  .csc-chg{font-size:12px;font-weight:600}
-  .csc-mkt{font-size:11px;color:var(--text3);margin-top:2px}
-  .pos{color:var(--green)} .neg{color:var(--red)}
-  .fg-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:18px}
-  .cn-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius2);padding:13px 15px;margin-bottom:9px;cursor:pointer;transition:all var(--ease);animation:fadeUp .3s ease both}
-  .cn-item:hover{border-color:var(--border2);background:var(--card2)}
-  .cn-tag{font-size:10px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
-  .cn-title{font-size:13px;font-weight:600;line-height:1.4;margin-bottom:4px}
-  .cn-meta{font-size:11px;color:var(--text3)}
+/* AI CHAT */
+.chat-wrap{display:flex;flex-direction:column;height:calc(100vh - 58px - 48px);max-height:700px}
+.chat-msgs{flex:1;overflow-y:auto;padding:16px 0;display:flex;flex-direction:column;gap:14px}
+.msg{display:flex;gap:10px;animation:fadeUp .25s ease}
+.msg.usr{flex-direction:row-reverse}
+.msg-av{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.msg-av.ai{background:linear-gradient(135deg,#111,#1a1a26);border:1.5px solid #f59e0b;color:#fbbf24}
+.msg-av.usr{background:linear-gradient(135deg,var(--accent),#5e3de8);color:#fff}
+.msg-bubble{max-width:80%;padding:12px 15px;border-radius:16px;font-size:13px;line-height:1.6}
+.msg-bubble.ai{background:var(--card2);border:1px solid var(--border);border-radius:4px 16px 16px 16px;color:var(--text)}
+.msg-bubble.usr{background:linear-gradient(135deg,var(--accent),#5e3de8);color:#fff;border-radius:16px 4px 16px 16px}
+.msg-bubble.ai strong{color:#fbbf24}
+.typing-dots{display:flex;gap:4px;padding:14px 16px}
+.typing-dots span{width:7px;height:7px;border-radius:50%;background:var(--text3);animation:typing 1.2s ease infinite}
+.typing-dots span:nth-child(2){animation-delay:.2s}
+.typing-dots span:nth-child(3){animation-delay:.4s}
+.chat-input-row{display:flex;gap:10px;padding:14px 0 0;border-top:1px solid var(--border);margin-top:auto}
+.chat-input{flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:11px 16px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;resize:none;max-height:100px;transition:border-color var(--ease)}
+.chat-input:focus{border-color:var(--accent)}
+.chat-send{width:40px;height:40px;border-radius:var(--r2);background:linear-gradient(135deg,var(--accent),#5e3de8);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;transition:all var(--ease)}
+.chat-send:hover{transform:scale(1.05)}
+.chat-send:disabled{opacity:.5;cursor:not-allowed}
+.chat-suggest{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+.sugg-btn{padding:6px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;font-size:12px;color:var(--text2);cursor:pointer;transition:all var(--ease);white-space:nowrap}
+.sugg-btn:hover{border-color:var(--accent);color:var(--accent2);background:rgba(124,92,252,.08)}
 
-  /* BOTTOM NAV */
-  .bnav{display:none;position:fixed;bottom:0;left:0;right:0;height:var(--bottom-h);background:rgba(22,22,31,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--border);z-index:100;padding:0 4px;align-items:center;justify-content:space-around}
-  .bni{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 10px;border-radius:11px;cursor:pointer;transition:all var(--ease);color:var(--text3);font-size:10px;font-weight:500;flex:1;position:relative}
-  .bni.act{color:var(--accent2)}
-  .bni-icon{font-size:19px;transition:transform var(--ease)}
-  .bni.act .bni-icon{transform:scale(1.1)}
-  .bni-badge{position:absolute;top:5px;right:14px;background:var(--accent);color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:10px}
+/* BOTTOM NAV */
+.bnav{display:none;position:fixed;bottom:0;left:0;right:0;height:var(--bh);background:rgba(22,22,31,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--border);z-index:100;padding:0 4px;align-items:center;justify-content:space-around}
+.bni{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 6px;border-radius:11px;cursor:pointer;transition:all var(--ease);color:var(--text3);font-size:9px;font-weight:500;flex:1;position:relative}
+.bni.act{color:var(--accent2)}
+.bni-i{font-size:18px;transition:transform var(--ease)}
+.bni.act .bni-i{transform:scale(1.1)}
 
-  /* EMPTY */
-  .es{text-align:center;padding:44px 18px;color:var(--text3)}
-  .es-i{font-size:38px;margin-bottom:11px;opacity:.5}
-  .es-t{font-size:13px;line-height:1.5}
+/* EMPTY */
+.es{text-align:center;padding:44px 18px;color:var(--text3)}
+.esi{font-size:38px;margin-bottom:11px;opacity:.5}
+.est{font-size:13px;line-height:1.5}
 
-  /* TOAST */
-  .tc{position:fixed;top:14px;right:14px;z-index:9999;display:flex;flex-direction:column;gap:7px}
-  .toast{background:var(--card2);border:1px solid var(--border2);border-radius:var(--radius2);padding:11px 14px;min-width:260px;max-width:320px;display:flex;align-items:flex-start;gap:9px;animation:notifIn .3s ease;box-shadow:0 8px 26px rgba(0,0,0,.4)}
-  .t-icon{font-size:16px;flex-shrink:0;margin-top:1px}
-  .t-title{font-size:12px;font-weight:600;margin-bottom:2px}
-  .t-msg{font-size:11px;color:var(--text2);line-height:1.4}
-  .t-close{background:none;border:none;cursor:pointer;color:var(--text3);font-size:13px;padding:2px;margin-left:auto}
+/* TOAST */
+.tc{position:fixed;top:14px;right:14px;z-index:9999;display:flex;flex-direction:column;gap:7px}
+.toast{background:var(--card2);border:1px solid var(--border2);border-radius:var(--r2);padding:11px 14px;min-width:260px;max-width:320px;display:flex;align-items:flex-start;gap:9px;animation:notifIn .3s ease;box-shadow:0 8px 26px rgba(0,0,0,.4)}
+.ti{font-size:16px;flex-shrink:0;margin-top:1px}
+.ttitle{font-size:12px;font-weight:600;margin-bottom:2px}
+.tmsg{font-size:11px;color:var(--text2);line-height:1.4}
+.tclose{background:none;border:none;cursor:pointer;color:var(--text3);font-size:13px;padding:2px;margin-left:auto}
 
-  /* SYNC INDICATOR */
-  .sync-dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;margin-right:5px;animation:pulse 2s ease infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+/* CHARTS GRID */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
 
-  /* RESPONSIVE */
-  @media(max-width:900px){
-    .sidebar{transform:translateX(-100%)}
-    .sidebar.open{transform:translateX(0)}
-    .main{margin-left:0}
-    .topbar{padding:0 14px}
-    .mob-toggle{display:flex}
-    .bnav{display:flex}
-    .page{padding:14px 12px 76px}
-    .exp-layout{grid-template-columns:1fr}
-    .sim-layout{grid-template-columns:1fr}
-  }
-  @media(min-width:901px){
-    .sg{grid-template-columns:repeat(4,1fr)}
-  }
-  @media(max-width:600px){
-    .sg{grid-template-columns:repeat(2,1fr)}
-    .inv-grid{grid-template-columns:repeat(2,1fr)}
-    .cg{grid-template-columns:repeat(2,1fr)}
-    .tc{top:auto;bottom:70px;right:10px;left:10px}
-    .toast{min-width:unset}
-    .fr{grid-template-columns:1fr}
+/* OVERLAY */
+.sov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99}
 
-    #auth-screen{padding:20px 16px;align-items:flex-start;padding-top:48px}
-    .auth-card{padding:26px 18px;border-radius:20px;width:100%;min-width:0;max-width:100%}
-    .auth-logo{margin-bottom:18px}
-    .auth-title{font-size:20px}
-    .auth-sub{margin-bottom:16px}
-    .fi{font-size:16px !important;padding:13px 14px}
-    .btn{font-size:15px;padding:13px 18px}
-
-    #profile-screen{padding:16px 14px 48px}
-    .profile-card{padding:22px 16px;border-radius:20px;width:100%;min-width:0;margin-top:8px}
-    .ps-title{font-size:18px}
-
-    .ph h2{font-size:18px}
-    .sc-val{font-size:17px}
-    .inv-tot-val{font-size:24px}
-    .imr{grid-template-columns:repeat(3,1fr)}
-    .mcard{padding:22px 18px 36px}
-    .stg{grid-template-columns:repeat(2,1fr)}
-    .sbk{grid-template-columns:repeat(2,1fr)}
-    .srv{font-size:28px}
-    .csc-price{font-size:14px}
-  }
-  .charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
-  @media(max-width:900px){.charts-grid{grid-template-columns:1fr}}
-  .sid-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99}
+/* RESPONSIVE */
+@media(max-width:900px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .topbar{padding:0 14px}
+  .mobt{display:flex}
+  .bnav{display:flex}
+  .page{padding:14px 12px 76px}
+  .expl{grid-template-columns:1fr}
+  .siml{grid-template-columns:1fr}
+  .cgrid{grid-template-columns:1fr}
+}
+@media(min-width:901px){.sg{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:600px){
+  .sg{grid-template-columns:repeat(2,1fr)}
+  .invg{grid-template-columns:repeat(2,1fr)}
+  .cg{grid-template-columns:repeat(2,1fr)}
+  .tc{top:auto;bottom:70px;right:10px;left:10px}
+  .toast{min-width:unset}
+  .fr{grid-template-columns:1fr}
+  #auth-screen{padding:20px 16px;align-items:flex-start;padding-top:40px}
+  .auth-card{padding:26px 18px;border-radius:20px;width:100%;min-width:0;max-width:100%}
+  #profile-screen{padding:16px 14px 48px}
+  .pcard{padding:22px 16px;border-radius:20px;width:100%;min-width:0;margin-top:8px}
+  .ph h2{font-size:18px}
+  .scval{font-size:17px}
+  .invtval{font-size:24px}
+  .mcard{padding:22px 18px 36px}
+  .stg{grid-template-columns:repeat(2,1fr)}
+  .sbk{grid-template-columns:repeat(2,1fr)}
+  .srv{font-size:28px}
+  .simp{padding:16px}
+  .chat-wrap{height:calc(100vh - 58px - 76px - 60px)}
+}
 </style>
 </head>
 <body>
 <div class="tc" id="tc"></div>
-<div class="sid-overlay" id="sid-ov" onclick="closeSB()"></div>
+<div class="sov" id="sov" onclick="closeSB()"></div>
 
 <!-- LOADING -->
-<div id="loading-screen">
-  <div class="loader-logo">💎</div>
-  <div class="loader-title">Nexus</div>
-  <div class="loader-spin"></div>
-  <div class="loader-msg">Conectando...</div>
+<div id="ls">
+  <div class="ll">📈</div>
+  <div class="lt">Nexus</div>
+  <div class="ls2" style="width:32px;height:32px;border:2px solid #1a1a26;border-top-color:#f59e0b;border-radius:50%;animation:spin .8s linear infinite"></div>
+  <div style="font-size:13px;color:var(--text3)">Conectando...</div>
 </div>
 
 <!-- AUTH -->
 <div id="auth-screen">
-  <div class="auth-orb o1"></div><div class="auth-orb o2"></div>
+  <div class="aorb o1"></div><div class="aorb o2"></div>
   <div class="auth-card">
-    <div class="auth-logo"><div class="auth-logo-icon">💎</div><span class="auth-logo-text">Nexus</span></div>
-
-    <div id="login-form" style="display:flex;flex-direction:column;width:100%">
-      <h1 class="auth-title">Bem-vindo de volta</h1>
-      <p class="auth-sub">Acesse sua conta</p>
-      <div class="auth-err" id="login-err"></div>
-      <div class="fg"><label class="fl">E-mail</label><input type="email" class="fi" id="li-email" placeholder="seu@email.com" onkeydown="if(event.key==='Enter')doLogin()"></div>
-      <div class="fg"><label class="fl">Senha</label><input type="password" class="fi" id="li-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
-      <button class="btn btn-p" id="login-btn" onclick="doLogin()" style="margin-top:6px">Entrar →</button>
-      <div class="auth-switch">Não tem conta? <a onclick="showReg()">Cadastrar-se</a></div>
+    <div class="alo">
+      <div class="ali">💎</div>
+      <span class="alt">Nexus</span>
     </div>
-
-    <div id="reg-form" style="display:none;flex-direction:column;width:100%">
-      <h1 class="auth-title">Criar conta</h1>
-      <p class="auth-sub">Comece hoje mesmo</p>
-      <div class="auth-err" id="reg-err"></div>
-      <div class="fg"><label class="fl">E-mail</label><input type="email" class="fi" id="ri-email" placeholder="seu@email.com"></div>
-      <div class="fg"><label class="fl">Senha</label><input type="password" class="fi" id="ri-pass" placeholder="Mínimo 6 caracteres"></div>
-      <div class="fg"><label class="fl">Confirmar senha</label><input type="password" class="fi" id="ri-conf" placeholder="Repita a senha"></div>
-      <button class="btn btn-p" id="reg-btn" onclick="doRegister()" style="margin-top:6px">Criar conta →</button>
-      <div class="auth-switch">Já tem conta? <a onclick="showLogin()">Fazer login</a></div>
+    <div id="lf" style="display:flex;flex-direction:column;width:100%">
+      <h1 class="atitle">Bem-vindo de volta</h1>
+      <p class="asub">Acesse sua conta</p>
+      <div class="aerr" id="lerr"></div>
+      <div class="fg"><label class="fl">E-mail</label><input type="email" class="fi" id="lem" placeholder="seu@email.com" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <div class="fg"><label class="fl">Senha</label><input type="password" class="fi" id="lps" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <button class="btn btn-p" id="lbtn" onclick="doLogin()" style="margin-top:6px;width:100%">Entrar →</button>
+      <div class="aswitch">Não tem conta? <a onclick="showReg()">Cadastrar-se</a></div>
+    </div>
+    <div id="rf" style="display:none;flex-direction:column;width:100%">
+      <h1 class="atitle">Criar conta</h1>
+      <p class="asub">Comece hoje mesmo</p>
+      <div class="aerr" id="rerr"></div>
+      <div class="fg"><label class="fl">E-mail</label><input type="email" class="fi" id="rem" placeholder="seu@email.com"></div>
+      <div class="fg"><label class="fl">Senha</label><input type="password" class="fi" id="rps" placeholder="Mínimo 6 caracteres"></div>
+      <div class="fg"><label class="fl">Confirmar senha</label><input type="password" class="fi" id="rcf" placeholder="Repita a senha"></div>
+      <button class="btn btn-p" id="rbtn" onclick="doReg()" style="margin-top:6px;width:100%">Criar conta →</button>
+      <div class="aswitch">Já tem conta? <a onclick="showLogin()">Fazer login</a></div>
     </div>
   </div>
 </div>
 
-<!-- PROFILE SETUP -->
+<!-- PROFILE -->
 <div id="profile-screen">
-  <div class="profile-card">
-    <div class="step-bar"><div class="step-seg active"></div><div class="step-seg"></div><div class="step-seg"></div><div class="step-seg"></div></div>
-
-    <div class="ps active" data-s="0">
-      <h2 class="ps-title">Sobre você</h2>
-      <p class="ps-sub">Vamos personalizar sua experiência</p>
-      <div class="fg"><label class="fl">Nome completo</label><input type="text" class="fi" id="p-name" placeholder="Seu nome"></div>
-      <div class="fr">
-        <div class="fg"><label class="fl">Idade</label><input type="number" class="fi" id="p-age" placeholder="28"></div>
-        <div class="fg"><label class="fl">Sexo</label><select class="fi" id="p-gender"><option value="">Selecione</option><option>Masculino</option><option>Feminino</option><option>Outro</option><option>Prefiro não dizer</option></select></div>
-      </div>
-      <div class="step-actions"><button class="btn btn-p" onclick="nxStep()">Continuar →</button></div>
+  <div class="pcard">
+    <div class="sbar"><div class="sseg act"></div><div class="sseg"></div><div class="sseg"></div><div class="sseg"></div></div>
+    <div class="ps active"><h2 class="pt">Sobre você</h2><p class="psb">Vamos personalizar sua experiência</p>
+      <div class="fg"><label class="fl">Nome completo</label><input type="text" class="fi" id="pn" placeholder="Seu nome"></div>
+      <div class="fr"><div class="fg"><label class="fl">Idade</label><input type="number" class="fi" id="pa" placeholder="28"></div><div class="fg"><label class="fl">Sexo</label><select class="fi" id="pg"><option value="">Selecione</option><option>Masculino</option><option>Feminino</option><option>Outro</option><option>Prefiro não dizer</option></select></div></div>
+      <div class="sact"><button class="btn btn-p" style="flex:1" onclick="nxS()">Continuar →</button></div>
     </div>
-
-    <div class="ps" data-s="1">
-      <h2 class="ps-title">Finanças</h2>
-      <p class="ps-sub">Sua situação financeira atual</p>
-      <div class="fg"><label class="fl">Profissão</label><input type="text" class="fi" id="p-job" placeholder="Ex: Desenvolvedor, Professor..."></div>
-      <div class="fg"><label class="fl">Renda mensal (R$)</label><input type="number" class="fi" id="p-income" placeholder="5000"></div>
-      <div class="fg"><label class="fl">Quanto investe por mês (R$)</label><input type="number" class="fi" id="p-invest" placeholder="800"></div>
-      <div class="step-actions"><button class="btn btn-s" onclick="pvStep()">←</button><button class="btn btn-p" onclick="nxStep()">Continuar →</button></div>
+    <div class="ps"><h2 class="pt">Finanças</h2><p class="psb">Sua situação atual</p>
+      <div class="fg"><label class="fl">Profissão</label><input type="text" class="fi" id="pj" placeholder="Ex: Engenheiro, Professor..."></div>
+      <div class="fg"><label class="fl">Renda mensal (R$)</label><input type="number" class="fi" id="pi" placeholder="5000"></div>
+      <div class="fg"><label class="fl">Quanto investe por mês (R$)</label><input type="number" class="fi" id="pv" placeholder="800"></div>
+      <div class="sact"><button class="btn btn-s" onclick="pvS()">←</button><button class="btn btn-p" onclick="nxS()">Continuar →</button></div>
     </div>
-
-    <div class="ps" data-s="2">
-      <h2 class="ps-title">Objetivos</h2>
-      <p class="ps-sub">Nos ajude a traçar o plano ideal</p>
-      <div class="fg"><label class="fl">Objetivo principal</label>
-        <select class="fi" id="p-goal"><option value="">Selecione</option><option>Aposentadoria antecipada</option><option>Comprar um imóvel</option><option>Viajar pelo mundo</option><option>Independência financeira</option><option>Fundo de emergência</option><option>Investir em crypto</option><option>Outro</option></select>
-      </div>
-      <div class="fg"><label class="fl" style="margin-bottom:9px">Experiência com investimentos</label>
-        <div class="radio-group" id="exp-grp"><div class="rb sel" data-v="Iniciante" onclick="pickR(this,'exp-grp')">🌱 Iniciante</div><div class="rb" data-v="Intermediário" onclick="pickR(this,'exp-grp')">📈 Intermediário</div><div class="rb" data-v="Avançado" onclick="pickR(this,'exp-grp')">🚀 Avançado</div></div>
-      </div>
-      <div class="fg"><label class="fl" style="margin-bottom:9px">Interesse em crypto?</label>
-        <div class="radio-group" id="crp-grp"><div class="rb sel" data-v="Sim" onclick="pickR(this,'crp-grp')">✅ Sim</div><div class="rb" data-v="Aprendendo" onclick="pickR(this,'crp-grp')">🧐 Aprendendo</div><div class="rb" data-v="Não" onclick="pickR(this,'crp-grp')">❌ Não</div></div>
-      </div>
-      <div class="step-actions"><button class="btn btn-s" onclick="pvStep()">←</button><button class="btn btn-p" onclick="nxStep()">Continuar →</button></div>
+    <div class="ps"><h2 class="pt">Objetivos</h2><p class="psb">Nos ajude a traçar o plano ideal</p>
+      <div class="fg"><label class="fl">Objetivo principal</label><select class="fi" id="pg2"><option value="">Selecione</option><option>Aposentadoria antecipada</option><option>Comprar um imóvel</option><option>Viajar pelo mundo</option><option>Independência financeira</option><option>Fundo de emergência</option><option>Investir em crypto</option><option>Outro</option></select></div>
+      <div class="fg"><label class="fl" style="margin-bottom:9px">Experiência</label><div class="rg" id="expg"><div class="rb sel" data-v="Iniciante" onclick="pickR(this,'expg')">🌱 Iniciante</div><div class="rb" data-v="Intermediário" onclick="pickR(this,'expg')">📈 Intermediário</div><div class="rb" data-v="Avançado" onclick="pickR(this,'expg')">🚀 Avançado</div></div></div>
+      <div class="fg"><label class="fl" style="margin-bottom:9px">Interesse em crypto?</label><div class="rg" id="crpg"><div class="rb sel" data-v="Sim" onclick="pickR(this,'crpg')">✅ Sim</div><div class="rb" data-v="Aprendendo" onclick="pickR(this,'crpg')">🧐 Aprendendo</div><div class="rb" data-v="Não" onclick="pickR(this,'crpg')">❌ Não</div></div></div>
+      <div class="sact"><button class="btn btn-s" onclick="pvS()">←</button><button class="btn btn-p" onclick="nxS()">Continuar →</button></div>
     </div>
-
-    <div class="ps" data-s="3">
-      <div style="text-align:center;padding:12px 0">
-        <div style="font-size:52px;margin-bottom:13px">🎉</div>
-        <h2 class="ps-title" style="font-size:22px;margin-bottom:7px">Tudo pronto!</h2>
-        <p class="ps-sub" style="margin-bottom:22px">Seu perfil foi salvo na nuvem. Seus dados estarão disponíveis em qualquer dispositivo!</p>
-        <div id="p-summary" style="background:var(--bg2);border-radius:var(--radius2);padding:16px;text-align:left;margin-bottom:22px"></div>
-        <button class="btn btn-p" id="enter-btn" onclick="enterApp()" style="font-size:15px;padding:14px 22px">Acessar meu painel 🚀</button>
-      </div>
-    </div>
+    <div class="ps"><div style="text-align:center;padding:12px 0">
+      <div style="font-size:52px;margin-bottom:13px">🎉</div>
+      <h2 class="pt" style="font-size:22px;margin-bottom:7px">Tudo pronto!</h2>
+      <p class="psb" style="margin-bottom:20px">Perfil salvo na nuvem. Acesse de qualquer dispositivo!</p>
+      <div id="psumm" style="background:var(--bg2);border-radius:var(--r2);padding:16px;text-align:left;margin-bottom:20px"></div>
+      <button class="btn btn-p" id="entbtn" onclick="enterApp()" style="font-size:15px;padding:14px 22px;width:100%">Acessar meu painel 🚀</button>
+    </div></div>
   </div>
 </div>
 
 <!-- APP -->
 <div id="app">
-  <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
-    <div class="sb-logo"><div class="sb-logo-icon">💎</div><span class="sb-logo-text">Nexus</span></div>
-    <nav class="sb-nav">
-      <div class="nav-lbl">Principal</div>
-      <div class="ni act" onclick="goPg('dashboard',this)"><span class="ni-icon">🏠</span>Dashboard</div>
-      <div class="ni" onclick="goPg('expenses',this)"><span class="ni-icon">💸</span>Gastos<span class="nbadge" id="sb-eb">0</span></div>
-      <div class="ni" onclick="goPg('investments',this)"><span class="ni-icon">📊</span>Investimentos</div>
-      <div class="ni" onclick="goPg('crypto',this)"><span class="ni-icon">₿</span>Crypto</div>
-      <div class="nav-lbl">Ferramentas</div>
-      <div class="ni" onclick="goPg('goals',this)"><span class="ni-icon">🎯</span>Metas<span class="nbadge" id="sb-gb">0</span></div>
-      <div class="ni" onclick="goPg('simulator',this)"><span class="ni-icon">🧮</span>Simulador</div>
-      <div class="ni" onclick="goPg('alerts',this)"><span class="ni-icon">🔔</span>Alertas</div>
+    <div class="sblogo">
+      <div class="sbli" style="font-size:15px">💎</div>
+      <span class="sblt">Nexus</span>
+    </div>
+    <nav class="sbnav">
+      <div class="nlbl">Principal</div>
+      <div class="ni act" onclick="goPg('dashboard',this)"><span class="ni-i">🏠</span>Dashboard</div>
+      <div class="ni" onclick="goPg('expenses',this)"><span class="ni-i">💸</span>Gastos<span class="nbadge" id="sbeb">0</span></div>
+      <div class="ni" onclick="goPg('investments',this)"><span class="ni-i">📊</span>Investimentos</div>
+      <div class="ni" onclick="goPg('crypto',this)"><span class="ni-i">₿</span>Crypto</div>
+      <div class="ni" onclick="goPg('stocks',this)"><span class="ni-i">🏛️</span>Bolsa</div>
+      <div class="nlbl">Ferramentas</div>
+      <div class="ni" onclick="goPg('goals',this)"><span class="ni-i">🎯</span>Metas<span class="nbadge" id="sbgb">0</span></div>
+      <div class="ni" onclick="goPg('simulator',this)"><span class="ni-i">🧮</span>Simulador</div>
+      <div class="ni" onclick="goPg('ai',this)"><span class="ni-i">🤖</span>IA Financeira</div>
+      <div class="ni" onclick="goPg('alerts',this)"><span class="ni-i">🔔</span>Alertas</div>
     </nav>
-    <div class="sb-foot">
-      <div class="user-pill">
-        <div class="u-av" id="sb-av">N</div>
+    <div class="sbfoot">
+      <div class="upill">
+        <div class="uav" id="sbav">N</div>
         <div style="flex:1;min-width:0">
-          <div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="sb-nm">Usuário</div>
-          <div style="font-size:10px;color:var(--text3)"><span class="sync-dot"></span><span id="sb-rl">Sincronizado</span></div>
+          <div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="sbnm">Usuário</div>
+          <div style="font-size:10px;color:var(--text3)"><span class="sdot"></span>Sincronizado</div>
         </div>
         <span style="font-size:13px;color:var(--text3);cursor:pointer" onclick="doLogout()" title="Sair">↩</span>
       </div>
@@ -488,66 +516,67 @@
 
   <main class="main">
     <div class="topbar">
-      <button class="mob-toggle" onclick="toggleSB()">☰</button>
-      <div class="topbar-title" id="tb-title">Dashboard</div>
+      <button class="mobt" onclick="toggleSB()">☰</button>
+      <div class="tbtitle" id="tbt">Dashboard</div>
       <div style="display:flex;gap:7px;align-items:center">
+        <div class="ib" onclick="goPg('ai',null)">🤖</div>
         <div class="ib" onclick="goPg('alerts',null)">🔔<span class="ndot" id="ndot"></span></div>
-        <div class="ib" onclick="doLogout()" title="Sair">↩</div>
+        <div class="ib" onclick="doLogout()">↩</div>
       </div>
     </div>
 
     <!-- DASHBOARD -->
     <div class="page act" id="page-dashboard">
-      <div class="ph"><h2 id="d-hi">Olá! 👋</h2><p id="d-sub">Carregando seus dados...</p></div>
+      <div class="ph"><h2 id="dhi">Olá! 👋</h2><p id="dsub">Carregando seus dados...</p></div>
       <div class="sg">
-        <div class="sc" style="animation-delay:.04s"><div class="sc-lbl">Renda mensal</div><div class="sc-val" style="color:var(--accent2)" id="s-inc">R$ —</div><div class="sc-d up">↑ Salário</div></div>
-        <div class="sc" style="animation-delay:.08s"><div class="sc-lbl">Para investir</div><div class="sc-val" style="color:var(--green)" id="s-inv">R$ —</div><div class="sc-d up">↑ Potencial/mês</div></div>
-        <div class="sc" style="animation-delay:.12s"><div class="sc-lbl">Gastos do mês</div><div class="sc-val" style="color:var(--blue)" id="s-exp">R$ 0,00</div><div class="sc-d" id="s-exp-d">— Sem registros</div></div>
-        <div class="sc" style="animation-delay:.16s"><div class="sc-lbl">Patrimônio</div><div class="sc-val" style="color:var(--yellow)" id="s-pat">R$ 0,00</div><div class="sc-d" id="s-pat-d">— Adicione ativos</div></div>
+        <div class="sc" style="animation-delay:.04s"><div class="sclbl">Renda mensal</div><div class="scval" style="color:var(--accent2)" id="sinc">R$ —</div><div class="scd up">↑ Salário</div></div>
+        <div class="sc" style="animation-delay:.08s"><div class="sclbl">Para investir</div><div class="scval" style="color:var(--green)" id="sinv">R$ —</div><div class="scd up">↑ Potencial/mês</div></div>
+        <div class="sc" style="animation-delay:.12s"><div class="sclbl">Gastos do mês</div><div class="scval" style="color:var(--blue)" id="sexp">R$ 0,00</div><div class="scd" id="sexd">— Sem registros</div></div>
+        <div class="sc" style="animation-delay:.16s"><div class="sclbl">Patrimônio</div><div class="scval" style="color:var(--yellow)" id="spat">R$ 0,00</div><div class="scd" id="spatd">— Adicione ativos</div></div>
       </div>
-      <div class="charts-grid">
+      <div class="cgrid">
         <div class="cc" style="animation-delay:.2s">
-          <div class="cc-h"><div><div class="cc-t">Gastos por categoria</div><div class="cc-s">Mês atual</div></div><span class="badge badge-p">Mensal</span></div>
-          <canvas id="ch-cat" style="max-height:190px;display:none"></canvas>
-          <div class="es" id="cat-es" style="padding:20px"><div class="es-i" style="font-size:28px">📊</div><div class="es-t" style="font-size:12px">Adicione gastos para ver</div></div>
+          <div class="cch"><div><div class="cct">Gastos por categoria</div><div class="ccs">Mês atual</div></div><span class="badge bp">Mensal</span></div>
+          <canvas id="chcat" style="max-height:190px;display:none"></canvas>
+          <div class="es" id="cates" style="padding:20px"><div class="esi" style="font-size:28px">📊</div><div class="est" style="font-size:12px">Adicione gastos para ver</div></div>
         </div>
         <div class="cc" style="animation-delay:.24s">
-          <div class="cc-h"><div><div class="cc-t">Evolução do patrimônio</div><div class="cc-s">Últimos 6 meses</div></div><span class="badge badge-g" id="pat-b">—</span></div>
-          <canvas id="ch-pat" style="max-height:190px;display:none"></canvas>
-          <div class="es" id="pat-es" style="padding:20px"><div class="es-i" style="font-size:28px">📈</div><div class="es-t" style="font-size:12px">Registre investimentos</div></div>
+          <div class="cch"><div><div class="cct">Evolução do patrimônio</div><div class="ccs">Últimos 6 meses</div></div><span class="badge bg" id="patb">—</span></div>
+          <canvas id="chpat" style="max-height:190px;display:none"></canvas>
+          <div class="es" id="pates" style="padding:20px"><div class="esi" style="font-size:28px">📈</div><div class="est" style="font-size:12px">Registre investimentos</div></div>
         </div>
       </div>
       <div style="font-size:14px;font-weight:700;margin-bottom:12px">📌 Dicas &amp; Alertas</div>
-      <div id="d-alerts"></div>
+      <div id="dalerts"></div>
     </div>
 
     <!-- EXPENSES -->
     <div class="page" id="page-expenses">
       <div class="ph"><h2>Gastos 💸</h2><p>Registre e categorize suas despesas</p></div>
-      <div class="exp-layout">
+      <div class="expl">
         <div>
           <div class="panel" style="margin-bottom:14px">
-            <div class="pt">Adicionar despesa</div>
-            <div class="fg"><label class="fl">Descrição</label><input type="text" class="fi" id="e-desc" placeholder="Ex: Almoço, Uber, Netflix..."></div>
+            <div class="ptt">Adicionar despesa</div>
+            <div class="fg"><label class="fl">Descrição</label><input type="text" class="fi" id="edes" placeholder="Ex: Almoço, Uber, Netflix..."></div>
             <div class="fr">
-              <div class="fg"><label class="fl">Valor (R$)</label><input type="number" class="fi" id="e-amt" placeholder="0,00" min="0" step="0.01"></div>
-              <div class="fg"><label class="fl">Categoria</label><select class="fi" id="e-cat"><option value="food">🍔 Alimentação</option><option value="transport">🚗 Transporte</option><option value="leisure">🎮 Lazer</option><option value="bills">📄 Contas</option><option value="health">💊 Saúde</option><option value="education">📚 Educação</option><option value="other">📦 Outros</option></select></div>
+              <div class="fg"><label class="fl">Valor (R$)</label><input type="number" class="fi" id="eamt" placeholder="0,00" min="0" step="0.01"></div>
+              <div class="fg"><label class="fl">Categoria</label><select class="fi" id="ecat"><option value="food">🍔 Alimentação</option><option value="transport">🚗 Transporte</option><option value="leisure">🎮 Lazer</option><option value="bills">📄 Contas</option><option value="health">💊 Saúde</option><option value="education">📚 Educação</option><option value="other">📦 Outros</option></select></div>
             </div>
-            <div class="fg"><label class="fl">Data</label><input type="date" class="fi" id="e-date"></div>
-            <button class="btn btn-g" id="e-add-btn" onclick="addExpense()">+ Adicionar</button>
+            <div class="fg"><label class="fl">Data</label><input type="date" class="fi" id="edate"></div>
+            <button class="btn btn-g" id="eabtn" onclick="addExp()">+ Adicionar</button>
           </div>
           <div class="cc">
-            <div class="cc-h"><div class="cc-t">Distribuição</div></div>
-            <canvas id="ch-edon" style="max-height:170px;display:none"></canvas>
-            <div class="es" id="edon-es" style="padding:18px"><div class="es-i" style="font-size:26px">🥧</div><div class="es-t" style="font-size:12px">Sem dados</div></div>
+            <div class="cch"><div class="cct">Distribuição</div></div>
+            <canvas id="chedon" style="max-height:170px;display:none"></canvas>
+            <div class="es" id="edones" style="padding:18px"><div class="esi" style="font-size:26px">🥧</div><div class="est" style="font-size:12px">Sem dados</div></div>
           </div>
         </div>
         <div class="panel">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-            <div class="pt" style="margin-bottom:0">Despesas</div>
-            <span id="e-total" style="font-family:'Syne',sans-serif;font-size:14px;color:var(--red);font-weight:700"></span>
+            <div class="ptt" style="margin-bottom:0">Despesas</div>
+            <span id="etot" style="font-family:'Syne',sans-serif;font-size:14px;color:var(--red);font-weight:700"></span>
           </div>
-          <div id="exp-list"><div class="es"><div class="es-i">📭</div><div class="es-t">Nenhuma despesa.<br>Adicione a primeira!</div></div></div>
+          <div id="explist"><div class="es"><div class="esi">📭</div><div class="est">Sem despesas.<br>Adicione a primeira!</div></div></div>
         </div>
       </div>
     </div>
@@ -555,76 +584,132 @@
     <!-- INVESTMENTS -->
     <div class="page" id="page-investments">
       <div class="ph"><h2>Investimentos 📊</h2><p>Gerencie seus ativos</p></div>
-      <div class="inv-summ">
-        <div class="inv-tot-lbl">Patrimônio total investido</div>
-        <div class="inv-tot-val" id="iv-total">R$ 0,00</div>
+      <div class="invsumm">
+        <div class="invtlbl">Patrimônio total investido</div>
+        <div class="invtval" id="ivtot">R$ 0,00</div>
         <div class="imr">
-          <div class="imc"><div class="imc-l">Rendimento/ano</div><div class="imc-v" id="iv-earn" style="color:var(--green)">R$ 0</div></div>
-          <div class="imc"><div class="imc-l">Retorno</div><div class="imc-v" id="iv-roi" style="color:var(--green)">0%</div></div>
-          <div class="imc"><div class="imc-l">Classes</div><div class="imc-v" id="iv-cls" style="color:var(--accent2)">0</div></div>
+          <div class="imc"><div class="imcl">Rendimento/ano</div><div class="imcv" id="ivern" style="color:var(--green)">R$ 0</div></div>
+          <div class="imc"><div class="imcl">Retorno</div><div class="imcv" id="ivroi" style="color:var(--green)">0%</div></div>
+          <div class="imc"><div class="imcl">Classes</div><div class="imcv" id="ivcls" style="color:var(--accent2)">0</div></div>
         </div>
       </div>
-      <div style="margin-bottom:12px"><button class="btn btn-p btn-sm" onclick="openM('inv-modal')">+ Adicionar ativo</button></div>
-      <div class="inv-grid" id="inv-grid"><div style="grid-column:1/-1" class="es"><div class="es-i">💼</div><div class="es-t">Nenhum ativo cadastrado.<br>Adicione o primeiro!</div></div></div>
-      <div class="cc" id="inv-ch-card" style="display:none">
-        <div class="cc-h"><div><div class="cc-t">Alocação do portfólio</div><div class="cc-s">Distribuição atual</div></div></div>
+      <div style="margin-bottom:12px"><button class="btn btn-p btn-sm" onclick="openM('invmod')">+ Adicionar ativo</button></div>
+      <div class="invg" id="invgrid"><div style="grid-column:1/-1" class="es"><div class="esi">💼</div><div class="est">Nenhum ativo.<br>Adicione o primeiro!</div></div></div>
+      <div class="cc" id="invchcard" style="display:none">
+        <div class="cch"><div><div class="cct">Alocação do portfólio</div><div class="ccs">Distribuição atual</div></div></div>
         <div style="display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:center;max-width:100%">
-          <canvas id="ch-port" style="max-height:160px;max-width:160px"></canvas>
-          <div id="port-leg" style="min-width:0"></div>
+          <canvas id="chport" style="max-height:160px;max-width:160px"></canvas>
+          <div id="portleg" style="min-width:0"></div>
         </div>
       </div>
     </div>
 
     <!-- CRYPTO -->
     <div class="page" id="page-crypto">
-      <div class="ph"><h2>Criptomoedas ₿</h2><p>Mercado simulado + educação</p></div>
-      <div class="fg-card">
+      <div class="ph"><h2>Criptomoedas ₿</h2><p>Mercado + educação crypto</p></div>
+      <div class="fgcard">
         <div style="font-size:13px;font-weight:600;margin-bottom:14px;text-align:center">Índice de Medo &amp; Ganância</div>
-        <div style="display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap">
-          <svg viewBox="0 0 200 110" width="170" height="95">
-            <defs><linearGradient id="fgG" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#f87171"/><stop offset="50%" style="stop-color:#fbbf24"/><stop offset="100%" style="stop-color:#22d3a5"/></linearGradient></defs>
-            <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="var(--bg3)" stroke-width="13" stroke-linecap="round"/>
-            <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#fgG)" stroke-width="13" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="97"/>
-            <text x="100" y="91" text-anchor="middle" font-family="Syne,sans-serif" font-size="26" font-weight="800" fill="var(--yellow)">62</text>
-            <text x="100" y="106" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="var(--text3)">GANÂNCIA</text>
+        <div style="display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap">
+          <svg viewBox="0 0 200 110" width="160" height="88">
+            <defs><linearGradient id="fgg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#f87171"/><stop offset="50%" style="stop-color:#fbbf24"/><stop offset="100%" style="stop-color:#22d3a5"/></linearGradient></defs>
+            <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="13" stroke-linecap="round"/>
+            <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#fgg)" stroke-width="13" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="97"/>
+            <text x="100" y="91" text-anchor="middle" font-family="Syne,sans-serif" font-size="26" font-weight="800" fill="#fbbf24">62</text>
+            <text x="100" y="106" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#6b6885">GANÂNCIA</text>
           </svg>
-          <div style="font-size:13px;color:var(--text2);max-width:200px;line-height:1.6">
-            <div style="margin-bottom:6px">😱 <strong style="color:var(--red)">0–24</strong> Medo extremo</div>
-            <div style="margin-bottom:6px">😰 <strong style="color:var(--yellow)">25–49</strong> Medo</div>
-            <div style="margin-bottom:6px">😐 <strong style="color:var(--text2)">50</strong> Neutro</div>
-            <div style="margin-bottom:6px">😊 <strong style="color:var(--green)">51–74</strong> Ganância</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.8">
+            <div>😱 <strong style="color:var(--red)">0–24</strong> Medo extremo</div>
+            <div>😰 <strong style="color:var(--yellow)">25–49</strong> Medo</div>
+            <div>😐 <strong style="color:var(--text2)">50</strong> Neutro</div>
+            <div>😊 <strong style="color:var(--green)">51–74</strong> Ganância</div>
             <div>🤑 <strong style="color:var(--green)">75–100</strong> Ganância extrema</div>
           </div>
         </div>
-        <div style="text-align:center;font-size:12px;color:var(--text3);margin-top:12px">Fonte: alternative.me/crypto/fear-and-greed-index · Valor simulado</div>
+        <div style="text-align:center;font-size:11px;color:var(--text3);margin-top:10px">Fonte: alternative.me · Valor simulado</div>
       </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><div style="font-size:14px;font-weight:700">Principais criptos</div><span class="badge badge-g">Simulado</span></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div style="font-size:14px;font-weight:700">Principais criptos</div>
+        <button class="ref-btn" id="crefbtn" onclick="refreshCrypto()">
+          <span class="ref-ico">🔄</span> Atualizar preços
+          <span id="clastupd" style="font-size:10px;color:var(--text3)"></span>
+        </button>
+      </div>
       <div class="cg" id="cg"></div>
       <div class="cc" style="margin-bottom:18px">
-        <div class="cc-h"><div><div class="cc-t" id="c-ch-title">Bitcoin — 30 dias</div><div class="cc-s">Preço simulado</div></div><span class="badge badge-y" id="c-ch-chg">+4.2%</span></div>
-        <canvas id="ch-crypto" style="max-height:170px"></canvas>
+        <div class="cch"><div><div class="cct" id="cchtitle">Bitcoin — 30 dias</div><div class="ccs">Preço simulado</div></div><span class="badge by" id="cchchg">+4.2%</span></div>
+        <canvas id="chcrypto" style="max-height:170px"></canvas>
       </div>
       <div style="font-size:14px;font-weight:700;margin-bottom:12px">📰 Notícias &amp; Educação</div>
-      <div id="c-news"></div>
+      <div id="cnews"></div>
+    </div>
+
+    <!-- STOCKS -->
+    <div class="page" id="page-stocks">
+      <div class="ph"><h2>Bolsa de Valores 🏛️</h2><p>B3, S&amp;P 500 e mercado europeu</p></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+        <div class="mktab" id="mktab">
+          <button class="mktab-btn act" onclick="showMkt('br',this)">🇧🇷 Ibovespa B3</button>
+          <button class="mktab-btn" onclick="showMkt('us',this)">🇺🇸 S&amp;P 500</button>
+          <button class="mktab-btn" onclick="showMkt('eu',this)">🌍 Europa</button>
+        </div>
+        <button class="ref-btn" onclick="toast('🔄','Atualizando...','Preços atualizados!','info')"><span>🔄</span> Atualizar</button>
+      </div>
+      <div class="cc" style="margin-bottom:16px">
+        <div class="cch"><div><div class="cct" id="skchtitle">Ibovespa — 30 dias</div><div class="ccs">Índice simulado</div></div><span class="badge bg" id="skchchg">+2.1%</span></div>
+        <canvas id="chstocks" style="max-height:170px"></canvas>
+      </div>
+      <div id="sklist"></div>
     </div>
 
     <!-- GOALS -->
     <div class="page" id="page-goals">
       <div class="ph"><h2>Metas 🎯</h2><p>Seus objetivos financeiros</p></div>
-      <div style="margin-bottom:18px"><button class="btn btn-p btn-sm" onclick="openM('goal-modal')">+ Nova meta</button></div>
-      <div class="gg" id="goals-grid"><div style="grid-column:1/-1" class="es"><div class="es-i">🎯</div><div class="es-t">Nenhuma meta ainda.<br>Defina seu primeiro objetivo!</div></div></div>
+      <div style="margin-bottom:18px"><button class="btn btn-p btn-sm" onclick="openM('goalmod')">+ Nova meta</button></div>
+      <div class="gg" id="goalgrid"><div style="grid-column:1/-1" class="es"><div class="esi">🎯</div><div class="est">Nenhuma meta.<br>Defina seu primeiro objetivo!</div></div></div>
     </div>
 
     <!-- SIMULATOR -->
     <div class="page" id="page-simulator">
-      <div class="ph"><h2>Simulador 🧮</h2><p>Juros compostos na prática</p></div>
-      <div class="sim-layout">
-        <div class="sim-panel">
+      <div class="ph"><h2>Simulador 🧮</h2><p>Juros compostos — edite os valores livremente</p></div>
+      <div class="siml">
+        <div class="simp">
           <div style="font-size:13px;font-weight:600;margin-bottom:16px;color:var(--text2)">Parâmetros</div>
-          <div class="rg"><div class="rt"><span class="rl">Valor inicial</span><span class="rc" id="sv-i">R$ 1.000</span></div><input type="range" id="sr-i" min="0" max="100000" step="500" value="1000" oninput="calcSim()"><div class="re"><span>R$ 0</span><span>R$ 100k</span></div></div>
-          <div class="rg"><div class="rt"><span class="rl">Aporte mensal</span><span class="rc" id="sv-m">R$ 500</span></div><input type="range" id="sr-m" min="0" max="20000" step="100" value="500" oninput="calcSim()"><div class="re"><span>R$ 0</span><span>R$ 20k</span></div></div>
-          <div class="rg"><div class="rt"><span class="rl">Taxa anual</span><span class="rc" id="sv-r">12%</span></div><input type="range" id="sr-r" min="1" max="40" step="0.5" value="12" oninput="calcSim()"><div class="re"><span>1%</span><span>40%</span></div></div>
-          <div class="rg"><div class="rt"><span class="rl">Período</span><span class="rc" id="sv-y">10 anos</span></div><input type="range" id="sr-y" min="1" max="40" step="1" value="10" oninput="calcSim()"><div class="re"><span>1 ano</span><span>40 anos</span></div></div>
+          <div class="rng">
+            <div class="rnt"><span class="rnl">Valor inicial</span></div>
+            <div class="sim-input-row">
+              <span style="font-size:13px;color:var(--text3)">R$</span>
+              <input type="number" class="sim-edit" id="siv" value="1000" min="0" step="100" oninput="calcSim()">
+            </div>
+            <input type="range" id="sir" min="0" max="100000" step="500" value="1000" oninput="syncEdit('sir','siv',1);calcSim()">
+            <div class="re"><span>R$ 0</span><span>R$ 100k</span></div>
+          </div>
+          <div class="rng">
+            <div class="rnt"><span class="rnl">Aporte mensal</span></div>
+            <div class="sim-input-row">
+              <span style="font-size:13px;color:var(--text3)">R$</span>
+              <input type="number" class="sim-edit" id="smv" value="500" min="0" step="50" oninput="calcSim()">
+            </div>
+            <input type="range" id="smr" min="0" max="20000" step="100" value="500" oninput="syncEdit('smr','smv',1);calcSim()">
+            <div class="re"><span>R$ 0</span><span>R$ 20k</span></div>
+          </div>
+          <div class="rng">
+            <div class="rnt"><span class="rnl">Taxa anual</span></div>
+            <div class="sim-input-row">
+              <input type="number" class="sim-edit" id="srv" value="12" min="0.1" max="100" step="0.1" oninput="calcSim()">
+              <span style="font-size:13px;color:var(--text3)">% a.a.</span>
+            </div>
+            <input type="range" id="srr" min="1" max="40" step="0.5" value="12" oninput="syncEdit('srr','srv',1);calcSim()">
+            <div class="re"><span>1%</span><span>40%</span></div>
+          </div>
+          <div class="rng">
+            <div class="rnt"><span class="rnl">Período</span></div>
+            <div class="sim-input-row">
+              <input type="number" class="sim-edit" id="syv" value="10" min="1" max="50" step="1" oninput="calcSim()">
+              <span style="font-size:13px;color:var(--text3)">anos</span>
+            </div>
+            <input type="range" id="syr" min="1" max="40" step="1" value="10" oninput="syncEdit('syr','syv',1);calcSim()">
+            <div class="re"><span>1 ano</span><span>40 anos</span></div>
+          </div>
           <div class="fg" style="margin-bottom:4px"><label class="fl" style="margin-bottom:8px">Tipo de ativo</label>
             <div class="stg" id="stg">
               <div class="stb act" data-r="12" onclick="pickST(this)">🏦 Renda Fixa<br><span style="font-size:9px;color:var(--text3)">~12% a.a.</span></div>
@@ -637,16 +722,41 @@
             <div style="font-size:10px;color:var(--text3);margin-top:5px">* Estimativas históricas. Crypto é altamente volátil.</div>
           </div>
         </div>
-        <div class="sim-panel">
-          <div class="srh"><div class="srl">Valor final estimado</div><div class="srv" id="sim-fv">R$ 0</div><div class="srs" id="sim-pd">em 10 anos</div></div>
+        <div class="simp">
+          <div class="srh"><div class="srl">Valor final estimado</div><div class="srv" id="simfv">R$ 0</div><div class="srs" id="simpd">em 10 anos</div></div>
           <div class="sbk">
-            <div class="sbc"><div class="sbc-l">Total investido</div><div class="sbc-v" style="color:var(--blue)" id="sim-ti">R$ 0</div></div>
-            <div class="sbc"><div class="sbc-l">Rendimento</div><div class="sbc-v" style="color:var(--green)" id="sim-rd">R$ 0</div></div>
-            <div class="sbc"><div class="sbc-l">Multiplicador</div><div class="sbc-v" style="color:var(--accent2)" id="sim-mx">—</div></div>
-            <div class="sbc"><div class="sbc-l">ROI</div><div class="sbc-v" style="color:var(--yellow)" id="sim-ri">—</div></div>
+            <div class="sbc"><div class="sbcl">Total investido</div><div class="sbcv" style="color:var(--blue)" id="simti">R$ 0</div></div>
+            <div class="sbc"><div class="sbcl">Rendimento</div><div class="sbcv" style="color:var(--green)" id="simrd">R$ 0</div></div>
+            <div class="sbc"><div class="sbcl">Multiplicador</div><div class="sbcv" style="color:var(--accent2)" id="simmx">—</div></div>
+            <div class="sbc"><div class="sbcl">ROI</div><div class="sbcv" style="color:var(--yellow)" id="simri">—</div></div>
           </div>
-          <canvas id="ch-sim" style="max-height:170px"></canvas>
+          <canvas id="chsim" style="max-height:170px"></canvas>
           <div style="font-size:10px;color:var(--text3);margin-top:10px;text-align:center;line-height:1.6">⚠️ Simulação educacional. Resultados passados não garantem retornos futuros.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI -->
+    <div class="page" id="page-ai">
+      <div class="ph"><h2>IA Financeira 🤖</h2><p>Tire dúvidas sobre finanças e investimentos</p></div>
+      <div class="chat-wrap">
+        <div class="chat-suggest" id="chatsugg">
+          <button class="sugg-btn" onclick="sendSugg(this)">O que é CDI?</button>
+          <button class="sugg-btn" onclick="sendSugg(this)">Como montar carteira de investimentos?</button>
+          <button class="sugg-btn" onclick="sendSugg(this)">Diferença entre ações e FIIs</button>
+          <button class="sugg-btn" onclick="sendSugg(this)">O que é Bitcoin e como funciona?</button>
+          <button class="sugg-btn" onclick="sendSugg(this)">Como declarar crypto no IR?</button>
+          <button class="sugg-btn" onclick="sendSugg(this)">Quanto guardar por mês?</button>
+        </div>
+        <div class="chat-msgs" id="chatmsgs">
+          <div class="msg">
+            <div class="msg-av ai">N</div>
+            <div class="msg-bubble ai">Olá! Sou a IA do <strong>Nexus</strong>, especializada em finanças e investimentos. Pode me perguntar sobre investimentos, crypto, imposto de renda, planejamento financeiro e muito mais. Como posso ajudar?</div>
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <textarea class="chat-input" id="chatinput" placeholder="Pergunte sobre finanças, crypto, investimentos..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}"></textarea>
+          <button class="chat-send" id="chatsend" onclick="sendChat()">➤</button>
         </div>
       </div>
     </div>
@@ -654,507 +764,564 @@
     <!-- ALERTS -->
     <div class="page" id="page-alerts">
       <div class="ph"><h2>Alertas 🔔</h2><p>Notificações e dicas</p></div>
-      <div id="alerts-list"></div>
+      <div id="alertlist"></div>
     </div>
   </main>
 
   <!-- BOTTOM NAV -->
   <nav class="bnav" id="bnav">
-    <div class="bni act" id="bn-dashboard" onclick="goPg('dashboard',null);setActBN(this)"><span class="bni-icon">🏠</span><span>Início</span></div>
-    <div class="bni" id="bn-expenses" onclick="goPg('expenses',null);setActBN(this)"><span class="bni-icon">💸</span><span>Gastos</span></div>
-    <div class="bni" id="bn-investments" onclick="goPg('investments',null);setActBN(this)"><span class="bni-icon">📊</span><span>Carteira</span></div>
-    <div class="bni" id="bn-crypto" onclick="goPg('crypto',null);setActBN(this)"><span class="bni-icon">₿</span><span>Crypto</span></div>
-    <div class="bni" id="bn-goals" onclick="goPg('goals',null);setActBN(this)"><span class="bni-icon">🎯</span><span>Metas</span></div>
+    <div class="bni act" id="bnd" onclick="goPg('dashboard',null);setABN(this)"><span class="bni-i">🏠</span><span>Início</span></div>
+    <div class="bni" id="bne" onclick="goPg('expenses',null);setABN(this)"><span class="bni-i">💸</span><span>Gastos</span></div>
+    <div class="bni" id="bni2" onclick="goPg('investments',null);setABN(this)"><span class="bni-i">📊</span><span>Carteira</span></div>
+    <div class="bni" id="bnc" onclick="goPg('crypto',null);setABN(this)"><span class="bni-i">₿</span><span>Crypto</span></div>
+    <div class="bni" id="bna" onclick="goPg('ai',null);setABN(this)"><span class="bni-i">🤖</span><span>IA</span></div>
   </nav>
 </div>
 
 <!-- MODALS -->
-<div class="moverlay" id="goal-modal">
+<div class="mov" id="goalmod">
   <div class="mcard">
-    <div class="mhandle"></div>
-    <h3 class="mt">Nova meta</h3><p class="ms">Defina e acompanhe um objetivo</p>
-    <div class="fg"><label class="fl">Nome</label><input type="text" class="fi" id="gm-n" placeholder="Ex: Viagem à Europa"></div>
+    <div class="mhdl"></div>
+    <h3 class="mt">Nova meta</h3><p class="msb">Defina um objetivo e acompanhe o progresso</p>
+    <div class="fg"><label class="fl">Nome</label><input type="text" class="fi" id="gmn" placeholder="Ex: Viagem à Europa"></div>
     <div class="fg"><label class="fl" style="margin-bottom:8px">Ícone</label>
-      <div class="radio-group" id="gm-eg" style="flex-wrap:wrap">
-        <div class="rb sel" data-v="✈️" onclick="pickR(this,'gm-eg')">✈️</div><div class="rb" data-v="🏠" onclick="pickR(this,'gm-eg')">🏠</div><div class="rb" data-v="🚗" onclick="pickR(this,'gm-eg')">🚗</div><div class="rb" data-v="💍" onclick="pickR(this,'gm-eg')">💍</div><div class="rb" data-v="📚" onclick="pickR(this,'gm-eg')">📚</div><div class="rb" data-v="🏖️" onclick="pickR(this,'gm-eg')">🏖️</div><div class="rb" data-v="₿" onclick="pickR(this,'gm-eg')">₿</div><div class="rb" data-v="💰" onclick="pickR(this,'gm-eg')">💰</div>
+      <div class="rg" id="gmeg" style="flex-wrap:wrap">
+        <div class="rb sel" data-v="✈️" onclick="pickR(this,'gmeg')">✈️</div><div class="rb" data-v="🏠" onclick="pickR(this,'gmeg')">🏠</div><div class="rb" data-v="🚗" onclick="pickR(this,'gmeg')">🚗</div><div class="rb" data-v="💍" onclick="pickR(this,'gmeg')">💍</div><div class="rb" data-v="📚" onclick="pickR(this,'gmeg')">📚</div><div class="rb" data-v="🏖️" onclick="pickR(this,'gmeg')">🏖️</div><div class="rb" data-v="₿" onclick="pickR(this,'gmeg')">₿</div><div class="rb" data-v="💰" onclick="pickR(this,'gmeg')">💰</div>
       </div>
     </div>
     <div class="fr">
-      <div class="fg"><label class="fl">Valor alvo (R$)</label><input type="number" class="fi" id="gm-t" placeholder="20000"></div>
-      <div class="fg"><label class="fl">Já tenho (R$)</label><input type="number" class="fi" id="gm-c" placeholder="0"></div>
+      <div class="fg"><label class="fl">Valor alvo (R$)</label><input type="number" class="fi" id="gmt" placeholder="20000"></div>
+      <div class="fg"><label class="fl">Já tenho (R$)</label><input type="number" class="fi" id="gmc" placeholder="0"></div>
     </div>
-    <div class="ma"><button class="btn btn-s" onclick="closeM('goal-modal')">Cancelar</button><button class="btn btn-p" id="gm-btn" onclick="addGoal()">Criar meta</button></div>
+    <div class="ma"><button class="btn btn-s" onclick="closeM('goalmod')">Cancelar</button><button class="btn btn-p" id="gmbtn" onclick="addGoal()">Criar meta</button></div>
   </div>
 </div>
-
-<div class="moverlay" id="inv-modal">
+<div class="mov" id="invmod">
   <div class="mcard">
-    <div class="mhandle"></div>
-    <h3 class="mt">Novo ativo</h3><p class="ms">Adicione um investimento à carteira</p>
-    <div class="fg"><label class="fl">Nome / Ticker</label><input type="text" class="fi" id="im-n" placeholder="Ex: Tesouro Selic, PETR4, BTC"></div>
+    <div class="mhdl"></div>
+    <h3 class="mt">Novo ativo</h3><p class="msb">Adicione um investimento à carteira</p>
+    <div class="fg"><label class="fl">Nome / Ticker</label><input type="text" class="fi" id="imn" placeholder="Ex: Tesouro Selic, PETR4, BTC"></div>
     <div class="fr">
-      <div class="fg"><label class="fl">Categoria</label><select class="fi" id="im-c"><option value="renda_fixa">🏦 Renda Fixa</option><option value="acoes">📈 Ações</option><option value="fiis">🏢 FIIs</option><option value="crypto">₿ Crypto</option><option value="outros">📦 Outros</option></select></div>
-      <div class="fg"><label class="fl">Rentab. anual (%)</label><input type="number" class="fi" id="im-r" placeholder="12"></div>
+      <div class="fg"><label class="fl">Categoria</label><select class="fi" id="imc"><option value="renda_fixa">🏦 Renda Fixa</option><option value="acoes">📈 Ações</option><option value="fiis">🏢 FIIs</option><option value="crypto">₿ Crypto</option><option value="outros">📦 Outros</option></select></div>
+      <div class="fg"><label class="fl">Rentab. anual (%)</label><input type="number" class="fi" id="imr2" placeholder="12" step="0.1"></div>
     </div>
-    <div class="fg"><label class="fl">Valor investido (R$)</label><input type="number" class="fi" id="im-v" placeholder="1000"></div>
-    <div class="ma"><button class="btn btn-s" onclick="closeM('inv-modal')">Cancelar</button><button class="btn btn-p" id="im-btn" onclick="addInvestment()">Adicionar</button></div>
+    <div class="fg"><label class="fl">Valor investido (R$)</label><input type="number" class="fi" id="imv" placeholder="1000" step="0.01"></div>
+    <div class="ma"><button class="btn btn-s" onclick="closeM('invmod')">Cancelar</button><button class="btn btn-p" id="imbtn" onclick="addInv()">Adicionar</button></div>
   </div>
 </div>
 
 <script>
-// ═══════════════════════ SUPABASE CONFIG
-const SUPA_URL = 'https://jhpzesfjaedpivnrnzwy.supabase.co';
-const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpocHplc2ZqYWVkcGl2bnJuend5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NTEwNDksImV4cCI6MjA4OTQyNzA0OX0.Ap6dBdCRpDHUonAiUJJRB5qtVe7Hyxiq-6Y6tBGprPA';
-const { createClient } = supabase;
-const db = createClient(SUPA_URL, SUPA_KEY);
+// ═══════════ SUPABASE
+const SURL='https://jhpzesfjaedpivnrnzwy.supabase.co';
+const SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpocHplc2ZqYWVkcGl2bnJuend5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NTEwNDksImV4cCI6MjA4OTQyNzA0OX0.Ap6dBdCRpDHUonAiUJJRB5qtVe7Hyxiq-6Y6tBGprPA';
+const db=supabase.createClient(SURL,SKEY);
 
-// ═══════════════════════ STATE
-const S = { user:null, profile:{}, expenses:[], investments:[], goals:[], charts:{} };
+// ═══════════ STATE
+const S={user:null,profile:{},expenses:[],investments:[],goals:[],charts:{},chatHistory:[]};
 
-// ═══════════════════════ BOOT
-window.addEventListener('DOMContentLoaded', async () => {
-  try {
-    const { data:{ session } } = await db.auth.getSession();
-    if (session?.user) {
-      S.user = session.user;
-      const prof = await loadProfile();
-      if (prof?.name) { await loadAllData(); showApp(); }
-      else { hideLoad(); showProfileSetup(); }
-    } else {
-      hideLoad(); show('auth-screen');
-    }
-  } catch(e) { hideLoad(); show('auth-screen'); }
-
-  db.auth.onAuthStateChange(async (event, session) => {
-    if (event === 'SIGNED_OUT') { location.reload(); }
-  });
-
-  // close modals on overlay click
-  document.querySelectorAll('.moverlay').forEach(o => o.addEventListener('click', e => { if(e.target===o) o.classList.remove('open'); }));
-  document.getElementById('e-date').valueAsDate = new Date();
+// ═══════════ BOOT
+window.addEventListener('DOMContentLoaded',async()=>{
+  try{
+    const{data:{session}}=await db.auth.getSession();
+    if(session?.user){S.user=session.user;const p=await loadProfile();if(p?.name){await loadAll();showApp();}else{hideL();showAuth();}}
+    else{hideL();showAuth();}
+  }catch(e){hideL();showAuth();}
+  document.querySelectorAll('.mov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')}));
+  document.getElementById('edate').valueAsDate=new Date();
 });
+function hideL(){document.getElementById('ls').style.display='none';}
+function showAuth(){const a=document.getElementById('auth-screen');a.style.display='flex';a.style.flexDirection='column';a.style.alignItems='center';}
+function showProfileSetup(){const p=document.getElementById('profile-screen');p.style.display='flex';p.style.flexDirection='column';p.style.alignItems='center';curSt=0;updSt();}
+function showApp(){hideL();document.getElementById('auth-screen').style.display='none';document.getElementById('profile-screen').style.display='none';const a=document.getElementById('app');a.classList.add('v');a.style.display='flex';initUI();}
 
-function hideLoad(){ document.getElementById('loading-screen').style.display='none'; }
-function show(id){
-  const el=document.getElementById(id);
-  if(!el) return;
-  el.style.display='flex';
-  // auth and profile screens need column direction
-  if(id==='auth-screen'||id==='profile-screen'){
-    el.style.flexDirection='column';
-    el.style.alignItems='center';
-  }
-}
-function hide(id){ const el=document.getElementById(id); if(el){el.style.display='none';} }
-
-// ═══════════════════════ AUTH
-function showReg(){
-  hide('login-form');
-  const rf=document.getElementById('reg-form');
-  rf.style.display='flex'; rf.style.flexDirection='column'; rf.style.width='100%';
-}
-function showLogin(){
-  hide('reg-form');
-  const lf=document.getElementById('login-form');
-  lf.style.display='flex'; lf.style.flexDirection='column'; lf.style.width='100%';
-}
-
+// ═══════════ AUTH
+function showReg(){document.getElementById('lf').style.display='none';const r=document.getElementById('rf');r.style.display='flex';r.style.flexDirection='column';r.style.width='100%';}
+function showLogin(){document.getElementById('rf').style.display='none';const l=document.getElementById('lf');l.style.display='flex';l.style.flexDirection='column';l.style.width='100%';}
 async function doLogin(){
-  const email=v('li-email'), pass=v('li-pass');
-  if(!email||!pass){ showErr('login-err','Preencha e-mail e senha.'); return; }
-  const btn=document.getElementById('login-btn');
-  setBtnLoad(btn,true);
-  hideErr('login-err');
-  try {
-    const { data, error } = await db.auth.signInWithPassword({ email, password:pass });
-    if(error) throw error;
-    S.user = data.user;
-    const prof = await loadProfile();
-    hideLoad();
-    if(prof?.name){ await loadAllData(); hide('auth-screen'); showApp(); }
-    else { hide('auth-screen'); showProfileSetup(); }
-  } catch(e) {
-    showErr('login-err', e.message==='Invalid login credentials' ? 'E-mail ou senha incorretos.' : e.message);
-  } finally { setBtnLoad(btn,false); }
+  const em=v('lem'),ps=v('lps');if(!em||!ps){showErr('lerr','Preencha e-mail e senha.');return;}
+  const btn=document.getElementById('lbtn');setLoad(btn,true);hideErr('lerr');
+  try{const{data,error}=await db.auth.signInWithPassword({email:em,password:ps});if(error)throw error;S.user=data.user;const p=await loadProfile();if(p?.name){await loadAll();document.getElementById('auth-screen').style.display='none';showApp();}else{document.getElementById('auth-screen').style.display='none';showProfileSetup();}}
+  catch(e){showErr('lerr',e.message.includes('Invalid')?'E-mail ou senha incorretos.':e.message);}
+  finally{setLoad(btn,false);}
 }
+async function doReg(){
+  const em=v('rem'),ps=v('rps'),cf=v('rcf');if(!em||!ps){showErr('rerr','Preencha todos os campos.');return;}
+  if(ps!==cf){showErr('rerr','Senhas não coincidem.');return;}
+  if(ps.length<6){showErr('rerr','Senha muito curta.');return;}
+  const btn=document.getElementById('rbtn');setLoad(btn,true);hideErr('rerr');
+  try{const{data,error}=await db.auth.signUp({email:em,password:ps});if(error)throw error;S.user=data.user;document.getElementById('auth-screen').style.display='none';showProfileSetup();}
+  catch(e){showErr('rerr',e.message.includes('already')?'E-mail já cadastrado.':e.message);}
+  finally{setLoad(btn,false);}
+}
+async function doLogout(){await db.auth.signOut();location.reload();}
 
-async function doRegister(){
-  const email=v('ri-email'), pass=v('ri-pass'), conf=v('ri-conf');
-  if(!email||!pass){ showErr('reg-err','Preencha todos os campos.'); return; }
-  if(pass!==conf){ showErr('reg-err','Senhas não coincidem.'); return; }
-  if(pass.length<6){ showErr('reg-err','Senha muito curta (mínimo 6).'); return; }
-  const btn=document.getElementById('reg-btn');
-  setBtnLoad(btn,true);
-  hideErr('reg-err');
-  try {
-    const { data, error } = await db.auth.signUp({ email, password:pass });
-    if(error) throw error;
-    S.user = data.user;
-    hide('auth-screen'); showProfileSetup();
-  } catch(e) {
-    showErr('reg-err', e.message.includes('already registered') ? 'Este e-mail já está cadastrado.' : e.message);
-  } finally { setBtnLoad(btn,false); }
+// ═══════════ PROFILE
+let curSt=0;
+function nxS(){
+  if(curSt===0&&!v('pn')){toast('⚠️','Atenção','Informe seu nome.','warn');return;}
+  if(curSt===1&&!v('pi')){toast('⚠️','Atenção','Informe sua renda.','warn');return;}
+  if(curSt===2)buildSum();
+  curSt++;updSt();
 }
-
-async function doLogout(){
-  await db.auth.signOut();
-  location.reload();
+function pvS(){curSt--;updSt();}
+function updSt(){
+  document.querySelectorAll('.ps').forEach((el,i)=>el.classList.toggle('active',i===curSt));
+  document.querySelectorAll('.sseg').forEach((el,i)=>{el.classList.remove('act','dn');if(i===curSt)el.classList.add('act');else if(i<curSt)el.classList.add('dn');});
 }
-
-// ═══════════════════════ PROFILE SETUP
-let curStep=0;
-function showProfileSetup(){
-  document.getElementById('profile-screen').style.display='flex';
-  curStep=0; updStepUI();
-}
-function nxStep(){
-  if(curStep===0&&!v('p-name')){ toast('⚠️','Atenção','Informe seu nome.','warn'); return; }
-  if(curStep===1&&!v('p-income')){ toast('⚠️','Atenção','Informe sua renda.','warn'); return; }
-  if(curStep===2){ buildSummary(); }
-  curStep++; updStepUI();
-}
-function pvStep(){ curStep--; updStepUI(); }
-function updStepUI(){
-  document.querySelectorAll('.ps').forEach((el,i)=>el.classList.toggle('active',i===curStep));
-  document.querySelectorAll('.step-seg').forEach((el,i)=>{ el.classList.remove('active','done'); if(i===curStep)el.classList.add('active'); else if(i<curStep)el.classList.add('done'); });
-}
-function pickR(el,grp){ document.querySelectorAll(`#${grp} .rb`).forEach(b=>b.classList.remove('sel')); el.classList.add('sel'); }
-function buildSummary(){
-  const p={name:v('p-name'),age:v('p-age'),gender:v('p-gender'),job:v('p-job'),income:parseFloat(v('p-income'))||0,invest:parseFloat(v('p-invest'))||0,goal:v('p-goal')||'Não definido',experience:document.querySelector('#exp-grp .rb.sel')?.dataset.v||'Iniciante',crypto:document.querySelector('#crp-grp .rb.sel')?.dataset.v||'Não'};
+function pickR(el,g){document.querySelectorAll(`#${g} .rb`).forEach(b=>b.classList.remove('sel'));el.classList.add('sel');}
+function buildSum(){
+  const p={name:v('pn'),age:v('pa'),gender:v('pg'),job:v('pj'),income:parseFloat(v('pi'))||0,invest:parseFloat(v('pv'))||0,goal:v('pg2')||'Não definido',experience:document.querySelector('#expg .rb.sel')?.dataset.v||'Iniciante',crypto:document.querySelector('#crpg .rb.sel')?.dataset.v||'Não'};
   S.profile=p;
-  document.getElementById('p-summary').innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;font-size:13px"><div><span style="color:var(--text3)">Nome</span><br><strong>${p.name}</strong></div><div><span style="color:var(--text3)">Renda</span><br><strong style="color:var(--green)">R$ ${fmt(p.income)}</strong></div><div><span style="color:var(--text3)">Investimento/mês</span><br><strong style="color:var(--accent2)">R$ ${fmt(p.invest)}</strong></div><div><span style="color:var(--text3)">Objetivo</span><br><strong>${p.goal}</strong></div></div>`;
+  document.getElementById('psumm').innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;font-size:13px"><div><span style="color:var(--text3)">Nome</span><br><strong>${p.name}</strong></div><div><span style="color:var(--text3)">Renda</span><br><strong style="color:var(--green)">R$ ${fmt(p.income)}</strong></div><div><span style="color:var(--text3)">Invest./mês</span><br><strong style="color:#fbbf24">R$ ${fmt(p.invest)}</strong></div><div><span style="color:var(--text3)">Objetivo</span><br><strong>${p.goal}</strong></div></div>`;
 }
 async function enterApp(){
-  const btn=document.getElementById('enter-btn');
-  setBtnLoad(btn,true);
-  try {
-    const p=S.profile;
-    await db.from('profiles').upsert({ id:S.user.id, name:p.name, age:parseInt(p.age)||null, gender:p.gender, job:p.job, income:p.income, invest_monthly:p.invest, goal:p.goal, experience:p.experience, crypto_interest:p.crypto });
-    hide('profile-screen');
-    showApp();
-  } catch(e) { toast('❌','Erro',e.message,'danger'); }
-  finally { setBtnLoad(btn,false); }
+  const btn=document.getElementById('entbtn');setLoad(btn,true);
+  try{const p=S.profile;await db.from('profiles').upsert({id:S.user.id,name:p.name,age:parseInt(p.age)||null,gender:p.gender,job:p.job,income:p.income,invest_monthly:p.invest,goal:p.goal,experience:p.experience,crypto_interest:p.crypto});showApp();}
+  catch(e){toast('❌','Erro',e.message,'danger');}
+  finally{setLoad(btn,false);}
 }
 
-// ═══════════════════════ DATA LOADING
-async function loadProfile(){
-  const { data } = await db.from('profiles').select('*').eq('id',S.user.id).single();
-  if(data) S.profile={ name:data.name, age:data.age, gender:data.gender, job:data.job, income:data.income||0, invest:data.invest_monthly||0, goal:data.goal, experience:data.experience||'Iniciante', crypto:data.crypto_interest||'Não' };
-  return data;
-}
-async function loadAllData(){
-  const uid=S.user.id;
-  const [expR, invR, goaR] = await Promise.all([
-    db.from('expenses').select('*').eq('user_id',uid).order('date',{ascending:false}),
-    db.from('investments').select('*').eq('user_id',uid).order('created_at',{ascending:false}),
-    db.from('goals').select('*').eq('user_id',uid).order('created_at',{ascending:false})
-  ]);
-  S.expenses = expR.data||[];
-  S.investments = invR.data||[];
-  S.goals = goaR.data||[];
-}
+// ═══════════ DATA
+async function loadProfile(){const{data}=await db.from('profiles').select('*').eq('id',S.user.id).single();if(data)S.profile={name:data.name,age:data.age,job:data.job,income:data.income||0,invest:data.invest_monthly||0,goal:data.goal,experience:data.experience||'Iniciante',crypto:data.crypto_interest||'Não'};return data;}
+async function loadAll(){const uid=S.user.id;const[er,ir,gr]=await Promise.all([db.from('expenses').select('*').eq('user_id',uid).order('date',{ascending:false}),db.from('investments').select('*').eq('user_id',uid).order('created_at',{ascending:false}),db.from('goals').select('*').eq('user_id',uid).order('created_at',{ascending:false})]);S.expenses=er.data||[];S.investments=ir.data||[];S.goals=gr.data||[];}
 
-// ═══════════════════════ SHOW APP
-function showApp(){
-  hideLoad();
-  hide('auth-screen');
-  hide('profile-screen');
-  const app=document.getElementById('app');
-  app.classList.add('v');
-  app.style.display='flex';
-  initUI();
-}
+// ═══════════ UI INIT
 function initUI(){
   const p=S.profile;
-  document.getElementById('sb-av').textContent=(p.name||'U')[0].toUpperCase();
-  document.getElementById('sb-nm').textContent=p.name||'Usuário';
-  document.getElementById('sb-rl').textContent='Sincronizado';
-  document.getElementById('d-hi').textContent=`Olá, ${p.name||''}! 👋`;
-  document.getElementById('d-sub').textContent=`Objetivo: ${p.goal||'crescer financeiramente'}`;
-  document.getElementById('s-inc').textContent=`R$ ${fmt(p.income||0)}`;
-  document.getElementById('s-inv').textContent=`R$ ${fmt(p.invest||0)}`;
-  renderExpList(); renderExpChart();
-  renderInvGrid(); renderInvestChart();
-  renderGoals();
-  renderDashCharts(); updateDashStats();
-  renderAlerts();
-  renderCrypto();
-  calcSim();
-  updBadges();
+  document.getElementById('sbav').textContent=(p.name||'U')[0].toUpperCase();
+  document.getElementById('sbnm').textContent=p.name||'Usuário';
+  document.getElementById('dhi').textContent=`Olá, ${p.name||''}! 👋`;
+  document.getElementById('dsub').textContent=`Objetivo: ${p.goal||'crescer financeiramente'}`;
+  document.getElementById('sinc').textContent=`R$ ${fmt(p.income||0)}`;
+  document.getElementById('sinv').textContent=`R$ ${fmt(p.invest||0)}`;
+  renderExpList();renderExpChart();renderInvGrid();renderInvChart();renderGoals();renderDashCharts();updDashStats();renderAlerts();renderCrypto();renderStocks('br');calcSim();updBadges();
   toast('✅','Dados carregados!','Tudo sincronizado com a nuvem.','success');
 }
-function updBadges(){
-  document.getElementById('sb-eb').textContent=S.expenses.length;
-  document.getElementById('sb-gb').textContent=S.goals.length;
-}
+function updBadges(){document.getElementById('sbeb').textContent=S.expenses.length;document.getElementById('sbgb').textContent=S.goals.length;}
 
-// ═══════════════════════ NAVIGATION
-const pgTitles={dashboard:'Dashboard',expenses:'Gastos',investments:'Investimentos',crypto:'Criptomoedas',goals:'Metas',simulator:'Simulador',alerts:'Alertas'};
+// ═══════════ NAVIGATION
+const pgTitles={dashboard:'Dashboard',expenses:'Gastos',investments:'Investimentos',crypto:'Criptomoedas',stocks:'Bolsa de Valores',goals:'Metas',simulator:'Simulador',ai:'IA Financeira',alerts:'Alertas'};
 function goPg(id,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('act'));
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('act'));
-  const pg=document.getElementById('page-'+id); if(pg)pg.classList.add('act');
+  const pg=document.getElementById('page-'+id);if(pg)pg.classList.add('act');
   if(el)el.classList.add('act');
-  document.querySelectorAll('.ni').forEach(n=>{ if(n.getAttribute('onclick')?.includes(`'${id}'`))n.classList.add('act'); });
-  document.getElementById('tb-title').textContent=pgTitles[id]||id;
-  if(id==='alerts'){ document.getElementById('ndot').style.display='none'; }
-  if(id==='dashboard') setTimeout(renderDashCharts,50);
-  if(id==='investments') setTimeout(renderInvestChart,60);
-  if(id==='expenses') setTimeout(renderExpChart,50);
-  if(id==='simulator') setTimeout(calcSim,50);
-  if(id==='crypto') setTimeout(renderCryptoChart,50);
+  document.querySelectorAll('.ni').forEach(n=>{if(n.getAttribute('onclick')?.includes(`'${id}'`))n.classList.add('act');});
+  document.getElementById('tbt').textContent=pgTitles[id]||id;
+  if(id==='alerts')document.getElementById('ndot').style.display='none';
+  if(id==='dashboard')setTimeout(renderDashCharts,50);
+  if(id==='investments')setTimeout(renderInvChart,60);
+  if(id==='expenses')setTimeout(renderExpChart,50);
+  if(id==='simulator')setTimeout(calcSim,50);
+  if(id==='crypto')setTimeout(renderCryptoChart,50);
+  if(id==='stocks')setTimeout(()=>renderStocksChart('br',2.1),50);
   closeSB();
 }
-function setActBN(el){ document.querySelectorAll('.bni').forEach(b=>b.classList.remove('act')); el.classList.add('act'); }
+function setABN(el){document.querySelectorAll('.bni').forEach(b=>b.classList.remove('act'));el.classList.add('act');}
 
-// ═══════════════════════ EXPENSES
-const catCfg={food:{l:'Alimentação',i:'🍔',c:'c-food'},transport:{l:'Transporte',i:'🚗',c:'c-transport'},leisure:{l:'Lazer',i:'🎮',c:'c-leisure'},bills:{l:'Contas',i:'📄',c:'c-bills'},health:{l:'Saúde',i:'💊',c:'c-health'},education:{l:'Educação',i:'📚',c:'c-education'},other:{l:'Outros',i:'📦',c:'c-other'}};
-function getCatTotals(){ const m={}; S.expenses.forEach(e=>{m[e.category]=(m[e.category]||0)+e.amount}); return Object.entries(m).map(([c,t])=>({cat:c,label:catCfg[c]?.l||c,total:t})).sort((a,b)=>b.total-a.total); }
-
-async function addExpense(){
-  const desc=v('e-desc').trim(), amt=parseFloat(v('e-amt')), cat=v('e-cat'), date=v('e-date');
-  if(!desc||!amt||amt<=0||!date){ toast('⚠️','Atenção','Preencha todos os campos.','warn'); return; }
-  const btn=document.getElementById('e-add-btn'); setBtnLoad(btn,true);
-  try {
-    const { data, error } = await db.from('expenses').insert({ user_id:S.user.id, description:desc, amount:amt, category:cat, date }).select().single();
-    if(error) throw error;
-    S.expenses.unshift(data);
-    clearV(['e-desc','e-amt']); document.getElementById('e-date').valueAsDate=new Date();
-    renderExpList(); renderExpChart(); renderDashCharts(); updateDashStats(); updBadges();
-    toast('✅','Gasto salvo!',`${desc} — R$ ${amt.toFixed(2)}`,'success');
-  } catch(e){ toast('❌','Erro',e.message,'danger'); }
-  finally{ setBtnLoad(btn,false); }
+// ═══════════ EXPENSES
+const catCfg={food:{l:'Alimentação',i:'🍔',c:'cf'},transport:{l:'Transporte',i:'🚗',c:'ct'},leisure:{l:'Lazer',i:'🎮',c:'cl'},bills:{l:'Contas',i:'📄',c:'cb'},health:{l:'Saúde',i:'💊',c:'ch'},education:{l:'Educação',i:'📚',c:'ce'},other:{l:'Outros',i:'📦',c:'co'}};
+function getCatTot(){const m={};S.expenses.forEach(e=>{m[e.category]=(m[e.category]||0)+e.amount});return Object.entries(m).map(([c,t])=>({cat:c,label:catCfg[c]?.l||c,total:t})).sort((a,b)=>b.total-a.total);}
+async function addExp(){
+  const des=v('edes').trim(),amt=parseFloat(v('eamt')),cat=v('ecat'),date=v('edate');
+  if(!des||!amt||amt<=0||!date){toast('⚠️','Atenção','Preencha todos os campos.','warn');return;}
+  const btn=document.getElementById('eabtn');setLoad(btn,true);
+  try{const{data,error}=await db.from('expenses').insert({user_id:S.user.id,description:des,amount:amt,category:cat,date}).select().single();if(error)throw error;S.expenses.unshift(data);clrV(['edes','eamt']);document.getElementById('edate').valueAsDate=new Date();renderExpList();renderExpChart();renderDashCharts();updDashStats();updBadges();toast('✅','Gasto salvo!',`${des} — R$ ${amt.toFixed(2)}`,'success');}
+  catch(e){toast('❌','Erro',e.message,'danger');}
+  finally{setLoad(btn,false);}
 }
-async function delExpense(id){
-  try {
-    await db.from('expenses').delete().eq('id',id);
-    S.expenses=S.expenses.filter(e=>e.id!==id);
-    renderExpList(); renderExpChart(); renderDashCharts(); updateDashStats(); updBadges();
-    toast('🗑️','Removido','Despesa excluída.','info');
-  } catch(e){ toast('❌','Erro',e.message,'danger'); }
-}
+async function delExp(id){try{await db.from('expenses').delete().eq('id',id);S.expenses=S.expenses.filter(e=>e.id!==id);renderExpList();renderExpChart();renderDashCharts();updDashStats();updBadges();toast('🗑️','Removido','Despesa excluída.','info');}catch(e){toast('❌','Erro',e.message,'danger');}}
 function renderExpList(){
-  const list=document.getElementById('exp-list');
+  const list=document.getElementById('explist');
   const total=S.expenses.reduce((s,e)=>s+e.amount,0);
-  document.getElementById('e-total').textContent=total>0?`−R$ ${fmt(total)}`:'';
-  if(!S.expenses.length){ list.innerHTML='<div class="es"><div class="es-i">📭</div><div class="es-t">Sem despesas ainda.<br>Adicione a primeira!</div></div>'; return; }
-  list.innerHTML=S.expenses.slice(0,30).map(e=>{
-    const c=catCfg[e.category]||catCfg.other;
-    const d=new Date(e.date+'T00:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});
-    return `<div class="ei"><div class="ei-icon ${c.c}">${c.i}</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:500">${e.description}</div><div style="font-size:11px;color:var(--text3)">${c.l}</div></div><div style="text-align:right"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--red)">−R$ ${e.amount.toFixed(2)}</div><div style="font-size:10px;color:var(--text3)">${d}</div></div><button class="edel" onclick="delExpense(${e.id})">✕</button></div>`;
-  }).join('');
-}
-function updateDashStats(){
+  document.getElementById('etot').textContent=total>0?`−R$ ${fmt(total)}`:'';
+  if(!S.expenses.length){list.innerHTML='<div class="es"><div class="esi">📭</div><div class="est">Sem despesas.<br>Adicione a primeira!</div></div>';return;}
+  list.innerHTML=S.expenses.slice(0,30).map(e=>{const c=catCfg[e.category]||catCfg.other;const d=new Date(e.date+'T00:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});return`<div class="ei"><div class="eico ${c.c}">${c.i}</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:500">${e.description}</div><div style="font-size:11px;color:var(--text3)">${c.l}</div></div><div style="text-align:right"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--red)">−R$ ${e.amount.toFixed(2)}</div><div style="font-size:10px;color:var(--text3)">${d}</div></div><button class="edel" onclick="delExp(${e.id})">✕</button></div>`;}).join('');}
+function updDashStats(){
   const total=S.expenses.reduce((s,e)=>s+e.amount,0);
-  document.getElementById('s-exp').textContent=`R$ ${fmt(total)}`;
-  const inc=S.profile.income||0; const pct=inc>0?((total/inc)*100).toFixed(0):0;
-  const el=document.getElementById('s-exp-d');
-  if(total>0){ el.className=`sc-d ${total/inc>0.7?'dn':'up'}`; el.textContent=`${total/inc>0.7?'↑':'→'} ${pct}% da renda`; } else { el.className='sc-d'; el.textContent='— Sem registros'; }
+  document.getElementById('sexp').textContent=`R$ ${fmt(total)}`;
+  const inc=S.profile.income||0,pct=inc>0?((total/inc)*100).toFixed(0):0;
+  const el=document.getElementById('sexd');
+  if(total>0){el.className=`scd ${total/inc>0.7?'dn':'up'}`;el.textContent=`${total/inc>0.7?'↑':'→'} ${pct}% da renda`;}else{el.className='scd';el.textContent='— Sem registros';}
   const pat=S.investments.reduce((s,i)=>s+i.value,0);
-  document.getElementById('s-pat').textContent=`R$ ${fmt(pat)}`;
-  const pd=document.getElementById('s-pat-d');
-  if(pat>0){ pd.className='sc-d up'; pd.textContent='↑ Total na carteira'; } else { pd.className='sc-d'; pd.textContent='— Adicione ativos'; }
+  document.getElementById('spat').textContent=`R$ ${fmt(pat)}`;
+  const pd=document.getElementById('spatd');
+  if(pat>0){pd.className='scd up';pd.textContent='↑ Total na carteira';}else{pd.className='scd';pd.textContent='— Adicione ativos';}
 }
 
-// ═══════════════════════ INVESTMENTS
+// ═══════════ INVESTMENTS
 const invCfg={renda_fixa:{i:'🏦',bg:'rgba(56,189,248,.12)',col:'#38bdf8'},acoes:{i:'📈',bg:'rgba(167,139,250,.12)',col:'#a78bfa'},fiis:{i:'🏢',bg:'rgba(34,211,165,.12)',col:'#22d3a5'},crypto:{i:'₿',bg:'rgba(251,191,36,.12)',col:'#fbbf24'},outros:{i:'📦',bg:'rgba(156,163,175,.12)',col:'#9ca3af'}};
 const invLbl={renda_fixa:'Renda Fixa',acoes:'Ações',fiis:'Fundos Imob.',crypto:'Crypto',outros:'Outros'};
-async function addInvestment(){
-  const name=v('im-n').trim(), cat=v('im-c'), rate=parseFloat(v('im-r'))||0, value=parseFloat(v('im-v'))||0;
-  if(!name||value<=0){ toast('⚠️','Atenção','Preencha nome e valor.','warn'); return; }
-  const btn=document.getElementById('im-btn'); setBtnLoad(btn,true);
-  try {
-    const { data, error } = await db.from('investments').insert({ user_id:S.user.id, name, category:cat, rate, value }).select().single();
-    if(error) throw error;
-    S.investments.unshift(data);
-    closeM('inv-modal'); clearV(['im-n','im-r','im-v']);
-    renderInvGrid(); renderInvestChart(); updateDashStats(); renderDashCharts();
-    toast('✅','Ativo salvo!',`${name} — R$ ${fmt(value)}`,'success');
-  } catch(e){ toast('❌','Erro',e.message,'danger'); }
-  finally{ setBtnLoad(btn,false); }
+async function addInv(){
+  const name=v('imn').trim(),cat=v('imc'),rate=parseFloat(v('imr2'))||0,value=parseFloat(v('imv'))||0;
+  if(!name||value<=0){toast('⚠️','Atenção','Preencha nome e valor.','warn');return;}
+  const btn=document.getElementById('imbtn');setLoad(btn,true);
+  try{const{data,error}=await db.from('investments').insert({user_id:S.user.id,name,category:cat,rate,value}).select().single();if(error)throw error;S.investments.unshift(data);closeM('invmod');clrV(['imn','imr2','imv']);renderInvGrid();renderInvChart();updDashStats();renderDashCharts();toast('✅','Ativo salvo!',`${name} — R$ ${fmt(value)}`,'success');}
+  catch(e){toast('❌','Erro',e.message,'danger');}
+  finally{setLoad(btn,false);}
 }
-async function delInvestment(id){
-  try {
-    await db.from('investments').delete().eq('id',id);
-    S.investments=S.investments.filter(i=>i.id!==id);
-    renderInvGrid(); renderInvestChart(); updateDashStats(); renderDashCharts();
-    toast('🗑️','Removido','Ativo excluído.','info');
-  } catch(e){ toast('❌','Erro',e.message,'danger'); }
-}
+async function delInv(id){try{await db.from('investments').delete().eq('id',id);S.investments=S.investments.filter(i=>i.id!==id);renderInvGrid();renderInvChart();updDashStats();renderDashCharts();toast('🗑️','Removido','Ativo excluído.','info');}catch(e){toast('❌','Erro',e.message,'danger');}}
 function renderInvGrid(){
-  const grid=document.getElementById('inv-grid');
+  const grid=document.getElementById('invgrid');
   const total=S.investments.reduce((s,i)=>s+i.value,0);
   const earn=S.investments.reduce((s,i)=>s+(i.value*(i.rate/100)),0);
-  document.getElementById('iv-total').textContent=`R$ ${fmt(total)}`;
-  document.getElementById('iv-earn').textContent=`R$ ${fmt(earn)}`;
-  document.getElementById('iv-roi').textContent=total>0?`+${((earn/total)*100).toFixed(1)}%`:'0%';
-  document.getElementById('iv-cls').textContent=[...new Set(S.investments.map(i=>i.category))].length;
-  if(!S.investments.length){ grid.innerHTML='<div style="grid-column:1/-1" class="es"><div class="es-i">💼</div><div class="es-t">Nenhum ativo ainda.<br>Adicione o primeiro!</div></div>'; document.getElementById('inv-ch-card').style.display='none'; return; }
-  grid.innerHTML=S.investments.map((inv,idx)=>{
-    const cfg=invCfg[inv.category]||invCfg.outros;
-    const pct=total>0?((inv.value/total)*100).toFixed(1):0;
-    return `<div class="icard" style="animation-delay:${idx*.06}s"><div class="ic-top"><div class="ic-ico" style="background:${cfg.bg}">${cfg.i}</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${inv.name}</div><div style="font-size:11px;color:var(--text3)">${invLbl[inv.category]||inv.category}</div></div><button style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:13px;padding:2px;flex-shrink:0" onmouseenter="this.style.color='var(--red)'" onmouseleave="this.style.color='var(--text3)'" onclick="delInvestment(${inv.id})">✕</button></div><div class="ic-val" style="color:${cfg.col}">R$ ${fmt(inv.value)}</div><div class="ic-bar"><div class="ic-bar-fill" style="width:${pct}%;background:${cfg.col}"></div></div><div class="ic-meta"><span>${pct}% portfólio</span><strong style="color:var(--green)">+${inv.rate}% a.a.</strong></div></div>`;
-  }).join('');
-  document.getElementById('inv-ch-card').style.display='block';
+  document.getElementById('ivtot').textContent=`R$ ${fmt(total)}`;
+  document.getElementById('ivern').textContent=`R$ ${fmt(earn)}`;
+  document.getElementById('ivroi').textContent=total>0?`+${((earn/total)*100).toFixed(1)}%`:'0%';
+  document.getElementById('ivcls').textContent=[...new Set(S.investments.map(i=>i.category))].length;
+  if(!S.investments.length){grid.innerHTML='<div style="grid-column:1/-1" class="es"><div class="esi">💼</div><div class="est">Nenhum ativo.<br>Adicione o primeiro!</div></div>';document.getElementById('invchcard').style.display='none';return;}
+  grid.innerHTML=S.investments.map((inv,idx)=>{const cfg=invCfg[inv.category]||invCfg.outros;const pct=total>0?((inv.value/total)*100).toFixed(1):0;return`<div class="icard" style="animation-delay:${idx*.06}s"><div class="ictop"><div class="icico" style="background:${cfg.bg}">${cfg.i}</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${inv.name}</div><div style="font-size:11px;color:var(--text3)">${invLbl[inv.category]||inv.category}</div></div><button style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:12px;padding:2px;flex-shrink:0" onmouseenter="this.style.color='var(--red)'" onmouseleave="this.style.color='var(--text3)'" onclick="delInv(${inv.id})">✕</button></div><div class="icval" style="color:${cfg.col}">R$ ${fmt(inv.value)}</div><div class="icbar"><div class="icbf" style="width:${pct}%;background:${cfg.col}"></div></div><div class="icmeta"><span>${pct}% portfólio</span><strong style="color:var(--green)">+${inv.rate}% a.a.</strong></div></div>`;}).join('');
+  document.getElementById('invchcard').style.display='block';
 }
-function renderInvestChart(){
-  dChart('port');
-  if(!S.investments.length) return;
-  const catMap={}; S.investments.forEach(i=>{catMap[i.category]=(catMap[i.category]||0)+i.value});
-  const labels=Object.keys(catMap).map(k=>invLbl[k]||k), data=Object.values(catMap), colors=Object.keys(catMap).map(k=>invCfg[k]?.col||'#9ca3af'), total=data.reduce((a,b)=>a+b,0);
-  const ctx=document.getElementById('ch-port').getContext('2d');
-  S.charts['port']=new Chart(ctx,{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:colors,borderWidth:0,hoverOffset:5}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},cutout:'66%'}});
-  document.getElementById('port-leg').innerHTML=labels.map((l,i)=>`<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="width:9px;height:9px;border-radius:2px;background:${colors[i]};flex-shrink:0"></div><div style="min-width:0"><div style="font-size:12px;font-weight:500">${l}</div><div style="font-size:11px;color:var(--text3)">R$ ${fmt(data[i])} · ${((data[i]/total)*100).toFixed(1)}%</div></div></div>`).join('');
-}
+function renderInvChart(){dC('port');if(!S.investments.length)return;const catMap={};S.investments.forEach(i=>{catMap[i.category]=(catMap[i.category]||0)+i.value});const labels=Object.keys(catMap).map(k=>invLbl[k]||k),data=Object.values(catMap),colors=Object.keys(catMap).map(k=>invCfg[k]?.col||'#9ca3af'),total=data.reduce((a,b)=>a+b,0);const ctx=document.getElementById('chport').getContext('2d');S.charts['port']=new Chart(ctx,{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:colors,borderWidth:0,hoverOffset:5}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},cutout:'66%'}});document.getElementById('portleg').innerHTML=labels.map((l,i)=>`<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="width:9px;height:9px;border-radius:2px;background:${colors[i]};flex-shrink:0"></div><div style="min-width:0"><div style="font-size:12px;font-weight:500">${l}</div><div style="font-size:11px;color:var(--text3)">R$ ${fmt(data[i])} · ${((data[i]/total)*100).toFixed(1)}%</div></div></div>`).join('');}
 
-// ═══════════════════════ GOALS
+// ═══════════ GOALS
 async function addGoal(){
-  const name=v('gm-n').trim(), target=parseFloat(v('gm-t'))||0, current=parseFloat(v('gm-c'))||0;
-  const emoji=document.querySelector('#gm-eg .rb.sel')?.dataset.v||'🎯';
-  if(!name||target<=0){ toast('⚠️','Atenção','Preencha nome e valor alvo.','warn'); return; }
-  const btn=document.getElementById('gm-btn'); setBtnLoad(btn,true);
-  try {
-    const { data, error } = await db.from('goals').insert({ user_id:S.user.id, name, emoji, target, current_value:current }).select().single();
-    if(error) throw error;
-    S.goals.push(data);
-    closeM('goal-modal'); clearV(['gm-n','gm-t','gm-c']);
-    renderGoals(); updBadges();
-    toast('🎯','Meta salva!',`${name} adicionada!`,'success');
-  } catch(e){ toast('❌','Erro',e.message,'danger'); }
-  finally{ setBtnLoad(btn,false); }
+  const name=v('gmn').trim(),target=parseFloat(v('gmt'))||0,current=parseFloat(v('gmc'))||0,emoji=document.querySelector('#gmeg .rb.sel')?.dataset.v||'🎯';
+  if(!name||target<=0){toast('⚠️','Atenção','Preencha nome e valor alvo.','warn');return;}
+  const btn=document.getElementById('gmbtn');setLoad(btn,true);
+  try{const{data,error}=await db.from('goals').insert({user_id:S.user.id,name,emoji,target,current_value:current}).select().single();if(error)throw error;S.goals.push(data);closeM('goalmod');clrV(['gmn','gmt','gmc']);renderGoals();updBadges();toast('🎯','Meta salva!',`${name} adicionada!`,'success');}
+  catch(e){toast('❌','Erro',e.message,'danger');}
+  finally{setLoad(btn,false);}
 }
-async function delGoal(id){
-  try {
-    await db.from('goals').delete().eq('id',id);
-    S.goals=S.goals.filter(g=>g.id!==id);
-    renderGoals(); updBadges();
-    toast('🗑️','Removida','Meta excluída.','info');
-  } catch(e){ toast('❌','Erro',e.message,'danger'); }
-}
-function renderGoals(){
-  const grid=document.getElementById('goals-grid');
-  if(!S.goals.length){ grid.innerHTML='<div style="grid-column:1/-1" class="es"><div class="es-i">🎯</div><div class="es-t">Nenhuma meta ainda.<br>Defina seu primeiro objetivo!</div></div>'; return; }
-  grid.innerHTML=S.goals.map((g,i)=>{
-    const pct=Math.min(100,(g.current_value/g.target)*100), rem=g.target-g.current_value;
-    return `<div class="gc" style="animation-delay:${i*.06}s"><div class="gc-top"><div><div class="gc-emoji">${g.emoji}</div><div class="gc-name">${g.name}</div><div class="gc-target">Meta: R$ ${fmt(g.target)}</div></div><button class="gdel" onclick="delGoal(${g.id})">✕</button></div><div class="pbar"><div class="pfill" style="width:${pct}%"></div></div><div class="gi-row"><span style="font-weight:600;color:var(--accent2)">R$ ${fmt(g.current_value)}</span><span style="color:var(--text3)">${pct.toFixed(0)}% · −R$ ${fmt(rem)}</span></div></div>`;
-  }).join('');
-}
+async function delGoal(id){try{await db.from('goals').delete().eq('id',id);S.goals=S.goals.filter(g=>g.id!==id);renderGoals();updBadges();}catch(e){toast('❌','Erro',e.message,'danger');}}
+function renderGoals(){const grid=document.getElementById('goalgrid');if(!S.goals.length){grid.innerHTML='<div style="grid-column:1/-1" class="es"><div class="esi">🎯</div><div class="est">Nenhuma meta.<br>Defina seu primeiro objetivo!</div></div>';return;}grid.innerHTML=S.goals.map((g,i)=>{const pct=Math.min(100,(g.current_value/g.target)*100),rem=g.target-g.current_value;return`<div class="gc" style="animation-delay:${i*.06}s"><div class="gctop"><div><div class="gcemo">${g.emoji}</div><div class="gcname">${g.name}</div><div class="gctgt">Meta: R$ ${fmt(g.target)}</div></div><button class="gdel" onclick="delGoal(${g.id})">✕</button></div><div class="pbar"><div class="pfill" style="width:${pct}%"></div></div><div class="girow"><span style="font-weight:600;color:var(--accent2)">R$ ${fmt(g.current_value)}</span><span style="color:var(--text3)">${pct.toFixed(0)}% · −R$ ${fmt(rem)}</span></div></div>`;}).join('');}
 
-// ═══════════════════════ DASHBOARD CHARTS
-function renderDashCharts(){ renderCatChart(); renderPatChart(); }
-function renderCatChart(){
-  dChart('cat');
-  const cats=getCatTotals();
-  const el=document.getElementById('ch-cat'), es=document.getElementById('cat-es');
-  if(!cats.length){ el.style.display='none'; es.style.display='block'; return; }
-  el.style.display='block'; es.style.display='none';
-  const ctx=el.getContext('2d');
-  S.charts['cat']=new Chart(ctx,{type:'bar',data:{labels:cats.map(c=>c.label),datasets:[{data:cats.map(c=>c.total),backgroundColor:['#fbbf24','#38bdf8','#a78bfa','#f87171','#22d3a5','#7c5cfc','#9ca3af'],borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#6b6885',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.03)'},ticks:{color:'#6b6885',font:{size:10},callback:v=>`R$${v}`}}}}});
-}
-function renderPatChart(){
-  dChart('pat');
-  const pat=S.investments.reduce((s,i)=>s+i.value,0);
-  const el=document.getElementById('ch-pat'), es=document.getElementById('pat-es');
-  if(!pat){ el.style.display='none'; es.style.display='block'; document.getElementById('pat-b').textContent='—'; return; }
-  el.style.display='block'; es.style.display='none';
-  document.getElementById('pat-b').textContent=`R$ ${fmtBig(pat)}`;
-  const months=['Out','Nov','Dez','Jan','Fev','Mar'];
-  const base=pat*.65, data=months.map((_,i)=>Math.round(base+((pat-base)/5)*i)); data[5]=pat;
-  const ctx=el.getContext('2d');
-  const g=ctx.createLinearGradient(0,0,0,170); g.addColorStop(0,'rgba(124,92,252,.28)'); g.addColorStop(1,'rgba(124,92,252,0)');
-  S.charts['pat']=new Chart(ctx,{type:'line',data:{labels:months,datasets:[{data,borderColor:'#7c5cfc',backgroundColor:g,borderWidth:2.5,tension:.4,fill:true,pointRadius:3,pointBackgroundColor:'#7c5cfc'}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#6b6885',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.03)'},ticks:{color:'#6b6885',font:{size:10},callback:v=>`R$${(v/1000).toFixed(0)}k`}}}}});
-}
-function renderExpChart(){
-  dChart('edon');
-  const cats=getCatTotals();
-  const el=document.getElementById('ch-edon'), es=document.getElementById('edon-es');
-  if(!cats.length){ el.style.display='none'; es.style.display='block'; return; }
-  el.style.display='block'; es.style.display='none';
-  const colors=['#fbbf24','#38bdf8','#a78bfa','#f87171','#22d3a5','#7c5cfc','#9ca3af'];
-  S.charts['edon']=new Chart(el.getContext('2d'),{type:'doughnut',data:{labels:cats.map(c=>c.label),datasets:[{data:cats.map(c=>c.total),backgroundColor:colors.slice(0,cats.length),borderWidth:0,hoverOffset:5}]},options:{responsive:true,maintainAspectRatio:true,cutout:'58%',plugins:{legend:{display:true,position:'right',labels:{color:'#9e9bb8',font:{size:10},padding:9,boxWidth:9,boxHeight:9}}}}});
-}
+// ═══════════ CHARTS
+function renderDashCharts(){renderCatChart();renderPatChart();}
+function renderCatChart(){dC('cat');const cats=getCatTot();const el=document.getElementById('chcat'),es=document.getElementById('cates');if(!cats.length){el.style.display='none';es.style.display='block';return;}el.style.display='block';es.style.display='none';S.charts['cat']=new Chart(el.getContext('2d'),{type:'bar',data:{labels:cats.map(c=>c.label),datasets:[{data:cats.map(c=>c.total),backgroundColor:['#fbbf24','#38bdf8','#a78bfa','#f87171','#22d3a5','#7c5cfc','#9ca3af'],borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#6b6885',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.03)'},ticks:{color:'#6b6885',font:{size:10},callback:v=>`R$${v}`}}}}});}
+function renderPatChart(){dC('pat');const pat=S.investments.reduce((s,i)=>s+i.value,0);const el=document.getElementById('chpat'),es=document.getElementById('pates');if(!pat){el.style.display='none';es.style.display='block';document.getElementById('patb').textContent='—';return;}el.style.display='block';es.style.display='none';document.getElementById('patb').textContent=`R$ ${fmtBig(pat)}`;const months=['Out','Nov','Dez','Jan','Fev','Mar'],base=pat*.65,data=months.map((_,i)=>Math.round(base+((pat-base)/5)*i));data[5]=pat;const ctx=el.getContext('2d');const g=ctx.createLinearGradient(0,0,0,170);g.addColorStop(0,'rgba(124,92,252,.28)');g.addColorStop(1,'rgba(124,92,252,0)');S.charts['pat']=new Chart(ctx,{type:'line',data:{labels:months,datasets:[{data,borderColor:'#7c5cfc',backgroundColor:g,borderWidth:2.5,tension:.4,fill:true,pointRadius:3,pointBackgroundColor:'#7c5cfc'}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#6b6885',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.03)'},ticks:{color:'#6b6885',font:{size:10},callback:v=>`R$${(v/1000).toFixed(0)}k`}}}}});}
+function renderExpChart(){dC('edon');const cats=getCatTot();const el=document.getElementById('chedon'),es=document.getElementById('edones');if(!cats.length){el.style.display='none';es.style.display='block';return;}el.style.display='block';es.style.display='none';const colors=['#fbbf24','#38bdf8','#a78bfa','#f87171','#22d3a5','#7c5cfc','#9ca3af'];S.charts['edon']=new Chart(el.getContext('2d'),{type:'doughnut',data:{labels:cats.map(c=>c.label),datasets:[{data:cats.map(c=>c.total),backgroundColor:colors.slice(0,cats.length),borderWidth:0,hoverOffset:5}]},options:{responsive:true,maintainAspectRatio:true,cutout:'58%',plugins:{legend:{display:true,position:'right',labels:{color:'#9e9bb8',font:{size:10},padding:9,boxWidth:9,boxHeight:9}}}}});}
 
-// ═══════════════════════ SIMULATOR
-function pickST(el){ document.querySelectorAll('.stb').forEach(b=>b.classList.remove('act')); el.classList.add('act'); document.getElementById('sr-r').value=el.dataset.r; calcSim(); }
+// ═══════════ SIMULATOR — fully editable
+function syncEdit(rangeId,editId,dir){if(dir===1)document.getElementById(editId).value=document.getElementById(rangeId).value;else document.getElementById(rangeId).value=document.getElementById(editId).value;}
+function pickST(el){document.querySelectorAll('.stb').forEach(b=>b.classList.remove('act'));el.classList.add('act');document.getElementById('srr').value=el.dataset.r;document.getElementById('srv').value=el.dataset.r;calcSim();}
 function calcSim(){
-  const init=+document.getElementById('sr-i').value, monthly=+document.getElementById('sr-m').value, rate=+document.getElementById('sr-r').value/100, years=+document.getElementById('sr-y').value;
-  document.getElementById('sv-i').textContent=`R$ ${fmtK(init)}`;
-  document.getElementById('sv-m').textContent=`R$ ${fmtK(monthly)}`;
-  document.getElementById('sv-r').textContent=`${document.getElementById('sr-r').value}%`;
-  document.getElementById('sv-y').textContent=`${years} ${years===1?'ano':'anos'}`;
-  document.getElementById('sim-pd').textContent=`em ${years} ${years===1?'ano':'anos'}`;
-  const mr=rate/12, n=years*12;
-  let fv=init*Math.pow(1+mr,n); fv+=mr>0?monthly*(Math.pow(1+mr,n)-1)/mr:monthly*n;
-  const invested=init+monthly*n, earn=fv-invested, roi=invested>0?(earn/invested)*100:0, mult=invested>0?fv/invested:1;
-  document.getElementById('sim-fv').textContent=`R$ ${fmtBig(fv)}`;
-  document.getElementById('sim-ti').textContent=`R$ ${fmtBig(invested)}`;
-  document.getElementById('sim-rd').textContent=`R$ ${fmtBig(earn)}`;
-  document.getElementById('sim-mx').textContent=`${mult.toFixed(1)}x`;
-  document.getElementById('sim-ri').textContent=`+${roi.toFixed(0)}%`;
-  dChart('sim');
-  const lbls=[], vals=[], invArr=[], step=years<=10?1:years<=20?2:5;
-  for(let y=0;y<=years;y+=step){ lbls.push(y===0?'Hoje':`${y}a`); const ni=y*12; let fvi=init*Math.pow(1+mr,ni); fvi+=mr>0?monthly*(Math.pow(1+mr,ni)-1)/mr:monthly*ni; vals.push(Math.round(fvi)); invArr.push(Math.round(init+monthly*ni)); }
-  const ctx=document.getElementById('ch-sim').getContext('2d');
-  const g1=ctx.createLinearGradient(0,0,0,170); g1.addColorStop(0,'rgba(124,92,252,.3)'); g1.addColorStop(1,'rgba(124,92,252,0)');
-  const g2=ctx.createLinearGradient(0,0,0,170); g2.addColorStop(0,'rgba(34,211,165,.15)'); g2.addColorStop(1,'rgba(34,211,165,0)');
+  const init=parseFloat(document.getElementById('siv').value)||0;
+  const monthly=parseFloat(document.getElementById('smv').value)||0;
+  const rate=parseFloat(document.getElementById('srv').value)||0;
+  const years=parseFloat(document.getElementById('syv').value)||1;
+  // sync sliders
+  document.getElementById('sir').value=Math.min(init,100000);
+  document.getElementById('smr').value=Math.min(monthly,20000);
+  document.getElementById('srr').value=Math.min(rate,40);
+  document.getElementById('syr').value=Math.min(years,40);
+  document.getElementById('simpd').textContent=`em ${years} ${years===1?'ano':'anos'}`;
+  const mr=rate/100/12,n=Math.round(years*12);
+  let fv=init*Math.pow(1+mr,n);fv+=mr>0?monthly*(Math.pow(1+mr,n)-1)/mr:monthly*n;
+  const invested=init+monthly*n,earn=fv-invested,roi=invested>0?(earn/invested)*100:0,mult=invested>0?fv/invested:1;
+  document.getElementById('simfv').textContent=`R$ ${fmtBig(fv)}`;
+  document.getElementById('simti').textContent=`R$ ${fmtBig(invested)}`;
+  document.getElementById('simrd').textContent=`R$ ${fmtBig(earn)}`;
+  document.getElementById('simmx').textContent=`${mult.toFixed(1)}x`;
+  document.getElementById('simri').textContent=`+${roi.toFixed(0)}%`;
+  dC('sim');
+  const lbls=[],vals=[],invArr=[],step=years<=10?1:years<=20?2:5;
+  for(let y=0;y<=years;y+=step){lbls.push(y===0?'Hoje':`${y}a`);const ni=Math.round(y*12);let fvi=init*Math.pow(1+mr,ni);fvi+=mr>0?monthly*(Math.pow(1+mr,ni)-1)/mr:monthly*ni;vals.push(Math.round(fvi));invArr.push(Math.round(init+monthly*ni));}
+  const ctx=document.getElementById('chsim').getContext('2d');
+  const g1=ctx.createLinearGradient(0,0,0,170);g1.addColorStop(0,'rgba(124,92,252,.3)');g1.addColorStop(1,'rgba(124,92,252,0)');
+  const g2=ctx.createLinearGradient(0,0,0,170);g2.addColorStop(0,'rgba(34,211,165,.15)');g2.addColorStop(1,'rgba(34,211,165,0)');
   S.charts['sim']=new Chart(ctx,{type:'line',data:{labels:lbls,datasets:[{label:'Valor futuro',data:vals,borderColor:'#7c5cfc',backgroundColor:g1,borderWidth:2.5,tension:.4,fill:true,pointRadius:2},{label:'Investido',data:invArr,borderColor:'#22d3a5',backgroundColor:g2,borderWidth:2,tension:.4,fill:true,pointRadius:2,borderDash:[4,4]}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:true,labels:{color:'#9e9bb8',font:{size:10},boxWidth:11,boxHeight:2,padding:10}}},scales:{x:{grid:{display:false},ticks:{color:'#6b6885',font:{size:9},maxTicksLimit:8}},y:{grid:{color:'rgba(255,255,255,.03)'},ticks:{color:'#6b6885',font:{size:9},callback:v=>`R$${(v/1000).toFixed(0)}k`}}}}});
 }
 
-// ═══════════════════════ CRYPTO
-const cryptos=[{sym:'BTC',name:'Bitcoin',icon:'₿',bg:'rgba(247,147,26,.15)',price:374200,chg:4.2,mkt:'R$ 7.3T'},{sym:'ETH',name:'Ethereum',icon:'Ξ',bg:'rgba(98,126,234,.15)',price:20100,chg:2.8,mkt:'R$ 2.4T'},{sym:'SOL',name:'Solana',icon:'◎',bg:'rgba(153,69,255,.15)',price:980,chg:-1.4,mkt:'R$ 450B'},{sym:'BNB',name:'BNB',icon:'⬡',bg:'rgba(243,186,47,.15)',price:2850,chg:1.1,mkt:'R$ 400B'},{sym:'ADA',name:'Cardano',icon:'♦',bg:'rgba(0,51,173,.15)',price:3.10,chg:-2.1,mkt:'R$ 110B'},{sym:'AVAX',name:'Avalanche',icon:'▲',bg:'rgba(232,65,66,.15)',price:210,chg:5.2,mkt:'R$ 87B'},{sym:'DOT',name:'Polkadot',icon:'●',bg:'rgba(230,0,122,.15)',price:38,chg:3.5,mkt:'R$ 58B'},{sym:'MATIC',name:'Polygon',icon:'⬟',bg:'rgba(130,71,229,.15)',price:4.20,chg:-0.8,mkt:'R$ 39B'}];
-const cryptoNews=[{tag:'Bitcoin',title:'Bitcoin supera R$ 380.000 em nova alta histórica após ETFs serem aprovados',meta:'Há 2h · Cointelegraph'},{tag:'Ethereum',title:'Atualização do Ethereum reduz taxas em 40% e aumenta capacidade da rede',meta:'Há 5h · The Block'},{tag:'Regulação',title:'Banco Central do Brasil anuncia framework para stablecoins em 2026',meta:'Há 8h · InfoMoney'},{tag:'DeFi',title:'Total em DeFi supera US$ 200 bilhões — novo recorde histórico',meta:'Ontem · Decrypt'},{tag:'Educação',title:'O que é blockchain? Guia completo para iniciantes em criptomoedas',meta:'2 dias · Nexus Academy'},{tag:'Web3',title:'5 tendências crypto para 2026: AI tokens, RWA, Layer 2 e mais',meta:'3 dias · Nexus Academy'}];
+// ═══════════ CRYPTO
+const cryptos=[
+  {sym:'BTC',name:'Bitcoin',icon:'₿',bg:'rgba(247,147,26,.15)',price:374200,chg:4.2,mkt:'R$ 7.3T'},
+  {sym:'ETH',name:'Ethereum',icon:'Ξ',bg:'rgba(98,126,234,.15)',price:20100,chg:2.8,mkt:'R$ 2.4T'},
+  {sym:'SOL',name:'Solana',icon:'◎',bg:'rgba(153,69,255,.15)',price:980,chg:-1.4,mkt:'R$ 450B'},
+  {sym:'BNB',name:'BNB',icon:'⬡',bg:'rgba(243,186,47,.15)',price:2850,chg:1.1,mkt:'R$ 400B'},
+  {sym:'ADA',name:'Cardano',icon:'♦',bg:'rgba(0,51,173,.15)',price:3.10,chg:-2.1,mkt:'R$ 110B'},
+  {sym:'AVAX',name:'Avalanche',icon:'▲',bg:'rgba(232,65,66,.15)',price:210,chg:5.2,mkt:'R$ 87B'},
+  {sym:'DOT',name:'Polkadot',icon:'●',bg:'rgba(230,0,122,.15)',price:38,chg:3.5,mkt:'R$ 58B'},
+  {sym:'MATIC',name:'Polygon',icon:'⬟',bg:'rgba(130,71,229,.15)',price:4.20,chg:-0.8,mkt:'R$ 39B'}
+];
+// News with real links
+const cryptoNews=[
+  {tag:'Bitcoin',title:'Bitcoin ultrapassa R$ 380.000 após aprovação de ETFs no Brasil',meta:'Há 2h · Cointelegraph',url:'https://br.cointelegraph.com'},
+  {tag:'Ethereum',title:'Atualização do Ethereum reduz taxas em 40% e aumenta capacidade da rede',meta:'Há 5h · The Block',url:'https://www.theblock.co'},
+  {tag:'Regulação',title:'Banco Central do Brasil anuncia framework para stablecoins em 2026',meta:'Há 8h · InfoMoney',url:'https://infomoney.com.br/criptomoedas/'},
+  {tag:'DeFi',title:'Total em DeFi supera US$ 200 bilhões — novo recorde histórico',meta:'Ontem · Decrypt',url:'https://decrypt.co'},
+  {tag:'Educação',title:'O que é blockchain? Guia completo para iniciantes em criptomoedas',meta:'2 dias · Livecoins',url:'https://livecoins.com.br'},
+  {tag:'Web3',title:'5 tendências crypto para 2026: AI tokens, RWA, Layer 2 e mais',meta:'3 dias · Portal do Bitcoin',url:'https://portaldobitcoin.uol.com.br'}
+];
+let cryptoPrices=[...cryptos];
 function renderCrypto(){
-  document.getElementById('cg').innerHTML=cryptos.map((c,i)=>`<div class="csc" style="animation-delay:${i*.04}s" onclick="renderCryptoChart('${c.sym}',${c.chg})"><div class="csc-top"><div class="csc-logo" style="background:${c.bg}">${c.icon}</div><div><div style="font-size:13px;font-weight:700">${c.sym}</div><div style="font-size:11px;color:var(--text3)">${c.name}</div></div></div><div class="csc-price">R$ ${fmtCr(c.price)}</div><div class="csc-chg ${c.chg>=0?'pos':'neg'}">${c.chg>=0?'↑':'↓'} ${Math.abs(c.chg)}%</div><div class="csc-mkt">Cap: ${c.mkt}</div></div>`).join('');
-  document.getElementById('c-news').innerHTML=cryptoNews.map((n,i)=>`<div class="cn-item" style="animation-delay:${i*.05}s"><div class="cn-tag">${n.tag}</div><div class="cn-title">${n.title}</div><div class="cn-meta">${n.meta}</div></div>`).join('');
+  document.getElementById('cg').innerHTML=cryptoPrices.map((c,i)=>`<div class="csc" style="animation-delay:${i*.04}s" onclick="renderCryptoChart('${c.sym}',${c.chg})"><div class="csctop"><div class="cscl" style="background:${c.bg}">${c.icon}</div><div><div style="font-size:13px;font-weight:700">${c.sym}</div><div style="font-size:11px;color:var(--text3)">${c.name}</div></div></div><div class="cscp">R$ ${fmtCr(c.price)}</div><div class="cscc ${c.chg>=0?'pos':'neg'}">${c.chg>=0?'↑':'↓'} ${Math.abs(c.chg)}%</div><div class="cscm">Cap: ${c.mkt}</div></div>`).join('');
+  document.getElementById('cnews').innerHTML=cryptoNews.map((n,i)=>`<a class="cnitem" style="animation-delay:${i*.05}s" href="${n.url}" target="_blank" rel="noopener"><div class="cntag">${n.tag}</div><div class="cntitle">${n.title}</div><div class="cnmeta">${n.meta} · <span style="color:var(--accent2)">Ler matéria →</span></div></a>`).join('');
   setTimeout(()=>renderCryptoChart('BTC',4.2),80);
 }
 function renderCryptoChart(sym='BTC',chg=4.2){
-  dChart('crypto');
-  document.getElementById('c-ch-title').textContent=`${sym} — 30 dias`;
-  const cb=document.getElementById('c-ch-chg'); cb.textContent=`${chg>=0?'+':''}${chg}%`;
-  if(chg>=0){cb.className='badge badge-g';}else{cb.style.cssText='background:rgba(248,113,113,.1);color:var(--red);font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px';}
-  const pts=30; const data=[100]; for(let i=1;i<pts;i++) data.push(+(data[i-1]*(1+(Math.random()-.47)*.04)).toFixed(2));
-  const sc=chg/((data[pts-1]/data[0]-1)*100||1); const scaled=data.map(x=>(+(x*sc+(100-100*sc/1))).toFixed(2));
+  dC('crypto');
+  document.getElementById('cchtitle').textContent=`${sym} — 30 dias`;
+  const cb=document.getElementById('cchchg');cb.textContent=`${chg>=0?'+':''}${chg}%`;
+  if(chg>=0){cb.className='badge bg';}else{cb.className='badge br';}
+  const pts=30,data=[100];for(let i=1;i<pts;i++)data.push(+(data[i-1]*(1+(Math.random()-.47)*.04)).toFixed(2));
+  const sc=chg/((data[pts-1]/data[0]-1)*100||1),scaled=data.map(x=>(+(x*sc+(100-100*sc/1))).toFixed(2));
   const labels=Array.from({length:pts},(_,i)=>`${pts-i}d`).reverse();
   const color=chg>=0?'#22d3a5':'#f87171';
-  const ctx=document.getElementById('ch-crypto').getContext('2d');
-  const g=ctx.createLinearGradient(0,0,0,150); g.addColorStop(0,chg>=0?'rgba(34,211,165,.22)':'rgba(248,113,113,.18)'); g.addColorStop(1,'rgba(0,0,0,0)');
+  const ctx=document.getElementById('chcrypto').getContext('2d');
+  const g=ctx.createLinearGradient(0,0,0,150);g.addColorStop(0,chg>=0?'rgba(34,211,165,.22)':'rgba(248,113,113,.18)');g.addColorStop(1,'rgba(0,0,0,0)');
   S.charts['crypto']=new Chart(ctx,{type:'line',data:{labels,datasets:[{data:scaled,borderColor:color,backgroundColor:g,borderWidth:2,tension:.4,fill:true,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#6b6885',font:{size:9},maxTicksLimit:7}},y:{grid:{color:'rgba(255,255,255,.03)'},ticks:{color:'#6b6885',font:{size:9}}}}}});
 }
-
-// ═══════════════════════ ALERTS
-const alertsData=[{icon:'💡',t:'ai-info',title:'Use o Simulador',desc:'Descubra quanto seu dinheiro pode crescer com juros compostos na aba Simulador.'},{icon:'₿',t:'ainfo',title:'Mercado Crypto',desc:'Acompanhe preços, índice de medo & ganância e novidades na aba Crypto.'},{icon:'🎯',t:'aok',title:'Defina suas metas',desc:'Crie objetivos financeiros e acompanhe o progresso com barras visuais.'},{icon:'💸',t:'aw',title:'Registre seus gastos',desc:'Adicione despesas mensais para visualizar para onde vai seu dinheiro.'},{icon:'📊',t:'ainfo',title:'Monte sua carteira',desc:'Adicione investimentos para acompanhar patrimônio e rentabilidade total.'}];
-function renderAlerts(){
-  document.getElementById('alerts-list').innerHTML=alertsData.map((a,i)=>`<div class="ai" style="animation-delay:${i*.06}s"><div class="ai-icon ${a.t}">${a.icon}</div><div style="flex:1"><div class="ai-title">${a.title}</div><div class="ai-desc">${a.desc}</div></div></div>`).join('');
-  document.getElementById('d-alerts').innerHTML=alertsData.slice(0,3).map((a,i)=>`<div class="ai" style="animation-delay:${i*.06}s"><div class="ai-icon ${a.t}">${a.icon}</div><div style="flex:1"><div class="ai-title">${a.title}</div><div class="ai-desc">${a.desc}</div></div></div>`).join('');
+async function refreshCrypto(){
+  const btn=document.getElementById('crefbtn');btn.classList.add('spinning');
+  try{
+    // Try CoinGecko public API
+    const res=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,cardano,avalanche-2,polkadot,matic-network&vs_currencies=brl&include_24hr_change=true',{signal:AbortSignal.timeout(6000)});
+    if(res.ok){
+      const data=await res.json();
+      const map={bitcoin:'BTC',ethereum:'ETH',solana:'SOL',binancecoin:'BNB',cardano:'ADA','avalanche-2':'AVAX',polkadot:'DOT','matic-network':'MATIC'};
+      cryptoPrices=cryptoPrices.map(c=>{const key=Object.entries(map).find(([,s])=>s===c.sym)?.[0];if(key&&data[key]){return{...c,price:data[key].brl,chg:+(data[key].brl_24h_change||0).toFixed(2)};}return c;});
+      document.getElementById('clastupd').textContent=' · Atualizado agora';
+      renderCrypto();toast('✅','Preços atualizados!','Dados do CoinGecko carregados.','success');
+    }else throw new Error('API indisponível');
+  }catch(e){
+    // Simulate slight price changes
+    cryptoPrices=cryptoPrices.map(c=>({...c,price:+(c.price*(1+(Math.random()-.5)*.02)).toFixed(2),chg:+((Math.random()*10-5)).toFixed(1)}));
+    document.getElementById('clastupd').textContent=' · Simulado';
+    renderCrypto();toast('ℹ️','Preços simulados','API indisponível. Usando variação simulada.','info');
+  }finally{btn.classList.remove('spinning');}
 }
 
-// ═══════════════════════ HELPERS
+// ═══════════ STOCKS
+const stocksData={
+  br:[
+    {ticker:'PETR4',name:'Petrobras',icon:'🛢️',price:38.42,chg:1.8,vol:'R$ 1.2B',sector:'Energia'},
+    {ticker:'VALE3',name:'Vale S.A.',icon:'⛏️',price:61.15,chg:-0.9,vol:'R$ 980M',sector:'Mineração'},
+    {ticker:'ITUB4',name:'Itaú Unibanco',icon:'🏦',price:35.80,chg:0.5,vol:'R$ 750M',sector:'Bancos'},
+    {ticker:'BBDC4',name:'Bradesco',icon:'🏦',price:14.22,chg:-1.2,vol:'R$ 420M',sector:'Bancos'},
+    {ticker:'ABEV3',name:'Ambev',icon:'🍺',price:12.65,chg:0.3,vol:'R$ 310M',sector:'Bebidas'},
+    {ticker:'WEGE3',name:'WEG',icon:'⚙️',price:52.10,chg:2.1,vol:'R$ 290M',sector:'Industrial'},
+    {ticker:'RENT3',name:'Localiza',icon:'🚗',price:41.80,chg:-0.4,vol:'R$ 180M',sector:'Serviços'},
+    {ticker:'MGLU3',name:'Magazine Luiza',icon:'🛍️',price:8.34,chg:3.2,vol:'R$ 160M',sector:'Varejo'},
+  ],
+  us:[
+    {ticker:'AAPL',name:'Apple Inc.',icon:'🍎',price:213.40,chg:0.8,vol:'$18.2B',sector:'Tech'},
+    {ticker:'MSFT',name:'Microsoft',icon:'🪟',price:415.20,chg:1.2,vol:'$14.1B',sector:'Tech'},
+    {ticker:'GOOGL',name:'Alphabet',icon:'🔍',price:172.80,chg:-0.3,vol:'$9.8B',sector:'Tech'},
+    {ticker:'AMZN',name:'Amazon',icon:'📦',price:198.60,chg:1.9,vol:'$8.4B',sector:'E-commerce'},
+    {ticker:'NVDA',name:'NVIDIA',icon:'💻',price:892.30,chg:3.4,vol:'$22.1B',sector:'Semicond.'},
+    {ticker:'META',name:'Meta Platforms',icon:'📱',price:524.10,chg:0.6,vol:'$11.3B',sector:'Social'},
+    {ticker:'TSLA',name:'Tesla',icon:'⚡',price:248.90,chg:-1.8,vol:'$16.7B',sector:'EVs'},
+    {ticker:'BRK.B',name:'Berkshire',icon:'💰',price:412.00,chg:0.2,vol:'$4.2B',sector:'Holding'},
+  ],
+  eu:[
+    {ticker:'SAP',name:'SAP SE',icon:'🖥️',price:198.20,chg:1.1,vol:'€2.1B',sector:'Tech'},
+    {ticker:'ASML',name:'ASML Holding',icon:'🔬',price:892.40,chg:2.3,vol:'€3.4B',sector:'Semicond.'},
+    {ticker:'LVMH',name:'LVMH',icon:'👜',price:658.30,chg:-0.5,vol:'€1.8B',sector:'Luxo'},
+    {ticker:'NESN',name:'Nestlé',icon:'🍫',price:92.14,chg:0.2,vol:'€1.2B',sector:'Alimentos'},
+    {ticker:'SHEL',name:'Shell',icon:'🛢️',price:28.42,chg:-0.8,vol:'€1.5B',sector:'Energia'},
+    {ticker:'AIR',name:'Airbus',icon:'✈️',price:162.80,chg:1.6,vol:'€890M',sector:'Aeroesp.'},
+    {ticker:'SIE',name:'Siemens',icon:'⚡',price:182.40,chg:0.9,vol:'€1.1B',sector:'Industrial'},
+    {ticker:'DHER',name:'Deutsche Post',icon:'📬',price:38.60,chg:-0.3,vol:'€520M',sector:'Logística'},
+  ]
+};
+let curMkt='br';
+function showMkt(mkt,btn){curMkt=mkt;document.querySelectorAll('.mktab-btn').forEach(b=>b.classList.remove('act'));btn.classList.add('act');const chgs={br:2.1,us:1.4,eu:0.8};const titles={br:'Ibovespa — 30 dias',us:'S&P 500 — 30 dias',eu:'Euro Stoxx — 30 dias'};document.getElementById('skchtitle').textContent=titles[mkt];document.getElementById('skchchg').textContent=`+${chgs[mkt]}%`;renderStocks(mkt);renderStocksChart(mkt,chgs[mkt]);}
+let activeStock=null;
+function renderStocks(mkt){
+  const list=document.getElementById('sklist');
+  list.innerHTML=stocksData[mkt].map((s,i)=>`
+    <div class="skcard" style="animation-delay:${i*.04}s;transition:border-color .2s,background .2s" id="sk-${s.ticker.replace('.','')}" onclick="selectStock('${s.ticker}','${s.name}',${s.chg},'${mkt}')">
+      <div class="skrow">
+        <div class="skico">${s.icon}</div>
+        <div style="flex:1;min-width:0">
+          <div class="skticker">${s.ticker}</div>
+          <div class="skname">${s.name} · <span style="color:var(--text3)">${s.sector}</span></div>
+        </div>
+        <div style="text-align:right">
+          <div class="skprice">${s.price.toLocaleString('pt-BR',{minimumFractionDigits:2})}</div>
+          <div class="skchg ${s.chg>=0?'pos':'neg'}">${s.chg>=0?'↑':'↓'} ${Math.abs(s.chg)}% · ${s.vol}</div>
+        </div>
+        <div style="margin-left:10px;font-size:11px;color:var(--text3)">📈</div>
+      </div>
+    </div>`).join('');
+  // auto-select first stock
+  const first=stocksData[mkt][0];
+  selectStock(first.ticker,first.name,first.chg,mkt);
+}
+
+function selectStock(ticker,name,chg,mkt){
+  activeStock=ticker;
+  // highlight selected card
+  document.querySelectorAll('.skcard').forEach(c=>{
+    c.style.borderColor='rgba(255,255,255,0.07)';
+    c.style.background='var(--card)';
+  });
+  const card=document.getElementById('sk-'+ticker.replace('.',''));
+  if(card){
+    card.style.borderColor=chg>=0?'rgba(34,211,165,.4)':'rgba(248,113,113,.4)';
+    card.style.background='var(--card2)';
+  }
+  // update chart title
+  const mktLabel={br:'B3',us:'NYSE/NASDAQ',eu:'Euronext'};
+  document.getElementById('skchtitle').textContent=`${ticker} — ${name} — 30 dias`;
+  const chgBadge=document.getElementById('skchchg');
+  chgBadge.textContent=`${chg>=0?'+':''}${chg}%`;
+  chgBadge.className=`badge ${chg>=0?'bg':'br'}`;
+  renderStocksChart(ticker,chg);
+}
+
+function renderStocksChart(ticker,chg){
+  dC('stocks');
+  // Generate realistic-looking price series based on ticker volatility
+  const volatility={
+    PETR4:.035,VALE3:.04,ITUB4:.022,BBDC4:.025,ABEV3:.018,WEGE3:.028,RENT3:.032,MGLU3:.055,
+    AAPL:.02,MSFT:.022,GOOGL:.025,AMZN:.028,NVDA:.045,META:.035,TSLA:.06,'BRK.B':.015,
+    SAP:.022,ASML:.03,LVMH:.025,NESN:.015,SHEL:.028,AIR:.032,SIE:.022,DHER:.02
+  }[ticker]||.03;
+  const pts=30;
+  const seed=ticker.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+  let rng=seed;
+  const pseudoRand=()=>{rng=(rng*1664525+1013904223)&0xffffffff;return((rng>>>0)/0xffffffff);};
+  const data=[100];
+  const trend=chg/100/pts;
+  for(let i=1;i<pts;i++){
+    const prev=data[i-1];
+    const move=(pseudoRand()-.48)*volatility+trend;
+    data.push(+(prev*(1+move)).toFixed(3));
+  }
+  // scale so last point matches chg%
+  const actualChg=(data[pts-1]/data[0]-1)*100;
+  const scale=actualChg!==0?chg/actualChg:1;
+  const scaled=data.map((v,i)=>+(data[0]+((v-data[0])*scale)).toFixed(3));
+  const labels=Array.from({length:pts},(_,i)=>`${pts-i}d`).reverse();
+  const color=chg>=0?'#22d3a5':'#f87171';
+  const ctx=document.getElementById('chstocks').getContext('2d');
+  const g=ctx.createLinearGradient(0,0,0,160);
+  g.addColorStop(0,chg>=0?'rgba(34,211,165,.22)':'rgba(248,113,113,.2)');
+  g.addColorStop(1,'rgba(0,0,0,0)');
+  // Add min/max annotation points
+  const maxVal=Math.max(...scaled),minVal=Math.min(...scaled);
+  const maxIdx=scaled.indexOf(maxVal),minIdx=scaled.indexOf(minVal);
+  S.charts['stocks']=new Chart(ctx,{
+    type:'line',
+    data:{labels,datasets:[{
+      data:scaled,borderColor:color,backgroundColor:g,
+      borderWidth:2,tension:.4,fill:true,
+      pointRadius:scaled.map((_,i)=>(i===maxIdx||i===minIdx)?5:0),
+      pointBackgroundColor:scaled.map((_,i)=>i===maxIdx?'#22d3a5':i===minIdx?'#f87171':'transparent'),
+      pointBorderColor:'transparent'
+    }]},
+    options:{
+      responsive:true,maintainAspectRatio:true,
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          callbacks:{
+            label:ctx=>`${ticker}: ${ctx.parsed.y.toFixed(2)}`,
+            afterLabel:ctx=>{const base=scaled[0];const pct=((ctx.parsed.y/base)-1)*100;return`Variação: ${pct>=0?'+':''}${pct.toFixed(2)}%`;}
+          }
+        }
+      },
+      scales:{
+        x:{grid:{display:false},ticks:{color:'#6b6885',font:{size:9},maxTicksLimit:7}},
+        y:{grid:{color:'rgba(255,255,255,.03)'},ticks:{color:'#6b6885',font:{size:9},callback:v=>`${v.toFixed(1)}`}}
+      }
+    }
+  });
+}
+
+// ═══════════ AI CHAT
+// AI Chat — respostas baseadas em base de conhecimento local
+// (A API da Anthropic bloqueia chamadas diretas do navegador por CORS.
+//  Para IA real, é necessário um backend/proxy. Aqui usamos respostas inteligentes locais.)
+const aiKB = {
+  'cdi': 'O **CDI (Certificado de Depósito Interbancário)** é a taxa de juros usada entre bancos. Serve como referência para investimentos de renda fixa. Em 2025, o CDI acompanha a Selic (em torno de 13,75% a.a.). Investimentos que rendem "100% do CDI" são considerados boa referência para renda fixa.',
+  'selic': 'A **Selic** é a taxa básica de juros da economia brasileira, definida pelo Copom (Banco Central). Impacta diretamente o Tesouro Selic, CDBs e a inflação. Quanto maior a Selic, melhores os rendimentos de renda fixa.',
+  'tesouro': 'O **Tesouro Direto** é um programa do governo federal para venda de títulos públicos a pessoas físicas. Principais opções: **Tesouro Selic** (segurança e liquidez diária), **Tesouro IPCA+** (proteção contra inflação), **Tesouro Prefixado** (taxa fixada no momento da compra). É considerado o investimento mais seguro do Brasil.',
+  'acoes': '**Ações** são frações do capital de uma empresa listada na B3. Ao comprar uma ação, você se torna sócio da empresa. Os ganhos vêm de dividendos (distribuição de lucros) e valorização do papel. É renda variável — o valor pode subir ou cair. Requer análise fundamentalista ou técnica.',
+  'fiis': '**Fundos de Investimento Imobiliário (FIIs)** permitem investir em imóveis sem comprá-los diretamente. Distribuem rendimentos mensais (geralmente isentos de IR para pessoa física). Negociados na B3 como ações. Divididos em: Tijolo (imóveis físicos), Papel (CRIs/CRAs) e Híbridos.',
+  'bitcoin': '**Bitcoin (BTC)** é a primeira criptomoeda, criada em 2009 por Satoshi Nakamoto. Funciona em uma rede descentralizada (blockchain) sem banco central. Tem oferta limitada a 21 milhões de unidades. É altamente volátil — pode valorizar muito, mas também perder valor rapidamente. Considerado "ouro digital" por muitos investidores.',
+  'blockchain': 'A **Blockchain** é um registro distribuído e imutável de transações. Funciona como um livro contábil público, onde cada "bloco" contém transações e está encadeado ao anterior. Não pode ser alterado sem o consenso da rede. Base das criptomoedas e contratos inteligentes.',
+  'defi': '**DeFi (Finanças Descentralizadas)** são serviços financeiros construídos em blockchains (principalmente Ethereum). Incluem: empréstimos sem banco, negociação de tokens, rendimentos de liquidez. Mais arriscado que finanças tradicionais, mas com potencial de rendimentos elevados.',
+  'carteira': 'Uma **carteira de investimentos** equilibrada para iniciantes costuma seguir: **Reserva de emergência** (3-6 meses de gastos em Tesouro Selic ou CDB de liquidez diária) → **Renda fixa** (CDBs, LCIs, LCAs com boas taxas) → **Renda variável** (FIIs e ações de empresas sólidas) → **Crypto** (pequena parcela, 2-5%, para quem aceita risco).',
+  'ir': 'Para **declarar criptomoedas no IR**: se o total de vendas no mês for acima de R$ 35.000, há incidência de imposto (15% a 22,5% sobre o lucro). Deve-se declarar saldo em "Bens e Direitos" (código 89). Prejuízos podem ser compensados em meses futuros. Guarde todas as notas de corretoras.',
+  'poupar': 'Para **poupar mais**, a regra básica é: Receita - Poupança = Gastos (e não o contrário). Recomendação: guarde pelo menos **20% da renda** mensalmente. Registre todos os gastos, corte supérfluos, negocie contas fixas. O app Nexus pode ajudar a visualizar para onde vai seu dinheiro.',
+  'dividendos': '**Dividendos** são parte do lucro que empresas distribuem aos acionistas. No Brasil, dividendos de ações e FIIs são **isentos de IR** para pessoa física. Empresas com bom histórico de dividendos: TAEE11, BBSE3, CPFE3, CPLE6. Em FIIs, os rendimentos mensais são a forma de dividendos.',
+  'lci lca': '**LCI (Letra de Crédito Imobiliário)** e **LCA (Letra de Crédito do Agronegócio)** são títulos emitidos por bancos, **isentos de IR** para pessoa física. Geralmente rendem entre 90-100% do CDI. Possuem prazo de carência. Protegidos pelo FGC até R$ 250.000.',
+  'fgc': 'O **FGC (Fundo Garantidor de Créditos)** protege investimentos em caso de falência de bancos. Cobre até **R$ 250.000 por CPF por instituição** (limite global de R$ 1 milhão). Cobre: poupança, CDBs, LCIs, LCAs, LCs. Não cobre: fundos de investimento, ações, debêntures.',
+  'default': 'Boa pergunta! Como assistente financeiro do Nexus, posso ajudar com temas como: investimentos (ações, FIIs, Tesouro Direto), criptomoedas (Bitcoin, Ethereum, DeFi), planejamento financeiro, imposto de renda, CDI, Selic e muito mais. Tente perguntar sobre um desses temas específicos!'
+};
+function getAIReply(msg) {
+  const m = msg.toLowerCase();
+  if(m.includes('cdi')) return aiKB.cdi;
+  if(m.includes('selic') || m.includes('taxa básica') || m.includes('taxa de juros')) return aiKB.selic;
+  if(m.includes('tesouro') || m.includes('título público')) return aiKB.tesouro;
+  if(m.includes('ação') || m.includes('ações') || m.includes('bolsa') || m.includes('b3') || m.includes('renda variável')) return aiKB.acoes;
+  if(m.includes('fii') || m.includes('fundo imobiliário') || m.includes('imóvel')) return aiKB.fiis;
+  if(m.includes('bitcoin') || m.includes('btc')) return aiKB.bitcoin;
+  if(m.includes('blockchain') || m.includes('bloco')) return aiKB.blockchain;
+  if(m.includes('defi') || m.includes('descentraliz')) return aiKB.defi;
+  if(m.includes('carteira') || m.includes('montar') || m.includes('diversif') || m.includes('portfólio')) return aiKB.carteira;
+  if(m.includes('imposto') || m.includes(' ir ') || m.includes('declarar') || m.includes('declaração')) return aiKB.ir;
+  if(m.includes('poupar') || m.includes('guardar') || m.includes('economizar') || m.includes('quanto')) return aiKB.poupar;
+  if(m.includes('dividendo')) return aiKB.dividendos;
+  if(m.includes('lci') || m.includes('lca')) return aiKB['lci lca'];
+  if(m.includes('fgc') || m.includes('garantia') || m.includes('falência')) return aiKB.fgc;
+  if(m.includes('crypto') || m.includes('cripto') || m.includes('ethereum') || m.includes('eth') || m.includes('solana')) return 'As **criptomoedas** são ativos digitais descentralizados. As principais são Bitcoin (BTC), Ethereum (ETH) e Solana (SOL). São altamente voláteis e de alto risco. Recomenda-se alocar no máximo 5-10% do portfólio em crypto, apenas o que você pode perder. Sempre use corretoras regulamentadas pela CVM/Receita Federal.';
+  if(m.includes('renda fixa') || m.includes('cdb') || m.includes('poupança')) return 'A **renda fixa** inclui investimentos com retorno previsível: CDBs (rendem % do CDI), LCIs/LCAs (isentas de IR), Tesouro Direto (títulos públicos) e poupança (menos recomendada — rende pouco). Para iniciantes, comece pelo **Tesouro Selic** como reserva de emergência.';
+  return aiKB.default;
+}
+
+async function sendChat(){
+  const input=document.getElementById('chatinput');
+  const msg=input.value.trim();if(!msg)return;
+  input.value='';autoResize(input);
+  document.getElementById('chatsugg').style.display='none';
+  appendMsg(msg,'usr');
+  const send=document.getElementById('chatsend');send.disabled=true;
+  const typing=appendTyping();
+  S.chatHistory.push({role:'user',content:msg});
+  // Simulate response delay for better UX
+  await new Promise(r=>setTimeout(r,800+Math.random()*600));
+  const reply=getAIReply(msg);
+  S.chatHistory.push({role:'assistant',content:reply});
+  typing.remove();appendMsg(reply,'ai');
+  send.disabled=false;
+}
+function sendSugg(btn){document.getElementById('chatinput').value=btn.textContent;sendChat();}
+function appendMsg(text,role){
+  const msgs=document.getElementById('chatmsgs');
+  const div=document.createElement('div');div.className=`msg ${role}`;
+  const av=document.createElement('div');av.className=`msg-av ${role}`;av.textContent=role==='ai'?'N':(S.profile.name||'U')[0].toUpperCase();
+  const bubble=document.createElement('div');bubble.className=`msg-bubble ${role}`;
+  bubble.innerHTML=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+  div.appendChild(av);div.appendChild(bubble);msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;return div;
+}
+function appendTyping(){
+  const msgs=document.getElementById('chatmsgs');
+  const div=document.createElement('div');div.className='msg';
+  const av=document.createElement('div');av.className='msg-av ai';av.textContent='N';
+  const bubble=document.createElement('div');bubble.className='msg-bubble ai';
+  bubble.innerHTML='<div class="typing-dots"><span></span><span></span><span></span></div>';
+  div.appendChild(av);div.appendChild(bubble);msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;return div;
+}
+function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px';}
+document.addEventListener('DOMContentLoaded',()=>{const ci=document.getElementById('chatinput');if(ci)ci.addEventListener('input',()=>autoResize(ci));});
+
+// ═══════════ ALERTS
+const alertsData=[{icon:'💡',t:'ainfo',title:'Use o Simulador',desc:'Edite valores livremente no Simulador para calcular diferentes cenários de investimento.'},{icon:'₿',t:'ainfo',title:'Mercado Crypto',desc:'Clique em "Atualizar preços" na aba Crypto para buscar cotações em tempo real.'},{icon:'🏛️',t:'ainfo',title:'Bolsa de Valores',desc:'Acompanhe ações da B3, S&P 500 e mercado europeu na nova aba Bolsa.'},{icon:'🤖',t:'aok',title:'IA Financeira',desc:'Use a IA para tirar dúvidas sobre investimentos, crypto, IR e planejamento financeiro.'},{icon:'🎯',t:'aw',title:'Defina metas',desc:'Crie objetivos financeiros e acompanhe o progresso com barras visuais.'}];
+function renderAlerts(){document.getElementById('alertlist').innerHTML=alertsData.map((a,i)=>`<div class="ai" style="animation-delay:${i*.06}s"><div class="aiico ${a.t}">${a.icon}</div><div style="flex:1"><div class="aititle">${a.title}</div><div class="aidesc">${a.desc}</div></div></div>`).join('');document.getElementById('dalerts').innerHTML=alertsData.slice(0,3).map((a,i)=>`<div class="ai" style="animation-delay:${i*.06}s"><div class="aiico ${a.t}">${a.icon}</div><div style="flex:1"><div class="aititle">${a.title}</div><div class="aidesc">${a.desc}</div></div></div>`).join('');}
+
+// ═══════════ HELPERS
 const fmt=n=>Number(n).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-const fmtBig=n=>{ if(n>=1e9)return(n/1e9).toFixed(1).replace('.',',')+' bi'; if(n>=1e6)return(n/1e6).toFixed(1).replace('.',',')+' mi'; if(n>=1000)return(n/1000).toFixed(1).replace('.',',')+' mil'; return Number(n).toFixed(2).replace('.',','); };
-const fmtK=n=>n>=1000?`${(n/1000).toFixed(0)}k`:n.toString();
+const fmtBig=n=>{if(n>=1e9)return(n/1e9).toFixed(1).replace('.',',')+' bi';if(n>=1e6)return(n/1e6).toFixed(1).replace('.',',')+' mi';if(n>=1000)return(n/1000).toFixed(1).replace('.',',')+' mil';return Number(n).toFixed(2).replace('.',',');};
 const fmtCr=n=>n>=1000?n.toLocaleString('pt-BR',{minimumFractionDigits:0}):n.toLocaleString('pt-BR',{minimumFractionDigits:2});
 const v=id=>document.getElementById(id)?.value||'';
-const clearV=ids=>ids.forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-const dChart=id=>{if(S.charts[id]){S.charts[id].destroy();delete S.charts[id];}};
+const clrV=ids=>ids.forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+const dC=id=>{if(S.charts[id]){S.charts[id].destroy();delete S.charts[id];}};
 const openM=id=>document.getElementById(id).classList.add('open');
 const closeM=id=>document.getElementById(id).classList.remove('open');
 const showErr=(id,msg)=>{const el=document.getElementById(id);if(el){el.textContent=msg;el.style.display='block';}};
 const hideErr=id=>{const el=document.getElementById(id);if(el)el.style.display='none';};
-const setBtnLoad=(btn,on)=>{if(on){btn.classList.add('btn-loading');btn.disabled=true;}else{btn.classList.remove('btn-loading');btn.disabled=false;}};
-
-function toast(icon,title,msg,type='info'){
-  const c=document.getElementById('tc'), id='t'+Date.now();
-  const bm={success:'var(--green)',warn:'var(--yellow)',danger:'var(--red)',info:'var(--accent)'};
-  const el=document.createElement('div'); el.className='toast'; el.id=id;
-  el.style.borderLeft=`3px solid ${bm[type]||'var(--accent)'}`;
-  el.innerHTML=`<span class="t-icon">${icon}</span><div style="flex:1"><div class="t-title">${title}</div><div class="t-msg">${msg}</div></div><button class="t-close" onclick="rmToast('${id}')">✕</button>`;
-  c.appendChild(el); setTimeout(()=>rmToast(id),4500);
-}
-function rmToast(id){const t=document.getElementById(id);if(t){t.style.opacity='0';t.style.transform='translateX(110%)';t.style.transition='.25s ease';setTimeout(()=>t.remove(),250);}}
-
-function toggleSB(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sid-ov').classList.toggle('open');}
-function closeSB(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sid-ov').classList.remove('open');}
+const setLoad=(btn,on)=>{if(on){btn.classList.add('btn-ld');btn.disabled=true;}else{btn.classList.remove('btn-ld');btn.disabled=false;}};
+function toast(icon,title,msg,type='info'){const c=document.getElementById('tc'),id='t'+Date.now();const bm={success:'var(--green)',warn:'var(--yellow)',danger:'var(--red)',info:'var(--accent)'};const el=document.createElement('div');el.className='toast';el.id=id;el.style.borderLeft=`3px solid ${bm[type]||'var(--accent)'}`;el.innerHTML=`<span class="ti">${icon}</span><div style="flex:1"><div class="ttitle">${title}</div><div class="tmsg">${msg}</div></div><button class="tclose" onclick="rmT('${id}')">✕</button>`;c.appendChild(el);setTimeout(()=>rmT(id),4500);}
+function rmT(id){const t=document.getElementById(id);if(t){t.style.opacity='0';t.style.transform='translateX(110%)';t.style.transition='.25s ease';setTimeout(()=>t.remove(),250);}}
+function toggleSB(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sov').classList.toggle('open');}
+function closeSB(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sov').classList.remove('open');}
 </script>
 </body>
 </html>
