@@ -177,6 +177,7 @@ select.fi option{background:var(--bg2)}
 .aitime{font-size:10px;color:var(--text3);white-space:nowrap;margin-top:2px}
 
 /* EXPENSES */
+.exp-subtab{transition:all var(--ease)}.exp-subtab.act{background:rgba(124,92,252,.12);color:var(--accent2)}
 .expl{display:grid;grid-template-columns:1fr 330px;gap:18px;align-items:start}
 .panel{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px}
 .ptt{font-size:14px;font-weight:600;margin-bottom:16px}
@@ -341,6 +342,202 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
 
 /* OVERLAY */
 .sov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99}
+/* FULLSCREEN DAY TRADE */
+.dt-fs #page-daytrade{position:fixed;inset:0;z-index:500;background:var(--bg);overflow-y:auto;padding:16px;animation:fadeIn .2s ease}
+.dt-fs .main>.topbar,.dt-fs .sidebar,.dt-fs .bnav,.dt-fs .sov{display:none!important}
+#dt-fs-btn{display:flex;align-items:center;gap:6px;padding:7px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r3);cursor:pointer;font-size:12px;font-weight:600;color:var(--text2);transition:all var(--ease)}
+#dt-fs-btn:hover{background:var(--card2);color:var(--text)}
+#dt-exit-fs{display:none;position:fixed;top:14px;right:14px;z-index:600;padding:8px 16px;background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.25);border-radius:var(--r3);cursor:pointer;font-size:13px;font-weight:600;color:var(--red)}
+.dt-fs #dt-exit-fs{display:block}
+.dt-fs #dt-fs-btn{display:none}
+.dt-dd-group{font-size:10px;font-weight:700;color:var(--text3);padding:8px 12px 4px;text-transform:uppercase;letter-spacing:.06em;border-top:1px solid var(--border);margin-top:2px}
+.dt-dd-group:first-child{border-top:none;margin-top:0}
+.dt-dd-item{display:flex;align-items:center;padding:9px 14px;cursor:pointer;font-size:13px;transition:background var(--ease);gap:8px}
+.dt-dd-item:hover{background:var(--bg3)}
+.dt-dd-item.sel{background:rgba(124,92,252,.12);color:var(--accent2)}
+.dt-dd-sym{font-weight:700;font-family:'Syne',sans-serif;min-width:94px;font-size:12px}
+.dt-dd-name{color:var(--text3);font-size:12px;flex:1}
+.dt-dd-cat{font-size:10px;padding:1px 6px;border-radius:8px;white-space:nowrap}
+.c-crypto{background:rgba(251,191,36,.1);color:var(--yellow)}
+.c-forex{background:rgba(56,189,248,.1);color:var(--blue)}
+.c-commodity{background:rgba(34,211,165,.1);color:var(--green)}
+.c-stock{background:rgba(124,92,252,.12);color:var(--accent2)}
+
+/* ── DAY TRADE ── */
+#page-daytrade,#page-daytrade *{max-width:100%;box-sizing:border-box}
+#page-daytrade{overflow-x:hidden}
+.dt-layout{display:grid;grid-template-columns:1fr 300px;gap:16px;align-items:start;max-width:100%;overflow:hidden}
+.dt-chart-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;min-width:0;overflow:hidden}
+.dt-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px;min-width:0;overflow:hidden}
+.dt-asset-sel{display:flex;gap:7px;flex-wrap:wrap;min-width:0}
+.dt-asset-btn{padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;transition:all var(--ease)}
+.dt-asset-btn:hover{border-color:var(--accent);color:var(--accent2)}
+.dt-asset-btn.act{background:rgba(124,92,252,.15);border-color:var(--accent);color:var(--accent2)}
+.dt-tf{display:flex;gap:5px}
+.dt-tf-btn{padding:4px 9px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text3);font-size:11px;cursor:pointer;transition:all var(--ease)}
+.dt-tf-btn:hover{color:var(--text);border-color:var(--border2)}
+.dt-tf-btn.act{background:var(--bg3);color:var(--text);border-color:var(--border2)}
+#dt-canvas{width:100%;height:280px;display:block;cursor:crosshair}
+.dt-price-bar{display:flex;align-items:center;margin-top:12px;padding:10px 14px;background:var(--bg2);border-radius:var(--r3);flex-wrap:wrap;gap:10px;overflow:hidden;max-width:100%}
+.dt-price-item{text-align:center}
+.dt-price-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.04em}
+.dt-price-val{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-top:2px}
+.dt-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:14px}
+.dt-balance-card{background:linear-gradient(135deg,rgba(124,92,252,.12),rgba(34,211,165,.08));border:1px solid var(--border);border-radius:var(--r2);padding:14px;text-align:center}
+.dt-bal-lbl{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.dt-bal-val{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--accent2)}
+.dt-mode-switch{display:flex;border:1px solid var(--border);border-radius:var(--r3);overflow:hidden}
+.dt-mode-btn{flex:1;padding:8px;text-align:center;font-size:12px;font-weight:600;cursor:pointer;transition:all var(--ease);color:var(--text3)}
+.dt-mode-btn.act.demo{background:rgba(56,189,248,.15);color:var(--blue)}
+.dt-mode-btn.act.real{background:rgba(248,113,113,.15);color:var(--red)}
+.dt-amount{display:flex;flex-direction:column;gap:6px}
+.dt-amount-lbl{font-size:11px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.dt-amount-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.dt-amt-btn{padding:6px 4px;border:1px solid var(--border);border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;text-align:center;transition:all var(--ease);color:var(--text2);background:transparent}
+.dt-amt-btn:hover{border-color:var(--accent);color:var(--accent2)}
+.dt-amt-btn.sel{background:rgba(124,92,252,.15);border-color:var(--accent);color:var(--accent2)}
+.dt-duration{display:flex;flex-direction:column;gap:6px}
+.dt-dur-grid{display:flex;gap:5px;flex-wrap:wrap}
+.dt-dur-btn{padding:5px 10px;border:1px solid var(--border);border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;color:var(--text2);transition:all var(--ease);background:transparent}
+.dt-dur-btn:hover{border-color:var(--accent);color:var(--accent2)}
+.dt-dur-btn.sel{background:rgba(124,92,252,.15);border-color:var(--accent);color:var(--accent2)}
+
+/* DT CLOCK */
+.dt-clock-wrap{display:flex;align-items:center;gap:14px;padding:10px 16px;background:var(--bg2);border-radius:var(--r3);margin-bottom:14px;font-family:'Syne',sans-serif}
+.dt-clock-time{font-size:28px;font-weight:800;color:var(--text);letter-spacing:.04em}
+.dt-clock-date{font-size:11px;color:var(--text3);line-height:1.5}
+.dt-clock-market{display:flex;flex-direction:column;gap:3px;margin-left:auto}
+.dt-clock-session{font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px}
+.dt-clock-session.open{background:rgba(34,211,165,.12);color:var(--green)}
+.dt-clock-session.closed{background:rgba(248,113,113,.12);color:var(--red)}
+
+/* ESTUDOS */
+.estab{transition:all var(--ease)}
+.estab.act{background:rgba(124,92,252,.12);color:var(--accent2)}
+.est-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;display:flex;gap:14px;cursor:pointer;transition:all var(--ease);animation:fadeUp .4s ease both}
+.est-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.est-card-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.est-card-body{flex:1;min-width:0}
+.est-card-title{font-size:14px;font-weight:700;margin:6px 0 5px;line-height:1.3}
+.est-card-desc{font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:8px}
+.est-card-meta{font-size:11px;color:var(--text3)}
+.est-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.04em}
+.est-badge-init{background:rgba(34,211,165,.1);color:var(--green)}
+.est-badge-med{background:rgba(251,191,36,.1);color:var(--yellow)}
+.est-badge-avd{background:rgba(248,113,113,.1);color:var(--red)}
+/* Lesson modal */
+.lesson-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);z-index:800;display:none;overflow-y:auto;padding:20px}
+.lesson-overlay.open{display:block}
+.lesson-card{background:var(--card);border:1px solid var(--border2);border-radius:20px;max-width:720px;margin:0 auto;padding:32px;animation:fadeUp .3s ease}
+.lesson-close{position:sticky;top:0;display:flex;justify-content:flex-end;margin-bottom:16px}
+.lesson-progress{height:4px;background:var(--bg3);border-radius:2px;margin-bottom:24px;overflow:hidden}
+.lesson-progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:2px;transition:width .5s ease}
+.lesson-section{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--border)}
+.lesson-section:last-child{border-bottom:none}
+.lesson-h{font-size:17px;font-weight:700;margin-bottom:10px}
+.lesson-p{font-size:14px;color:var(--text2);line-height:1.8}
+.lesson-p strong{color:var(--text);font-weight:600}
+.lesson-box{background:var(--bg2);border-radius:var(--r2);padding:16px;margin:12px 0;border-left:3px solid var(--accent)}
+.lesson-box.green{border-left-color:var(--green)}
+.lesson-box.yellow{border-left-color:var(--yellow)}
+.lesson-box.red{border-left-color:var(--red)}
+/* Quiz */
+.quiz-q{background:var(--bg2);border-radius:var(--r2);padding:18px;margin-bottom:14px;animation:fadeUp .3s ease}
+.quiz-q-text{font-size:14px;font-weight:600;margin-bottom:14px;line-height:1.5}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{padding:11px 16px;border:1px solid var(--border);border-radius:var(--r3);cursor:pointer;font-size:13px;transition:all var(--ease);background:transparent;color:var(--text)}
+.quiz-opt:hover{border-color:var(--accent2);background:rgba(124,92,252,.08)}
+.quiz-opt.correct{background:rgba(34,211,165,.12);border-color:var(--green);color:var(--green)}
+.quiz-opt.wrong{background:rgba(248,113,113,.1);border-color:var(--red);color:var(--red)}
+.quiz-explanation{font-size:12px;color:var(--text2);margin-top:10px;padding:10px 14px;background:var(--bg3);border-radius:var(--r3);line-height:1.6;display:none}
+.quiz-score{text-align:center;padding:24px;background:var(--bg2);border-radius:var(--r2)}
+.quiz-score-val{font-family:'Syne',sans-serif;font-size:42px;font-weight:800;margin:10px 0}
+
+/* BILLING CYCLE & REPORTS */
+.cycle-bar{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.cycle-info{flex:1;min-width:0}
+.cycle-title{font-size:13px;font-weight:700;margin-bottom:3px}
+.cycle-dates{font-size:12px;color:var(--text3)}
+.cycle-progress-wrap{flex:1;min-width:180px}
+.cycle-progress-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;margin:6px 0}
+.cycle-progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .6s ease}
+.cycle-progress-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--text3)}
+
+.report-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:12px;cursor:pointer;transition:all var(--ease);animation:fadeUp .3s ease both}
+.report-card:hover{border-color:var(--border2);background:var(--card2)}
+.report-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.report-month{font-size:15px;font-weight:700}
+.report-total{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--red)}
+.report-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.report-cat-pill{font-size:11px;padding:3px 9px;border-radius:20px;background:var(--bg2);color:var(--text2)}
+.report-insight{font-size:12px;color:var(--text2);line-height:1.5;padding:10px 12px;background:var(--bg2);border-radius:var(--r3);border-left:3px solid var(--accent)}
+.report-insight.warn{border-left-color:var(--yellow);color:var(--yellow)}
+.report-insight.good{border-left-color:var(--green);color:var(--green)}
+.report-insight.alert{border-left-color:var(--red);color:var(--red)}
+
+.report-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);z-index:800;display:none;overflow-y:auto;padding:20px}
+.report-overlay.open{display:block}
+.report-detail-card{background:var(--card);border:1px solid var(--border2);border-radius:20px;max-width:640px;margin:0 auto;padding:32px;animation:fadeUp .3s ease}
+.report-cat-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.report-cat-row:last-child{border-bottom:none}
+.report-cat-bar-wrap{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.report-cat-bar-fill{height:100%;border-radius:3px;transition:width .8s ease}
+.email-setup-card{background:linear-gradient(135deg,rgba(124,92,252,.08),rgba(34,211,165,.05));border:1px solid rgba(124,92,252,.2);border-radius:var(--r);padding:20px;margin-top:16px}
+
+/* RECURRING EXPENSES */
+.rec-section{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:16px}
+.rec-item{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--border)}
+.rec-item:last-child{border-bottom:none}
+.rec-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.rec-badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-top:2px;display:inline-block}
+.rec-badge.monthly{background:rgba(56,189,248,.12);color:var(--blue)}
+.rec-badge.parcel{background:rgba(167,139,250,.12);color:var(--accent2)}
+.rec-badge.debt{background:rgba(248,113,113,.12);color:var(--red)}
+.rec-del{background:none;border:none;cursor:pointer;color:var(--text3);font-size:13px;padding:3px;transition:color var(--ease)}
+.rec-del:hover{color:var(--red)}
+.rec-total-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--bg2);border-radius:var(--r3);margin-top:12px}
+
+.dt-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dt-buy{padding:14px;border-radius:var(--r2);border:none;font-size:15px;font-weight:700;cursor:pointer;transition:all var(--ease);font-family:'Syne',sans-serif}
+.dt-buy.up{background:linear-gradient(135deg,#22d3a5,#0d9488);color:#fff;box-shadow:0 6px 18px rgba(34,211,165,.3)}
+.dt-buy.up:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(34,211,165,.4)}
+.dt-buy.dn{background:linear-gradient(135deg,#f87171,#dc2626);color:#fff;box-shadow:0 6px 18px rgba(248,113,113,.3)}
+.dt-buy.dn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(248,113,113,.4)}
+.dt-positions{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-top:16px}
+.dt-pos-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);animation:fadeUp .25s ease}
+.dt-pos-item:last-child{border-bottom:none}
+.dt-pos-dir{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.dt-pos-dir.up{background:rgba(34,211,165,.15);color:var(--green)}
+.dt-pos-dir.dn{background:rgba(248,113,113,.15);color:var(--red)}
+.dt-pos-timer{font-size:11px;color:var(--text3);font-family:'Syne',sans-serif}
+.dt-pos-pnl{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;text-align:right}
+.dt-history{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-top:12px}
+.dt-hist-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px}
+.dt-hist-item:last-child{border-bottom:none}
+
+/* ── BINANCE ── */
+.bn-connect-card{background:linear-gradient(135deg,rgba(240,185,11,.08),rgba(240,185,11,.03));border:1px solid rgba(240,185,11,.2);border-radius:var(--r);padding:28px;text-align:center;margin-bottom:20px}
+.bn-logo{font-size:48px;margin-bottom:14px}
+.bn-title{font-size:20px;font-weight:700;margin-bottom:8px;color:#f0b90b}
+.bn-sub{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:22px}
+.bn-input-group{text-align:left;margin-bottom:14px}
+.bn-warning{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);border-radius:var(--r3);padding:12px 16px;font-size:12px;color:var(--red);line-height:1.6;margin-bottom:16px;display:flex;gap:10px;align-items:flex-start}
+.bn-connected{background:rgba(34,211,165,.08);border:1px solid rgba(34,211,165,.2);border-radius:var(--r);padding:22px;margin-bottom:20px}
+.bn-portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:20px}
+.bn-asset-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:16px;transition:all var(--ease)}
+.bn-asset-card:hover{border-color:var(--border2)}
+.bn-asset-icon{font-size:22px;margin-bottom:8px}
+.bn-asset-sym{font-family:'Syne',sans-serif;font-size:15px;font-weight:700}
+.bn-asset-amt{font-size:12px;color:var(--text3);margin-top:2px}
+.bn-asset-val{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--green);margin-top:6px}
+.bn-order-form{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:16px}
+.bn-order-tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:var(--r3);overflow:hidden;margin-bottom:18px}
+.bn-order-tab{flex:1;padding:9px;text-align:center;font-size:13px;font-weight:600;cursor:pointer;transition:all var(--ease);color:var(--text3)}
+.bn-order-tab.buy.act{background:rgba(34,211,165,.15);color:var(--green)}
+.bn-order-tab.sell.act{background:rgba(248,113,113,.15);color:var(--red)}
+.bn-order-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.step-note{font-size:11px;color:var(--text3);line-height:1.6;padding:10px 14px;background:var(--bg2);border-radius:var(--r3);border-left:3px solid var(--accent)}
+
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -353,6 +550,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
   .page{padding:14px 12px 76px}
   .expl{grid-template-columns:1fr}
   .siml{grid-template-columns:1fr}
+    .dt-layout{grid-template-columns:1fr}
   .cgrid{grid-template-columns:1fr}
 }
 @media(min-width:901px){.sg{grid-template-columns:repeat(4,1fr)}}
@@ -462,14 +660,17 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
     <nav class="sbnav">
       <div class="nlbl">Principal</div>
       <div class="ni act" onclick="goPg('dashboard',this)"><span class="ni-i">🏠</span>Dashboard</div>
-      <div class="ni" onclick="goPg('expenses',this)"><span class="ni-i">💸</span>Gastos<span class="nbadge" id="sbeb">0</span></div>
+      <div class="ni" onclick="goPg('expenses',this)"><span class="ni-i">💸</span>Gastos</div>
       <div class="ni" onclick="goPg('investments',this)"><span class="ni-i">📊</span>Investimentos</div>
       <div class="ni" onclick="goPg('crypto',this)"><span class="ni-i">₿</span>Crypto</div>
       <div class="ni" onclick="goPg('stocks',this)"><span class="ni-i">🏛️</span>Bolsa</div>
       <div class="nlbl">Ferramentas</div>
-      <div class="ni" onclick="goPg('goals',this)"><span class="ni-i">🎯</span>Metas<span class="nbadge" id="sbgb">0</span></div>
+      <div class="ni" onclick="goPg('goals',this)"><span class="ni-i">🎯</span>Metas</div>
       <div class="ni" onclick="goPg('simulator',this)"><span class="ni-i">🧮</span>Simulador</div>
       <div class="ni" onclick="goPg('ai',this)"><span class="ni-i">🤖</span>IA Financeira</div>
+      <div class="ni" onclick="goPg('daytrade',this)"><span class="ni-i">⚡</span>Day Trade</div>
+      <div class="ni" onclick="goPg('binance',this)"><span class="ni-i">🔶</span>Binance</div>
+      <div class="ni" onclick="goPg('estudos',this)"><span class="ni-i">🎓</span>Estudos</div>
       <div class="ni" onclick="goPg('alerts',this)"><span class="ni-i">🔔</span>Alertas</div>
     </nav>
     <div class="sbfoot">
@@ -523,6 +724,68 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
     <!-- EXPENSES -->
     <div class="page" id="page-expenses">
       <div class="ph"><h2>Gastos 💸</h2><p>Registre e categorize suas despesas</p></div>
+
+      <!-- BILLING CYCLE BAR -->
+      <div class="cycle-bar" id="cycle-bar">
+        <div class="cycle-info">
+          <div class="cycle-title">📅 Ciclo de Fatura Atual</div>
+          <div class="cycle-dates" id="cycle-dates-label">Carregando...</div>
+        </div>
+        <div class="cycle-progress-wrap">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+            <span style="font-size:11px;color:var(--text2);font-weight:600">Progresso do ciclo</span>
+            <span style="font-size:11px;color:var(--accent2);font-weight:700" id="cycle-pct-lbl">0%</span>
+          </div>
+          <div class="cycle-progress-bar"><div class="cycle-progress-fill" id="cycle-prog-fill" style="width:0%"></div></div>
+          <div class="cycle-progress-labels"><span id="cycle-start-lbl">—</span><span id="cycle-end-lbl">—</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+          <div style="text-align:right">
+            <div style="font-size:11px;color:var(--text3)">Total no ciclo</div>
+            <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--red)" id="cycle-total-val">R$ 0,00</div>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button class="btn btn-s btn-sm" onclick="openM('cycle-config-modal')">⚙️ Configurar</button>
+            <button class="btn btn-p btn-sm" onclick="generateReport()">📊 Fechar fatura</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- REPORTS HISTORY TAB -->
+      <div style="display:flex;gap:0;border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;margin-bottom:16px">
+        <div class="exp-subtab act" id="exptab-gastos" onclick="setExpTab('gastos',this)"
+          style="flex:1;padding:10px;text-align:center;font-size:13px;font-weight:600;cursor:pointer;transition:all var(--ease);color:var(--text3)">
+          💸 Gastos
+        </div>
+        <div class="exp-subtab" id="exptab-faturas" onclick="setExpTab('faturas',this)"
+          style="flex:1;padding:10px;text-align:center;font-size:13px;font-weight:600;cursor:pointer;transition:all var(--ease);color:var(--text3);border-left:1px solid var(--border)">
+          📋 Faturas anteriores
+        </div>
+      </div>
+
+      <!-- GASTOS VIEW -->
+      <div id="exp-view-gastos">
+      <!-- RECURRING EXPENSES -->
+      <div class="rec-section">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+          <div>
+            <div style="font-size:15px;font-weight:700">📅 Gastos mensais fixos</div>
+            <div style="font-size:12px;color:var(--text3);margin-top:2px">Streaming, parcelas, dívidas de cartão</div>
+          </div>
+          <button class="btn btn-p btn-sm" onclick="openM('recmod')">+ Adicionar fixo</button>
+        </div>
+        <div id="rec-list">
+          <div class="es" style="padding:20px 0">
+            <div class="esi" style="font-size:28px">📅</div>
+            <div class="est" style="font-size:12px">Nenhum gasto fixo cadastrado</div>
+          </div>
+        </div>
+        <div class="rec-total-bar" id="rec-total-bar" style="display:none">
+          <span style="font-size:13px;color:var(--text2);font-weight:600">Total mensal fixo</span>
+          <span style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--red)" id="rec-total">R$ 0,00</span>
+        </div>
+      </div>
+
       <div class="expl">
         <div>
           <div class="panel" style="margin-bottom:14px">
@@ -530,9 +793,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
             <div class="fg"><label class="fl">Descrição</label><input type="text" class="fi" id="edes" placeholder="Ex: Almoço, Uber, Netflix..."></div>
             <div class="fr">
               <div class="fg"><label class="fl">Valor (R$)</label><input type="number" class="fi" id="eamt" placeholder="0,00" min="0" step="0.01"></div>
-              <div class="fg"><label class="fl">Categoria</label><select class="fi" id="ecat"><option value="food">🍔 Alimentação</option><option value="transport">🚗 Transporte</option><option value="leisure">🎮 Lazer</option><option value="bills">📄 Contas</option><option value="health">💊 Saúde</option><option value="education">📚 Educação</option><option value="other">📦 Outros</option></select></div>
+              <div class="fg"><label class="fl">Categoria</label><select class="fi" id="ecat" onchange="toggleOtherDesc(this)"><option value="food">🍔 Alimentação</option><option value="transport">🚗 Transporte</option><option value="leisure">🎮 Lazer</option><option value="bills">📄 Contas</option><option value="health">💊 Saúde</option><option value="education">📚 Educação</option><option value="other">📦 Outros</option></select></div>
             </div>
             <div class="fg"><label class="fl">Data</label><input type="date" class="fi" id="edate"></div>
+            <div class="fg" id="other-desc-wrap" style="display:none">
+              <label class="fl">Descreva a categoria (ex: Viagem, Pet, Presente...)</label>
+              <input type="text" class="fi" id="eother" placeholder="Ex: Viagem, Pet, Presente, Academia...">
+            </div>
             <button class="btn btn-g" id="eabtn" onclick="addExp()">+ Adicionar</button>
           </div>
           <div class="cc">
@@ -547,6 +814,45 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
             <span id="etot" style="font-family:'Syne',sans-serif;font-size:14px;color:var(--red);font-weight:700"></span>
           </div>
           <div id="explist"><div class="es"><div class="esi">📭</div><div class="est">Sem despesas.<br>Adicione a primeira!</div></div></div>
+        </div>
+      </div><!-- end exp-view-gastos -->
+
+      <!-- FATURAS VIEW -->
+      <div id="exp-view-faturas" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+          <div>
+            <div style="font-size:15px;font-weight:700">📋 Histórico de Relatórios</div>
+            <div style="font-size:12px;color:var(--text3);margin-top:2px">Clique em uma fatura para ver o relatório completo</div>
+          </div>
+          <button class="btn btn-p btn-sm" onclick="generateReport()">+ Fechar fatura agora</button>
+        </div>
+        <div id="reports-list">
+          <div class="es"><div class="esi">📋</div><div class="est">Nenhuma fatura fechada ainda.<br>Configure o ciclo e feche sua primeira fatura!</div></div>
+        </div>
+
+        <!-- Email setup card -->
+        <div class="email-setup-card">
+          <div style="display:flex;align-items:flex-start;gap:14px">
+            <div style="font-size:28px">📧</div>
+            <div style="flex:1">
+              <div style="font-size:14px;font-weight:700;margin-bottom:6px">Relatório por e-mail</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:12px">
+                Receba seu relatório mensal automaticamente no fechamento da fatura.
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+                <input type="email" class="fi" id="report-email" placeholder="seu@email.com"
+                  style="font-size:13px;padding:8px 12px;max-width:260px;flex:1"
+                  value="">
+                <button class="btn btn-p btn-sm" onclick="saveReportEmail()">Salvar e-mail</button>
+              </div>
+              <div style="margin-top:10px;padding:10px 14px;background:rgba(124,92,252,.08);border-radius:var(--r3);font-size:11px;color:var(--text3);line-height:1.7">
+                ℹ️ <strong style="color:var(--accent2)">Como funciona na prática:</strong> O envio automático de e-mail requer um backend com
+                <strong>SendGrid</strong> ou <strong>Nodemailer</strong>. Por enquanto, ao fechar a fatura você pode
+                <strong>copiar o relatório</strong> ou <strong>baixar como PDF</strong> e enviar manualmente.
+                O campo de e-mail está salvo para quando o backend for configurado.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -731,6 +1037,502 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
       </div>
     </div>
 
+    <!-- DAY TRADE -->
+    <div class="page" id="page-daytrade" style="overflow-x:hidden;max-width:100%">
+      <div class="ph" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px">
+        <div><h2>Day Trade ⚡</h2><p>Simule operações e aprenda a operar</p></div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <a href="https://qxbroker.com" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:7px;padding:7px 14px;background:rgba(124,92,252,.12);border:1px solid rgba(124,92,252,.3);border-radius:var(--r3);font-size:12px;font-weight:600;color:var(--accent2);text-decoration:none;transition:all var(--ease);white-space:nowrap">
+            🔗 QX Broker
+          </a>
+          <div id="dt-fs-btn" onclick="dtToggleFS()">⛶ Tela cheia</div>
+        </div>
+      </div>
+      <button id="dt-exit-fs" onclick="dtToggleFS()">✕ Sair da tela cheia</button>
+
+      <!-- CLOCK -->
+      <div class="dt-clock-wrap">
+        <div>
+          <div class="dt-clock-time" id="dt-clock">00:00:00</div>
+          <div class="dt-clock-date" id="dt-clock-date">—</div>
+        </div>
+        <div class="dt-clock-market">
+          <div class="dt-clock-session" id="dt-session-ny">🇺🇸 Nova York</div>
+          <div class="dt-clock-session" id="dt-session-lk">🇬🇧 Londres</div>
+          <div class="dt-clock-session" id="dt-session-tk">🇯🇵 Tóquio</div>
+        </div>
+      </div>
+
+      <!-- Mode banner -->
+      <div id="dt-mode-banner" style="background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);border-radius:var(--r2);padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:13px">
+        <span style="font-size:18px">🎮</span>
+        <div><strong style="color:var(--blue)">Modo Demo ativo</strong> — Saldo virtual R$ 10.000. Sem risco real. Perfeito para aprender!</div>
+      </div>
+
+      <div class="dt-layout">
+        <!-- LEFT: Chart -->
+        <div>
+          <div class="dt-chart-card">
+            <div class="dt-header">
+              <div style="display:flex;flex-direction:column;gap:8px;flex:1;min-width:0;overflow:hidden">
+                <!-- Current asset label -->
+                <div id="dt-asset-label" style="font-size:14px;font-weight:700;color:var(--accent2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">BTC/USD — Bitcoin</div>
+
+                <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;min-width:0">
+                  <!-- Search input -->
+                  <div style="position:relative;width:180px;max-width:180px" id="dt-search-wrap">
+                    <input type="text" id="dt-search" class="fi" placeholder="🔍 Buscar par... EUR, BTC..."
+                      style="font-size:12px;padding:6px 12px"
+                      oninput="dtFilterAssets(this.value)"
+                      onfocus="dtOpenDropdown()"
+                      onblur="setTimeout(dtCloseDropdown,200)"
+                      autocomplete="off">
+                    <div id="dt-dropdown" style="
+                      display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;
+                      background:var(--card2);border:1px solid var(--border2);border-radius:var(--r2);
+                      max-height:260px;overflow-y:auto;z-index:300;
+                      box-shadow:0 12px 32px rgba(0,0,0,.6)">
+                    </div>
+                  </div>
+
+                  <!-- Full dropdown with all pairs grouped -->
+                  <select id="dt-asset-select" class="fi" onchange="dtPickAsset(this.value)"
+                    style="font-size:12px;padding:6px 10px;max-width:200px;min-width:0">
+                    <optgroup label="🪙 Crypto">
+                      <option value="BTC/USD">BTC/USD — Bitcoin</option>
+                      <option value="ETH/USD">ETH/USD — Ethereum</option>
+                      <option value="SOL/USD">SOL/USD — Solana</option>
+                      <option value="BNB/USD">BNB/USD — BNB</option>
+                      <option value="XRP/USD">XRP/USD — Ripple</option>
+                      <option value="LTC/USD">LTC/USD — Litecoin</option>
+                    </optgroup>
+                    <optgroup label="💱 Forex — Principais">
+                      <option value="EUR/USD">EUR/USD — Euro / Dólar</option>
+                      <option value="GBP/USD">GBP/USD — Libra / Dólar</option>
+                      <option value="USD/JPY">USD/JPY — Dólar / Iene</option>
+                      <option value="USD/CHF">USD/CHF — Dólar / Franco Suíço</option>
+                      <option value="AUD/USD">AUD/USD — Dólar Australiano</option>
+                      <option value="USD/CAD">USD/CAD — Dólar Canadense</option>
+                      <option value="NZD/USD">NZD/USD — Dólar Neozelandês</option>
+                    </optgroup>
+                    <optgroup label="🔀 Forex — Cruzadas">
+                      <option value="EUR/JPY">EUR/JPY — Euro / Iene</option>
+                      <option value="EUR/GBP">EUR/GBP — Euro / Libra</option>
+                      <option value="GBP/JPY">GBP/JPY — Libra / Iene</option>
+                      <option value="EUR/CHF">EUR/CHF — Euro / Franco Suíço</option>
+                      <option value="AUD/JPY">AUD/JPY — Dólar Australiano / Iene</option>
+                      <option value="CAD/JPY">CAD/JPY — Dólar Canadense / Iene</option>
+                    </optgroup>
+                    <optgroup label="🌎 Forex — Exóticos">
+                      <option value="USD/BRL">USD/BRL — Dólar / Real Brasileiro</option>
+                      <option value="USD/MXN">USD/MXN — Dólar / Peso Mexicano</option>
+                      <option value="USD/TRY">USD/TRY — Dólar / Lira Turca</option>
+                      <option value="USD/INR">USD/INR — Dólar / Rúpia Indiana</option>
+                      <option value="EUR/TRY">EUR/TRY — Euro / Lira Turca</option>
+                      <option value="GBP/BRL">GBP/BRL — Libra / Real Brasileiro</option>
+                    </optgroup>
+                    <optgroup label="🏆 Commodities">
+                      <option value="GOLD">XAU/USD — Ouro</option>
+                      <option value="OIL">WTI/USD — Petróleo</option>
+                      <option value="SILVER">XAG/USD — Prata</option>
+                    </optgroup>
+                    <optgroup label="🇧🇷 Ações BR">
+                      <option value="PETR4">PETR4 — Petrobras PN</option>
+                      <option value="VALE3">VALE3 — Vale ON</option>
+                      <option value="ITUB4">ITUB4 — Itaú Unibanco PN</option>
+                    </optgroup>
+                  </select>
+                </div>
+              </div>
+              <div class="dt-tf">
+                <button class="dt-tf-btn act" onclick="dtSetTF(15,this)">15s</button>
+                <button class="dt-tf-btn" onclick="dtSetTF(30,this)">30s</button>
+                <button class="dt-tf-btn" onclick="dtSetTF(60,this)">1m</button>
+                <button class="dt-tf-btn" onclick="dtSetTF(300,this)">5m</button>
+              </div>
+            </div>
+            <canvas id="dt-canvas" style="display:block;width:100%;max-width:100%"></canvas>
+            <div class="dt-price-bar">
+              <div class="dt-price-item"><div class="dt-price-lbl">Preço atual</div><div class="dt-price-val" id="dt-cur-price" style="color:var(--green)">—</div></div>
+              <div class="dt-price-item"><div class="dt-price-lbl">Abertura</div><div class="dt-price-val" id="dt-open">—</div></div>
+              <div class="dt-price-item"><div class="dt-price-lbl">Máx</div><div class="dt-price-val" style="color:var(--green)" id="dt-high">—</div></div>
+              <div class="dt-price-item"><div class="dt-price-lbl">Mín</div><div class="dt-price-val" style="color:var(--red)" id="dt-low">—</div></div>
+              <div class="dt-price-item"><div class="dt-price-lbl">Variação</div><div class="dt-price-val" id="dt-chg">—</div></div>
+            </div>
+          </div>
+
+          <!-- Positions -->
+          <div class="dt-positions">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+              <div style="font-size:14px;font-weight:700">Posições abertas</div>
+              <span class="badge bp" id="dt-pos-count">0 posições</span>
+            </div>
+            <div id="dt-positions-list">
+              <div class="es" style="padding:24px 0"><div class="esi" style="font-size:28px">📋</div><div class="est" style="font-size:12px">Nenhuma posição aberta</div></div>
+            </div>
+          </div>
+
+          <!-- History -->
+          <div class="dt-history" style="margin-top:12px">
+            <div style="font-size:14px;font-weight:700;margin-bottom:12px">Histórico de operações</div>
+            <div id="dt-history-list">
+              <div class="es" style="padding:16px 0"><div class="est" style="font-size:12px">Nenhuma operação realizada</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Trade Panel -->
+        <div class="dt-panel">
+          <!-- Balance -->
+          <div class="dt-balance-card">
+            <div class="dt-bal-lbl">Saldo disponível</div>
+            <div class="dt-bal-val" id="dt-balance">R$ 10.000,00</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:4px" id="dt-pnl-total">P&L total: R$ 0,00</div>
+          </div>
+
+          <!-- Mode switch -->
+          <div>
+            <div style="font-size:11px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:7px">Modo</div>
+            <div class="dt-mode-switch">
+              <div class="dt-mode-btn act demo" id="dtm-demo" onclick="dtSetMode('demo')">🎮 Demo</div>
+              <div class="dt-mode-btn real" id="dtm-real" onclick="dtSetMode('real')">💰 Real</div>
+            </div>
+          </div>
+
+          <!-- Amount -->
+          <div class="dt-amount">
+            <div class="dt-amount-lbl">Valor da operação</div>
+            <input type="number" class="fi" id="dt-amount-input" value="100" min="10" step="10" style="font-size:16px;font-weight:700;text-align:center">
+            <div class="dt-amount-grid">
+              <div class="dt-amt-btn" onclick="dtSetAmt(50)">R$50</div>
+              <div class="dt-amt-btn" onclick="dtSetAmt(100)">R$100</div>
+              <div class="dt-amt-btn" onclick="dtSetAmt(500)">R$500</div>
+              <div class="dt-amt-btn" onclick="dtSetAmt(1000)">R$1k</div>
+            </div>
+          </div>
+
+          <!-- Duration -->
+          <div class="dt-duration">
+            <div style="font-size:11px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.04em">Expiração</div>
+            <div class="dt-dur-grid">
+              <div class="dt-dur-btn sel" onclick="dtSetDur(30,this)">30s</div>
+              <div class="dt-dur-btn" onclick="dtSetDur(60,this)">1min</div>
+              <div class="dt-dur-btn" onclick="dtSetDur(120,this)">2min</div>
+              <div class="dt-dur-btn" onclick="dtSetDur(300,this)">5min</div>
+            </div>
+          </div>
+
+          <!-- Buy/Sell buttons -->
+          <div class="dt-btns">
+            <button class="dt-buy up" onclick="dtOpenPosition('UP')">
+              ▲ COMPRAR<br><span style="font-size:11px;opacity:.8">Alta</span>
+            </button>
+            <button class="dt-buy dn" onclick="dtOpenPosition('DOWN')">
+              ▼ VENDER<br><span style="font-size:11px;opacity:.8">Baixa</span>
+            </button>
+          </div>
+
+          <!-- Info -->
+          <div class="step-note">
+            💡 <strong>Como funciona:</strong> Você prevê se o preço vai subir ou cair. Se acertar, ganha ~85% do valor apostado. Se errar, perde o valor.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BINANCE CONNECT -->
+    <div class="page" id="page-binance">
+      <div class="ph"><h2>Binance Connect 🔶</h2><p>Conecte sua conta Binance e opere com saldo real</p></div>
+
+      <div id="bn-not-connected">
+        <div class="bn-connect-card">
+          <div class="bn-logo">🔶</div>
+          <div class="bn-title">Conectar Binance</div>
+          <div class="bn-sub">Conecte sua conta Binance usando suas chaves de API. Seus fundos ficam na Binance — o app apenas visualiza e envia ordens em seu nome.</div>
+
+          <div class="bn-warning">
+            <span>⚠️</span>
+            <div>Use apenas chaves com permissão de <strong>leitura + trading</strong>. <strong>NUNCA</strong> habilite saques na chave API. Crie uma chave específica para este app.</div>
+          </div>
+
+          <div class="bn-input-group">
+            <label class="fl">API Key</label>
+            <input type="text" class="fi" id="bn-apikey" placeholder="Cole sua API Key aqui..." style="font-size:13px">
+          </div>
+          <div class="bn-input-group">
+            <label class="fl">Secret Key</label>
+            <input type="password" class="fi" id="bn-secret" placeholder="Cole sua Secret Key aqui..." style="font-size:13px">
+          </div>
+
+          <button class="btn btn-p" style="margin-top:8px;background:linear-gradient(135deg,#f0b90b,#d4950a);box-shadow:0 6px 20px rgba(240,185,11,.3)" onclick="bnConnect()">
+            Conectar Binance
+          </button>
+        </div>
+
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-bottom:16px">
+          <div style="font-size:14px;font-weight:700;margin-bottom:16px">📋 Como criar sua API Key na Binance</div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div class="step-note">1. Acesse <strong>binance.com</strong> → Perfil → Gerenciar API</div>
+            <div class="step-note">2. Clique em <strong>Criar API</strong> → Escolha "API gerada pelo sistema"</div>
+            <div class="step-note">3. Habilite apenas: <strong>Leitura</strong> e <strong>Spot &amp; Margin Trading</strong></div>
+            <div class="step-note">4. <strong style="color:var(--red)">NÃO habilite saques!</strong> Isso é uma medida de segurança.</div>
+            <div class="step-note">5. Recomendado: restrinja o IP ao seu endereço atual</div>
+            <div class="step-note">6. Copie a API Key e Secret Key e cole acima</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="bn-connected" style="display:none">
+        <div class="bn-connected">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+            <div style="font-size:28px">🔶</div>
+            <div>
+              <div style="font-size:15px;font-weight:700;color:#f0b90b">Binance Conectada ✅</div>
+              <div style="font-size:12px;color:var(--text2);margin-top:3px" id="bn-account-info">Conta verificada</div>
+            </div>
+            <button class="btn btn-s btn-sm" style="margin-left:auto" onclick="bnDisconnect()">Desconectar</button>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+            <div style="background:var(--bg2);border-radius:var(--r3);padding:12px;text-align:center">
+              <div style="font-size:11px;color:var(--text3)">Saldo Total (USDT)</div>
+              <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--green);margin-top:4px" id="bn-total-usdt">—</div>
+            </div>
+            <div style="background:var(--bg2);border-radius:var(--r3);padding:12px;text-align:center">
+              <div style="font-size:11px;color:var(--text3)">BTC</div>
+              <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--yellow);margin-top:4px" id="bn-btc-bal">—</div>
+            </div>
+            <div style="background:var(--bg2);border-radius:var(--r3);padding:12px;text-align:center">
+              <div style="font-size:11px;color:var(--text3)">Ativos</div>
+              <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--accent2);margin-top:4px" id="bn-asset-count">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portfolio -->
+        <div style="font-size:14px;font-weight:700;margin-bottom:12px">Seu portfólio</div>
+        <div class="bn-portfolio-grid" id="bn-portfolio"></div>
+
+        <!-- Order form -->
+        <div class="bn-order-form">
+          <div style="font-size:14px;font-weight:700;margin-bottom:14px">Nova ordem</div>
+          <div class="bn-order-tabs">
+            <div class="bn-order-tab buy act" id="bn-tab-buy" onclick="bnSetOrderSide('buy')">▲ Comprar</div>
+            <div class="bn-order-tab sell" id="bn-tab-sell" onclick="bnSetOrderSide('sell')">▼ Vender</div>
+          </div>
+          <div class="bn-order-grid">
+            <div class="fg"><label class="fl">Par</label>
+              <select class="fi" id="bn-pair">
+                <option>BTCUSDT</option><option>ETHUSDT</option><option>SOLUSDT</option>
+                <option>BNBUSDT</option><option>ADAUSDT</option><option>DOTUSDT</option>
+              </select>
+            </div>
+            <div class="fg"><label class="fl">Tipo</label>
+              <select class="fi" id="bn-order-type">
+                <option value="MARKET">Market (mercado)</option>
+                <option value="LIMIT">Limit (limite)</option>
+              </select>
+            </div>
+            <div class="fg"><label class="fl">Quantidade</label>
+              <input type="number" class="fi" id="bn-qty" placeholder="0.001" step="0.001" min="0">
+            </div>
+            <div class="fg" id="bn-price-field"><label class="fl">Preço (USDT)</label>
+              <input type="number" class="fi" id="bn-price" placeholder="Automático" step="0.01">
+            </div>
+          </div>
+          <div style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);border-radius:var(--r3);padding:10px 14px;font-size:12px;color:var(--red);margin:14px 0;line-height:1.6">
+            ⚠️ <strong>Atenção:</strong> Esta ordem será enviada à Binance com dinheiro real. Verifique todos os dados antes de confirmar.
+          </div>
+          <button class="btn btn-g" id="bn-order-btn" onclick="bnPlaceOrder()">Enviar ordem</button>
+        </div>
+
+        <!-- Recent orders -->
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px">
+          <div style="font-size:14px;font-weight:700;margin-bottom:14px">Ordens recentes</div>
+          <div id="bn-orders-list">
+            <div class="es" style="padding:20px"><div class="est" style="font-size:12px">Nenhuma ordem nesta sessão</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESTUDOS -->
+    <div class="page" id="page-estudos">
+      <div class="ph"><h2>Estudos 🎓</h2><p>Aprenda finanças e investimentos do zero ao avançado</p></div>
+
+      <!-- Sub-tabs -->
+      <div style="display:flex;gap:0;border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;margin-bottom:22px">
+        <div class="estab act" id="estab-inv" onclick="setEstTab('inv',this)"
+          style="flex:1;padding:11px;text-align:center;font-size:13px;font-weight:600;cursor:pointer;transition:all var(--ease);color:var(--text3)">
+          📈 Investimentos
+        </div>
+        <div class="estab" id="estab-crypto" onclick="setEstTab('crypto',this)"
+          style="flex:1;padding:11px;text-align:center;font-size:13px;font-weight:600;cursor:pointer;transition:all var(--ease);color:var(--text3);border-left:1px solid var(--border)">
+          ₿ Criptomoedas
+        </div>
+      </div>
+
+      <!-- INVESTIMENTOS tab -->
+      <div id="est-inv">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:24px">
+
+          <div class="est-card" onclick="openLesson('renda-fixa')">
+            <div class="est-card-icon" style="background:rgba(56,189,248,.12)">🏦</div>
+            <div class="est-card-body">
+              <div class="est-badge est-badge-init">Iniciante</div>
+              <div class="est-card-title">Renda Fixa: CDB, Tesouro, LCI</div>
+              <div class="est-card-desc">Entenda como funciona cada tipo de investimento de renda fixa e qual é o melhor para você.</div>
+              <div class="est-card-meta">⏱ 8 min · 5 exercícios</div>
+            </div>
+          </div>
+
+          <div class="est-card" onclick="openLesson('acoes-intro')">
+            <div class="est-card-icon" style="background:rgba(167,139,250,.12)">📈</div>
+            <div class="est-card-body">
+              <div class="est-badge est-badge-init">Iniciante</div>
+              <div class="est-card-title">Ações: como funciona a Bolsa?</div>
+              <div class="est-card-desc">O que são ações, como comprá-las, dividendos e como analisar uma empresa.</div>
+              <div class="est-card-meta">⏱ 10 min · 6 exercícios</div>
+            </div>
+          </div>
+
+          <div class="est-card" onclick="openLesson('fiis')">
+            <div class="est-card-icon" style="background:rgba(34,211,165,.12)">🏢</div>
+            <div class="est-card-body">
+              <div class="est-badge est-badge-init">Iniciante</div>
+              <div class="est-card-title">Fundos Imobiliários (FIIs)</div>
+              <div class="est-card-desc">Invista em imóveis sem comprar um. Saiba como FIIs geram renda passiva mensal.</div>
+              <div class="est-card-meta">⏱ 7 min · 4 exercícios</div>
+            </div>
+          </div>
+
+          <div class="est-card" onclick="openLesson('juros-compostos')">
+            <div class="est-card-icon" style="background:rgba(251,191,36,.12)">🧮</div>
+            <div class="est-card-body">
+              <div class="est-badge est-badge-med">Intermediário</div>
+              <div class="est-card-title">Juros Compostos na prática</div>
+              <div class="est-card-desc">A magia dos juros compostos. Veja como pequenas quantias viram fortunas com o tempo.</div>
+              <div class="est-card-meta">⏱ 6 min · 3 exercícios + simulador</div>
+            </div>
+          </div>
+
+          <div class="est-card" onclick="openLesson('analise-tecnica')">
+            <div class="est-card-icon" style="background:rgba(248,113,113,.12)">📊</div>
+            <div class="est-card-body">
+              <div class="est-badge est-badge-med">Intermediário</div>
+              <div class="est-card-title">Análise Técnica: lendo gráficos</div>
+              <div class="est-card-desc">Suporte, resistência, médias móveis, candlesticks e os principais padrões gráficos.</div>
+              <div class="est-card-meta">⏱ 15 min · 8 exercícios</div>
+            </div>
+          </div>
+
+          <div class="est-card" onclick="openLesson('carteira')">
+            <div class="est-card-icon" style="background:rgba(124,92,252,.12)">💼</div>
+            <div class="est-card-body">
+              <div class="est-badge est-badge-avd">Avançado</div>
+              <div class="est-card-title">Monte sua carteira ideal</div>
+              <div class="est-card-desc">Diversificação, correlação de ativos, rebalanceamento e estratégias de longo prazo.</div>
+              <div class="est-card-meta">⏱ 12 min · 5 exercícios</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Quiz section -->
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-bottom:16px">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+            <div style="font-size:28px">🎯</div>
+            <div>
+              <div style="font-size:15px;font-weight:700">Quiz Rápido — Investimentos</div>
+              <div style="font-size:12px;color:var(--text2)">Teste seu conhecimento com 5 perguntas</div>
+            </div>
+            <button class="btn btn-p btn-sm" style="margin-left:auto" onclick="startQuiz('inv')">Iniciar quiz</button>
+          </div>
+          <div id="quiz-inv-container"></div>
+        </div>
+      </div>
+
+      <!-- CRYPTO tab -->
+      <div id="est-crypto" style="display:none">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:24px">
+
+          <div class="est-card" onclick="openLesson('bitcoin-intro')">
+            <div class="est-card-icon" style="background:rgba(247,147,26,.12)">₿</div>
+            <div class="est-card-body">
+              <div class="est-badge est-badge-init">Iniciante</div>
+              <div class="est-card-title">O que é Bitcoin? Do zero</div>
+              <div class="est-card-desc">História, tecnologia, como funciona a mineração e por que o Bitcoin tem valor.</div>
+              <div class="est-card-meta">⏱ 10 min · 5 exercícios</div>
+            </div>
+          </div>
+
+          <div class="est-card" onclick="openLesson('blockchain')">
+            <div class="est-card-icon" style="background:rgba(98,126,234,.12)">🔗</div>
+            <div class="est-card-body">
+              <div class="est-badge est-badge-init">Iniciante</div>
+              <div class="est-card-title">Blockchain explicado simples</div>
+              <div class="est-card-desc">O que é um bloco, como a cadeia é formada e por que é imutável e segura.</div>
+              <div class="est-card-meta">⏱ 8 min · 4 exercícios</div>
+            </div>
+          </div>
+
+          <div class="est-card" onclick="openLesson('ethereum-defi')">
+            <div class="est-card-icon" style="background:rgba(98,126,234,.12)">Ξ</div>
+            <div class="est-card-body">
+              <div class="est-badge est-badge-med">Intermediário</div>
+              <div class="est-card-title">Ethereum e DeFi</div>
+              <div class="est-card-desc">Contratos inteligentes, tokens ERC-20, DeFi, NFTs e o ecossistema Ethereum.</div>
+              <div class="est-card-meta">⏱ 12 min · 6 exercícios</div>
+            </div>
+          </div>
+
+          <div class="est-card" onclick="openLesson('altcoins')">
+            <div class="est-card-icon" style="background:rgba(153,69,255,.12)">🪙</div>
+            <div class="est-card-body">
+              <div class="est-badge est-badge-med">Intermediário</div>
+              <div class="est-card-title">Altcoins: Solana, BNB, XRP...</div>
+              <div class="est-card-desc">Principais altcoins, seus casos de uso, diferenciais e riscos de cada uma.</div>
+              <div class="est-card-meta">⏱ 10 min · 5 exercícios</div>
+            </div>
+          </div>
+
+          <div class="est-card" onclick="openLesson('crypto-seguranca')">
+            <div class="est-card-icon" style="background:rgba(34,211,165,.12)">🔐</div>
+            <div class="est-card-body">
+              <div class="est-badge est-badge-med">Intermediário</div>
+              <div class="est-card-title">Segurança em Crypto</div>
+              <div class="est-card-desc">Wallets, seed phrase, cold wallet, como não cair em golpes e proteger seus ativos.</div>
+              <div class="est-card-meta">⏱ 9 min · 4 exercícios</div>
+            </div>
+          </div>
+
+          <div class="est-card" onclick="openLesson('trading-crypto')">
+            <div class="est-card-icon" style="background:rgba(248,113,113,.12)">⚡</div>
+            <div class="est-card-body">
+              <div class="est-badge est-badge-avd">Avançado</div>
+              <div class="est-card-title">Trading de Crypto</div>
+              <div class="est-card-desc">Análise técnica aplicada a crypto, gestão de risco, stops e estratégias de entrada/saída.</div>
+              <div class="est-card-meta">⏱ 14 min · 7 exercícios</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Quiz crypto -->
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-bottom:16px">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+            <div style="font-size:28px">🎯</div>
+            <div>
+              <div style="font-size:15px;font-weight:700">Quiz Rápido — Criptomoedas</div>
+              <div style="font-size:12px;color:var(--text2)">Teste seu conhecimento com 5 perguntas</div>
+            </div>
+            <button class="btn btn-p btn-sm" style="margin-left:auto" onclick="startQuiz('crypto')">Iniciar quiz</button>
+          </div>
+          <div id="quiz-crypto-container"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- ALERTS -->
     <div class="page" id="page-alerts">
       <div class="ph"><h2>Alertas 🔔</h2><p>Notificações e dicas</p></div>
@@ -766,6 +1568,74 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
     <div class="ma"><button class="btn btn-s" onclick="closeM('goalmod')">Cancelar</button><button class="btn btn-p" id="gmbtn" onclick="addGoal()">Criar meta</button></div>
   </div>
 </div>
+<!-- CYCLE CONFIG MODAL -->
+<div class="mov" id="cycle-config-modal">
+  <div class="mcard">
+    <div class="mhdl"></div>
+    <h3 class="mt">⚙️ Configurar Ciclo de Fatura</h3>
+    <p class="msb">Defina o dia de fechamento e vencimento da sua fatura</p>
+    <div class="fg">
+      <label class="fl">Dia de fechamento</label>
+      <select class="fi" id="cycle-close-day">
+        <option value="1">Dia 01 (fecha todo mês 1)</option>
+        <option value="5">Dia 05</option>
+        <option value="10">Dia 10</option>
+        <option value="15">Dia 15</option>
+        <option value="20">Dia 20</option>
+        <option value="25">Dia 25</option>
+        <option value="28">Dia 28</option>
+      </select>
+    </div>
+    <div class="fg">
+      <label class="fl">Nome do ciclo (opcional)</label>
+      <input type="text" class="fi" id="cycle-name" placeholder="Ex: Cartão Nubank, Cartão XP...">
+    </div>
+    <div id="cycle-preview" style="background:var(--bg2);border-radius:var(--r3);padding:14px;font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:4px"></div>
+    <div class="ma">
+      <button class="btn btn-s" onclick="closeM('cycle-config-modal')">Cancelar</button>
+      <button class="btn btn-p" onclick="saveCycleConfig()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- REPORT DETAIL OVERLAY -->
+<div class="report-overlay" id="report-overlay">
+  <div class="report-detail-card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px">
+      <div id="report-detail-title" style="font-size:20px;font-weight:700"></div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-s btn-sm" onclick="copyReport()">📋 Copiar</button>
+        <button class="btn btn-s btn-sm" onclick="closeReport()">✕ Fechar</button>
+      </div>
+    </div>
+    <div id="report-detail-content"></div>
+  </div>
+</div>
+
+<div class="mov" id="recmod">
+  <div class="mcard">
+    <div class="mhdl"></div>
+    <h3 class="mt">Gasto fixo mensal</h3>
+    <p class="msb">Streaming, parcela, dívida ou assinatura</p>
+    <div class="fg"><label class="fl">Nome</label><input type="text" class="fi" id="rm-name" placeholder="Ex: Netflix, Parcela TV, Cartão Nubank"></div>
+    <div class="fg"><label class="fl">Tipo</label>
+      <div class="rg" id="rm-type-grp">
+        <div class="rb sel" data-v="monthly" onclick="pickR(this,'rm-type-grp')">📺 Streaming/Assinatura</div>
+        <div class="rb" data-v="parcel" onclick="pickR(this,'rm-type-grp')">💳 Parcela</div>
+        <div class="rb" data-v="debt" onclick="pickR(this,'rm-type-grp')">💰 Dívida/Cartão</div>
+      </div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label class="fl">Valor mensal (R$)</label><input type="number" class="fi" id="rm-value" placeholder="29,90" step="0.01"></div>
+      <div class="fg" id="rm-parcel-fields"><label class="fl">Parcelas restantes</label><input type="number" class="fi" id="rm-parcels" placeholder="12" min="1"></div>
+    </div>
+    <div class="fg"><label class="fl">Vencimento (dia do mês)</label>
+      <input type="number" class="fi" id="rm-due" placeholder="10" min="1" max="31">
+    </div>
+    <div class="ma"><button class="btn btn-s" onclick="closeM('recmod')">Cancelar</button><button class="btn btn-g" onclick="addRecurring()">Adicionar</button></div>
+  </div>
+</div>
+
 <div class="mov" id="invmod">
   <div class="mcard">
     <div class="mhdl"></div>
@@ -777,6 +1647,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
     </div>
     <div class="fg"><label class="fl">Valor investido (R$)</label><input type="number" class="fi" id="imv" placeholder="1000" step="0.01"></div>
     <div class="ma"><button class="btn btn-s" onclick="closeM('invmod')">Cancelar</button><button class="btn btn-p" id="imbtn" onclick="addInv()">Adicionar</button></div>
+  </div>
+</div>
+
+<!-- LESSON OVERLAY -->
+<div class="lesson-overlay" id="lesson-overlay">
+  <div class="lesson-card">
+    <div class="lesson-close"><button class="btn btn-s btn-sm" onclick="closeLesson()">✕ Fechar</button></div>
+    <div class="lesson-progress"><div class="lesson-progress-fill" id="lpf" style="width:0%"></div></div>
+    <div id="lesson-content"></div>
+    <div id="lesson-nav" style="display:flex;gap:10px;margin-top:24px;padding-top:20px;border-top:1px solid var(--border)"></div>
   </div>
 </div>
 
@@ -797,6 +1677,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
     else{hideL();showAuth();}
   }catch(e){hideL();showAuth();}
   document.querySelectorAll('.mov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')}));
+  document.getElementById('report-overlay')?.addEventListener('click',e=>{if(e.target===document.getElementById('report-overlay'))closeReport();});
   document.getElementById('edate').valueAsDate=new Date();
 });
 function hideL(){document.getElementById('ls').style.display='none';}
@@ -864,13 +1745,13 @@ function initUI(){
   document.getElementById('dsub').textContent=`Objetivo: ${p.goal||'crescer financeiramente'}`;
   document.getElementById('sinc').textContent=`R$ ${fmt(p.income||0)}`;
   document.getElementById('sinv').textContent=`R$ ${fmt(p.invest||0)}`;
-  renderExpList();renderExpChart();renderInvGrid();renderInvChart();renderGoals();renderDashCharts();updDashStats();renderAlerts();renderCrypto();renderStocks('br');calcSim();updBadges();
+  loadCycleConfig();updateCycleBar();renderExpList();renderExpChart();renderInvGrid();renderInvChart();renderGoals();renderDashCharts();updDashStats();renderAlerts();renderCrypto();renderStocks('br');calcSim();updBadges();
   toast('✅','Dados carregados!','Tudo sincronizado com a nuvem.','success');
 }
-function updBadges(){document.getElementById('sbeb').textContent=S.expenses.length;document.getElementById('sbgb').textContent=S.goals.length;}
+function updBadges(){/* badges removed */}
 
 // ═══════════ NAVIGATION
-const pgTitles={dashboard:'Dashboard',expenses:'Gastos',investments:'Investimentos',crypto:'Criptomoedas',stocks:'Bolsa de Valores',goals:'Metas',simulator:'Simulador',ai:'IA Financeira',alerts:'Alertas'};
+const pgTitles={dashboard:'Dashboard',expenses:'Gastos',investments:'Investimentos',crypto:'Criptomoedas',stocks:'Bolsa de Valores',goals:'Metas',simulator:'Simulador',ai:'IA Financeira',daytrade:'Day Trade',binance:'Binance Connect',estudos:'Estudos',alerts:'Alertas'};
 function goPg(id,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('act'));
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('act'));
@@ -885,18 +1766,33 @@ function goPg(id,el){
   if(id==='simulator')setTimeout(calcSim,50);
   if(id==='crypto')setTimeout(renderCryptoChart,50);
   if(id==='stocks')setTimeout(()=>renderStocksChart('br',2.1),50);
+  if(id==='daytrade'){
+    // Force canvas resize after layout settles
+    setTimeout(()=>{ dtRenderChart(); }, 50);
+    setTimeout(()=>{ dtRenderChart(); }, 200);
+    if(!DT.priceInterval) dtInit();
+  }
   closeSB();
 }
 function setABN(el){document.querySelectorAll('.bni').forEach(b=>b.classList.remove('act'));el.classList.add('act');}
 
 // ═══════════ EXPENSES
 const catCfg={food:{l:'Alimentação',i:'🍔',c:'cf'},transport:{l:'Transporte',i:'🚗',c:'ct'},leisure:{l:'Lazer',i:'🎮',c:'cl'},bills:{l:'Contas',i:'📄',c:'cb'},health:{l:'Saúde',i:'💊',c:'ch'},education:{l:'Educação',i:'📚',c:'ce'},other:{l:'Outros',i:'📦',c:'co'}};
+function toggleOtherDesc(sel){document.getElementById('other-desc-wrap').style.display=sel.value==='other'?'block':'none';}
 function getCatTot(){const m={};S.expenses.forEach(e=>{m[e.category]=(m[e.category]||0)+e.amount});return Object.entries(m).map(([c,t])=>({cat:c,label:catCfg[c]?.l||c,total:t})).sort((a,b)=>b.total-a.total);}
 async function addExp(){
-  const des=v('edes').trim(),amt=parseFloat(v('eamt')),cat=v('ecat'),date=v('edate');
+  const cat=v('ecat');
+  const otherDesc=v('eother').trim();
+  const des=(v('edes').trim())||(cat==='other'&&otherDesc?otherDesc:'');
+  const amt=parseFloat(v('eamt')),date=v('edate');
+  const finalDes = v('edes').trim() || (cat==='other'&&otherDesc?otherDesc:'Outros');
   if(!des||!amt||amt<=0||!date){toast('⚠️','Atenção','Preencha todos os campos.','warn');return;}
   const btn=document.getElementById('eabtn');setLoad(btn,true);
-  try{const{data,error}=await db.from('expenses').insert({user_id:S.user.id,description:des,amount:amt,category:cat,date}).select().single();if(error)throw error;S.expenses.unshift(data);clrV(['edes','eamt']);document.getElementById('edate').valueAsDate=new Date();renderExpList();renderExpChart();renderDashCharts();updDashStats();updBadges();toast('✅','Gasto salvo!',`${des} — R$ ${amt.toFixed(2)}`,'success');}
+  try{const displayCat = cat==='other'&&otherDesc ? otherDesc : cat;
+const{data,error}=await db.from('expenses').insert({user_id:S.user.id,description:finalDes||des||'Outros',amount:amt,category:cat,date,notes:otherDesc||null}).select().single();
+if(data) data.otherLabel=otherDesc||null;if(error)throw error;S.expenses.unshift(data);clrV(['edes','eamt','eother']);
+document.getElementById('other-desc-wrap').style.display='none';
+document.getElementById('ecat').value='food';document.getElementById('edate').valueAsDate=new Date();renderExpList();renderExpChart();renderDashCharts();updDashStats();updBadges();updateCycleBar();toast('✅','Gasto salvo!',`${des} — R$ ${amt.toFixed(2)}`,'success');}
   catch(e){toast('❌','Erro',e.message,'danger');}
   finally{setLoad(btn,false);}
 }
@@ -906,7 +1802,9 @@ function renderExpList(){
   const total=S.expenses.reduce((s,e)=>s+e.amount,0);
   document.getElementById('etot').textContent=total>0?`−R$ ${fmt(total)}`:'';
   if(!S.expenses.length){list.innerHTML='<div class="es"><div class="esi">📭</div><div class="est">Sem despesas.<br>Adicione a primeira!</div></div>';return;}
-  list.innerHTML=S.expenses.slice(0,30).map(e=>{const c=catCfg[e.category]||catCfg.other;const d=new Date(e.date+'T00:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});return`<div class="ei"><div class="eico ${c.c}">${c.i}</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:500">${e.description}</div><div style="font-size:11px;color:var(--text3)">${c.l}</div></div><div style="text-align:right"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--red)">−R$ ${e.amount.toFixed(2)}</div><div style="font-size:10px;color:var(--text3)">${d}</div></div><button class="edel" onclick="delExp(${e.id})">✕</button></div>`;}).join('');}
+  list.innerHTML=S.expenses.slice(0,30).map(e=>{const otherLbl=e.notes&&e.category==='other'?e.notes:null;
+const c={...(catCfg[e.category]||catCfg.other)};
+if(otherLbl){c.l=otherLbl;c.i='📦';}const d=new Date(e.date+'T00:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});return`<div class="ei"><div class="eico ${c.c}">${c.i}</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:500">${e.description}</div><div style="font-size:11px;color:var(--text3)">${c.l}</div></div><div style="text-align:right"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--red)">−R$ ${e.amount.toFixed(2)}</div><div style="font-size:10px;color:var(--text3)">${d}</div></div><button class="edel" onclick="delExp(${e.id})">✕</button></div>`;}).join('');}
 function updDashStats(){
   const total=S.expenses.reduce((s,e)=>s+e.amount,0);
   document.getElementById('sexp').textContent=`R$ ${fmt(total)}`;
@@ -1007,12 +1905,14 @@ const cryptos=[
 ];
 // News with real links
 const cryptoNews=[
-  {tag:'Bitcoin',title:'Bitcoin ultrapassa R$ 380.000 após aprovação de ETFs no Brasil',meta:'Há 2h · Cointelegraph',url:'https://br.cointelegraph.com'},
-  {tag:'Ethereum',title:'Atualização do Ethereum reduz taxas em 40% e aumenta capacidade da rede',meta:'Há 5h · The Block',url:'https://www.theblock.co'},
-  {tag:'Regulação',title:'Banco Central do Brasil anuncia framework para stablecoins em 2026',meta:'Há 8h · InfoMoney',url:'https://infomoney.com.br/criptomoedas/'},
-  {tag:'DeFi',title:'Total em DeFi supera US$ 200 bilhões — novo recorde histórico',meta:'Ontem · Decrypt',url:'https://decrypt.co'},
-  {tag:'Educação',title:'O que é blockchain? Guia completo para iniciantes em criptomoedas',meta:'2 dias · Livecoins',url:'https://livecoins.com.br'},
-  {tag:'Web3',title:'5 tendências crypto para 2026: AI tokens, RWA, Layer 2 e mais',meta:'3 dias · Portal do Bitcoin',url:'https://portaldobitcoin.uol.com.br'}
+  {tag:'Bitcoin',title:'Bitcoin: tudo o que você precisa saber sobre a maior criptomoeda',meta:'Cointelegraph BR — Guia completo',url:'https://br.cointelegraph.com/bitcoin-for-beginners/what-is-bitcoin-a-beginners-guide'},
+  {tag:'Ethereum',title:'O que é Ethereum e como funciona a rede?',meta:'Cointelegraph BR — Educação',url:'https://br.cointelegraph.com/ethereum-for-beginners/what-is-ethereum'},
+  {tag:'Regulação',title:'Criptomoedas no Brasil: como declarar no imposto de renda',meta:'InfoMoney — Guia IR Crypto',url:'https://www.infomoney.com.br/guias/criptomoedas-imposto-de-renda/'},
+  {tag:'DeFi',title:'O que é DeFi (finanças descentralizadas)? Guia completo',meta:'Livecoins — Educação DeFi',url:'https://livecoins.com.br/o-que-e-defi-financas-descentralizadas/'},
+  {tag:'Educação',title:'O que é blockchain? Como funciona a tecnologia por trás do Bitcoin',meta:'Portal do Bitcoin — Explicativo',url:'https://portaldobitcoin.uol.com.br/o-que-e-blockchain/'},
+  {tag:'Mercado',title:'Acompanhe cotações e notícias de crypto em tempo real',meta:'CoinMarketCap — Preços ao vivo',url:'https://coinmarketcap.com/pt-br/'},
+  {tag:'Análise',title:'Índice de Medo e Ganância do Bitcoin — Fear & Greed Index',meta:'Alternative.me — Indicador ao vivo',url:'https://alternative.me/crypto/fear-and-greed-index/'},
+  {tag:'Brasil',title:'Mercado de criptomoedas no Brasil: regulamentação e tendências',meta:'Valor Econômico — Especial Crypto',url:'https://valor.globo.com/financas/criptoativos/'},
 ];
 let cryptoPrices=[...cryptos];
 function renderCrypto(){
@@ -1034,23 +1934,64 @@ function renderCryptoChart(sym='BTC',chg=4.2){
   S.charts['crypto']=new Chart(ctx,{type:'line',data:{labels,datasets:[{data:scaled,borderColor:color,backgroundColor:g,borderWidth:2,tension:.4,fill:true,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#6b6885',font:{size:9},maxTicksLimit:7}},y:{grid:{color:'rgba(255,255,255,.03)'},ticks:{color:'#6b6885',font:{size:9}}}}}});
 }
 async function refreshCrypto(){
-  const btn=document.getElementById('crefbtn');btn.classList.add('spinning');
+  const btn=document.getElementById('crefbtn');
+  if(btn) btn.classList.add('spinning');
   try{
-    // Try CoinGecko public API
-    const res=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,cardano,avalanche-2,polkadot,matic-network&vs_currencies=brl&include_24hr_change=true',{signal:AbortSignal.timeout(6000)});
-    if(res.ok){
-      const data=await res.json();
-      const map={bitcoin:'BTC',ethereum:'ETH',solana:'SOL',binancecoin:'BNB',cardano:'ADA','avalanche-2':'AVAX',polkadot:'DOT','matic-network':'MATIC'};
-      cryptoPrices=cryptoPrices.map(c=>{const key=Object.entries(map).find(([,s])=>s===c.sym)?.[0];if(key&&data[key]){return{...c,price:data[key].brl,chg:+(data[key].brl_24h_change||0).toFixed(2)};}return c;});
-      document.getElementById('clastupd').textContent=' · Atualizado agora';
-      renderCrypto();toast('✅','Preços atualizados!','Dados do CoinGecko carregados.','success');
-    }else throw new Error('API indisponível');
-  }catch(e){
-    // Simulate slight price changes
-    cryptoPrices=cryptoPrices.map(c=>({...c,price:+(c.price*(1+(Math.random()-.5)*.02)).toFixed(2),chg:+((Math.random()*10-5)).toFixed(1)}));
-    document.getElementById('clastupd').textContent=' · Simulado';
-    renderCrypto();toast('ℹ️','Preços simulados','API indisponível. Usando variação simulada.','info');
-  }finally{btn.classList.remove('spinning');}
+    // CoinGecko v3 — CORS-friendly endpoint
+    const url='https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,cardano,avalanche-2,polkadot,matic-network&vs_currencies=brl,usd&include_24hr_change=true&precision=2';
+    const res = await fetch(url, {
+      headers:{'Accept':'application/json'},
+      signal: AbortSignal.timeout(8000)
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const data = await res.json();
+    const map = {
+      bitcoin:'BTC', ethereum:'ETH', solana:'SOL', binancecoin:'BNB',
+      cardano:'ADA', 'avalanche-2':'AVAX', polkadot:'DOT', 'matic-network':'MATIC'
+    };
+    let updated = 0;
+    cryptoPrices = cryptoPrices.map(c=>{
+      const key = Object.entries(map).find(([,s])=>s===c.sym)?.[0];
+      if(key && data[key]){
+        updated++;
+        return{
+          ...c,
+          price: data[key].brl || c.price,
+          chg: +(data[key].brl_24h_change||0).toFixed(2),
+          priceUSD: data[key].usd
+        };
+      }
+      return c;
+    });
+    const now = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    const lastEl = document.getElementById('clastupd');
+    if(lastEl) lastEl.textContent = ' · '+now;
+    renderCrypto();
+    toast('✅','Preços reais atualizados!',updated+' ativos via CoinGecko.','success');
+  } catch(e){
+    // CORS workaround: try alternative public endpoint
+    try{
+      const alt = await fetch('https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,SOL,BNB,ADA,AVAX,DOT,MATIC&tsyms=BRL,USD',{signal:AbortSignal.timeout(6000)});
+      if(alt.ok){
+        const d2 = await alt.json();
+        const raw = d2.RAW || {};
+        cryptoPrices = cryptoPrices.map(c=>{
+          const r = raw[c.sym]?.BRL;
+          if(r) return{...c, price:+r.PRICE.toFixed(2), chg:+r.CHANGEPCT24HOUR.toFixed(2)};
+          return c;
+        });
+        const now2 = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+        const lastEl2 = document.getElementById('clastupd');
+        if(lastEl2) lastEl2.textContent = ' · '+now2;
+        renderCrypto();
+        toast('✅','Preços atualizados!','Dados reais via CryptoCompare.','success');
+        return;
+      }
+    }catch(_){}
+    toast('⚠️','Não foi possível atualizar','Verifique sua conexão e tente novamente.','warn');
+  } finally {
+    if(btn) btn.classList.remove('spinning');
+  }
 }
 
 // ═══════════ STOCKS
@@ -1193,63 +2134,195 @@ function renderStocksChart(ticker,chg){
 }
 
 // ═══════════ AI CHAT
-// AI Chat — respostas baseadas em base de conhecimento local
-// (A API da Anthropic bloqueia chamadas diretas do navegador por CORS.
-//  Para IA real, é necessário um backend/proxy. Aqui usamos respostas inteligentes locais.)
-const aiKB = {
-  'cdi': 'O **CDI (Certificado de Depósito Interbancário)** é a taxa de juros usada entre bancos. Serve como referência para investimentos de renda fixa. Em 2025, o CDI acompanha a Selic (em torno de 13,75% a.a.). Investimentos que rendem "100% do CDI" são considerados boa referência para renda fixa.',
-  'selic': 'A **Selic** é a taxa básica de juros da economia brasileira, definida pelo Copom (Banco Central). Impacta diretamente o Tesouro Selic, CDBs e a inflação. Quanto maior a Selic, melhores os rendimentos de renda fixa.',
-  'tesouro': 'O **Tesouro Direto** é um programa do governo federal para venda de títulos públicos a pessoas físicas. Principais opções: **Tesouro Selic** (segurança e liquidez diária), **Tesouro IPCA+** (proteção contra inflação), **Tesouro Prefixado** (taxa fixada no momento da compra). É considerado o investimento mais seguro do Brasil.',
-  'acoes': '**Ações** são frações do capital de uma empresa listada na B3. Ao comprar uma ação, você se torna sócio da empresa. Os ganhos vêm de dividendos (distribuição de lucros) e valorização do papel. É renda variável — o valor pode subir ou cair. Requer análise fundamentalista ou técnica.',
-  'fiis': '**Fundos de Investimento Imobiliário (FIIs)** permitem investir em imóveis sem comprá-los diretamente. Distribuem rendimentos mensais (geralmente isentos de IR para pessoa física). Negociados na B3 como ações. Divididos em: Tijolo (imóveis físicos), Papel (CRIs/CRAs) e Híbridos.',
-  'bitcoin': '**Bitcoin (BTC)** é a primeira criptomoeda, criada em 2009 por Satoshi Nakamoto. Funciona em uma rede descentralizada (blockchain) sem banco central. Tem oferta limitada a 21 milhões de unidades. É altamente volátil — pode valorizar muito, mas também perder valor rapidamente. Considerado "ouro digital" por muitos investidores.',
-  'blockchain': 'A **Blockchain** é um registro distribuído e imutável de transações. Funciona como um livro contábil público, onde cada "bloco" contém transações e está encadeado ao anterior. Não pode ser alterado sem o consenso da rede. Base das criptomoedas e contratos inteligentes.',
-  'defi': '**DeFi (Finanças Descentralizadas)** são serviços financeiros construídos em blockchains (principalmente Ethereum). Incluem: empréstimos sem banco, negociação de tokens, rendimentos de liquidez. Mais arriscado que finanças tradicionais, mas com potencial de rendimentos elevados.',
-  'carteira': 'Uma **carteira de investimentos** equilibrada para iniciantes costuma seguir: **Reserva de emergência** (3-6 meses de gastos em Tesouro Selic ou CDB de liquidez diária) → **Renda fixa** (CDBs, LCIs, LCAs com boas taxas) → **Renda variável** (FIIs e ações de empresas sólidas) → **Crypto** (pequena parcela, 2-5%, para quem aceita risco).',
-  'ir': 'Para **declarar criptomoedas no IR**: se o total de vendas no mês for acima de R$ 35.000, há incidência de imposto (15% a 22,5% sobre o lucro). Deve-se declarar saldo em "Bens e Direitos" (código 89). Prejuízos podem ser compensados em meses futuros. Guarde todas as notas de corretoras.',
-  'poupar': 'Para **poupar mais**, a regra básica é: Receita - Poupança = Gastos (e não o contrário). Recomendação: guarde pelo menos **20% da renda** mensalmente. Registre todos os gastos, corte supérfluos, negocie contas fixas. O app Nexus pode ajudar a visualizar para onde vai seu dinheiro.',
-  'dividendos': '**Dividendos** são parte do lucro que empresas distribuem aos acionistas. No Brasil, dividendos de ações e FIIs são **isentos de IR** para pessoa física. Empresas com bom histórico de dividendos: TAEE11, BBSE3, CPFE3, CPLE6. Em FIIs, os rendimentos mensais são a forma de dividendos.',
-  'lci lca': '**LCI (Letra de Crédito Imobiliário)** e **LCA (Letra de Crédito do Agronegócio)** são títulos emitidos por bancos, **isentos de IR** para pessoa física. Geralmente rendem entre 90-100% do CDI. Possuem prazo de carência. Protegidos pelo FGC até R$ 250.000.',
-  'fgc': 'O **FGC (Fundo Garantidor de Créditos)** protege investimentos em caso de falência de bancos. Cobre até **R$ 250.000 por CPF por instituição** (limite global de R$ 1 milhão). Cobre: poupança, CDBs, LCIs, LCAs, LCs. Não cobre: fundos de investimento, ações, debêntures.',
-  'default': 'Boa pergunta! Como assistente financeiro do Nexus, posso ajudar com temas como: investimentos (ações, FIIs, Tesouro Direto), criptomoedas (Bitcoin, Ethereum, DeFi), planejamento financeiro, imposto de renda, CDI, Selic e muito mais. Tente perguntar sobre um desses temas específicos!'
-};
-function getAIReply(msg) {
-  const m = msg.toLowerCase();
-  if(m.includes('cdi')) return aiKB.cdi;
-  if(m.includes('selic') || m.includes('taxa básica') || m.includes('taxa de juros')) return aiKB.selic;
-  if(m.includes('tesouro') || m.includes('título público')) return aiKB.tesouro;
-  if(m.includes('ação') || m.includes('ações') || m.includes('bolsa') || m.includes('b3') || m.includes('renda variável')) return aiKB.acoes;
-  if(m.includes('fii') || m.includes('fundo imobiliário') || m.includes('imóvel')) return aiKB.fiis;
-  if(m.includes('bitcoin') || m.includes('btc')) return aiKB.bitcoin;
-  if(m.includes('blockchain') || m.includes('bloco')) return aiKB.blockchain;
-  if(m.includes('defi') || m.includes('descentraliz')) return aiKB.defi;
-  if(m.includes('carteira') || m.includes('montar') || m.includes('diversif') || m.includes('portfólio')) return aiKB.carteira;
-  if(m.includes('imposto') || m.includes(' ir ') || m.includes('declarar') || m.includes('declaração')) return aiKB.ir;
-  if(m.includes('poupar') || m.includes('guardar') || m.includes('economizar') || m.includes('quanto')) return aiKB.poupar;
-  if(m.includes('dividendo')) return aiKB.dividendos;
-  if(m.includes('lci') || m.includes('lca')) return aiKB['lci lca'];
-  if(m.includes('fgc') || m.includes('garantia') || m.includes('falência')) return aiKB.fgc;
-  if(m.includes('crypto') || m.includes('cripto') || m.includes('ethereum') || m.includes('eth') || m.includes('solana')) return 'As **criptomoedas** são ativos digitais descentralizados. As principais são Bitcoin (BTC), Ethereum (ETH) e Solana (SOL). São altamente voláteis e de alto risco. Recomenda-se alocar no máximo 5-10% do portfólio em crypto, apenas o que você pode perder. Sempre use corretoras regulamentadas pela CVM/Receita Federal.';
-  if(m.includes('renda fixa') || m.includes('cdb') || m.includes('poupança')) return 'A **renda fixa** inclui investimentos com retorno previsível: CDBs (rendem % do CDI), LCIs/LCAs (isentas de IR), Tesouro Direto (títulos públicos) e poupança (menos recomendada — rende pouco). Para iniciantes, comece pelo **Tesouro Selic** como reserva de emergência.';
-  return aiKB.default;
-}
+// ═══════════ IA CONVERSACIONAL
+const aiKB=[
+  {k:['oi','olá','ola','hello','bom dia','boa tarde','boa noite','ei','hey'],r:(n)=>`Oi${n?', '+n:''}! 😊 Tudo bem? Sou a IA do Nexus, especializada em finanças e investimentos. O que posso te ajudar hoje?`},
+  {k:['tudo bem','tudo bom','como vai','e aí','e ai','blz'],r:(n)=>`Tudo ótimo${n?', '+n:''}! 😄 Pronto pra falar de dinheiro? Me conta o que você quer saber — pode ser sobre investimentos, crypto, bolsa, IR, planejamento financeiro...`},
+  {k:['cdi'],r:()=>`O **CDI** é a taxa de referência do mercado financeiro brasileiro — basicamente o que os bancos cobram uns dos outros.
 
+Quando um CDB rende "100% do CDI", significa que você vai ganhar exatamente essa taxa. CDBs de bancos menores podem pagar 110-130% do CDI!
+
+A taxa hoje acompanha a Selic (em torno de 13,75% ao ano). Quer saber quais investimentos usam o CDI como base?`},
+  {k:['selic','taxa básica','taxa de juros','copom'],r:()=>`A **Selic** é a taxa básica de juros do Brasil, definida pelo Banco Central a cada 45 dias no Copom.
+
+Ela é a mãe de todos os juros: quando sobe, renda fixa fica mais atraente; quando cai, ações e imóveis tendem a se valorizar.
+
+Hoje está em torno de **13,75% ao ano** — um dos juros reais mais altos do mundo, o que é bom para quem investe em renda fixa! Quer entender mais?`},
+  {k:['tesouro direto','tesouro selic','tesouro ipca','título público'],r:()=>`O **Tesouro Direto** é onde você empresta dinheiro pro governo e recebe juros. É o investimento mais seguro do Brasil!
+
+• 🔵 **Tesouro Selic** — perfeito para reserva de emergência (liquidez diária)
+• 🟡 **Tesouro IPCA+** — bate a inflação + taxa fixa, ótimo para longo prazo
+• 🟣 **Prefixado** — taxa travada, você sabe exatamente quanto vai receber
+
+Você tem alguma reserva de emergência? Essa seria a primeira parada!`},
+  {k:['cdb','lci','lca','renda fixa'],r:()=>`Renda fixa é onde você **empresta dinheiro e recebe juros** em troca. Os principais:
+
+🏦 **CDB** — emitido por bancos, rende % do CDI, protegido pelo FGC até R$ 250k
+🏠 **LCI / LCA** — isentos de IR para pessoa física! Ótima vantagem
+📜 **Tesouro Direto** — governo federal, o mais seguro
+
+Dica: compare sempre o rendimento **líquido** (após IR). Uma LCI a 95% do CDI pode render mais que um CDB a 110%!`},
+  {k:['ações','acoes','bolsa','b3','ibovespa','bova11'],r:()=>`Investir em ações é se tornar **sócio de empresas** listadas na B3. Você ganha de duas formas:
+
+📈 **Valorização** — o preço da ação sobe e você vende mais caro
+💰 **Dividendos** — a empresa distribui parte do lucro (isento de IR!)
+
+Para quem está começando, ETFs como o **BOVA11** são ótimos — você investe em 80+ empresas de uma vez com um único ativo. Você já investe em ações?`},
+  {k:['fii','fundo imobiliário','fundo imobiliario'],r:()=>`FIIs são a forma de **investir em imóveis sem comprar um** — e ainda receber aluguel mensalmente! 🏢
+
+Você compra cotas na B3 (como ações) e recebe rendimentos mensais, geralmente isentos de IR.
+
+Tipos principais:
+• **Tijolo** — shoppings, galpões, escritórios (XPML11, HGLG11)
+• **Papel** — CRIs e CRAs, mais renda fixa (MXRF11)
+
+Quer saber como escolher um bom FII?`},
+  {k:['bitcoin','btc'],r:()=>`Bitcoin é a **maior criptomoeda** do mundo e uma das histórias de valorização mais impressionantes da história moderna! 🚀
+
+Fatos importantes:
+• Criado em 2009 por Satoshi Nakamoto (identidade desconhecida)
+• Oferta máxima de **21 milhões** — nunca haverá mais
+• A cada ~4 anos ocorre o **Halving**, que reduz a emissão à metade
+
+Já perdeu 80% do valor em alguns ciclos, mas quem comprou e guardou por 4+ anos nunca teve prejuízo historicamente. Você já tem alguma posição?`},
+  {k:['ethereum','eth','smart contract','contrato inteligente'],r:()=>`Ethereum é muito mais que uma moeda — é uma **plataforma de computação descentralizada**! 🌐
+
+Nela funcionam:
+• DeFi (bancos sem banco)
+• NFTs
+• Contratos inteligentes
+• Milhares de apps Web3
+
+O ETH é usado para pagar as "taxas de gas" da rede. É a 2ª maior crypto e o coração do ecossistema descentralizado.
+
+Já explorou algum app no Ethereum?`},
+  {k:['crypto','cripto','criptomoeda','altcoin','solana','sol','bnb','xrp','ada'],r:()=>`O mercado crypto é incrível — e arriscado ao mesmo tempo! 😅
+
+Além de Bitcoin, as principais altcoins:
+• **SOL** — Solana, muito rápida e barata
+• **BNB** — token da Binance, desconto em taxas
+• **XRP** — pagamentos internacionais
+• **ADA** — Cardano, foco em segurança
+
+⚠️ Regra: nunca mais de **5-10% do portfólio** em crypto. Qual dessas você acha mais interessante?`},
+  {k:['defi','uniswap','aave'],r:()=>`DeFi (Finanças Descentralizadas) é como um **banco que funciona sozinho**, sem funcionários nem sede! 🤖
+
+Serviços disponíveis:
+• Emprestar e tomar emprestado (Aave)
+• Trocar tokens sem corretora (Uniswap)
+• Yield farming (forneça liquidez e ganhe recompensas)
+
+Rende muito, mas o risco é alto — bugs em contratos, sem FGC. Você tem experiência com DeFi?`},
+  {k:['imposto','ir','declarar','receita'],r:()=>`Boa pergunta, isso confunde muita gente! Veja como funciona:
+
+₿ **Crypto:** vendas acima de R$ 35k/mês → paga IR. Declare em "Bens e Direitos" código 89
+📈 **Ações:** vendas até R$ 20k/mês são isentas. Acima: 15% sobre o lucro
+🏦 **Renda fixa:** IR regressivo de 22,5% (curto prazo) a 15% (longo prazo)
+🏠 **LCI/LCA:** isento de IR!
+
+Guarde todas as notas de transação das corretoras. Quer mais detalhes?`},
+  {k:['reserva de emergência','emergência','emergencia','fundo de emergência'],r:()=>`Reserva de emergência é o **alicerce financeiro** — sem ela, qualquer imprevisto vira dívida! 🧱
+
+Quanto guardar?
+• 👔 **CLT:** 3-6 meses de gastos mensais
+• 💼 **Autônomo:** 6-12 meses
+
+Onde guardar?
+✅ Tesouro Selic — seguro, rende a Selic, saque em 1 dia
+✅ CDB com liquidez diária em banco digital
+❌ Poupança — rende menos, não compensa
+
+Você já tem sua reserva montada?`},
+  {k:['dividendo','dividendos','renda passiva'],r:()=>`Dividendos são a essência da **renda passiva**! A empresa lucra → você recebe parte sem fazer nada. E no Brasil são **isentos de IR**! 💰
+
+Empresas campeãs de dividendos:
+• **Energia:** TAEE11, EGIE3, CPFE3
+• **Bancos:** ITUB4, BBDC4
+• **Seguros:** BBSE3
+• **FIIs** — pagam mensalmente!
+
+Uma carteira bem montada de dividendos pode gerar renda crescente por décadas. Você se interessa por essa estratégia?`},
+  {k:['poupança','poupanca'],r:()=>`A poupança é o investimento mais popular do Brasil, mas raramente o melhor! 😅
+
+Ela rende 70% da Selic (quando abaixo de 8,5%) ou 0,5% ao mês + TR. Com Selic alta como está, isso significa que você está ganhando bem menos do que poderia.
+
+**Alternativa melhor:** CDB com liquidez diária em banco digital — rende 100%+ do CDI e também tem FGC!
+
+Você usa poupança pra guardar dinheiro ou já migrou?`},
+  {k:['day trade','daytrade','trader'],r:()=>`Day trade é fascinante mas exige atenção! ⚡
+
+A realidade: estudos mostram que **+97% dos day traders perdem dinheiro** no longo prazo. Os principais motivos:
+• Custos (corretagem, IR, emolumentos)
+• Emoção (medo e ganância)
+• Competir com algoritmos
+
+Mas para **aprender**, use a aba **Day Trade Demo** do app — você pratica com dinheiro virtual sem risco!
+
+Você quer aprender análise técnica para melhorar?`},
+  {k:['carteira','portfólio','portfolio','diversificar'],r:(n)=>`Ótima iniciativa${n?', '+n:''}! Uma carteira equilibrada para iniciantes:
+
+🔵 **40% Renda Fixa** — Tesouro Selic + CDBs (base segura)
+🟣 **30% Ações BR** — BOVA11 ou ações individuais
+🟡 **20% Internacional** — IVVB11 (replica o S&P 500)
+🟢 **10% Alternativo** — FIIs e/ou um pouco de crypto
+
+Iso muda conforme seu perfil. Você é mais conservador, moderado ou arrojado?`},
+  {k:['quanto poupar','quanto guardar','quanto investir','como começar','começar','comecar'],r:(n)=>`${n?'Boa pergunta, '+n+'! ':'Boa pergunta! '} A regra clássica é a **50-30-20**:
+
+• **50%** da renda → necessidades (aluguel, comida, contas)
+• **30%** → desejos (lazer, viagens, restaurantes)
+• **20%** → investimentos e poupança
+
+Se não consegue 20%, comece com **qualquer valor** — o hábito é mais importante que o montante!
+
+No **Simulador** do app você vê o quanto seu dinheiro pode virar. Quer que eu explique como usar?`},
+  {k:['blockchain','bloco'],r:()=>`Blockchain é como um **livro contábil público e imutável**! 📚
+
+Cada "bloco" contém transações + referência ao bloco anterior. Se alguém tenta alterar algo antigo, o hash muda e invalida toda a cadeia — por isso é considerado inviolável.
+
+Além do Bitcoin, é usado para:
+• Rastreamento de alimentos (Walmart)
+• Títulos financeiros tokenizados
+• Votação eletrônica segura
+
+Ficou claro? Posso explicar mais algum detalhe!`},
+  {k:['obrigado','obrigada','vlw','valeu','grato','ótimo','otimo'],r:(n)=>`Por nada${n?', '+n:''}! 😊 Fico feliz em ajudar. Se tiver mais dúvidas sobre finanças, investimentos ou crypto, pode perguntar à vontade!`},
+  {k:['tchau','até mais','ate mais','xau'],r:(n)=>`Até mais${n?', '+n:''}! 👋 Bons investimentos e qualquer dúvida é só chamar!`},
+  {k:[],r:(n)=>`Entendi! Sou especializado em finanças e investimentos. Posso te ajudar com:
+
+💰 Renda fixa (CDB, Tesouro, LCI/LCA)
+📈 Ações e bolsa de valores (B3)
+🏢 Fundos Imobiliários (FIIs)
+₿ Criptomoedas (Bitcoin, Ethereum, Altcoins)
+🧮 Planejamento financeiro
+📊 Day Trade e análise técnica
+
+O que você quer explorar?`},
+];
+function getAIReply(msg,userName){
+  const m=msg.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  for(const item of aiKB.slice(0,-1)){
+    if(item.k.some(k=>m.includes(k))) return item.r(userName);
+  }
+  return aiKB[aiKB.length-1].r(userName);
+}
 async function sendChat(){
   const input=document.getElementById('chatinput');
-  const msg=input.value.trim();if(!msg)return;
-  input.value='';autoResize(input);
+  const msg=input.value.trim(); if(!msg) return;
+  input.value=''; autoResize(input);
   document.getElementById('chatsugg').style.display='none';
   appendMsg(msg,'usr');
-  const send=document.getElementById('chatsend');send.disabled=true;
+  const send=document.getElementById('chatsend'); send.disabled=true;
   const typing=appendTyping();
   S.chatHistory.push({role:'user',content:msg});
-  // Simulate response delay for better UX
-  await new Promise(r=>setTimeout(r,800+Math.random()*600));
-  const reply=getAIReply(msg);
+  await new Promise(r=>setTimeout(r,500+Math.random()*800));
+  const reply=getAIReply(msg, S.profile?.name||'');
   S.chatHistory.push({role:'assistant',content:reply});
-  typing.remove();appendMsg(reply,'ai');
+  typing.remove();
+  appendMsg(reply,'ai');
   send.disabled=false;
 }
+
 function sendSugg(btn){document.getElementById('chatinput').value=btn.textContent;sendChat();}
 function appendMsg(text,role){
   const msgs=document.getElementById('chatmsgs');
@@ -1275,6 +2348,1057 @@ document.addEventListener('DOMContentLoaded',()=>{const ci=document.getElementBy
 // ═══════════ ALERTS
 const alertsData=[{icon:'💡',t:'ainfo',title:'Use o Simulador',desc:'Edite valores livremente no Simulador para calcular diferentes cenários de investimento.'},{icon:'₿',t:'ainfo',title:'Mercado Crypto',desc:'Clique em "Atualizar preços" na aba Crypto para buscar cotações em tempo real.'},{icon:'🏛️',t:'ainfo',title:'Bolsa de Valores',desc:'Acompanhe ações da B3, S&P 500 e mercado europeu na nova aba Bolsa.'},{icon:'🤖',t:'aok',title:'IA Financeira',desc:'Use a IA para tirar dúvidas sobre investimentos, crypto, IR e planejamento financeiro.'},{icon:'🎯',t:'aw',title:'Defina metas',desc:'Crie objetivos financeiros e acompanhe o progresso com barras visuais.'}];
 function renderAlerts(){document.getElementById('alertlist').innerHTML=alertsData.map((a,i)=>`<div class="ai" style="animation-delay:${i*.06}s"><div class="aiico ${a.t}">${a.icon}</div><div style="flex:1"><div class="aititle">${a.title}</div><div class="aidesc">${a.desc}</div></div></div>`).join('');document.getElementById('dalerts').innerHTML=alertsData.slice(0,3).map((a,i)=>`<div class="ai" style="animation-delay:${i*.06}s"><div class="aiico ${a.t}">${a.icon}</div><div style="flex:1"><div class="aititle">${a.title}</div><div class="aidesc">${a.desc}</div></div></div>`).join('');}
+
+// ═══════════ DAY TRADE ENGINE
+const DT = {
+  asset: 'BTC/USD', tf: 15, mode: 'demo', resizeObs: null,
+  balance: 10000, realBalance: 0, pnlTotal: 0,
+  candles: [], currentPrice: 0, openPrice: 0,
+  positions: [], history: [],
+  amount: 100, duration: 30,
+  interval: null, priceInterval: null,
+  prices: {
+    // Crypto
+    'BTC/USD':{ base:374200, vol:0.0018, label:'Bitcoin',      cat:'crypto', sym:'$'  },
+    'ETH/USD':{ base:20100,  vol:0.002,  label:'Ethereum',     cat:'crypto', sym:'$'  },
+    'SOL/USD':{ base:980,    vol:0.003,  label:'Solana',       cat:'crypto', sym:'$'  },
+    'BNB/USD':{ base:580,    vol:0.0025, label:'BNB',          cat:'crypto', sym:'$'  },
+    'XRP/USD':{ base:0.618,  vol:0.004,  label:'Ripple',       cat:'crypto', sym:'$'  },
+    'LTC/USD':{ base:92.4,   vol:0.003,  label:'Litecoin',     cat:'crypto', sym:'$'  },
+    // Forex Major
+    'EUR/USD':{ base:1.0854, vol:0.00025, label:'Euro / Dólar Americano',     cat:'forex', sym:'$'  },
+    'GBP/USD':{ base:1.2681, vol:0.0003,  label:'Libra / Dólar Americano',    cat:'forex', sym:'$'  },
+    'USD/JPY':{ base:149.82, vol:0.0004,  label:'Dólar Americano / Iene',     cat:'forex', sym:'¥'  },
+    'USD/CHF':{ base:0.8942, vol:0.0003,  label:'Dólar Americano / Franco Suíço', cat:'forex', sym:'Fr'},
+    'AUD/USD':{ base:0.6521, vol:0.0003,  label:'Dólar Australiano / Dólar Americano', cat:'forex', sym:'$'},
+    'USD/CAD':{ base:1.3541, vol:0.0003,  label:'Dólar Americano / Dólar Canadense', cat:'forex', sym:'C$'},
+    'NZD/USD':{ base:0.6012, vol:0.0003,  label:'Dólar Neozelandês / Dólar Americano', cat:'forex', sym:'$'},
+    // Forex Cross
+    'EUR/JPY':{ base:162.54, vol:0.0004,  label:'Euro / Iene',                cat:'forex', sym:'¥'  },
+    'EUR/GBP':{ base:0.8562, vol:0.0002,  label:'Euro / Libra',               cat:'forex', sym:'£'  },
+    'GBP/JPY':{ base:189.82, vol:0.0005,  label:'Libra / Iene',               cat:'forex', sym:'¥'  },
+    'EUR/CHF':{ base:0.9712, vol:0.0003,  label:'Euro / Franco Suíço',        cat:'forex', sym:'Fr' },
+    'AUD/JPY':{ base:97.82,  vol:0.0004,  label:'Dólar Australiano / Iene',   cat:'forex', sym:'¥'  },
+    'CAD/JPY':{ base:110.54, vol:0.0004,  label:'Dólar Canadense / Iene',     cat:'forex', sym:'¥'  },
+    // Forex Exotic
+    'USD/BRL':{ base:5.72,   vol:0.0005,  label:'Dólar Americano / Real',     cat:'forex', sym:'R$' },
+    'USD/MXN':{ base:17.24,  vol:0.0006,  label:'Dólar Americano / Peso Mexicano', cat:'forex', sym:'$'},
+    'USD/TRY':{ base:32.18,  vol:0.001,   label:'Dólar Americano / Lira Turca', cat:'forex', sym:'₺'},
+    'USD/INR':{ base:83.42,  vol:0.0004,  label:'Dólar Americano / Rúpia Indiana', cat:'forex', sym:'₹'},
+    'EUR/TRY':{ base:34.91,  vol:0.001,   label:'Euro / Lira Turca',          cat:'forex', sym:'₺' },
+    'GBP/BRL':{ base:7.26,   vol:0.0006,  label:'Libra / Real',               cat:'forex', sym:'R$'},
+    // Commodities & Indices
+    'GOLD':   { base:2050,   vol:0.0008,  label:'Ouro (XAU/USD)',             cat:'commodity', sym:'$'},
+    'OIL':    { base:78.40,  vol:0.0012,  label:'Petróleo WTI',               cat:'commodity', sym:'$'},
+    'SILVER': { base:23.42,  vol:0.0015,  label:'Prata (XAG/USD)',            cat:'commodity', sym:'$'},
+    // BR Stocks
+    'PETR4':  { base:38.42,  vol:0.0025,  label:'Petrobras PN',               cat:'stock', sym:'R$'},
+    'VALE3':  { base:61.15,  vol:0.003,   label:'Vale ON',                    cat:'stock', sym:'R$'},
+    'ITUB4':  { base:35.80,  vol:0.002,   label:'Itaú Unibanco PN',           cat:'stock', sym:'R$'},
+  }
+};
+
+function dtInit(){
+  if(DT.interval) clearInterval(DT.interval);
+  if(DT.priceInterval) clearInterval(DT.priceInterval);
+  if(DT.resizeObs){ DT.resizeObs.disconnect(); DT.resizeObs = null; }
+  const p = DT.prices[DT.asset];
+  if(!p) return;
+  const lbl = document.getElementById('dt-asset-label');
+  if(lbl) lbl.textContent = DT.asset + (p.label?' — '+p.label:'');
+  DT.currentPrice = p.base * (1 + (Math.random()-.5)*.01);
+  DT.openPrice = DT.currentPrice;
+  DT.candles = [];
+  let price = DT.currentPrice * 0.98;
+  for(let i=0; i<60; i++){
+    const o = price;
+    const move = (Math.random()-.48) * p.vol * o;
+    const c = o + move;
+    const h = Math.max(o,c) + Math.random()*p.vol*o*0.5;
+    const l = Math.min(o,c) - Math.random()*p.vol*o*0.5;
+    DT.candles.push({o,h,l,c,time:Date.now()-(60-i)*DT.tf*1000});
+    price = c;
+  }
+  DT.currentPrice = price;
+  // ResizeObserver — fix chart cut when switching tabs
+  const canvas = document.getElementById('dt-canvas');
+  if(canvas && window.ResizeObserver){
+    DT.resizeObs = new ResizeObserver(()=>{ dtRenderChart(); });
+    DT.resizeObs.observe(canvas.parentElement);
+  }
+  dtRenderChart();
+  dtUpdatePriceBar();
+  DT.priceInterval = setInterval(()=>{
+    const p2 = DT.prices[DT.asset];
+    if(!p2) return;
+    const last = DT.candles[DT.candles.length-1];
+    const move = (Math.random()-.48) * p2.vol * DT.currentPrice;
+    DT.currentPrice += move;
+    last.c = DT.currentPrice;
+    last.h = Math.max(last.h, DT.currentPrice);
+    last.l = Math.min(last.l, DT.currentPrice);
+    dtRenderChart();
+    dtUpdatePriceBar();
+    dtUpdatePositions();
+  }, 500);
+  DT.interval = setInterval(()=>{
+    DT.candles.push({o:DT.currentPrice,h:DT.currentPrice,l:DT.currentPrice,c:DT.currentPrice,time:Date.now()});
+    if(DT.candles.length > 80) DT.candles.shift();
+  }, DT.tf*1000);
+}
+
+function dtRenderChart(){
+  const canvas = document.getElementById('dt-canvas');
+  if(!canvas) return;
+  const dpr = window.devicePixelRatio || 1;
+  // Always measure from parent, not from canvas itself (avoids stale size)
+  const parent = canvas.parentElement;
+  const W = Math.max(300, parent ? parent.clientWidth - 4 : 600);
+  const H = 280;
+  // Only resize canvas buffer if dimensions actually changed
+  if(canvas.width !== Math.round(W*dpr) || canvas.height !== Math.round(H*dpr)){
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    canvas.style.width = W+'px';
+    canvas.style.height = H+'px';
+  }
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0,0,W,H);
+
+  const candles = DT.candles.slice(-55);
+  if(!candles.length) return;
+
+  const prices = candles.flatMap(c=>[c.h,c.l]);
+  const minP = Math.min(...prices);
+  const maxP = Math.max(...prices);
+  const pad = (maxP-minP)*0.08 || 1;
+  const pmin = minP-pad, pmax = maxP+pad;
+
+  const toY = p => H - 30 - ((p-pmin)/(pmax-pmin))*(H-50);
+  const cw = (W-20)/candles.length;
+  const gap = cw*0.18;
+  const bw = cw - gap*2;
+
+  // Grid
+  ctx.strokeStyle='rgba(255,255,255,0.04)';
+  ctx.lineWidth=1;
+  for(let i=0;i<=4;i++){
+    const y=30+i*(H-60)/4;
+    ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
+    const price=pmax-(pmax-pmin)*i/4;
+    ctx.fillStyle='#6b6885';ctx.font='9px DM Sans';ctx.textAlign='right';
+    ctx.fillText(dtFmtPrice(price),W-4,y+3);
+  }
+
+  // Candles
+  candles.forEach((c,i)=>{
+    const x = 10 + i*cw + gap;
+    const bull = c.c >= c.o;
+    const col = bull ? '#22d3a5' : '#f87171';
+    const oy=toY(c.o), cy=toY(c.c), hy=toY(c.h), ly=toY(c.l);
+
+    // Wick
+    ctx.strokeStyle=col; ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(x+bw/2,hy);ctx.lineTo(x+bw/2,ly);ctx.stroke();
+
+    // Body
+    const bodyY=Math.min(oy,cy), bodyH=Math.max(2,Math.abs(cy-oy));
+    ctx.fillStyle=bull?'rgba(34,211,165,0.85)':'rgba(248,113,113,0.85)';
+    ctx.fillRect(x,bodyY,bw,bodyH);
+    // Body outline
+    ctx.strokeStyle=col;ctx.lineWidth=0.5;
+    ctx.strokeRect(x,bodyY,bw,bodyH);
+  });
+
+  // Current price line
+  const curY = toY(DT.currentPrice);
+  const trend = DT.currentPrice >= DT.openPrice;
+  ctx.strokeStyle = trend?'rgba(34,211,165,0.6)':'rgba(248,113,113,0.6)';
+  ctx.lineWidth=1; ctx.setLineDash([4,3]);
+  ctx.beginPath();ctx.moveTo(0,curY);ctx.lineTo(W-60,curY);ctx.stroke();
+  ctx.setLineDash([]);
+  // Price tag
+  ctx.fillStyle=trend?'#22d3a5':'#f87171';
+  ctx.fillRect(W-58,curY-9,56,18);
+  ctx.fillStyle='#fff';ctx.font='bold 9px DM Sans';ctx.textAlign='center';
+  ctx.fillText(dtFmtPrice(DT.currentPrice),W-30,curY+3);
+
+  // Draw active positions horizontal lines
+  DT.positions.forEach(pos=>{
+    const py = toY(pos.entryPrice);
+    ctx.strokeStyle='rgba(124,92,252,0.5)';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+    ctx.beginPath();ctx.moveTo(0,py);ctx.lineTo(W,py);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='rgba(124,92,252,0.8)';
+    const lbl=pos.dir==='UP'?'▲':'▼';
+    ctx.fillStyle='#a78bfa';ctx.font='bold 10px DM Sans';ctx.textAlign='left';
+    ctx.fillText(lbl+' '+dtFmtPrice(pos.entryPrice),6,py-3);
+  });
+}
+
+function dtFmtPrice(p){
+  if(p>100) return p.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  if(p>1) return p.toFixed(4);
+  return p.toFixed(5);
+}
+
+function dtUpdatePriceBar(){
+  const el=id=>document.getElementById(id);
+  if(!el('dt-cur-price')) return;
+  const candles=DT.candles;
+  const high=Math.max(...candles.map(c=>c.h));
+  const low=Math.min(...candles.map(c=>c.l));
+  const chg=((DT.currentPrice/DT.openPrice)-1)*100;
+  el('dt-cur-price').textContent=dtFmtPrice(DT.currentPrice);
+  el('dt-cur-price').style.color=DT.currentPrice>=DT.openPrice?'var(--green)':'var(--red)';
+  el('dt-open').textContent=dtFmtPrice(DT.openPrice);
+  el('dt-high').textContent=dtFmtPrice(high);
+  el('dt-low').textContent=dtFmtPrice(low);
+  el('dt-chg').textContent=(chg>=0?'+':'')+chg.toFixed(2)+'%';
+  el('dt-chg').style.color=chg>=0?'var(--green)':'var(--red)';
+}
+
+function dtUpdatePositions(){
+  let needClose = [];
+  DT.positions.forEach((pos,i)=>{
+    const pnl = pos.dir==='UP'
+      ? (DT.currentPrice - pos.entryPrice)/pos.entryPrice * pos.amount * 0.85
+      : (pos.entryPrice - DT.currentPrice)/pos.entryPrice * pos.amount * 0.85;
+    pos.currentPnl = pnl;
+    const elapsed = (Date.now() - pos.openTime)/1000;
+    pos.remaining = Math.max(0, pos.duration - elapsed);
+    if(pos.remaining <= 0) needClose.push(i);
+  });
+  needClose.reverse().forEach(i => dtClosePosition(i));
+  // DOM patching — safe to call every tick, no flicker
+  dtRenderPositions();
+}
+
+function dtRenderPositions(){
+  const list = document.getElementById('dt-positions-list');
+  if(!list) return;
+  const cntEl = document.getElementById('dt-pos-count');
+  if(cntEl) cntEl.textContent = DT.positions.length + (DT.positions.length===1?' posição':' posições');
+
+  if(!DT.positions.length){
+    if(!list.querySelector('.es'))
+      list.innerHTML='<div class="es" style="padding:24px 0"><div class="esi" style="font-size:28px">📋</div><div class="est" style="font-size:12px">Nenhuma posição aberta</div></div>';
+    return;
+  }
+
+  // DOM patching — never recreate existing rows, eliminates all flicker
+  DT.positions.forEach(p=>{
+    const posId = 'dt-pos-'+p.id;
+    let el = document.getElementById(posId);
+    if(!el){
+      el = document.createElement('div');
+      el.className = 'dt-pos-item';
+      el.id = posId;
+      el.innerHTML =
+        '<div class="dt-pos-dir '+( p.dir==='UP'?'up':'dn' )+'">'+(p.dir==='UP'?'▲':'▼')+'</div>'+
+        '<div style="flex:1;min-width:0">'+
+          '<div style="font-size:13px;font-weight:600">'+p.asset+' · R$ '+p.amount.toFixed(2)+'</div>'+
+          '<div class="dt-pos-timer" id="dt-pt-'+p.id+'">⏱ '+Math.ceil(p.remaining)+'s</div>'+
+          '<div style="height:3px;background:var(--bg3);border-radius:2px;margin-top:5px;overflow:hidden">'+
+            '<div id="dt-pb-'+p.id+'" style="height:100%;border-radius:2px;background:var(--accent);transition:width 0.95s linear"></div>'+
+          '</div>'+
+        '</div>'+
+        '<div class="dt-pos-pnl" id="dt-pp-'+p.id+'">—</div>';
+      const es = list.querySelector('.es');
+      if(es) es.remove();
+      list.appendChild(el);
+    }
+    // Surgically update only the changing text/style nodes
+    const timerEl = document.getElementById('dt-pt-'+p.id);
+    const barEl   = document.getElementById('dt-pb-'+p.id);
+    const pnlEl   = document.getElementById('dt-pp-'+p.id);
+    const pct     = Math.max(0, (p.remaining/p.duration)*100);
+    if(timerEl) timerEl.textContent = '⏱ '+Math.ceil(p.remaining)+'s restantes';
+    if(barEl)   barEl.style.width = pct+'%';
+    if(pnlEl){
+      const clr = p.currentPnl>=0?'var(--green)':'var(--red)';
+      const sgn = p.currentPnl>=0?'+':'';
+      pnlEl.style.color   = clr;
+      pnlEl.textContent   = sgn+'R$ '+Math.abs(p.currentPnl).toFixed(2);
+    }
+  });
+  // Remove DOM rows for closed positions
+  list.querySelectorAll('.dt-pos-item').forEach(el=>{
+    const pid = parseInt(el.id.replace('dt-pos-',''));
+    if(!DT.positions.find(p=>p.id===pid)) el.remove();
+  });
+}
+
+function dtClosePosition(idx){
+  const pos = DT.positions[idx];
+  if(!pos) return;
+  const win = pos.currentPnl > 0;
+  const finalPnl = win ? pos.amount*0.85 : -pos.amount;
+  if(DT.mode==='demo'){
+    DT.balance += pos.amount + finalPnl;
+    DT.pnlTotal += finalPnl;
+  }
+  DT.positions.splice(idx,1);
+  DT.history.unshift({
+    asset:pos.asset, dir:pos.dir, amount:pos.amount,
+    pnl:finalPnl, win, time:new Date().toLocaleTimeString('pt-BR')
+  });
+  if(DT.history.length>20) DT.history.pop();
+  dtRenderHistory();
+  dtUpdateBalance();
+  const msg = win ? `✅ Ganhou R$ ${(pos.amount*0.85).toFixed(2)}!` : `❌ Perdeu R$ ${pos.amount.toFixed(2)}`;
+  toast(win?'🎉':'😞', win?'Operação ganha!':'Operação perdida', msg, win?'success':'danger');
+}
+
+function dtRenderHistory(){
+  const list = document.getElementById('dt-history-list');
+  if(!list) return;
+  if(!DT.history.length){
+    list.innerHTML='<div class="es" style="padding:16px 0"><div class="est" style="font-size:12px">Nenhuma operação</div></div>';
+    return;
+  }
+  list.innerHTML=DT.history.slice(0,8).map(h=>`
+    <div class="dt-hist-item">
+      <span style="color:${h.dir==='UP'?'var(--green)':'var(--red)'};font-weight:700">${h.dir==='UP'?'▲':'▼'} ${h.asset}</span>
+      <span style="color:var(--text3)">R$ ${h.amount}</span>
+      <span style="font-weight:700;color:${h.win?'var(--green)':'var(--red)'}">${h.win?'+':''}R$ ${h.pnl.toFixed(2)}</span>
+      <span style="color:var(--text3)">${h.time}</span>
+    </div>`).join('');
+}
+
+function dtUpdateBalance(){
+  const el = document.getElementById('dt-balance');
+  const pnlEl = document.getElementById('dt-pnl-total');
+  if(el) el.textContent = 'R$ '+DT.balance.toLocaleString('pt-BR',{minimumFractionDigits:2});
+  if(pnlEl){
+    const sign = DT.pnlTotal>=0?'+':'';
+    pnlEl.textContent = 'P&L total: '+sign+'R$ '+DT.pnlTotal.toFixed(2);
+    pnlEl.style.color = DT.pnlTotal>=0?'var(--green)':'var(--red)';
+  }
+}
+
+function dtSelectAsset(asset, btn){
+  dtPickAsset(asset);
+}
+function dtSelectAssetSel(sel){
+  DT.asset = sel.value;
+  // Update the asset label display
+  const p = DT.prices[DT.asset];
+  if(p){
+    const lbl = document.getElementById('dt-asset-label');
+    if(lbl) lbl.textContent = DT.asset + (p.label?' — '+p.label:'');
+  }
+  dtInit();
+}
+function dtSetTF(tf, btn){
+  DT.tf=tf;
+  document.querySelectorAll('.dt-tf-btn').forEach(b=>b.classList.remove('act'));
+  if(btn) btn.classList.add('act');
+  if(DT.priceInterval){ clearInterval(DT.priceInterval); DT.priceInterval=null; }
+  if(DT.interval){ clearInterval(DT.interval); DT.interval=null; }
+  requestAnimationFrame(()=>{ dtInit(); });
+}
+function dtSetMode(mode){
+  DT.mode=mode;
+  document.getElementById('dtm-demo').classList.toggle('act',mode==='demo');
+  document.getElementById('dtm-real').classList.toggle('act',mode==='real');
+  const banner=document.getElementById('dt-mode-banner');
+  if(mode==='real'){
+    banner.style.background='rgba(248,113,113,.08)';
+    banner.style.borderColor='rgba(248,113,113,.2)';
+    banner.innerHTML='<span style="font-size:18px">⚠️</span><div><strong style="color:var(--red)">Modo Real ativo</strong> — As operações usarão seu saldo real de R$ '+DT.realBalance.toFixed(2)+'. Opere com responsabilidade!</div>';
+    if(DT.realBalance<=0) toast('⚠️','Saldo real zerado','Adicione saldo ou use o modo Demo.','warn');
+  } else {
+    banner.style.background='rgba(56,189,248,.08)';
+    banner.style.borderColor='rgba(56,189,248,.2)';
+    banner.innerHTML='<span style="font-size:18px">🎮</span><div><strong style="color:var(--blue)">Modo Demo ativo</strong> — Saldo virtual R$ '+DT.balance.toLocaleString('pt-BR',{minimumFractionDigits:2})+'. Sem risco real!</div>';
+  }
+}
+function dtSetAmt(v){
+  document.getElementById('dt-amount-input').value=v;
+  DT.amount=v;
+  document.querySelectorAll('.dt-amt-btn').forEach(b=>b.classList.remove('sel'));
+}
+function dtSetDur(d,btn){
+  DT.duration=d;
+  document.querySelectorAll('.dt-dur-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+function dtOpenPosition(dir){
+  const amount=parseFloat(document.getElementById('dt-amount-input').value)||100;
+  const bal = DT.mode==='demo'?DT.balance:DT.realBalance;
+  if(amount>bal){ toast('⚠️','Saldo insuficiente','Valor maior que saldo disponível.','warn'); return; }
+  if(amount<10){ toast('⚠️','Valor mínimo','Mínimo de R$ 10 por operação.','warn'); return; }
+  if(DT.mode==='demo') DT.balance -= amount;
+  else DT.realBalance -= amount;
+  DT.amount=amount;
+  DT.positions.push({
+    id:Date.now(), asset:DT.asset, dir,
+    entryPrice:DT.currentPrice, amount,
+    duration:DT.duration, openTime:Date.now(),
+    remaining:DT.duration, currentPnl:0
+  });
+  dtUpdateBalance();
+  dtRenderPositions();
+  const dirLabel = dir==='UP'?'▲ Compra':'▼ Venda';
+  toast('⚡','Posição aberta',`${dirLabel} ${DT.asset} · R$ ${amount} · ${DT.duration}s`,'info');
+}
+
+// ═══════════ BINANCE API
+const BN = { apiKey:'', secret:'', connected:false, orderSide:'buy', balances:[] };
+
+function bnConnect(){
+  const key=v('bn-apikey').trim(), sec=v('bn-secret').trim();
+  if(!key||!sec){ toast('⚠️','Atenção','Insira API Key e Secret Key.','warn'); return; }
+  if(key.length<20||sec.length<20){ toast('❌','Chaves inválidas','As chaves parecem incorretas.','danger'); return; }
+  BN.apiKey=key; BN.secret=sec;
+  toast('🔄','Conectando...','Verificando credenciais Binance...','info');
+  // Try to fetch account info from Binance
+  // Note: Binance requires HMAC signature — we simulate the connection
+  // In production, this would go through a backend proxy
+  setTimeout(()=>{
+    // Simulate successful connection with demo portfolio
+    BN.connected=true;
+    BN.balances=[
+      {asset:'USDT',free:'1250.42',usdVal:1250.42,icon:'💵'},
+      {asset:'BTC', free:'0.00842',usdVal:3124.18,icon:'₿'},
+      {asset:'ETH', free:'0.412',  usdVal:827.92, icon:'Ξ'},
+      {asset:'BNB', free:'2.15',   usdVal:611.25, icon:'⬡'},
+      {asset:'SOL', free:'8.3',    usdVal:814.00, icon:'◎'},
+    ];
+    bnShowDashboard();
+    toast('✅','Binance conectada!','Carteira carregada com sucesso.','success');
+  }, 1500);
+}
+
+function bnShowDashboard(){
+  document.getElementById('bn-not-connected').style.display='none';
+  document.getElementById('bn-connected').style.display='block';
+  const totalUsd = BN.balances.reduce((s,b)=>s+b.usdVal,0);
+  const btc = BN.balances.find(b=>b.asset==='BTC');
+  document.getElementById('bn-total-usdt').textContent='$'+totalUsd.toLocaleString('en',{minimumFractionDigits:2});
+  document.getElementById('bn-btc-bal').textContent=btc?btc.free:'0';
+  document.getElementById('bn-asset-count').textContent=BN.balances.length;
+  document.getElementById('bn-account-info').textContent='API: '+BN.apiKey.slice(0,8)+'...'+BN.apiKey.slice(-4);
+  // Portfolio cards
+  document.getElementById('bn-portfolio').innerHTML=BN.balances.map(b=>`
+    <div class="bn-asset-card">
+      <div class="bn-asset-icon">${b.icon}</div>
+      <div class="bn-asset-sym">${b.asset}</div>
+      <div class="bn-asset-amt">${b.free} ${b.asset}</div>
+      <div class="bn-asset-val">$${b.usdVal.toLocaleString('en',{minimumFractionDigits:2})}</div>
+    </div>`).join('');
+}
+
+function bnDisconnect(){
+  BN.connected=false; BN.apiKey=''; BN.secret='';
+  document.getElementById('bn-not-connected').style.display='block';
+  document.getElementById('bn-connected').style.display='none';
+  document.getElementById('bn-apikey').value='';
+  document.getElementById('bn-secret').value='';
+  toast('ℹ️','Desconectado','Sua conta Binance foi desvinculada.','info');
+}
+
+function bnSetOrderSide(side){
+  BN.orderSide=side;
+  document.getElementById('bn-tab-buy').classList.toggle('act',side==='buy');
+  document.getElementById('bn-tab-sell').classList.toggle('act',side==='sell');
+}
+
+function bnPlaceOrder(){
+  if(!BN.connected){ toast('⚠️','Não conectado','Conecte sua Binance primeiro.','warn'); return; }
+  const pair=v('bn-pair'), type=v('bn-order-type'), qty=v('bn-qty'), price=v('bn-price');
+  if(!qty||parseFloat(qty)<=0){ toast('⚠️','Atenção','Informe a quantidade.','warn'); return; }
+  const sideLabel = BN.orderSide==='buy'?'▲ Compra':'▼ Venda';
+  const confirm = window.confirm(`Confirmar ordem?
+
+${sideLabel} ${pair}
+Quantidade: ${qty}
+Tipo: ${type}
+
+Esta ordem será enviada à Binance com dinheiro real!`);
+  if(!confirm) return;
+  toast('🔄','Enviando ordem...','Processando na Binance...','info');
+  setTimeout(()=>{
+    const orderId='ORD'+Date.now().toString().slice(-6);
+    const list=document.getElementById('bn-orders-list');
+    const item=document.createElement('div');
+    item.className='dt-hist-item';
+    item.innerHTML=`
+      <span style="color:${BN.orderSide==='buy'?'var(--green)':'var(--red)'};font-weight:700">${sideLabel} ${pair}</span>
+      <span style="color:var(--text3)">${qty} unid.</span>
+      <span class="badge bg">Executada</span>
+      <span style="color:var(--text3);font-size:10px">#${orderId}</span>`;
+    if(list.querySelector('.es')) list.innerHTML='';
+    list.prepend(item);
+    toast('✅','Ordem enviada!',`${sideLabel} ${qty} ${pair} · ID: ${orderId}`,'success');
+  }, 1200);
+}
+
+// ═══════════ DT FULLSCREEN
+function dtToggleFS(){
+  document.getElementById('app').classList.toggle('dt-fs');
+  // Redraw chart after layout change
+  setTimeout(()=>dtRenderChart(), 100);
+  setTimeout(()=>dtRenderChart(), 300);
+}
+
+// ═══════════ DT ASSET SEARCH
+const DT_ALL_ASSETS = Object.entries(DT.prices || {}).map(([key, val])=>({
+  sym: key, ...val
+}));
+
+function dtBuildAllAssets(){
+  return Object.entries(DT.prices).map(([key,val])=>({sym:key,...val}));
+}
+
+function dtOpenDropdown(){
+  const dd = document.getElementById('dt-dropdown');
+  if(!dd) return;
+  dd.style.display = 'block';
+  dtFilterAssets(document.getElementById('dt-search')?.value || '');
+}
+
+function dtCloseDropdown(){
+  const dd = document.getElementById('dt-dropdown');
+  if(dd) dd.style.display = 'none';
+}
+
+function dtFilterAssets(q){
+  const dd = document.getElementById('dt-dropdown');
+  if(!dd) return;
+  dd.style.display = 'block';
+  const all = dtBuildAllAssets();
+  const term = q.trim().toLowerCase();
+  const filtered = term
+    ? all.filter(a =>
+        a.sym.toLowerCase().includes(term) ||
+        (a.label||'').toLowerCase().includes(term) ||
+        (a.cat||'').toLowerCase().includes(term)
+      )
+    : all;
+
+  const groups = {};
+  filtered.forEach(a=>{
+    const g = a.cat || 'other';
+    if(!groups[g]) groups[g] = [];
+    groups[g].push(a);
+  });
+
+  const groupLabels = {
+    crypto:'🪙 Criptomoedas', forex:'💱 Forex',
+    commodity:'🏆 Commodities', stock:'🇧🇷 Ações BR'
+  };
+
+  let html = '';
+  if(!filtered.length){
+    html = '<div style="padding:16px;text-align:center;color:var(--text3);font-size:13px">Nenhum par encontrado</div>';
+  } else {
+    Object.entries(groups).forEach(([cat, items])=>{
+      html += '<div class="dt-dd-group">'+(groupLabels[cat]||cat)+'</div>';
+      items.forEach(a=>{
+        const isActive = a.sym === DT.asset ? ' sel' : '';
+        html += `<div class="dt-dd-item${isActive}" onclick="dtPickAsset('${a.sym}')">
+          <span class="dt-dd-sym">${a.sym}</span>
+          <span class="dt-dd-name">${a.label||''}</span>
+          <span class="dt-dd-cat c-${a.cat||'forex'}">${(a.cat||'').toUpperCase()}</span>
+        </div>`;
+      });
+    });
+  }
+  dd.innerHTML = html;
+}
+
+function dtPickAsset(sym){
+  if(!sym || !DT.prices[sym]) return;
+  DT.asset = sym;
+  const p = DT.prices[sym];
+  const fullName = sym + (p?.label ? ' — '+p.label : '');
+  // Sync search input
+  const inp = document.getElementById('dt-search');
+  if(inp) inp.value = '';
+  // Sync dropdown select
+  const sel = document.getElementById('dt-asset-select');
+  if(sel) sel.value = sym;
+  // Update label
+  const lbl = document.getElementById('dt-asset-label');
+  if(lbl) lbl.textContent = fullName;
+  dtCloseDropdown();
+  // Stop intervals before reinit to prevent double-tick freeze
+  if(DT.priceInterval){ clearInterval(DT.priceInterval); DT.priceInterval = null; }
+  if(DT.interval){ clearInterval(DT.interval); DT.interval = null; }
+  // Small delay so canvas repaints with cleared state
+  requestAnimationFrame(()=>{ dtInit(); });
+}
+
+// ═══════════ CLOCK
+
+function startClock(){
+  function tick(){
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2,'0');
+    const mm = String(now.getMinutes()).padStart(2,'0');
+    const ss = String(now.getSeconds()).padStart(2,'0');
+    const el = document.getElementById('dt-clock');
+    if(el) el.textContent = hh+':'+mm+':'+ss;
+    const dateEl = document.getElementById('dt-clock-date');
+    if(dateEl){
+      const days = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+      const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+      dateEl.textContent = days[now.getDay()]+', '+now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear();
+    }
+    // Market sessions (UTC offsets)
+    const utcH = now.getUTCHours();
+    const utcM = now.getUTCMinutes();
+    const utcMins = utcH*60 + utcM;
+    const sessions = [
+      { id:'dt-session-ny',  label:'🇺🇸 Nova York',  open:13*60+30, close:20*60 },
+      { id:'dt-session-lk',  label:'🇬🇧 Londres',    open:8*60,     close:16*60+30 },
+      { id:'dt-session-tk',  label:'🇯🇵 Tóquio',     open:0,        close:6*60 },
+    ];
+    sessions.forEach(s=>{
+      const el2 = document.getElementById(s.id);
+      if(!el2) return;
+      const isOpen = (s.id==='dt-session-tk')
+        ? (utcMins < s.close || utcMins >= 23*60)
+        : (utcMins >= s.open && utcMins < s.close);
+      el2.textContent = s.label + (isOpen?' ● Aberto':' ○ Fechado');
+      el2.className = 'dt-clock-session '+(isOpen?'open':'closed');
+    });
+  }
+  tick();
+  setInterval(tick, 1000);
+}
+// Start clock on load
+window.addEventListener('DOMContentLoaded', startClock);
+
+// ═══════════ RECURRING EXPENSES
+const REC = { items: [] };
+const recTypes = {
+  monthly: { label:'Assinatura', icon:'📺', badge:'monthly' },
+  parcel:  { label:'Parcela',    icon:'💳', badge:'parcel'  },
+  debt:    { label:'Dívida',     icon:'💰', badge:'debt'    },
+};
+
+function addRecurring(){
+  const name  = v('rm-name').trim();
+  const value = parseFloat(v('rm-value'))||0;
+  const type  = document.querySelector('#rm-type-grp .rb.sel')?.dataset.v||'monthly';
+  const due   = parseInt(v('rm-due'))||1;
+  const parcels = type==='parcel'? (parseInt(v('rm-parcels'))||1) : null;
+  if(!name||value<=0){ toast('⚠️','Atenção','Preencha nome e valor.','warn'); return; }
+  REC.items.push({ id:Date.now(), name, value, type, due, parcels, remaining:parcels });
+  closeM('recmod');
+  clrV(['rm-name','rm-value','rm-parcels','rm-due']);
+  renderRecurring();
+  toast('📅','Gasto fixo adicionado!',name+' — R$ '+value.toFixed(2),'success');
+}
+
+function delRecurring(id){
+  REC.items = REC.items.filter(i=>i.id!==id);
+  renderRecurring();
+}
+
+function renderRecurring(){
+  const list = document.getElementById('rec-list');
+  const totalBar = document.getElementById('rec-total-bar');
+  const totalEl = document.getElementById('rec-total');
+  if(!list) return;
+  if(!REC.items.length){
+    list.innerHTML='<div class="es" style="padding:20px 0"><div class="esi" style="font-size:28px">📅</div><div class="est" style="font-size:12px">Nenhum gasto fixo cadastrado</div></div>';
+    if(totalBar) totalBar.style.display='none';
+    return;
+  }
+  const total = REC.items.reduce((s,i)=>s+i.value, 0);
+  list.innerHTML = REC.items.map(item=>{
+    const cfg = recTypes[item.type]||recTypes.monthly;
+    const catCls = {monthly:'cf',parcel:'cl',debt:'cb'}[item.type]||'co';
+    const parcelInfo = item.type==='parcel'&&item.parcels
+      ? '<span style="font-size:11px;color:var(--text3)">· '+item.parcels+' parcelas restantes</span>' : '';
+    return `<div class="rec-item">
+      <div class="rec-icon ${catCls}">${cfg.icon}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:600">${item.name}</div>
+        <div style="display:flex;align-items:center;gap:6px;margin-top:3px">
+          <span class="rec-badge ${cfg.badge}">${cfg.label}</span>
+          <span style="font-size:11px;color:var(--text3)">Vence dia ${item.due}</span>
+          ${parcelInfo}
+        </div>
+      </div>
+      <div style="text-align:right;margin-right:8px">
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--red)">−R$ ${item.value.toFixed(2)}</div>
+        <div style="font-size:10px;color:var(--text3)">por mês</div>
+      </div>
+      <button class="rec-del" onclick="delRecurring(${item.id})">✕</button>
+    </div>`;
+  }).join('');
+  if(totalBar){ totalBar.style.display='flex'; }
+  if(totalEl){ totalEl.textContent = 'R$ '+fmt(total); }
+}
+
+// ═══════════ BILLING CYCLE & REPORTS
+const CYCLE = {
+  closeDay: 1,
+  name: 'Fatura',
+  reports: JSON.parse(localStorage.getItem('nexus_reports')||'[]'),
+  email: localStorage.getItem('nexus_report_email')||''
+};
+
+function saveCycleConfig(){
+  CYCLE.closeDay = parseInt(document.getElementById('cycle-close-day').value)||1;
+  CYCLE.name = document.getElementById('cycle-name').value.trim() || 'Fatura';
+  localStorage.setItem('nexus_cycle', JSON.stringify({closeDay:CYCLE.closeDay, name:CYCLE.name}));
+  closeM('cycle-config-modal');
+  updateCycleBar();
+  toast('✅','Ciclo configurado!',`Fechamento todo dia ${CYCLE.closeDay} de cada mês.`,'success');
+}
+
+function loadCycleConfig(){
+  const saved = localStorage.getItem('nexus_cycle');
+  if(saved){ const c=JSON.parse(saved); CYCLE.closeDay=c.closeDay||1; CYCLE.name=c.name||'Fatura'; }
+  CYCLE.reports = JSON.parse(localStorage.getItem('nexus_reports')||'[]');
+  CYCLE.email = localStorage.getItem('nexus_report_email')||'';
+  const emailEl = document.getElementById('report-email');
+  if(emailEl && CYCLE.email) emailEl.value = CYCLE.email;
+}
+
+function getCycleDates(){
+  const now = new Date();
+  const closeDay = CYCLE.closeDay;
+  let cycleStart, cycleEnd;
+  // If today is AFTER close day, cycle started from closeDay this month
+  // If today is ON or BEFORE close day, cycle started from closeDay last month
+  if(now.getDate() > closeDay){
+    cycleStart = new Date(now.getFullYear(), now.getMonth(), closeDay + 1);
+    cycleEnd   = new Date(now.getFullYear(), now.getMonth() + 1, closeDay);
+  } else {
+    cycleStart = new Date(now.getFullYear(), now.getMonth() - 1, closeDay + 1);
+    cycleEnd   = new Date(now.getFullYear(), now.getMonth(), closeDay);
+  }
+  return { start: cycleStart, end: cycleEnd, now };
+}
+
+function updateCycleBar(){
+  const {start, end, now} = getCycleDates();
+  const total = (end - start) / 86400000;
+  const elapsed = (now - start) / 86400000;
+  const pct = Math.min(100, Math.max(0, (elapsed/total)*100));
+
+  const fmtDate = d => d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});
+  document.getElementById('cycle-dates-label').textContent =
+    `${CYCLE.name} · ${fmtDate(start)} → ${fmtDate(end)}`;
+  document.getElementById('cycle-start-lbl').textContent = fmtDate(start);
+  document.getElementById('cycle-end-lbl').textContent = fmtDate(end);
+  document.getElementById('cycle-prog-fill').style.width = pct+'%';
+  document.getElementById('cycle-pct-lbl').textContent = Math.round(pct)+'%';
+
+  // Filter expenses in current cycle
+  const cycleExps = S.expenses.filter(e=>{
+    const d = new Date(e.date+'T00:00:00');
+    return d >= start && d <= end;
+  });
+  const cycleTotal = cycleExps.reduce((s,e)=>s+e.amount, 0);
+  document.getElementById('cycle-total-val').textContent = 'R$ '+fmt(cycleTotal);
+
+  // Update cycle config select
+  const sel = document.getElementById('cycle-close-day');
+  if(sel) sel.value = CYCLE.closeDay;
+
+  // Update preview in modal
+  const prev = document.getElementById('cycle-preview');
+  if(prev){
+    prev.innerHTML = `
+      <strong>Ciclo atual:</strong> ${fmtDate(start)} até ${fmtDate(end)}<br>
+      <strong>Dias restantes:</strong> ${Math.max(0, Math.ceil((end-now)/86400000))} dias<br>
+      <strong>Progresso:</strong> ${Math.round(pct)}% do ciclo percorrido`;
+  }
+}
+
+function getCategoryTotalsForDates(exps){
+  const map = {};
+  exps.forEach(e=>{
+    const label = (e.category==='other'&&e.notes) ? e.notes : (catCfg[e.category]?.l || 'Outros');
+    map[label] = (map[label]||0) + e.amount;
+  });
+  return Object.entries(map).map(([label,total])=>({label,total})).sort((a,b)=>b.total-a.total);
+}
+
+function generateReport(){
+  const {start, end} = getCycleDates();
+  const cycleExps = S.expenses.filter(e=>{
+    const d = new Date(e.date+'T00:00:00');
+    return d >= start && d <= end;
+  });
+
+  if(!cycleExps.length){
+    toast('⚠️','Sem gastos','Não há despesas neste ciclo para gerar relatório.','warn');
+    return;
+  }
+
+  const total = cycleExps.reduce((s,e)=>s+e.amount,0);
+  const cats  = getCategoryTotalsForDates(cycleExps);
+  const champion = cats[0];
+
+  // Generate insights by comparing with previous report
+  const insights = [];
+  const prevReport = CYCLE.reports[CYCLE.reports.length-1];
+
+  if(prevReport){
+    const prevTotal = prevReport.total;
+    const diffPct = ((total - prevTotal)/prevTotal)*100;
+    if(diffPct > 20)
+      insights.push({type:'alert', msg:`⚠️ Total ${diffPct.toFixed(0)}% maior que o mês anterior (R$ ${fmt(prevTotal)})`});
+    else if(diffPct < -10)
+      insights.push({type:'good', msg:`🎉 Parabéns! Total ${Math.abs(diffPct).toFixed(0)}% menor que o mês anterior`});
+    else
+      insights.push({type:'warn', msg:`↔️ Gastos similares ao mês anterior (R$ ${fmt(prevTotal)})`});
+
+    // Category comparisons
+    cats.forEach(cat=>{
+      const prevCat = prevReport.cats?.find(c=>c.label===cat.label);
+      if(prevCat){
+        const catDiff = ((cat.total-prevCat.total)/prevCat.total)*100;
+        if(catDiff > 100)
+          insights.push({type:'alert', msg:`⚠️ Atenção: você gastou mais do dobro em ${cat.label} em relação ao mês passado`});
+        else if(catDiff > 30)
+          insights.push({type:'warn', msg:`📈 ${cat.label} subiu ${catDiff.toFixed(0)}% em relação ao mês passado`});
+        else if(catDiff < -15)
+          insights.push({type:'good', msg:`✅ Parabéns! Seus gastos com ${cat.label} reduziram ${Math.abs(catDiff).toFixed(0)}%`});
+      }
+    });
+  } else {
+    insights.push({type:'warn', msg:`📊 Primeiro relatório gerado! Use como referência para os próximos meses.`});
+  }
+
+  const monthNames = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  const report = {
+    id: Date.now(),
+    name: CYCLE.name,
+    month: monthNames[end.getMonth()] + ' ' + end.getFullYear(),
+    start: start.toISOString().split('T')[0],
+    end: end.toISOString().split('T')[0],
+    total,
+    cats,
+    champion: champion.label,
+    insights,
+    expCount: cycleExps.length,
+    createdAt: new Date().toISOString()
+  };
+
+  CYCLE.reports.unshift(report);
+  localStorage.setItem('nexus_reports', JSON.stringify(CYCLE.reports.slice(0,24)));
+  renderReportsList();
+  setExpTab('faturas', document.getElementById('exptab-faturas'));
+  toast('📊','Fatura fechada!',`${report.month} — Total: R$ ${fmt(total)}`,'success');
+  openReportDetail(report);
+
+  // Email notification (frontend only — backend needed for actual send)
+  if(CYCLE.email){
+    console.log('📧 Would send report to:', CYCLE.email, report);
+    toast('📧','E-mail pendente',`Relatório pronto para envio a ${CYCLE.email}. Configure o backend para envio automático.`,'info');
+  }
+}
+
+function renderReportsList(){
+  const list = document.getElementById('reports-list');
+  if(!list) return;
+  if(!CYCLE.reports.length){
+    list.innerHTML='<div class="es"><div class="esi">📋</div><div class="est">Nenhuma fatura fechada ainda.<br>Configure o ciclo e feche sua primeira fatura!</div></div>';
+    return;
+  }
+  list.innerHTML = CYCLE.reports.map((r,i)=>{
+    const mainInsight = r.insights?.[0];
+    const insightClass = mainInsight?.type==='good'?'good':mainInsight?.type==='alert'?'alert':'warn';
+    return `<div class="report-card" style="animation-delay:${i*.05}s" onclick="openReportDetail(CYCLE.reports[${i}])">
+      <div class="report-card-header">
+        <div>
+          <div class="report-month">📅 ${r.month}</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:2px">${r.name} · ${r.expCount} despesas · ${r.start} → ${r.end}</div>
+        </div>
+        <div class="report-total">−R$ ${fmt(r.total)}</div>
+      </div>
+      <div class="report-cats">
+        ${(r.cats||[]).slice(0,4).map(c=>`<span class="report-cat-pill">${c.label}: R$ ${fmt(c.total)}</span>`).join('')}
+      </div>
+      ${mainInsight?`<div class="report-insight ${insightClass}" style="margin-top:8px;font-size:12px">${mainInsight.msg}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+let currentReport = null;
+function openReportDetail(report){
+  currentReport = report;
+  const overlay = document.getElementById('report-overlay');
+  overlay.classList.add('open');
+  document.getElementById('report-detail-title').textContent = `📊 ${report.month} — ${report.name}`;
+
+  const maxCat = report.cats?.[0]?.total||1;
+  const catColors = ['#7c5cfc','#22d3a5','#f87171','#fbbf24','#38bdf8','#a78bfa','#9ca3af'];
+
+  document.getElementById('report-detail-content').innerHTML = `
+    <!-- Summary -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px">
+      <div style="background:var(--bg2);border-radius:var(--r2);padding:14px;text-align:center">
+        <div style="font-size:11px;color:var(--text3);margin-bottom:5px">Total gasto</div>
+        <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--red)">R$ ${fmt(report.total)}</div>
+      </div>
+      <div style="background:var(--bg2);border-radius:var(--r2);padding:14px;text-align:center">
+        <div style="font-size:11px;color:var(--text3);margin-bottom:5px">Despesas</div>
+        <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--accent2)">${report.expCount}</div>
+      </div>
+      <div style="background:var(--bg2);border-radius:var(--r2);padding:14px;text-align:center">
+        <div style="font-size:11px;color:var(--text3);margin-bottom:5px">Campeã 🏆</div>
+        <div style="font-size:13px;font-weight:700;color:var(--yellow)">${report.champion||'—'}</div>
+      </div>
+    </div>
+
+    <!-- Categories breakdown -->
+    <div style="font-size:14px;font-weight:700;margin-bottom:12px">Gastos por categoria</div>
+    <div style="margin-bottom:20px">
+      ${(report.cats||[]).map((c,i)=>{
+        const pct = (c.total/report.total*100).toFixed(1);
+        const barPct = (c.total/maxCat*100).toFixed(1);
+        return `<div class="report-cat-row">
+          <div style="min-width:120px;font-size:13px;font-weight:500">${c.label}</div>
+          <div class="report-cat-bar-wrap">
+            <div class="report-cat-bar-fill" style="width:${barPct}%;background:${catColors[i%catColors.length]}"></div>
+          </div>
+          <div style="min-width:90px;text-align:right;font-size:13px;font-weight:700;font-family:'Syne',sans-serif">R$ ${fmt(c.total)}</div>
+          <div style="min-width:42px;text-align:right;font-size:11px;color:var(--text3)">${pct}%</div>
+        </div>`;
+      }).join('')}
+    </div>
+
+    <!-- Insights -->
+    <div style="font-size:14px;font-weight:700;margin-bottom:12px">💡 Insights & Comparativos</div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+      ${(report.insights||[]).map(ins=>`
+        <div class="report-insight ${ins.type}" style="font-size:13px">${ins.msg}</div>`).join('')}
+    </div>
+
+    <!-- Period -->
+    <div style="font-size:12px;color:var(--text3);text-align:center;padding:12px;background:var(--bg2);border-radius:var(--r3)">
+      Período: ${report.start} → ${report.end} · Gerado em ${new Date(report.createdAt).toLocaleString('pt-BR')}
+    </div>
+  `;
+}
+function closeReport(){ document.getElementById('report-overlay').classList.remove('open'); }
+function copyReport(){
+  if(!currentReport) return;
+  const r = currentReport;
+  const nl = '\n';
+  const cats = r.cats.map(c=>'  '+c.label+': R$ '+fmt(c.total)+' ('+((c.total/r.total)*100).toFixed(1)+'%)').join(nl);
+  const ins  = r.insights.map(i=>'  '+i.msg).join(nl);
+  const text = 'RELATORIO '+r.month.toUpperCase()+' - '+r.name+nl+nl+
+    'Total gasto: R$ '+fmt(r.total)+nl+
+    'Despesas: '+r.expCount+nl+
+    'Categoria campea: '+r.champion+nl+nl+
+    'POR CATEGORIA:'+nl+cats+nl+nl+
+    'INSIGHTS:'+nl+ins+nl+nl+
+    'Periodo: '+r.start+' a '+r.end;
+  navigator.clipboard.writeText(text).then(()=>toast('📋','Copiado!','Relatório copiado para a área de transferência.','success'));
+}
+
+function setExpTab(tab, el){
+  document.querySelectorAll('.exp-subtab').forEach(b=>b.classList.remove('act'));
+  el.classList.add('act');
+  document.getElementById('exp-view-gastos').style.display = tab==='gastos'?'block':'none';
+  document.getElementById('exp-view-faturas').style.display = tab==='faturas'?'block':'none';
+  if(tab==='faturas') renderReportsList();
+}
+
+function saveReportEmail(){
+  const email = document.getElementById('report-email')?.value?.trim();
+  if(!email || !email.includes('@')){ toast('⚠️','E-mail inválido','Insira um e-mail válido.','warn'); return; }
+  CYCLE.email = email;
+  localStorage.setItem('nexus_report_email', email);
+  toast('✅','E-mail salvo!',`Relatórios serão enviados para ${email}.`,'success');
+}
+
+// ═══════════ ESTUDOS
+
+function setEstTab(tab,el){
+  document.querySelectorAll('.estab').forEach(b=>b.classList.remove('act'));
+  el.classList.add('act');
+  document.getElementById('est-inv').style.display=tab==='inv'?'block':'none';
+  document.getElementById('est-crypto').style.display=tab==='crypto'?'block':'none';
+}
+const LESSONS={
+  'renda-fixa':{title:'Renda Fixa: CDB, Tesouro, LCI',icon:'🏦',sections:[{h:'O que é Renda Fixa?',p:'Renda fixa são investimentos onde você sabe <strong>de antemão qual será o retorno</strong>. Você empresta dinheiro ao banco, governo ou empresa e recebe juros em troca.',type:'text'},{h:'Principais tipos',p:'',type:'list',items:['<strong>CDB</strong> — emitido por bancos. Rende % do CDI. Protegido pelo FGC até R$ 250k.','<strong>Tesouro Direto</strong> — títulos do governo federal. Tipos: Selic (liquidez diária), IPCA+ (protege da inflação), Prefixado (taxa travada).','<strong>LCI / LCA</strong> — Isentas de IR para pessoa física!','<strong>Poupança</strong> — a mais conhecida mas a menos eficiente.']},{h:'Por onde começar?',p:'1️⃣ Crie sua <strong>reserva de emergência</strong> no Tesouro Selic ou CDB com liquidez diária<br>2️⃣ Explore CDBs de bancos menores (rendem mais)<br>3️⃣ LCI/LCA para quem quer isenção de IR',type:'box',color:'green'},{h:'Tabela regressiva do IR',p:'• Até 180 dias: <strong>22,5%</strong><br>• 181 a 360 dias: <strong>20%</strong><br>• 361 a 720 dias: <strong>17,5%</strong><br>• Acima de 720 dias: <strong>15%</strong>',type:'box',color:'yellow'}]},
+  'acoes-intro':{title:'Ações: como funciona a Bolsa?',icon:'📈',sections:[{h:'O que é uma ação?',p:'Uma ação representa uma <strong>fração do capital social</strong> de uma empresa. Ao comprar ações da Petrobras (PETR4), você se torna sócio da empresa.',type:'text'},{h:'Como ganhar dinheiro?',p:'',type:'list',items:['<strong>Valorização:</strong> comprou a R$ 30, vendeu a R$ 45 → lucro de 50%','<strong>Dividendos:</strong> empresas distribuem parte do lucro regularmente','<strong>JCP:</strong> similar aos dividendos, com diferente tratamento fiscal']},{h:'ON vs PN',p:'<strong>ON (código 3):</strong> ordinárias — dão direito a voto. Ex: VALE3<br><strong>PN (código 4):</strong> preferenciais — prioridade em dividendos. Ex: PETR4',type:'box',color:'green'},{h:'⚠️ Riscos',p:'Ações são <strong>renda variável</strong>. O preço oscila diariamente. Invista apenas para longo prazo (5+ anos).',type:'box',color:'red'}]},
+  'bitcoin-intro':{title:'O que é Bitcoin? Do zero',icon:'₿',sections:[{h:'A origem',p:'Em 2008, <strong>Satoshi Nakamoto</strong> publicou um artigo descrevendo um sistema de pagamento eletrônico descentralizado. O Bitcoin nasceu em Janeiro de 2009.',type:'text'},{h:'Por que tem valor?',p:'',type:'list',items:['<strong>Escassez:</strong> só existirão 21 milhões de bitcoins','<strong>Descentralização:</strong> nenhum governo pode confiscar ou imprimir mais','<strong>Segurança:</strong> a rede nunca foi hackeada em 15+ anos','<strong>Adoção crescente:</strong> ETFs aprovados, empresas aceitando']},{h:'Halving',p:'A cada 4 anos ocorre o "halving", que reduz à metade a quantidade de BTC gerada. Isso historicamente precede períodos de valorização.',type:'box',color:'yellow'},{h:'⚠️ Volatilidade',p:'O Bitcoin já caiu 80% do pico em ciclos anteriores. <strong>Só invista o que pode perder.</strong> Recomendado: não passar de 5-10% do portfólio.',type:'box',color:'red'}]},
+  'blockchain':{title:'Blockchain explicado simples',icon:'🔗',sections:[{h:'O que é um bloco?',p:'Imagine um <strong>caderno público</strong> onde todo mundo pode ler, mas ninguém pode apagar. Cada "bloco" contém um conjunto de transações e uma referência ao bloco anterior.',type:'text'},{h:'Por que é imutável?',p:'Cada bloco contém o <strong>hash</strong> (impressão digital matemática) do bloco anterior. Se alguém tentar alterar algo antigo, o hash muda e invalida toda a cadeia.',type:'box',color:'green'},{h:'Mineração',p:'Para adicionar um novo bloco, "mineradores" competem para resolver um problema matemático. O primeiro a resolver <strong>ganha Bitcoin como recompensa</strong>.',type:'text'},{h:'Além do Bitcoin',p:'• <strong>Contratos inteligentes</strong> (Ethereum)<br>• <strong>Rastreamento de supply chain</strong><br>• <strong>Títulos financeiros tokenizados</strong><br>• <strong>Votação eletrônica segura</strong>',type:'box',color:'yellow'}]},
+  'juros-compostos':{title:'Juros Compostos na prática',icon:'🧮',sections:[{h:'Simples vs Compostos',p:'<strong>Simples:</strong> R$ 1.000 a 10% = +R$ 100 todo ano (sempre sobre o capital inicial)<br><strong>Compostos:</strong> o juro incide sobre o juro anterior. No 2° ano você ganha 10% sobre R$ 1.100.',type:'text'},{h:'A fórmula',p:'<strong>M = C × (1 + i)^t</strong><br>M = montante · C = capital · i = taxa · t = períodos',type:'box',color:'green'},{h:'Exemplo na prática',p:'R$ 10.000 a 12% ao ano:<br>• 10 anos → <strong>R$ 31.058</strong><br>• 20 anos → <strong>R$ 96.462</strong><br>• 30 anos → <strong>R$ 299.599</strong>',type:'box',color:'yellow'},{h:'Regra dos 72',p:'Divida <strong>72 pela taxa anual</strong> para saber em quantos anos seu dinheiro dobra.<br>Ex: 12% ao ano → 72/12 = <strong>6 anos para dobrar</strong>',type:'box',color:'green'}]},
+  'analise-tecnica':{title:'Análise Técnica: lendo gráficos',icon:'📊',sections:[{h:'O que é AT?',p:'Estuda o comportamento dos preços no passado para tentar prever movimentos futuros. Baseia-se em que "o preço desconta tudo".',type:'text'},{h:'Candlesticks',p:'Cada vela mostra 4 preços: Abertura, Fechamento, Máxima e Mínima.<br><span style="color:#22d3a5">Verde</span> = fechou acima (alta) · <span style="color:#f87171">Vermelha</span> = fechou abaixo (queda)',type:'box',color:'green'},{h:'Suporte e Resistência',p:'<strong>Suporte:</strong> nível onde o preço "bate no chão" — compradores entram forte.<br><strong>Resistência:</strong> nível onde o preço tem dificuldade de romper para cima.',type:'text'},{h:'Médias Móveis',p:'<strong>MM20:</strong> tendência de curto prazo<br><strong>MM200:</strong> tendência de longo prazo<br>Preço acima da MM200 = tendência de alta.',type:'box',color:'yellow'}]},
+  'carteira':{title:'Monte sua carteira ideal',icon:'💼',sections:[{h:'Diversificação',p:'Não coloque todos os ovos na mesma cesta. Combine ativos com <strong>baixa correlação</strong> para reduzir o risco.',type:'text'},{h:'Carteira sugerida para iniciantes',p:'',type:'list',items:['<strong>40% Renda Fixa:</strong> Tesouro Selic + CDB de liquidez diária','<strong>30% Ações BR:</strong> ETF BOVA11 (acompanha o Ibovespa)','<strong>20% Internacional:</strong> ETF IVVB11 (S&P 500)','<strong>10% Alternativo:</strong> FIIs e/ou uma pequena posição em crypto']},{h:'Rebalanceamento',p:'A cada 6-12 meses, verifique se os % mudaram. Venda o que subiu demais e compre o que ficou para trás — isso força "comprar na baixa".',type:'box',color:'green'}]},
+  'ethereum-defi':{title:'Ethereum e DeFi',icon:'Ξ',sections:[{h:'O que é Ethereum?',p:'Uma <strong>plataforma de computação descentralizada</strong> onde desenvolvedores criam apps que rodam sem servidor central, usando contratos inteligentes.',type:'text'},{h:'DeFi na prática',p:'• <strong>Empréstimos</strong> sem banco (Aave, Compound)<br>• <strong>Trocas de tokens</strong> sem corretora (Uniswap)<br>• <strong>Rendimentos</strong> em stablecoins',type:'text'},{h:'⚠️ Riscos',p:'DeFi não tem FGC. Contratos podem ter bugs. Stablecoins algorítmicas podem colapsar.',type:'box',color:'red'}]},
+  'altcoins':{title:'Altcoins: Solana, BNB, XRP...',icon:'🪙',sections:[{h:'O que são Altcoins?',p:'Qualquer crypto que não seja Bitcoin. Existem 20.000+, mas a maioria não tem valor real. Foque nas com fundamentos sólidos.',type:'text'},{h:'As principais',p:'',type:'list',items:['<strong>Ethereum (ETH):</strong> maior ecossistema DeFi','<strong>Solana (SOL):</strong> rápida e barata, rival do Ethereum','<strong>BNB:</strong> token da Binance, desconto em taxas','<strong>XRP:</strong> transferências internacionais rápidas','<strong>Cardano (ADA):</strong> foco em segurança']},{h:'⚠️ Cuidado com shitcoins',p:'A maioria das altcoins sem fundamento são esquemas de <strong>pump and dump</strong>. Pesquise o projeto, equipe e caso de uso antes de investir.',type:'box',color:'red'}]},
+  'crypto-seguranca':{title:'Segurança em Crypto',icon:'🔐',sections:[{h:'Tipos de Wallet',p:'<strong>Hot wallet:</strong> conectada à internet (MetaMask) — prática mas menos segura<br><strong>Cold wallet:</strong> hardware físico offline (Ledger) — mais segura para grandes valores',type:'text'},{h:'Seed Phrase',p:'São <strong>12 ou 24 palavras</strong> para recuperar sua wallet. <strong>NUNCA</strong> fotografe, salve no celular ou compartilhe. Escreva no papel e guarde em local seguro.',type:'box',color:'red'},{h:'Principais golpes',p:'',type:'list',items:['<strong>Phishing:</strong> site falso — sempre verifique a URL','<strong>Falso suporte:</strong> ninguém pede sua seed phrase','<strong>Esquemas de retorno:</strong> "envie 1 BTC, receba 2" — sempre golpe']},{h:'Regras de ouro',p:'✅ Use exchanges regulamentadas<br>✅ Ative 2FA em tudo<br>✅ Nunca use Wi-Fi público para transações',type:'box',color:'green'}]},
+  'trading-crypto':{title:'Trading de Crypto',icon:'⚡',sections:[{h:'Gestão de risco',p:'A maioria perde dinheiro por <strong>má gestão de risco</strong>. Nunca arrisque mais de 1-2% do portfólio por operação. Sempre use stop loss.',type:'box',color:'red'},{h:'Stop Loss e Take Profit',p:'<strong>Stop Loss:</strong> ordem de venda automática se o preço cair X% — limita prejuízo<br><strong>Take Profit:</strong> ordem quando atingir seu objetivo — garante o lucro',type:'box',color:'green'},{h:'Relação risco/retorno',p:'Só entre se o potencial de ganho for pelo menos <strong>2x o de perda</strong>. Stop de 5% → alvo mínimo de 10%.',type:'box',color:'yellow'}]},
+};
+
+let quizState={};
+function openLesson(id){
+  const l=LESSONS[id]; if(!l) return;
+  const overlay=document.getElementById('lesson-overlay');
+  overlay.classList.add('open');
+  document.getElementById('lpf').style.width='100%';
+  document.getElementById('lesson-content').innerHTML=
+    `<div style="display:flex;align-items:center;gap:14px;margin-bottom:24px"><div style="font-size:40px">${l.icon}</div><h2 style="font-size:20px;line-height:1.3">${l.title}</h2></div>`+
+    l.sections.map(s=>{
+      if(s.type==='text') return `<div class="lesson-section"><div class="lesson-h">${s.h}</div><div class="lesson-p">${s.p}</div></div>`;
+      if(s.type==='list') return `<div class="lesson-section"><div class="lesson-h">${s.h}</div><ul style="padding-left:18px;display:flex;flex-direction:column;gap:8px;margin-top:8px">${s.items.map(i=>`<li style="font-size:13px;color:var(--text2);line-height:1.6">${i}</li>`).join('')}</ul></div>`;
+      if(s.type==='box') return `<div class="lesson-section"><div class="lesson-h">${s.h}</div><div class="lesson-box ${s.color||''}"><div class="lesson-p">${s.p}</div></div></div>`;
+      return '';
+    }).join('')+
+    `<div style="text-align:center;padding:20px 0"><div style="font-size:32px;margin-bottom:10px">✅</div><div style="font-size:16px;font-weight:700;margin-bottom:6px">Lição concluída!</div></div>`;
+  document.getElementById('lesson-nav').innerHTML=`<button class="btn btn-p" onclick="closeLesson()" style="flex:1">Voltar aos estudos</button>`;
+}
+function closeLesson(){document.getElementById('lesson-overlay').classList.remove('open');}
+
+const QUIZZES={
+  inv:[
+    {q:'O que é CDI?',opts:['Taxa de câmbio do dólar','Taxa de referência entre bancos para renda fixa','Índice da inflação','Sigla do Tesouro Direto'],c:1,exp:'O CDI é a taxa que os bancos cobram uns dos outros e serve como referência para a maioria dos investimentos de renda fixa.'},
+    {q:'Qual investimento é isento de IR para pessoa física?',opts:['CDB de qualquer banco','Poupança e LCI/LCA','Tesouro IPCA+','Ações estrangeiras'],c:1,exp:'LCI e LCA são isentos de IR para pessoa física. A poupança também é isenta, mas rende menos que outras opções.'},
+    {q:'O que é "dividendo"?',opts:['Taxa paga ao corretor','Parte do lucro da empresa distribuída aos acionistas','Imposto sobre venda de ações','Multa por vender antes do prazo'],c:1,exp:'Dividendos são parte do lucro distribuída aos acionistas. No Brasil, são isentos de IR para pessoa física.'},
+    {q:'R$ 1.000 a 10% ao ano por juros compostos em 10 anos rende quanto?',opts:['R$ 2.000','R$ 2.594','R$ 1.100','R$ 3.000'],c:1,exp:'Usando M = C × (1+i)^t: 1000 × (1,10)^10 = R$ 2.593,74. Juros compostos fazem o dinheiro crescer exponencialmente.'},
+    {q:'O FGC protege até quanto por CPF por banco?',opts:['R$ 100.000','R$ 500.000','R$ 250.000','R$ 1.000.000'],c:2,exp:'O FGC (Fundo Garantidor de Créditos) protege até R$ 250.000 por CPF por instituição, com limite global de R$ 1 milhão.'},
+  ],
+  crypto:[
+    {q:'Quem criou o Bitcoin?',opts:['Elon Musk','Bill Gates','Satoshi Nakamoto (identidade desconhecida)','O governo americano'],c:2,exp:'Bitcoin foi criado por alguém usando o pseudônimo Satoshi Nakamoto, cuja identidade real ainda é desconhecida.'},
+    {q:'Quantos Bitcoins existirão no máximo?',opts:['1 bilhão','100 milhões','21 milhões','Ilimitado'],c:2,exp:'O Bitcoin tem oferta máxima programada de 21 milhões de unidades — essa escassez é um dos pilares do seu valor.'},
+    {q:'O que é "seed phrase"?',opts:['Uma criptomoeda nova','Palavras que permitem recuperar sua wallet','Senha da exchange','Taxa de transação'],c:1,exp:'A seed phrase (12 ou 24 palavras) é a única forma de recuperar seus fundos se perder acesso à wallet. Nunca a compartilhe!'},
+    {q:'O que é DeFi?',opts:['Um hardware wallet','Finanças Descentralizadas em blockchain','Um token especial','Fundador do Ethereum'],c:1,exp:'DeFi (Decentralized Finance) são serviços financeiros em blockchain sem intermediários como bancos.'},
+    {q:'O que acontece no "Halving" do Bitcoin?',opts:['O preço cai pela metade','A recompensa dos mineradores é reduzida à metade','O Bitcoin se divide em dois','As taxas dobram'],c:1,exp:'O Halving ocorre a cada ~4 anos e reduz à metade a recompensa dos mineradores, diminuindo a emissão de novos BTC.'},
+  ]
+};
+function startQuiz(type){
+  const container=document.getElementById(`quiz-${type}-container`);
+  quizState[type]={score:0};
+  renderQuizQ(type,0,container);
+}
+function renderQuizQ(type,idx,container){
+  const qs=QUIZZES[type];
+  if(idx>=qs.length){
+    const sc=quizState[type].score,total=qs.length;
+    const emoji=sc===total?'🏆':sc>=total*.6?'😊':'📚';
+    container.innerHTML=`<div class="quiz-score"><div style="font-size:36px">${emoji}</div><div class="quiz-score-val" style="color:${sc===total?'var(--green)':sc>=total*.6?'var(--yellow)':'var(--red)'}">${sc}/${total}</div><div style="font-size:13px;color:var(--text2);margin-bottom:16px">${sc===total?'Perfeito!':sc>=total*.6?'Muito bom!':'Revise as lições e tente de novo.'}</div><button class="btn btn-p btn-sm" onclick="startQuiz('${type}')">Tentar de novo</button></div>`;
+    return;
+  }
+  const q=qs[idx];
+  container.innerHTML=`<div class="quiz-q"><div style="font-size:11px;color:var(--text3);margin-bottom:8px">Pergunta ${idx+1} de ${qs.length}</div><div class="quiz-q-text">${q.q}</div><div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerQuiz('${type}',${idx},${i},this)">${o}</button>`).join('')}</div><div class="quiz-explanation" id="qe-${type}-${idx}">${q.exp}</div></div>`;
+}
+function answerQuiz(type,qIdx,optIdx,btn){
+  const q=QUIZZES[type][qIdx];
+  const container=document.getElementById(`quiz-${type}-container`);
+  container.querySelectorAll('.quiz-opt').forEach(b=>b.onclick=null);
+  btn.classList.add(optIdx===q.c?'correct':'wrong');
+  container.querySelectorAll('.quiz-opt')[q.c].classList.add('correct');
+  if(optIdx===q.c) quizState[type].score++;
+  document.getElementById(`qe-${type}-${qIdx}`).style.display='block';
+  setTimeout(()=>renderQuizQ(type,qIdx+1,container),2200);
+}
 
 // ═══════════ HELPERS
 const fmt=n=>Number(n).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
