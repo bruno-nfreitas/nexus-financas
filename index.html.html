@@ -815,6 +815,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
           </div>
           <div id="explist"><div class="es"><div class="esi">📭</div><div class="est">Sem despesas.<br>Adicione a primeira!</div></div></div>
         </div>
+      </div><!-- end expl grid -->
       </div><!-- end exp-view-gastos -->
 
       <!-- FATURAS VIEW -->
@@ -1745,7 +1746,19 @@ function initUI(){
   document.getElementById('dsub').textContent=`Objetivo: ${p.goal||'crescer financeiramente'}`;
   document.getElementById('sinc').textContent=`R$ ${fmt(p.income||0)}`;
   document.getElementById('sinv').textContent=`R$ ${fmt(p.invest||0)}`;
-  loadCycleConfig();updateCycleBar();renderExpList();renderExpChart();renderInvGrid();renderInvChart();renderGoals();renderDashCharts();updDashStats();renderAlerts();renderCrypto();renderStocks('br');calcSim();updBadges();
+  try{loadCycleConfig();updateCycleBar();}catch(e){console.warn("cycle init:",e);}
+try{renderExpList();}catch(e){console.warn(e);}
+try{renderExpChart();}catch(e){console.warn(e);}
+try{renderInvGrid();}catch(e){console.warn(e);}
+try{renderInvChart();}catch(e){console.warn(e);}
+try{renderGoals();}catch(e){console.warn(e);}
+try{renderDashCharts();}catch(e){console.warn(e);}
+try{updDashStats();}catch(e){console.warn(e);}
+try{renderAlerts();}catch(e){console.warn(e);}
+try{renderCrypto();}catch(e){console.warn(e);}
+try{renderStocks('br');}catch(e){console.warn(e);}
+try{calcSim();}catch(e){console.warn(e);}
+try{updBadges();}catch(e){console.warn(e);}
   toast('✅','Dados carregados!','Tudo sincronizado com a nuvem.','success');
 }
 function updBadges(){/* badges removed */}
@@ -1786,11 +1799,13 @@ async function addExp(){
   const des=(v('edes').trim())||(cat==='other'&&otherDesc?otherDesc:'');
   const amt=parseFloat(v('eamt')),date=v('edate');
   const finalDes = v('edes').trim() || (cat==='other'&&otherDesc?otherDesc:'Outros');
-  if(!des||!amt||amt<=0||!date){toast('⚠️','Atenção','Preencha todos os campos.','warn');return;}
+  if(!finalDes||!amt||amt<=0||!date){toast('⚠️','Atenção','Preencha todos os campos.','warn');return;}
   const btn=document.getElementById('eabtn');setLoad(btn,true);
-  try{const displayCat = cat==='other'&&otherDesc ? otherDesc : cat;
-const{data,error}=await db.from('expenses').insert({user_id:S.user.id,description:finalDes||des||'Outros',amount:amt,category:cat,date,notes:otherDesc||null}).select().single();
-if(data) data.otherLabel=otherDesc||null;if(error)throw error;S.expenses.unshift(data);clrV(['edes','eamt','eother']);
+  try{
+    // Store custom "outros" label inside description with a marker
+    const descToSave = cat==='other'&&otherDesc ? '['+otherDesc+'] '+finalDes : (finalDes||des||'Despesa');
+    const{data,error}=await db.from('expenses').insert({user_id:S.user.id,description:descToSave,amount:amt,category:cat,date}).select().single();
+    if(error)throw error;S.expenses.unshift(data);clrV(['edes','eamt','eother']);
 document.getElementById('other-desc-wrap').style.display='none';
 document.getElementById('ecat').value='food';document.getElementById('edate').valueAsDate=new Date();renderExpList();renderExpChart();renderDashCharts();updDashStats();updBadges();updateCycleBar();toast('✅','Gasto salvo!',`${des} — R$ ${amt.toFixed(2)}`,'success');}
   catch(e){toast('❌','Erro',e.message,'danger');}
@@ -1802,9 +1817,12 @@ function renderExpList(){
   const total=S.expenses.reduce((s,e)=>s+e.amount,0);
   document.getElementById('etot').textContent=total>0?`−R$ ${fmt(total)}`:'';
   if(!S.expenses.length){list.innerHTML='<div class="es"><div class="esi">📭</div><div class="est">Sem despesas.<br>Adicione a primeira!</div></div>';return;}
-  list.innerHTML=S.expenses.slice(0,30).map(e=>{const otherLbl=e.notes&&e.category==='other'?e.notes:null;
+  list.innerHTML=S.expenses.slice(0,30).map(e=>{// Parse custom label stored as [Label] prefix in description
+const otherMatch = e.category==='other' ? e.description.match(/^\[([^\]]+)\]\s*/) : null;
+const otherLbl = otherMatch ? otherMatch[1] : null;
+const displayDesc = otherMatch ? e.description.replace(otherMatch[0],'').trim()||otherLbl : e.description;
 const c={...(catCfg[e.category]||catCfg.other)};
-if(otherLbl){c.l=otherLbl;c.i='📦';}const d=new Date(e.date+'T00:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});return`<div class="ei"><div class="eico ${c.c}">${c.i}</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:500">${e.description}</div><div style="font-size:11px;color:var(--text3)">${c.l}</div></div><div style="text-align:right"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--red)">−R$ ${e.amount.toFixed(2)}</div><div style="font-size:10px;color:var(--text3)">${d}</div></div><button class="edel" onclick="delExp(${e.id})">✕</button></div>`;}).join('');}
+if(otherLbl){c.l=otherLbl;c.i='📦';}const d=new Date(e.date+'T00:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});return`<div class="ei"><div class="eico ${c.c}">${c.i}</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:500">${displayDesc}</div><div style="font-size:11px;color:var(--text3)">${c.l}</div></div><div style="text-align:right"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--red)">−R$ ${e.amount.toFixed(2)}</div><div style="font-size:10px;color:var(--text3)">${d}</div></div><button class="edel" onclick="delExp(${e.id})">✕</button></div>`;}).join('');}
 function updDashStats(){
   const total=S.expenses.reduce((s,e)=>s+e.amount,0);
   document.getElementById('sexp').textContent=`R$ ${fmt(total)}`;
@@ -3080,6 +3098,7 @@ function getCycleDates(){
 }
 
 function updateCycleBar(){
+  if(!document.getElementById('cycle-bar')) return;
   const {start, end, now} = getCycleDates();
   const total = (end - start) / 86400000;
   const elapsed = (now - start) / 86400000;
@@ -3118,7 +3137,8 @@ function updateCycleBar(){
 function getCategoryTotalsForDates(exps){
   const map = {};
   exps.forEach(e=>{
-    const label = (e.category==='other'&&e.notes) ? e.notes : (catCfg[e.category]?.l || 'Outros');
+    const otherM = e.category==='other' ? (e.description||'').match(/^\[([^\]]+)\]/) : null;
+    const label = otherM ? otherM[1] : (catCfg[e.category]?.l || 'Outros');
     map[label] = (map[label]||0) + e.amount;
   });
   return Object.entries(map).map(([label,total])=>({label,total})).sort((a,b)=>b.total-a.total);
@@ -3203,6 +3223,7 @@ function generateReport(){
 function renderReportsList(){
   const list = document.getElementById('reports-list');
   if(!list) return;
+  CYCLE.reports = JSON.parse(localStorage.getItem('nexus_reports')||'[]');
   if(!CYCLE.reports.length){
     list.innerHTML='<div class="es"><div class="esi">📋</div><div class="est">Nenhuma fatura fechada ainda.<br>Configure o ciclo e feche sua primeira fatura!</div></div>';
     return;
