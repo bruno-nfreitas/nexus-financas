@@ -743,6 +743,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
           <div style="text-align:right">
             <div style="font-size:11px;color:var(--text3)">Total no ciclo</div>
             <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--red)" id="cycle-total-val">R$ 0,00</div>
+          <div id="cycle-total-breakdown" style="font-size:10px;color:var(--text3);margin-top:2px;display:none"></div>
           </div>
           <div style="display:flex;gap:6px">
             <button class="btn btn-s btn-sm" onclick="openM('cycle-config-modal')">⚙️ Configurar</button>
@@ -2992,7 +2993,10 @@ function startClock(){
 window.addEventListener('DOMContentLoaded', startClock);
 
 // ═══════════ RECURRING EXPENSES
-const REC = { items: [] };
+const REC = {
+  get items(){ return JSON.parse(localStorage.getItem('nexus_rec')||'[]'); },
+  set items(v){ localStorage.setItem('nexus_rec', JSON.stringify(v)); }
+};
 const recTypes = {
   monthly: { label:'Assinatura', icon:'📺', badge:'monthly' },
   parcel:  { label:'Parcela',    icon:'💳', badge:'parcel'  },
@@ -3006,16 +3010,20 @@ function addRecurring(){
   const due   = parseInt(v('rm-due'))||1;
   const parcels = type==='parcel'? (parseInt(v('rm-parcels'))||1) : null;
   if(!name||value<=0){ toast('⚠️','Atenção','Preencha nome e valor.','warn'); return; }
-  REC.items.push({ id:Date.now(), name, value, type, due, parcels, remaining:parcels });
+  const current = REC.items;
+  current.push({ id:Date.now(), name, value, type, due, parcels, remaining:parcels });
+  REC.items = current;
   closeM('recmod');
   clrV(['rm-name','rm-value','rm-parcels','rm-due']);
   renderRecurring();
+  updateCycleBar();
   toast('📅','Gasto fixo adicionado!',name+' — R$ '+value.toFixed(2),'success');
 }
 
 function delRecurring(id){
   REC.items = REC.items.filter(i=>i.id!==id);
   renderRecurring();
+  updateCycleBar();
 }
 
 function renderRecurring(){
@@ -3079,6 +3087,8 @@ function loadCycleConfig(){
   CYCLE.email = localStorage.getItem('nexus_report_email')||'';
   const emailEl = document.getElementById('report-email');
   if(emailEl && CYCLE.email) emailEl.value = CYCLE.email;
+  // Restore recurring items display
+  try{ renderRecurring(); }catch(e){}
 }
 
 function getCycleDates(){
@@ -3117,8 +3127,24 @@ function updateCycleBar(){
     const d = new Date(e.date+'T00:00:00');
     return d >= start && d <= end;
   });
-  const cycleTotal = cycleExps.reduce((s,e)=>s+e.amount, 0);
-  document.getElementById('cycle-total-val').textContent = 'R$ '+fmt(cycleTotal);
+  const cycleVarTotal = cycleExps.reduce((s,e)=>s+e.amount, 0);
+  // Add recurring (fixed) expenses
+  const recTotal = REC.items.reduce((s,i)=>s+i.value, 0);
+  const cycleTotal = cycleVarTotal + recTotal;
+  const cycleEl = document.getElementById('cycle-total-val');
+  if(cycleEl){
+    cycleEl.textContent = 'R$ '+fmt(cycleTotal);
+    // Show breakdown if there are recurring items
+    const breakdown = document.getElementById('cycle-total-breakdown');
+    if(breakdown){
+      if(recTotal > 0){
+        breakdown.textContent = 'Variáveis: R$ '+fmt(cycleVarTotal)+' + Fixos: R$ '+fmt(recTotal);
+        breakdown.style.display = 'block';
+      } else {
+        breakdown.style.display = 'none';
+      }
+    }
+  }
 
   // Update cycle config select
   const sel = document.getElementById('cycle-close-day');
