@@ -453,6 +453,66 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
 .quiz-score{text-align:center;padding:24px;background:var(--bg2);border-radius:var(--r2)}
 .quiz-score-val{font-family:'Syne',sans-serif;font-size:42px;font-weight:800;margin:10px 0}
 
+/* ESTUDOS LEVEL SYSTEM */
+.est-level-modal{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);z-index:900;display:none;align-items:center;justify-content:center;padding:20px}
+.est-level-modal.open{display:flex}
+.est-level-card{background:var(--card);border:1px solid var(--border2);border-radius:24px;padding:36px 32px;width:100%;max-width:520px;animation:fadeUp .3s ease;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.level-btn{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border:2px solid var(--border);border-radius:var(--r2);cursor:pointer;transition:all var(--ease);margin-bottom:10px;background:transparent;width:100%;text-align:left}
+.level-btn:hover{border-color:var(--border2);background:var(--bg2)}
+.level-btn.init:hover,.level-btn.init.sel{border-color:var(--green);background:rgba(34,211,165,.08)}
+.level-btn.med:hover,.level-btn.med.sel{border-color:var(--yellow);background:rgba(251,191,36,.08)}
+.level-btn.avd:hover,.level-btn.avd.sel{border-color:var(--red);background:rgba(248,113,113,.08)}
+.level-btn-icon{font-size:28px;flex-shrink:0;margin-top:2px}
+.level-btn-title{font-size:15px;font-weight:700;margin-bottom:3px}
+.level-btn-desc{font-size:12px;color:var(--text2);line-height:1.5}
+.level-tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;display:inline-block;margin-bottom:5px}
+.lt-init{background:rgba(34,211,165,.12);color:var(--green)}
+.lt-med{background:rgba(251,191,36,.1);color:var(--yellow)}
+.lt-avd{background:rgba(248,113,113,.1);color:var(--red)}
+
+/* LESSON EXERCISES */
+.exercise-section{margin-top:20px;padding-top:20px;border-top:2px dashed var(--border2)}
+.ex-header{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.ex-title{font-size:16px;font-weight:700}
+.ex-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+.ex-badge.simple{background:rgba(56,189,248,.12);color:var(--blue)}
+.ex-badge.interactive{background:rgba(124,92,252,.12);color:var(--accent2)}
+.ex-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:18px;margin-bottom:14px;animation:fadeUp .3s ease}
+.ex-q{font-size:14px;font-weight:600;line-height:1.5;margin-bottom:14px;color:var(--text)}
+.ex-opts{display:flex;flex-direction:column;gap:7px}
+.ex-opt{padding:11px 16px;border:1px solid var(--border);border-radius:var(--r3);cursor:pointer;font-size:13px;transition:all var(--ease);background:transparent;color:var(--text);text-align:left;width:100%}
+.ex-opt:hover{border-color:var(--accent2);background:rgba(124,92,252,.06)}
+.ex-opt.correct{background:rgba(34,211,165,.12);border-color:var(--green);color:var(--green);font-weight:600}
+.ex-opt.wrong{background:rgba(248,113,113,.08);border-color:var(--red);color:var(--red)}
+.ex-feedback{font-size:12px;padding:10px 14px;border-radius:var(--r3);margin-top:10px;line-height:1.6;display:none}
+.ex-feedback.ok{background:rgba(34,211,165,.1);color:var(--green);border:1px solid rgba(34,211,165,.2)}
+.ex-feedback.err{background:rgba(248,113,113,.08);color:var(--red);border:1px solid rgba(248,113,113,.2)}
+
+/* Interactive calc exercise */
+.ex-calc{display:flex;flex-direction:column;gap:12px}
+.ex-calc-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ex-calc-lbl{font-size:13px;font-weight:500;min-width:160px;color:var(--text2)}
+.ex-calc-input{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r3);padding:9px 12px;color:var(--text);font-family:'Syne',sans-serif;font-size:15px;font-weight:700;width:140px;outline:none}
+.ex-calc-input:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(124,92,252,.15)}
+.ex-result{background:linear-gradient(135deg,rgba(124,92,252,.1),rgba(34,211,165,.06));border:1px solid rgba(124,92,252,.2);border-radius:var(--r2);padding:16px;text-align:center;margin-top:4px}
+.ex-result-val{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--accent2),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ex-result-lbl{font-size:12px;color:var(--text3);margin-top:4px}
+
+/* Candle exercise */
+.candle-exercise{display:flex;flex-direction:column;align-items:center;gap:14px}
+.candle-display{display:flex;gap:12px;align-items:flex-end;padding:20px;background:var(--bg3);border-radius:var(--r2)}
+.candle-item{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:transform var(--ease)}
+.candle-item:hover{transform:scale(1.1)}
+.candle-stick{width:2px;border-radius:1px}
+.candle-body{width:18px;border-radius:3px;min-height:8px}
+.candle-label{font-size:10px;color:var(--text3)}
+
+/* Progress bar for lesson */
+.lesson-ex-progress{display:flex;gap:5px;margin-bottom:16px}
+.ex-prog-dot{width:28px;height:4px;border-radius:2px;background:var(--bg3);transition:background .3s}
+.ex-prog-dot.done{background:var(--green)}
+.ex-prog-dot.curr{background:var(--accent)}
+
 /* BILLING CYCLE & REPORTS */
 .cycle-bar{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .cycle-info{flex:1;min-width:0}
@@ -1378,7 +1438,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
       <div id="est-inv">
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:24px">
 
-          <div class="est-card" onclick="openLesson('renda-fixa')">
+          <div class="est-card" onclick="pickLevel('renda-fixa')">
             <div class="est-card-icon" style="background:rgba(56,189,248,.12)">🏦</div>
             <div class="est-card-body">
               <div class="est-badge est-badge-init">Iniciante</div>
@@ -1388,7 +1448,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
             </div>
           </div>
 
-          <div class="est-card" onclick="openLesson('acoes-intro')">
+          <div class="est-card" onclick="pickLevel('acoes-intro')">
             <div class="est-card-icon" style="background:rgba(167,139,250,.12)">📈</div>
             <div class="est-card-body">
               <div class="est-badge est-badge-init">Iniciante</div>
@@ -1398,7 +1458,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
             </div>
           </div>
 
-          <div class="est-card" onclick="openLesson('fiis')">
+          <div class="est-card" onclick="pickLevel('fiis')">
             <div class="est-card-icon" style="background:rgba(34,211,165,.12)">🏢</div>
             <div class="est-card-body">
               <div class="est-badge est-badge-init">Iniciante</div>
@@ -1408,7 +1468,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
             </div>
           </div>
 
-          <div class="est-card" onclick="openLesson('juros-compostos')">
+          <div class="est-card" onclick="pickLevel('juros-compostos')">
             <div class="est-card-icon" style="background:rgba(251,191,36,.12)">🧮</div>
             <div class="est-card-body">
               <div class="est-badge est-badge-med">Intermediário</div>
@@ -1418,7 +1478,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
             </div>
           </div>
 
-          <div class="est-card" onclick="openLesson('analise-tecnica')">
+          <div class="est-card" onclick="pickLevel('analise-tecnica')">
             <div class="est-card-icon" style="background:rgba(248,113,113,.12)">📊</div>
             <div class="est-card-body">
               <div class="est-badge est-badge-med">Intermediário</div>
@@ -1428,7 +1488,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
             </div>
           </div>
 
-          <div class="est-card" onclick="openLesson('carteira')">
+          <div class="est-card" onclick="pickLevel('carteira')">
             <div class="est-card-icon" style="background:rgba(124,92,252,.12)">💼</div>
             <div class="est-card-body">
               <div class="est-badge est-badge-avd">Avançado</div>
@@ -1458,7 +1518,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
       <div id="est-crypto" style="display:none">
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:24px">
 
-          <div class="est-card" onclick="openLesson('bitcoin-intro')">
+          <div class="est-card" onclick="pickLevel('bitcoin-intro')">
             <div class="est-card-icon" style="background:rgba(247,147,26,.12)">₿</div>
             <div class="est-card-body">
               <div class="est-badge est-badge-init">Iniciante</div>
@@ -1468,7 +1528,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
             </div>
           </div>
 
-          <div class="est-card" onclick="openLesson('blockchain')">
+          <div class="est-card" onclick="pickLevel('blockchain')">
             <div class="est-card-icon" style="background:rgba(98,126,234,.12)">🔗</div>
             <div class="est-card-body">
               <div class="est-badge est-badge-init">Iniciante</div>
@@ -1478,7 +1538,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
             </div>
           </div>
 
-          <div class="est-card" onclick="openLesson('ethereum-defi')">
+          <div class="est-card" onclick="pickLevel('ethereum-defi')">
             <div class="est-card-icon" style="background:rgba(98,126,234,.12)">Ξ</div>
             <div class="est-card-body">
               <div class="est-badge est-badge-med">Intermediário</div>
@@ -1488,7 +1548,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
             </div>
           </div>
 
-          <div class="est-card" onclick="openLesson('altcoins')">
+          <div class="est-card" onclick="pickLevel('altcoins')">
             <div class="est-card-icon" style="background:rgba(153,69,255,.12)">🪙</div>
             <div class="est-card-body">
               <div class="est-badge est-badge-med">Intermediário</div>
@@ -1498,7 +1558,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
             </div>
           </div>
 
-          <div class="est-card" onclick="openLesson('crypto-seguranca')">
+          <div class="est-card" onclick="pickLevel('crypto-seguranca')">
             <div class="est-card-icon" style="background:rgba(34,211,165,.12)">🔐</div>
             <div class="est-card-body">
               <div class="est-badge est-badge-med">Intermediário</div>
@@ -1508,7 +1568,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
             </div>
           </div>
 
-          <div class="est-card" onclick="openLesson('trading-crypto')">
+          <div class="est-card" onclick="pickLevel('trading-crypto')">
             <div class="est-card-icon" style="background:rgba(248,113,113,.12)">⚡</div>
             <div class="est-card-body">
               <div class="est-badge est-badge-avd">Avançado</div>
@@ -1605,7 +1665,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
   <div class="report-detail-card">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px">
       <div id="report-detail-title" style="font-size:20px;font-weight:700"></div>
-      <div style="display:flex;gap:8px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-p btn-sm" onclick="exportReportPDF()">📄 Exportar PDF</button>
         <button class="btn btn-s btn-sm" onclick="copyReport()">📋 Copiar</button>
         <button class="btn btn-s btn-sm" onclick="closeReport()">✕ Fechar</button>
       </div>
@@ -1649,6 +1710,42 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
     </div>
     <div class="fg"><label class="fl">Valor investido (R$)</label><input type="number" class="fi" id="imv" placeholder="1000" step="0.01"></div>
     <div class="ma"><button class="btn btn-s" onclick="closeM('invmod')">Cancelar</button><button class="btn btn-p" id="imbtn" onclick="addInv()">Adicionar</button></div>
+  </div>
+</div>
+
+<!-- LEVEL SELECTOR MODAL -->
+<div class="est-level-modal" id="level-modal" onclick="if(event.target===this)this.style.display='none'">
+  <div class="est-level-card">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="font-size:44px;margin-bottom:10px" id="level-modal-icon">📚</div>
+      <div style="font-size:20px;font-weight:700;margin-bottom:6px" id="level-modal-title">Renda Fixa</div>
+      <div style="font-size:13px;color:var(--text2)">Escolha o nível de profundidade da sua lição</div>
+    </div>
+    <button class="level-btn init" onclick="startLesson(currentLessonId,'init')">
+      <span class="level-btn-icon">🌱</span>
+      <div>
+        <span class="level-tag lt-init">INICIANTE</span>
+        <div class="level-btn-title">Explicação clara e simples</div>
+        <div class="level-btn-desc">Conceitos básicos com exemplos do dia a dia. Exercícios de fixação com múltipla escolha. Ideal para quem está começando agora.</div>
+      </div>
+    </button>
+    <button class="level-btn med" onclick="startLesson(currentLessonId,'med')">
+      <span class="level-btn-icon">📈</span>
+      <div>
+        <span class="level-tag lt-med">INTERMEDIÁRIO</span>
+        <div class="level-btn-title">Aprofundamento com cálculos</div>
+        <div class="level-btn-desc">Inclui fórmulas, comparações entre produtos e exercícios práticos com calculadora interativa. Para quem já tem noção do básico.</div>
+      </div>
+    </button>
+    <button class="level-btn avd" onclick="startLesson(currentLessonId,'avd')">
+      <span class="level-btn-icon">🚀</span>
+      <div>
+        <span class="level-tag lt-avd">AVANÇADO</span>
+        <div class="level-btn-title">Domínio completo + simulações</div>
+        <div class="level-btn-desc">Estratégias avançadas, simuladores interativos, análise de cenários reais e exercícios de tomada de decisão. Para quem quer dominar o assunto.</div>
+      </div>
+    </button>
+    <button class="btn btn-s" style="width:100%;margin-top:8px" onclick="document.getElementById('level-modal').style.display='none'">Cancelar</button>
   </div>
 </div>
 
@@ -1793,7 +1890,25 @@ function setABN(el){document.querySelectorAll('.bni').forEach(b=>b.classList.rem
 // ═══════════ EXPENSES
 const catCfg={food:{l:'Alimentação',i:'🍔',c:'cf'},transport:{l:'Transporte',i:'🚗',c:'ct'},leisure:{l:'Lazer',i:'🎮',c:'cl'},bills:{l:'Contas',i:'📄',c:'cb'},health:{l:'Saúde',i:'💊',c:'ch'},education:{l:'Educação',i:'📚',c:'ce'},other:{l:'Outros',i:'📦',c:'co'}};
 function toggleOtherDesc(sel){document.getElementById('other-desc-wrap').style.display=sel.value==='other'?'block':'none';}
-function getCatTot(){const m={};S.expenses.forEach(e=>{m[e.category]=(m[e.category]||0)+e.amount});return Object.entries(m).map(([c,t])=>({cat:c,label:catCfg[c]?.l||c,total:t})).sort((a,b)=>b.total-a.total);}
+function getCycleExps(){
+  try{
+    const {start,end}=getCycleDates();
+    return S.expenses.filter(e=>{
+      const d=new Date(e.date+'T00:00:00');
+      return d>=start && d<=end;
+    });
+  }catch(_){return S.expenses;}
+}
+function getCatTot(){
+  const m={};
+  getCycleExps().forEach(e=>{
+    const lbl = e.category==='other'
+      ? (e.description.match(/^\[([^\]]+)\]/)?.[1] || 'Outros')
+      : (catCfg[e.category]?.l || e.category);
+    m[lbl]=(m[lbl]||0)+e.amount;
+  });
+  return Object.entries(m).map(([label,total])=>({label,total})).sort((a,b)=>b.total-a.total);
+}
 async function addExp(){
   const cat=v('ecat');
   const otherDesc=v('eother').trim();
@@ -1815,17 +1930,18 @@ document.getElementById('ecat').value='food';document.getElementById('edate').va
 async function delExp(id){try{await db.from('expenses').delete().eq('id',id);S.expenses=S.expenses.filter(e=>e.id!==id);renderExpList();renderExpChart();renderDashCharts();updDashStats();updBadges();toast('🗑️','Removido','Despesa excluída.','info');}catch(e){toast('❌','Erro',e.message,'danger');}}
 function renderExpList(){
   const list=document.getElementById('explist');
-  const total=S.expenses.reduce((s,e)=>s+e.amount,0);
+  const cycleExps=getCycleExps();
+  const total=cycleExps.reduce((s,e)=>s+e.amount,0);
   document.getElementById('etot').textContent=total>0?`−R$ ${fmt(total)}`:'';
-  if(!S.expenses.length){list.innerHTML='<div class="es"><div class="esi">📭</div><div class="est">Sem despesas.<br>Adicione a primeira!</div></div>';return;}
-  list.innerHTML=S.expenses.slice(0,30).map(e=>{// Parse custom label stored as [Label] prefix in description
+  if(!cycleExps.length){list.innerHTML='<div class="es"><div class="esi">📭</div><div class="est">Sem despesas no ciclo atual.<br>Adicione a primeira!</div></div>';return;}
+  list.innerHTML=cycleExps.slice(0,50).map(e=>{// Parse custom label stored as [Label] prefix in description
 const otherMatch = e.category==='other' ? e.description.match(/^\[([^\]]+)\]\s*/) : null;
 const otherLbl = otherMatch ? otherMatch[1] : null;
 const displayDesc = otherMatch ? e.description.replace(otherMatch[0],'').trim()||otherLbl : e.description;
 const c={...(catCfg[e.category]||catCfg.other)};
 if(otherLbl){c.l=otherLbl;c.i='📦';}const d=new Date(e.date+'T00:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});return`<div class="ei"><div class="eico ${c.c}">${c.i}</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:500">${displayDesc}</div><div style="font-size:11px;color:var(--text3)">${c.l}</div></div><div style="text-align:right"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--red)">−R$ ${e.amount.toFixed(2)}</div><div style="font-size:10px;color:var(--text3)">${d}</div></div><button class="edel" onclick="delExp(${e.id})">✕</button></div>`;}).join('');}
 function updDashStats(){
-  const total=S.expenses.reduce((s,e)=>s+e.amount,0);
+  const total=getCycleExps().reduce((s,e)=>s+e.amount,0);
   document.getElementById('sexp').textContent=`R$ ${fmt(total)}`;
   const inc=S.profile.income||0,pct=inc>0?((total/inc)*100).toFixed(0):0;
   const el=document.getElementById('sexd');
@@ -3234,15 +3350,39 @@ function generateReport(){
 
   CYCLE.reports.unshift(report);
   localStorage.setItem('nexus_reports', JSON.stringify(CYCLE.reports.slice(0,24)));
+
+  // ── FIX 1: Zero expenses for the cycle (archive them, don't delete from DB)
+  // Remove cycle expenses from local display — they are already saved in Supabase
+  S.expenses = S.expenses.filter(e=>{
+    const d = new Date(e.date+'T00:00:00');
+    return !(d >= start && d <= end);
+  });
+
+  // ── FIX 2: Decrement parcels on recurring items, remove completed ones
+  const recItems = REC.items;
+  const updatedRec = recItems.map(item=>{
+    if(item.type === 'parcel' && item.parcels !== null){
+      const remaining = (item.parcels || 1) - 1;
+      if(remaining <= 0) return null; // completed — remove
+      return {...item, parcels: remaining};
+    }
+    return item;
+  }).filter(Boolean);
+  REC.items = updatedRec;
+
+  renderExpList();
+  renderExpChart();
+  renderRecurring();
+  updateCycleBar();
+  updDashStats();
+  renderDashCharts();
   renderReportsList();
   setExpTab('faturas', document.getElementById('exptab-faturas'));
   toast('📊','Fatura fechada!',`${report.month} — Total: R$ ${fmt(total)}`,'success');
   openReportDetail(report);
 
-  // Email notification (frontend only — backend needed for actual send)
   if(CYCLE.email){
-    console.log('📧 Would send report to:', CYCLE.email, report);
-    toast('📧','E-mail pendente',`Relatório pronto para envio a ${CYCLE.email}. Configure o backend para envio automático.`,'info');
+    toast('📧','E-mail pendente',`Relatório pronto para ${CYCLE.email}. Backend necessário para envio.`,'info');
   }
 }
 
@@ -3257,18 +3397,22 @@ function renderReportsList(){
   list.innerHTML = CYCLE.reports.map((r,i)=>{
     const mainInsight = r.insights?.[0];
     const insightClass = mainInsight?.type==='good'?'good':mainInsight?.type==='alert'?'alert':'warn';
-    return `<div class="report-card" style="animation-delay:${i*.05}s" onclick="openReportDetail(CYCLE.reports[${i}])">
-      <div class="report-card-header">
-        <div>
+    return `<div class="report-card" style="animation-delay:${i*.05}s">
+      <div class="report-card-header" onclick="openReportDetail(CYCLE.reports[${i}])" style="cursor:pointer">
+        <div style="flex:1">
           <div class="report-month">📅 ${r.month}</div>
           <div style="font-size:11px;color:var(--text3);margin-top:2px">${r.name} · ${r.expCount} despesas · ${r.start} → ${r.end}</div>
         </div>
-        <div class="report-total">−R$ ${fmt(r.total)}</div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="report-total">−R$ ${fmt(r.total)}</div>
+          <button class="btn btn-s btn-sm" style="background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.3);color:var(--red);flex-shrink:0"
+            onclick="event.stopPropagation();deleteReport(${i})">🗑</button>
+        </div>
       </div>
-      <div class="report-cats">
+      <div class="report-cats" onclick="openReportDetail(CYCLE.reports[${i}])" style="cursor:pointer">
         ${(r.cats||[]).slice(0,4).map(c=>`<span class="report-cat-pill">${c.label}: R$ ${fmt(c.total)}</span>`).join('')}
       </div>
-      ${mainInsight?`<div class="report-insight ${insightClass}" style="margin-top:8px;font-size:12px">${mainInsight.msg}</div>`:''}
+      ${mainInsight?`<div class="report-insight ${insightClass}" style="margin-top:8px;font-size:12px;cursor:pointer" onclick="openReportDetail(CYCLE.reports[${i}])">${mainInsight.msg}</div>`:''}
     </div>`;
   }).join('');
 }
@@ -3331,6 +3475,141 @@ function openReportDetail(report){
   `;
 }
 function closeReport(){ document.getElementById('report-overlay').classList.remove('open'); }
+
+function deleteReport(idx){
+  if(!confirm('Excluir esta fatura? Esta ação não pode ser desfeita.')) return;
+  CYCLE.reports.splice(idx,1);
+  localStorage.setItem('nexus_reports', JSON.stringify(CYCLE.reports));
+  renderReportsList();
+  toast('🗑','Fatura excluída','A fatura foi removida do histórico.','info');
+}
+
+function exportReportPDF(){
+  if(!currentReport) return;
+  const r = currentReport;
+  const catColors = ['#7c5cfc','#22d3a5','#f87171','#fbbf24','#38bdf8','#a78bfa','#9ca3af'];
+
+  // Build pie chart as SVG
+  const total = r.total || 1;
+  const cats = r.cats || [];
+  let startAngle = -Math.PI/2;
+  let piePaths = '';
+  let legendItems = '';
+  cats.forEach((cat,i)=>{
+    const pct = cat.total/total;
+    const angle = pct * 2 * Math.PI;
+    const x1 = 100 + 90*Math.cos(startAngle);
+    const y1 = 100 + 90*Math.sin(startAngle);
+    const x2 = 100 + 90*Math.cos(startAngle+angle);
+    const y2 = 100 + 90*Math.sin(startAngle+angle);
+    const lg = angle > Math.PI ? 1 : 0;
+    const col = catColors[i%catColors.length];
+    if(pct > 0.001){
+      piePaths += `<path d="M100,100 L${x1.toFixed(1)},${y1.toFixed(1)} A90,90 0 ${lg},1 ${x2.toFixed(1)},${y2.toFixed(1)} Z" fill="${col}" stroke="#1a1a2e" stroke-width="1.5"/>`;
+      // Label
+      const midAngle = startAngle + angle/2;
+      const lx = 100 + 55*Math.cos(midAngle);
+      const ly = 100 + 55*Math.sin(midAngle);
+      if(pct > 0.05){
+        piePaths += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="7" font-weight="bold">${(pct*100).toFixed(0)}%</text>`;
+      }
+    }
+    legendItems += `<tr><td style="padding:4px 8px"><span style="display:inline-block;width:12px;height:12px;background:${col};border-radius:3px;margin-right:6px"></span>${cat.label}</td><td style="padding:4px 8px;text-align:right;font-weight:700">R$ ${fmt(cat.total)}</td><td style="padding:4px 8px;text-align:right;color:#666">${(pct*100).toFixed(1)}%</td></tr>`;
+    startAngle += angle;
+  });
+
+  const pieChart = `<svg width="200" height="200" viewBox="0 0 200 200">${piePaths}</svg>`;
+
+  const insightsHtml = (r.insights||[]).map(ins=>{
+    const bg = ins.type==='good'?'#dcfce7':ins.type==='alert'?'#fee2e2':'#fef9c3';
+    const border = ins.type==='good'?'#16a34a':ins.type==='alert'?'#dc2626':'#ca8a04';
+    return `<div style="background:${bg};border-left:4px solid ${border};border-radius:6px;padding:10px 14px;margin-bottom:8px;font-size:13px;color:#1a1a2e">${ins.msg}</div>`;
+  }).join('');
+
+  const html = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Relatório ${r.month}</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;color:#1a1a2e;background:#fff;padding:40px}
+  .header{background:linear-gradient(135deg,#7c5cfc,#22d3a5);border-radius:16px;padding:32px;color:white;margin-bottom:32px}
+  .header h1{font-size:28px;font-weight:800;margin-bottom:6px}
+  .header p{opacity:.85;font-size:14px}
+  .header .period{font-size:12px;opacity:.7;margin-top:8px}
+  .summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+  .summary-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:20px;text-align:center}
+  .summary-card .lbl{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+  .summary-card .val{font-size:24px;font-weight:800}
+  .section-title{font-size:16px;font-weight:700;margin-bottom:16px;color:#1a1a2e;border-bottom:2px solid #e2e8f0;padding-bottom:8px}
+  .charts-row{display:flex;gap:32px;margin-bottom:32px;align-items:flex-start}
+  .pie-wrap{text-align:center}
+  .pie-wrap p{font-size:12px;color:#64748b;margin-top:8px}
+  table{width:100%;border-collapse:collapse}
+  th{background:#f1f5f9;padding:8px 12px;text-align:left;font-size:12px;color:#475569;font-weight:600}
+  td{padding:8px 12px;border-bottom:1px solid #f1f5f9;font-size:13px}
+  tr:last-child td{border-bottom:none}
+  .insights-section{margin-bottom:32px}
+  .footer{text-align:center;font-size:11px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:20px;margin-top:32px}
+  @media print{body{padding:20px}}
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>📊 ${r.month}</h1>
+    <p>${r.name} · ${r.expCount} despesas registradas</p>
+    <p class="period">Período: ${r.start} → ${r.end}</p>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="lbl">Total Gasto</div>
+      <div class="val" style="color:#dc2626">R$ ${fmt(r.total)}</div>
+    </div>
+    <div class="summary-card">
+      <div class="lbl">Nº de Despesas</div>
+      <div class="val" style="color:#7c5cfc">${r.expCount}</div>
+    </div>
+    <div class="summary-card">
+      <div class="lbl">Categoria Campeã 🏆</div>
+      <div class="val" style="font-size:16px;color:#ca8a04">${r.champion||'—'}</div>
+    </div>
+  </div>
+
+  <div class="charts-row">
+    <div class="pie-wrap">
+      <div class="section-title">Distribuição</div>
+      ${pieChart}
+      <p>Gráfico de categorias</p>
+    </div>
+    <div style="flex:1">
+      <div class="section-title">Gastos por Categoria</div>
+      <table>
+        <tr><th>Categoria</th><th style="text-align:right">Valor</th><th style="text-align:right">%</th></tr>
+        ${legendItems}
+        <tr style="background:#f8fafc;font-weight:700"><td>TOTAL</td><td style="text-align:right">R$ ${fmt(r.total)}</td><td style="text-align:right">100%</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="insights-section">
+    <div class="section-title">💡 Insights & Análise Comparativa</div>
+    ${insightsHtml || '<p style="color:#64748b;font-size:13px">Nenhum insight disponível.</p>'}
+  </div>
+
+  <div class="footer">
+    Relatório gerado em ${new Date(r.createdAt).toLocaleString('pt-BR')} · Nexus Finanças
+  </div>
+</body>
+</html>`;
+
+  // Open in new tab and trigger print dialog (saves as PDF)
+  const w = window.open('','_blank');
+  w.document.write(html);
+  w.document.close();
+  setTimeout(()=>{ w.focus(); w.print(); }, 600);
+}
 function copyReport(){
   if(!currentReport) return;
   const r = currentReport;
@@ -3364,6 +3643,27 @@ function saveReportEmail(){
 }
 
 // ═══════════ ESTUDOS
+let currentLessonId=null,currentLevel='init';
+
+function pickLevel(id){
+  const l=LESSONS[id];
+  if(!l){ console.error('Lesson not found:', id); return; }
+  currentLessonId=id;
+  const ico=document.getElementById('level-modal-icon');
+  const tit=document.getElementById('level-modal-title');
+  if(ico) ico.textContent=l.icon;
+  if(tit) tit.textContent=l.title;
+  const modal=document.getElementById('level-modal');
+  if(modal){
+    modal.style.cssText='display:flex!important;align-items:center;justify-content:center;position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);z-index:1000;padding:20px';
+  }
+}
+function startLesson(id,level){
+  const m=document.getElementById('level-modal');
+  if(m) m.style.display='none';
+  currentLevel=level;
+  openLesson(id,level);
+}
 
 function setEstTab(tab,el){
   document.querySelectorAll('.estab').forEach(b=>b.classList.remove('act'));
@@ -3386,23 +3686,335 @@ const LESSONS={
 };
 
 let quizState={};
-function openLesson(id){
+// ── EXERCISES DATA
+const EXERCISES={
+  'renda-fixa':{
+    init:[
+      {type:'mcq',q:'Qual investimento é garantido pelo FGC até R$ 250.000?',opts:['Ações da Petrobras','CDB de banco','Fundos de ações','Bitcoin'],c:1,exp:'O CDB é protegido pelo FGC. Ações, fundos e cripto não têm essa garantia.'},
+      {type:'mcq',q:'O que significa LCI ser isenta de IR?',opts:['Você não declara no IR','Você não paga imposto sobre o lucro','O banco paga o IR por você','Só vale acima de R$ 100k'],c:1,exp:'LCI e LCA são isentas de IR — o lucro vai inteiro para você, sem desconto do governo.'},
+      {type:'tf',q:'A poupança é sempre o melhor investimento por ser isenta de IR.',answer:false,exp:'FALSO! A poupança rende menos que CDBs, LCIs e Tesouro Direto. A isenção não compensa o rendimento menor.'},
+    ],
+    med:[
+      {type:'calc',q:'Calcule o rendimento líquido do CDB:',desc:'R$ 10.000 em CDB que rende 110% do CDI (CDI=13,75% a.a.). Quanto após 1 ano com IR de 17,5%?',inputs:[{id:'cap',label:'Capital (R$)',val:10000},{id:'cdi',label:'CDI anual (%)',val:13.75},{id:'pct',label:'% do CDI',val:110}],fn:'calcCDB',resultLabel:'Montante líquido'},
+      {type:'mcq',q:'CDB a 120% CDI vs LCI a 95% CDI (CDI=13,75%, prazo 1 ano). Qual rende mais líquido?',opts:['CDB rende mais bruto, ganha','LCI — isenta de IR supera o CDB','Empate','Depende do banco'],c:1,exp:'LCI a 95% CDI = 13,06% líquido. CDB 120% CDI = 16,5% bruto - 22,5% IR = 12,79% líquido. LCI GANHA mesmo com taxa menor!'},
+      {type:'mcq',q:'Qual título do Tesouro é ideal para reserva de emergência?',opts:['Tesouro IPCA+ 2035','Tesouro Prefixado','Tesouro Selic','Tesouro Renda+'],c:2,exp:'Tesouro Selic tem liquidez diária e rende a taxa Selic sem volatilidade — perfeito para reserva de emergência.'},
+    ],
+    avd:[
+      {type:'calc',q:'Simulador de carteira de Renda Fixa (R$ 50.000, 2 anos):',desc:'Aloque entre Tesouro Selic (13,75%), CDB 110% CDI (15,12%) e LCA 92% CDI (12,65% líquido).',inputs:[{id:'selic_pct',label:'% Tesouro Selic',val:40},{id:'cdb_pct',label:'% CDB',val:40},{id:'lca_pct',label:'% LCA',val:20}],fn:'calcPortfolioRF',resultLabel:'Rendimento total líquido em 2 anos'},
+      {type:'mcq',q:'Selic em queda: qual movimento faz mais sentido?',opts:['Migrar tudo para Tesouro Selic','Travar taxa em Prefixado antes da queda','Vender tudo para ações','Colocar 100% em poupança'],c:1,exp:'Com Selic em queda, o Prefixado permite travar a taxa atual mais alta. Quando a Selic cair, o Prefixado se valoriza no mercado secundário.'},
+      {type:'mcq',q:'O "come-cotas" afeta qual investimento?',opts:['CDB','LCI/LCA','Fundos de investimento','Tesouro Selic'],c:2,exp:'O come-cotas é antecipação semestral de IR nos fundos (maio e novembro). Prejudica o efeito dos juros compostos ao longo do tempo.'},
+    ]
+  },
+  'acoes-intro':{
+    init:[
+      {type:'mcq',q:'O que você se torna ao comprar ações?',opts:['Credor da empresa','Sócio da empresa','Funcionário','Gestor'],c:1,exp:'Ao comprar ações você se torna acionista (sócio) da empresa, participando dos lucros e da valorização.'},
+      {type:'tf',q:'Ações ON (ordinárias) dão direito a voto nas assembleias.',answer:true,exp:'VERDADEIRO! Ações ON (código 3, ex: VALE3) dão direito a voto. PN (código 4) têm preferência em dividendos.'},
+      {type:'mcq',q:'Vantagem de investir em ETF como BOVA11:',opts:['Rentabilidade garantida','Diversificação automática em um único ativo','Isenção total de IR','Liquidez apenas mensal'],c:1,exp:'ETFs replicam índices, dando exposição a dezenas de empresas com uma compra e taxa de administração baixa.'},
+    ],
+    med:[
+      {type:'mcq',q:'Empresa lucrou R$ 1 bi com 500M de ações. Qual o LPA?',opts:['R$ 0,50','R$ 2,00','R$ 5,00','R$ 50,00'],c:1,exp:'LPA = R$ 1.000.000.000 ÷ 500.000.000 = R$ 2,00 por ação.'},
+      {type:'calc',q:'Calcule o Dividend Yield:',desc:'Ação custa R$ 45 e pagou R$ 3,60 em dividendos nos últimos 12 meses.',inputs:[{id:'preco',label:'Preço da ação (R$)',val:45},{id:'divs',label:'Dividendos pagos (R$)',val:3.60}],fn:'calcDY',resultLabel:'Dividend Yield (% ao ano)'},
+      {type:'mcq',q:'P/L de 8 vs concorrente com P/L de 20. O que indica?',opts:['A de P/L 8 está cara','P/L 8 pode estar mais barata — comparar mesmo setor','P/L não serve','P/L 20 sempre é melhor'],c:1,exp:'P/L mais baixo pode indicar ação barata, mas compare empresas do mesmo setor e considere perspectivas de crescimento.'},
+    ],
+    avd:[
+      {type:'mcq',q:'ROE de 25% e a empresa reinveste 60% do lucro. Taxa de crescimento sustentável?',opts:['15%','10%','25%','60%'],c:0,exp:'Taxa sustentável = ROE × reinvestimento = 25% × 60% = 15%. É a taxa que a empresa cresce sem capital externo.'},
+      {type:'calc',q:'DCF simplificado:',desc:'Empresa gera R$ 1.000.000 de caixa livre/ano, crescimento 5% e taxa de desconto 12%.',inputs:[{id:'fcl',label:'Fluxo de caixa livre (R$)',val:1000000},{id:'g',label:'Crescimento (%)',val:5},{id:'r',label:'Taxa de desconto (%)',val:12}],fn:'calcDCF',resultLabel:'Valor justo da empresa'},
+      {type:'candle',q:'Identifique o Doji (indecisão — abertura ≈ fechamento):',desc:'Clique no candle que representa indecisão do mercado.'},
+    ]
+  },
+  'juros-compostos':{
+    init:[
+      {type:'mcq',q:'R$ 1.000 a 10% a.a. por juros SIMPLES em 5 anos:',opts:['R$ 1.500','R$ 1.610','R$ 2.000','R$ 1.100'],c:0,exp:'Juros simples: 1.000 + (1.000 × 10% × 5) = R$ 1.500. Sempre sobre o capital inicial.'},
+      {type:'calc',q:'Poder dos juros compostos:',desc:'Calcule quanto rende seu capital com juros compostos.',inputs:[{id:'cap',label:'Capital inicial (R$)',val:1000},{id:'taxa',label:'Taxa anual (%)',val:10},{id:'anos',label:'Anos',val:10}],fn:'calcJurosComp',resultLabel:'Montante final'},
+      {type:'tf',q:'Em juros compostos, o juro do mês 2 é calculado sobre o capital inicial.',answer:false,exp:'FALSO! Em juros compostos, o juro incide sobre o montante acumulado (capital + juros anteriores). Por isso cresce exponencialmente.'},
+    ],
+    med:[
+      {type:'calc',q:'Regra dos 72:',desc:'Descubra em quantos anos seu dinheiro dobra e confirme calculando.',inputs:[{id:'taxa72',label:'Taxa anual (%)',val:12},{id:'capital72',label:'Capital (R$)',val:10000}],fn:'calcRegra72',resultLabel:'Anos para dobrar'},
+      {type:'mcq',q:'R$ 500/mês por 20 anos a 12% a.a. Resultado aproximado?',opts:['R$ 120.000','R$ 480.000','R$ 240.000','R$ 2.000.000'],c:1,exp:'Com aportes mensais de R$ 500 a 1% ao mês por 240 meses: ~R$ 480.000. Os juros compostos sobre aportes regulares são poderosos!'},
+      {type:'mcq',q:'Inflação 6% e investimento rende 13%. Rendimento REAL?',opts:['7% ao ano','6,6% ao ano','7,5% ao ano','19% ao ano'],c:1,exp:'Taxa real = (1,13/1,06) - 1 = 6,6% ao ano. Fórmula de Fisher — não é simplesmente 13-6=7%.'},
+    ],
+    avd:[
+      {type:'calc',q:'Simulador de independência financeira:',desc:'Quanto acumular para viver de renda? Regra dos 4% (retirada anual segura).',inputs:[{id:'renda_mensal',label:'Renda mensal desejada (R$)',val:10000},{id:'taxa_inv',label:'Retorno anual (%)',val:12},{id:'inflacao',label:'Inflação anual (%)',val:5}],fn:'calcIndFin',resultLabel:'Patrimônio necessário'},
+      {type:'mcq',q:'R$ 500k, retira 0,5%/mês, carteira rende 0,8%/mês. O que acontece?',opts:['Patrimônio vai a zero em 20 anos','Patrimônio cresce indefinidamente','Fica estável','Vai a zero em 10 anos'],c:1,exp:'Rendimento (0,8%) > retirada (0,5%) = patrimônio CRESCE mesmo com saques. Isso é renda passiva sustentável!'},
+      {type:'mcq',q:'Taxa nominal 15% a.a., inflação 6% a.a. Taxa real?',opts:['9% ao ano','8,49% ao ano','15% ao ano','6% ao ano'],c:1,exp:'Taxa real = (1,15/1,06) - 1 = 8,49% ao ano. Use sempre a fórmula de Fisher.'},
+    ]
+  },
+  'bitcoin-intro':{
+    init:[
+      {type:'mcq',q:'Máximo de Bitcoins que existirão:',opts:['100 milhões','21 milhões','1 bilhão','Ilimitado'],c:1,exp:'O protocolo define limite rígido de 21 milhões — nunca haverá mais, garantindo escassez.'},
+      {type:'tf',q:'O governo pode imprimir mais Bitcoin para controlar seu preço.',answer:false,exp:'FALSO! Bitcoin é descentralizado. Nenhum governo controla sua emissão. O limite de 21M é imutável.'},
+      {type:'mcq',q:'O Halving do Bitcoin acontece a cada:',opts:['1 ano','4 anos (~210.000 blocos)','10 anos','Aleatoriamente'],c:1,exp:'Halving: a cada 210.000 blocos (~4 anos), reduz à metade a recompensa dos mineradores, diminuindo emissão de novos BTC.'},
+    ],
+    med:[
+      {type:'calc',q:'Simule o impacto do Halving:',desc:'Mineradores recebem 6,25 BTC por bloco, 144 blocos por dia. Calcule a receita antes e depois.',inputs:[{id:'btc_price',label:'Preço BTC (R$)',val:370000},{id:'reward',label:'Recompensa atual (BTC)',val:6.25},{id:'blocks',label:'Blocos por dia',val:144}],fn:'calcHalving',resultLabel:'Receita diária dos mineradores'},
+      {type:'mcq',q:'Comprou 0,1 BTC por R$ 25.000 (preço=250k). BTC subiu para R$ 380k. Lucro?',opts:['R$ 13.000','R$ 38.000','R$ 25.000','R$ 155.000'],c:0,exp:'Valor atual: 0,1 × 380.000 = R$ 38.000. Lucro = R$ 38.000 - R$ 25.000 = R$ 13.000 (+52%).'},
+      {type:'mcq',q:'O que é a Lightning Network?',opts:['Altcoin concorrente','Camada 2 para pagamentos rápidos em BTC','Próxima atualização do protocolo','Exchange descentralizada'],c:1,exp:'Lightning Network é Layer 2 para transações instantâneas e baratas em Bitcoin, resolvendo o problema de escalabilidade.'},
+    ],
+    avd:[
+      {type:'calc',q:'Modelo Stock-to-Flow:',desc:'S2F = Estoque atual ÷ Produção anual. Com 19,5M BTC e produção calculada abaixo:',inputs:[{id:'stock',label:'BTC em circulação (M)',val:19.5},{id:'flow_btc',label:'Recompensa por bloco (BTC)',val:6.25},{id:'blocks_year',label:'Blocos por ano',val:52560}],fn:'calcS2F',resultLabel:'Stock-to-Flow Ratio'},
+      {type:'mcq',q:'O que é Proof of Work?',opts:['Prova de posse de Bitcoin','Mecanismo onde mineradores resolvem problemas matemáticos para validar transações','Sistema de governança','Protocolo de privacidade'],c:1,exp:'PoW: mineradores competem para resolver um hash difícil. O vencedor adiciona o próximo bloco e recebe a recompensa em BTC.'},
+      {type:'mcq',q:'Carteira tem 5% em BTC. BTC cai 60%. Impacto no portfólio total?',opts:['-60%','-30%','-3%','-5%'],c:2,exp:'Impacto = 60% (queda) × 5% (alocação) = 3% de redução total. Gestão de risco limitou o dano!'},
+    ]
+  },
+  'analise-tecnica':{
+    init:[
+      {type:'candle',q:'Identifique o Doji (indecisão — corpo muito pequeno):',desc:'Clique no candlestick que representa indecisão do mercado.'},
+      {type:'mcq',q:'O que é uma resistência no gráfico?',opts:['Nível onde o preço sempre cai após atingir','Nível onde compradores entram forte','Média dos últimos 20 dias','O preço mais baixo do dia'],c:0,exp:'Resistência é um nível histórico onde vendedores aparecem em força e o preço tem dificuldade de romper para cima.'},
+      {type:'tf',q:'Preço abaixo da MM200 indica tendência de alta.',answer:false,exp:'FALSO! Preço ABAIXO da MM200 = tendência de BAIXA. Acima da MM200 = tendência de alta de longo prazo.'},
+    ],
+    med:[
+      {type:'mcq',q:'Candle verde com corpo longo e sombras pequenas indica:',opts:['Indecisão','Forte pressão compradora','Reversão','Movimento lateral'],c:1,exp:'Candle verde longo com sombras pequenas = compradores dominaram todo o período. Sinal de força de alta.'},
+      {type:'mcq',q:'IFR em 78 provavelmente indica:',opts:['Ativo em baixa forte','Ativo sobrecomprado — possível correção','Ativo neutro','Ativo sobrevendido'],c:1,exp:'IFR acima de 70 = sobrecompra. O ativo subiu muito rápido e pode corrigir. IFR abaixo de 30 = sobrevenda.'},
+      {type:'mcq',q:'O que é stop loss?',opts:['Ordem de compra automática','Ordem de venda para limitar prejuízo','Taxa da corretora','Dividendo especial'],c:1,exp:'Stop loss é uma ordem automática de venda se o preço cair a um nível definido, limitando sua perda máxima.'},
+    ],
+    avd:[
+      {type:'calc',q:'Calcule a relação Risco/Retorno:',desc:'Ação a R$ 50, stop em R$ 46, alvo em R$ 62. Vale a pena operar?',inputs:[{id:'entrada',label:'Entrada (R$)',val:50},{id:'stop',label:'Stop Loss (R$)',val:46},{id:'alvo',label:'Alvo (R$)',val:62}],fn:'calcRR',resultLabel:'Relação Risco/Retorno'},
+      {type:'mcq',q:'MM9 cruzou acima da MM21. Chamado de:',opts:['Death Cross','Golden Cross','Divergência MACD','Suporte rompido'],c:1,exp:'MM rápida cruza MM lenta para CIMA = Golden Cross (sinal de alta). O contrário = Death Cross (sinal de baixa).'},
+      {type:'mcq',q:'Divergência de alta no IFR significa:',opts:['IFR e preço caindo','Preço faz nova mínima mas IFR faz mínima maior — reversão','Preço e IFR subindo','IFR acima de 70'],c:1,exp:'Divergência de alta = preço faz novo fundo mais baixo, IFR faz fundo mais alto. Força vendedora diminuindo — possível reversão.'},
+    ]
+  },
+  'fiis':{
+    init:[
+      {type:'mcq',q:'Como investir em FIIs?',opts:['Comprando imóveis físicos','Comprando cotas na B3','Via financiamento','Só via banco privado'],c:1,exp:'FIIs são negociados na B3 como ações. Você compra cotas pela corretora e recebe rendimentos proporcionais.'},
+      {type:'tf',q:'Rendimentos mensais de FIIs são isentos de IR para pessoa física.',answer:true,exp:'VERDADEIRO! Rendimentos distribuídos por FIIs são isentos de IR para PF, desde que o fundo tenha +50 cotistas e seja negociado em bolsa.'},
+      {type:'mcq',q:'O que é um FII de papel?',opts:['FII de imóveis físicos','FII que investe em CRIs e títulos do setor imobiliário','FII sem bolsa','FII de pequenas construtoras'],c:1,exp:'FIIs de papel investem em CRIs, LCIs e outros títulos financeiros do setor imobiliário — não em imóveis físicos.'},
+    ],
+    med:[
+      {type:'calc',q:'Calcule o DY do FII:',desc:'Cota do MXRF11 custa R$ 10,50 e distribuiu R$ 0,10/cota no último mês.',inputs:[{id:'cota',label:'Preço da cota (R$)',val:10.50},{id:'rendimento',label:'Rendimento mensal (R$)',val:0.10}],fn:'calcFIIDY',resultLabel:'DY mensal e anual'},
+      {type:'mcq',q:'P/VP de um FII é 0,85. Significa:',opts:['Fundo caro','Desconto de 15% sobre o patrimônio','85% de vacância','DY de 8,5%'],c:1,exp:'P/VP = Preço ÷ Valor Patrimonial. 0,85 = você paga R$ 0,85 por R$ 1,00 de patrimônio — desconto de 15%.'},
+      {type:'mcq',q:'O que é vacância em FII de tijolo?',opts:['Taxa de administração','% de imóveis sem inquilino','Rendimento abaixo do esperado','Alavancagem'],c:1,exp:'Vacância = % da área sem inquilino. Alta vacância = menos aluguel = menor distribuição para cotistas.'},
+    ],
+    avd:[
+      {type:'calc',q:'Simulador de renda passiva com FIIs:',desc:'Quantas cotas do HGLG11 (R$ 165/cota, DY 0,7%/mês) para R$ 3.000/mês?',inputs:[{id:'fii_cota',label:'Preço da cota (R$)',val:165},{id:'fii_dy',label:'DY mensal (%)',val:0.7},{id:'renda_alvo',label:'Renda desejada (R$)',val:3000}],fn:'calcFIICotas',resultLabel:'Cotas e capital necessário'},
+      {type:'mcq',q:'FII de papel vs tijolo: quando cada um brilha?',opts:['Papel em queda de juros; tijolo em alta','Papel em alta de juros; tijolo em queda','Sempre tijolo','Sempre papel'],c:1,exp:'Papel se beneficia de juros altos (CRIs indexados ao CDI rendem mais). Tijolo se valoriza com queda dos juros (imóveis ficam mais atrativos).'},
+      {type:'mcq',q:'O que é follow-on em um FII?',opts:['Acompanhar distribuições','Nova emissão de cotas para captar recursos','Estratégia de rebalanceamento','Fusão de FIIs'],c:1,exp:'Follow-on = FII emite novas cotas para captar e comprar mais imóveis. Pode ser bom (cresce portfólio) ou dilutivo (depende do preço vs P/VP).'},
+    ]
+  },
+  'blockchain':{
+    init:[
+      {type:'mcq',q:'O que é um hash na blockchain?',opts:['Uma criptomoeda','Impressão digital matemática única de dados','Nome de um minerador','Taxa de transação'],c:1,exp:'Hash = função que transforma dados numa sequência única. Qualquer alteração mínima muda o hash completamente.'},
+      {type:'tf',q:'É possível alterar uma transação antiga na blockchain do Bitcoin.',answer:false,exp:'FALSO! Para alterar um bloco antigo, precisaria refazer o PoW daquele bloco e de todos os seguintes, mais rápido que toda a rede. Impossível na prática.'},
+      {type:'mcq',q:'O que fazem os mineradores?',opts:['Criam moedas do nada','Validam transações resolvendo problemas matemáticos e ganham BTC','Compram e vendem BTC','Guardam chaves privadas'],c:1,exp:'Mineradores usam poder computacional para resolver o PoW. O vencedor adiciona o próximo bloco e ganha a recompensa em BTC.'},
+    ],
+    med:[
+      {type:'mcq',q:'O que é um smart contract?',opts:['Contrato legal digitalizado','Código que executa automaticamente quando condições são atendidas','Sistema de seguro','Protocolo da Ledger'],c:1,exp:'Smart contracts executam automaticamente quando condições pré-definidas são atendidas — sem banco, advogado ou intermediário.'},
+      {type:'mcq',q:'Por que Ethereum cobra taxas de gas?',opts:['Para enriquecer a Fundação','Para remunerar validadores','Só para transações internacionais','São taxas cambiais'],c:1,exp:'Gas remunera o trabalho computacional de processar sua transação. Quanto mais complexa a operação, mais gas é necessário.'},
+      {type:'tf',q:'Uma blockchain pública pode ser controlada por uma única empresa.',answer:false,exp:'FALSO! Blockchains públicas são descentralizadas — milhares de nós ao redor do mundo validam as transações.'},
+    ],
+    avd:[
+      {type:'mcq',q:'O Trilema da Blockchain: difícil ter ao mesmo tempo:',opts:['Velocidade, segurança e preço','Descentralização, escalabilidade e segurança','Privacidade, transparência e velocidade','Mineração, staking e DeFi'],c:1,exp:'Trilema de Vitalik: toda blockchain luta para ter descentralização, escalabilidade e segurança simultaneamente. Soluções Layer 2 tentam contornar.'},
+      {type:'mcq',q:'Proof of Stake vs Proof of Work:',opts:['PoS usa mais energia','Em PoS, validadores travam crypto em vez de gastar energia','PoS é exclusivo do Bitcoin','PoW é mais recente'],c:1,exp:'PoS (Ethereum pós-merge): validadores travam ETH como colateral em vez de gastar energia. 99,9% menos energia que PoW.'},
+      {type:'mcq',q:'O que são soluções Layer 2?',opts:['Segunda versão de blockchain','Protocolos sobre a cadeia principal para mais velocidade e menor custo','Carteiras de segunda camada','Exchanges de segunda geração'],c:1,exp:'Layer 2 (Lightning/BTC, Polygon/ETH) processa transações fora da cadeia principal e registra só o resultado — muito mais rápido e barato.'},
+    ]
+  },
+  'carteira':{
+    init:[
+      {type:'mcq',q:'O que é diversificação?',opts:['Tudo no ativo com maior retorno','Distribuir entre diferentes ativos para reduzir risco','Contas em vários bancos','Ações de empresas do mesmo setor'],c:1,exp:'Diversificação: combinar ativos que não se movem juntos. Quando um cai, outro pode subir — reduz risco sem necessariamente reduzir retorno.'},
+      {type:'tf',q:'Portfólio 100% em renda fixa é sempre o mais seguro.',answer:false,exp:'FALSO! 100% em renda fixa tem risco de inflação (perda de poder de compra). Diversificação adequada reduz o risco real.'},
+      {type:'mcq',q:'Primeiro passo antes de investir:',opts:['Escolher as melhores ações','Montar a reserva de emergência','Abrir conta em exchange','Contratar fundo de ações'],c:1,exp:'Sem reserva de emergência (3-6 meses de gastos), qualquer imprevisto força vender investimentos no pior momento.'},
+    ],
+    med:[
+      {type:'calc',q:'Monte sua alocação ideal (R$ 30.000):',desc:'Distribua entre as classes (deve somar 100%).',inputs:[{id:'rf_pct',label:'Renda Fixa (%)',val:40},{id:'acoes_pct',label:'Ações BR (%)',val:30},{id:'inter_pct',label:'Internacional (%)',val:20},{id:'alt_pct',label:'Alternativo (%)',val:10}],fn:'calcAlocacao',resultLabel:'Distribuição do capital'},
+      {type:'mcq',q:'Correlação de -1 entre dois ativos significa:',opts:['Sempre sobem juntos','Sem relação','Quando um sobe, o outro cai proporcionalmente','Mesmo retorno'],c:2,exp:'Correlação -1 = diversificação perfeita. Os ativos se movem em direções opostas. Na prática, correlações baixas já ajudam muito.'},
+      {type:'mcq',q:'O que é rebalanceamento?',opts:['Trocar todos os ativos','Restaurar % originais vendendo o que subiu e comprando o que caiu','Aumentar aporte mensal','Zerar e começar do zero'],c:1,exp:'Rebalancear = voltar às proporções originais. Automaticamente "vende na alta e compra na baixa".'},
+    ],
+    avd:[
+      {type:'calc',q:'Índice de Sharpe:',desc:'Sharpe = (Retorno carteira - Taxa livre de risco) ÷ Desvio padrão',inputs:[{id:'ret_cart',label:'Retorno carteira (%)',val:18},{id:'taxa_lr',label:'CDI/Taxa livre risco (%)',val:13.75},{id:'desvio',label:'Desvio padrão (%)',val:12}],fn:'calcSharpe',resultLabel:'Índice de Sharpe'},
+      {type:'mcq',q:'Sharpe 0,35 vs 0,80:',opts:['0,35 é melhor','0,80 é melhor — mais retorno por unidade de risco','Equivalentes','Não comparável'],c:1,exp:'Sharpe maior = melhor relação risco/retorno. Sharpe 0,80 = para cada 1% de risco extra, ganha 0,80% de retorno extra.'},
+      {type:'mcq',q:'O que é a Fronteira Eficiente (Markowitz)?',opts:['Limite do Tesouro Direto','Carteiras com maior retorno para cada nível de risco','Fronteira entre RF e RV','Limite do FGC'],c:1,exp:'Fronteira Eficiente = conjunto de carteiras ótimas. Para cada nível de risco, representa o máximo retorno possível. Carteiras abaixo = ineficientes.'},
+    ]
+  },
+  'ethereum-defi':{
+    init:[
+      {type:'mcq',q:'Ethereum é principalmente:',opts:['Uma moeda para pagamentos','Plataforma de computação descentralizada com contratos inteligentes','Concorrente direto do Bitcoin','Uma exchange'],c:1,exp:'Ethereum é uma plataforma onde rodam contratos inteligentes e apps descentralizados (dApps), muito além de ser só uma moeda.'},
+      {type:'tf',q:'DeFi requer um banco para funcionar.',answer:false,exp:'FALSO! DeFi (Finanças Descentralizadas) elimina intermediários. Tudo funciona via contratos inteligentes na blockchain.'},
+      {type:'mcq',q:'O que paga as taxas de gas no Ethereum?',opts:['Dólares americanos','ETH (Ether)','Stablecoins apenas','Qualquer token ERC-20'],c:1,exp:'Gas é pago em ETH. É a remuneração para os validadores que processam sua transação na rede Ethereum.'},
+    ],
+    med:[
+      {type:'mcq',q:'O que é um contrato inteligente?',opts:['Contrato legal digital','Código que executa automaticamente quando condições são atendidas','Sistema de seguro crypto','App de gestão'],c:1,exp:'Smart contracts: programas na blockchain que executam sozinhos — sem banco, advogado ou intermediário.'},
+      {type:'mcq',q:'Uniswap é um exemplo de:',opts:['Exchange centralizada','DEX — exchange descentralizada','Wallet de hardware','Protocolo de empréstimo'],c:1,exp:'Uniswap é uma DEX (Decentralized Exchange) — você troca tokens diretamente via smart contract, sem criar conta ou passar por KYC.'},
+      {type:'mcq',q:'Risco principal do DeFi:',opts:['Alta liquidez','Bugs em contratos inteligentes sem FGC','Taxas muito baixas','Excesso de regulação'],c:1,exp:'DeFi não tem FGC. Contratos podem ter vulnerabilidades. Já houve hacks bilionários em protocolos DeFi. Pesquise antes de alocar.'},
+    ],
+    avd:[
+      {type:'mcq',q:'O que é "impermanent loss" em DeFi?',opts:['Taxa de saque de exchange','Perda temporária ao fornecer liquidez num pool quando os preços divergem','Imposto sobre DeFi','Penalidade por saque antecipado'],c:1,exp:'Impermanent loss: ao fornecer liquidez num pool, se os preços dos tokens divergirem, você pode ter menos valor que se tivesse apenas segurado os tokens.'},
+      {type:'mcq',q:'O que é stablecoin colateralizada?',opts:['Moeda com preço instável','Stablecoin lastreada em ativos reais (USD, BTC, ETH)','Token de governança','Moeda emitida por banco central'],c:1,exp:'Stablecoins colateralizadas (USDC, DAI) são lastreadas em ativos reais. Ao contrário das algorítmicas (como a UST que colapsou), têm reservas reais.'},
+      {type:'mcq',q:'Diferença entre Ethereum PoS e PoW:',opts:['PoS usa mais energia','PoS: validadores travam ETH como garantia em vez de gastar energia computacional','PoW é mais recente','Sem diferença prática'],c:1,exp:'Ethereum migrou para PoS no "Merge" de 2022 — 99,9% menos energia. Validadores travam ETH (staking) em vez de minerar.'},
+    ]
+  },
+  'altcoins':{
+    init:[
+      {type:'mcq',q:'O que é uma altcoin?',opts:['Moeda falsa','Qualquer criptomoeda que não seja Bitcoin','Token de jogo','Stablecoin'],c:1,exp:'Altcoin = alternative coin. Qualquer cripto que não seja Bitcoin. Ethereum, Solana, BNB são altcoins.'},
+      {type:'tf',q:'Todas as altcoins têm fundamentos sólidos e são bons investimentos.',answer:false,exp:'FALSO! A maioria das altcoins não tem fundamento real. Muitas são esquemas de pump and dump. Pesquise profundamente antes de investir.'},
+      {type:'mcq',q:'Solana (SOL) é conhecida por:',opts:['Ser a mais antiga','Alta velocidade e taxas baixas — rival do Ethereum','Ser emitida pelo governo','Ter o maior número de mineradores'],c:1,exp:'Solana processa milhares de transações por segundo com taxas mínimas, sendo uma das principais concorrentes do Ethereum para dApps.'},
+    ],
+    med:[
+      {type:'mcq',q:'XRP (Ripple) tem foco em:',opts:['Smart contracts','Pagamentos internacionais rápidos e baratos entre bancos','Mineração','NFTs'],c:1,exp:'XRP é projetado para transferências internacionais entre instituições financeiras — muito mais rápido e barato que transferências SWIFT tradicionais.'},
+      {type:'mcq',q:'O que é "market cap" (capitalização de mercado)?',opts:['Volume diário negociado','Preço do token × quantidade total em circulação','Valor de cada token','Quantidade total de holders'],c:1,exp:'Market cap = preço × supply circulante. Um token a R$ 0,01 com 100 bilhões de tokens tem market cap de R$ 1 bilhão — maior que um token a R$ 100 com 1 milhão de tokens.'},
+      {type:'mcq',q:'Sinal de alerta para uma altcoin ruim:',opts:['Time público e verificável','Whitepaper detalhado','Promessa de retornos garantidos de 1000%','Código open-source auditado'],c:2,exp:'Promessas de retornos garantidos são sempre bandeira vermelha. Cripto legítima não garante retornos — o mercado é livre e volátil.'},
+    ],
+    avd:[
+      {type:'mcq',q:'O que é tokenomics?',opts:['Economia geral de cripto','Estudo da distribuição, emissão e utilidade de um token específico','Taxa de transação','Sistema de governança genérico'],c:1,exp:'Tokenomics: análise da economia de um token — supply máximo, distribuição inicial, vestings, inflação/deflação e casos de uso. Fundamental antes de investir.'},
+      {type:'mcq',q:'O que é um "rug pull"?',opts:['Estratégia de hodl','Golpe: criadores vendem tudo e abandonam o projeto','Técnica de análise técnica','Protocolo de segurança'],c:1,exp:'Rug pull = puxar o tapete. Os criadores acumulam tokens, criam hype, o preço sobe — então vendem tudo e desaparecem. Projeto vai a zero.'},
+      {type:'mcq',q:'Como avaliar o "fully diluted valuation" (FDV) vs market cap?',opts:['São sempre iguais','FDV usa supply total vs market cap que usa supply circulante — FDV alto indica muita inflação futura','FDV é irrelevante','FDV é mais confiável sempre'],c:1,exp:'FDV = preço × supply total (incluindo tokens ainda não emitidos). FDV muito maior que market cap = muitos tokens serão liberados no futuro, criando pressão vendedora.'},
+    ]
+  },
+  'crypto-seguranca':{
+    init:[
+      {type:'mcq',q:'O que é uma seed phrase?',opts:['Senha da exchange','12 ou 24 palavras que permitem recuperar sua wallet','Nome da sua carteira','Taxa de transação'],c:1,exp:'Seed phrase = chave mestra da sua wallet. Com ela qualquer pessoa pode acessar seus fundos. NUNCA compartilhe.'},
+      {type:'tf',q:'É seguro fotografar sua seed phrase e guardar no Google Fotos.',answer:false,exp:'FALSO! NUNCA fotografe nem guarde digitalmente. Google Fotos é na nuvem — hackeável. Escreva no papel e guarde em local físico seguro.'},
+      {type:'mcq',q:'Alguém do suporte da Binance pediu sua seed phrase. O que fazer?',opts:['Fornecer — é o suporte oficial','NUNCA fornecer — é golpe 100%','Fornecer apenas as primeiras 6 palavras','Fornecer se pedir via e-mail oficial'],c:1,exp:'NENHUM suporte legítimo jamais pedirá sua seed phrase. Sem exceções. Quem pede é golpista.'},
+    ],
+    med:[
+      {type:'mcq',q:'Diferença entre hot wallet e cold wallet:',opts:['Hot = mais segura','Cold = hardware offline (mais segura); Hot = conectada à internet','São idênticas','Cold só para Bitcoin'],c:1,exp:'Cold wallet (Ledger, Trezor) fica offline — muito mais segura para grandes valores. Hot wallet (MetaMask) é prática mas vulnerável se o computador for comprometido.'},
+      {type:'mcq',q:'O que é phishing em crypto?',opts:['Taxa de mineração','Site/e-mail falso que imita plataforma legítima para roubar credenciais','Tipo de wallet','Protocolo de segurança'],c:1,exp:'Phishing: site falso idêntico ao real (ex: binance.com vs binânce.com). Sempre verifique a URL antes de digitar credenciais.'},
+      {type:'tf',q:'Ativar 2FA (autenticação de 2 fatores) em exchanges é opcional e desnecessário.',answer:false,exp:'FALSO! 2FA é essencial. Mesmo que sua senha seja roubada, o hacker precisaria do seu celular para acessar. Use Google Authenticator, não SMS.'},
+    ],
+    avd:[
+      {type:'mcq',q:'O que é uma "multisig wallet"?',opts:['Wallet com múltiplas seeds','Carteira que requer múltiplas assinaturas para autorizar transações','Wallet para múltiplas criptos','Exchange com várias contas'],c:1,exp:'Multisig (multi-signature): transações exigem aprovação de múltiplas chaves (ex: 2 de 3). Ideal para fundos de empresas ou grandes valores pessoais.'},
+      {type:'mcq',q:'O que é "dusting attack"?',opts:['Spam de e-mails','Envio de pequenas quantias de cripto para rastrear carteiras e deanonimizar usuários','Ataque de mineração','Golpe de NFT'],c:1,exp:'Dusting: envio de tiny amounts de cripto para mapear suas carteiras e transações, comprometendo sua privacidade. Não interaja com transações não solicitadas.'},
+      {type:'mcq',q:'Melhores práticas para uma cold wallet:',opts:['Conectar ao computador sempre que possível','Guardar seed phrase em múltiplos locais físicos seguros, nunca online','Compartilhar seed com familiar de confiança','Guardar seed no e-mail como backup'],c:1,exp:'Seed em múltiplos locais físicos seguros (cofre, local diferente do hardware). Nunca digital. Considere solução de herança digital para caso de emergência.'},
+    ]
+  },
+  'trading-crypto':{
+    init:[
+      {type:'mcq',q:'O que é stop loss?',opts:['Ordem de compra automática','Ordem de venda automática para limitar prejuízo','Taxa da exchange','Recompensa por mineração'],c:1,exp:'Stop loss: ordem automática que vende se o preço cair a um nível, limitando sua perda máxima. Essencial para proteção de capital.'},
+      {type:'tf',q:'A maioria dos day traders de cripto tem lucro consistente a longo prazo.',answer:false,exp:'FALSO! Estudos mostram que +95% dos traders perdem dinheiro no longo prazo. Custos, emoção e competir com algoritmos são obstáculos enormes.'},
+      {type:'mcq',q:'Regra básica de gestão de risco por operação:',opts:['Arriscar 50% do capital por trade','Arriscar no máximo 1-2% do capital','Arriscar tudo se tiver certeza','Sem limite definido'],c:1,exp:'Máximo de 1-2% do capital por trade garante que mesmo uma sequência de derrotas não acabará com seu portfólio.'},
+    ],
+    med:[
+      {type:'calc',q:'Calcule a relação Risco/Retorno:',desc:'BTC em $50.000, stop em $48.000, alvo em $55.000.',inputs:[{id:'entrada',label:'Entrada (USD)',val:50000},{id:'stop',label:'Stop Loss (USD)',val:48000},{id:'alvo',label:'Alvo (USD)',val:55000}],fn:'calcRR',resultLabel:'Relação Risco/Retorno'},
+      {type:'mcq',q:'O que é "FOMO" no trading?',opts:['Análise fundamentalista','Fear of Missing Out — comprar por medo de perder uma alta','Estratégia de short selling','Protocolo de segurança'],c:1,exp:'FOMO (medo de ficar de fora) leva traders a comprar no topo após grandes altas. Um dos erros mais comuns e custosos no trading emocional.'},
+      {type:'mcq',q:'O que é "scalping"?',opts:['Estratégia de longo prazo','Operações muito curtas (minutos) buscando pequenos lucros frequentes','Análise de fundamentos','Estratégia de dividendos em crypto'],c:1,exp:'Scalping: dezenas a centenas de operações por dia buscando ganhos pequenos. Exige disciplina extrema, baixíssima latência e domínio técnico.'},
+    ],
+    avd:[
+      {type:'calc',q:'Calcule o position sizing:',desc:'Você tem R$ 100.000. Aceita arriscar 1% por trade. Stop é de 5%. Qual o tamanho máximo da posição?',inputs:[{id:'capital_total',label:'Capital total (R$)',val:100000},{id:'risco_pct',label:'Risco por trade (%)',val:1},{id:'stop_pct',label:'Stop Loss (%)',val:5}],fn:'calcPositionSize',resultLabel:'Tamanho máximo da posição'},
+      {type:'mcq',q:'O que é "delta neutral" em trading?',opts:['Operação sem stop loss','Estratégia onde lucro/perda não depende da direção do preço','Análise de volume','Posição 100% em stablecoins'],c:1,exp:'Delta neutral: combinação de posições (ex: BTC spot + short futuro) que neutraliza a exposição direcional. O lucro vem de outros fatores (funding rate, prêmio de opção).'},
+      {type:'mcq',q:'O que é "funding rate" em futuros perpétuos?',opts:['Taxa de saque da exchange','Taxa paga entre longs e shorts para manter o preço do futuro próximo ao spot','Taxa de administração do fundo','Juros de empréstimo'],c:1,exp:'Funding rate: mecanismo de equilíbrio em futuros perpétuos. Funding positivo (longs predominam) = longs pagam shorts. Negativo = o contrário. Pode ser fonte de renda para quem está do lado certo.'},
+    ]
+  },
+};
+
+// ── CALCULATOR FUNCTIONS
+function calcCDB({cap,cdi,pct}){const b=parseFloat(cap)*(parseFloat(cdi)/100*parseFloat(pct)/100);const ir=b*0.175;return'R$ '+fmt(parseFloat(cap)+b-ir)+' (lucro líq: R$ '+fmt(b-ir)+')';}
+function calcDY({preco,divs}){return((parseFloat(divs)/parseFloat(preco))*100).toFixed(2)+'% ao ano';}
+function calcFIIDY({cota,rendimento}){const m=(parseFloat(rendimento)/parseFloat(cota))*100;return m.toFixed(2)+'% ao mês | '+(m*12).toFixed(2)+'% ao ano';}
+function calcFIICotas({fii_cota,fii_dy,renda_alvo}){const r=parseFloat(fii_cota)*parseFloat(fii_dy)/100;const c=Math.ceil(parseFloat(renda_alvo)/r);return c+' cotas = Capital R$ '+fmt(c*parseFloat(fii_cota));}
+function calcJurosComp({cap,taxa,anos}){const m=parseFloat(cap)*Math.pow(1+parseFloat(taxa)/100,parseFloat(anos));return'R$ '+fmt(m)+' (lucro: R$ '+fmt(m-parseFloat(cap))+')';}
+function calcRegra72({taxa72,capital72}){const a72=72/parseFloat(taxa72);const real=Math.log(2)/Math.log(1+parseFloat(taxa72)/100);return'~'+a72.toFixed(1)+' anos (real: '+real.toFixed(1)+'a) → R$ '+fmt(parseFloat(capital72)*2);}
+function calcIndFin({renda_mensal,taxa_inv,inflacao}){const rr=((1+parseFloat(taxa_inv)/100)/(1+parseFloat(inflacao)/100)-1)*100;const p=(parseFloat(renda_mensal)*12)/(rr/100);return'R$ '+fmt(p)+' (retorno real: '+rr.toFixed(2)+'% a.a.)';}
+function calcHalving({btc_price,reward,blocks}){const d=parseFloat(btc_price)*parseFloat(reward)*parseFloat(blocks);const a=parseFloat(btc_price)*(parseFloat(reward)/2)*parseFloat(blocks);return'Antes: R$ '+fmt(d)+'/dia → Após: R$ '+fmt(a)+'/dia';}
+function calcS2F({stock,flow_btc,blocks_year}){const f=parseFloat(flow_btc)*parseFloat(blocks_year);const s=(parseFloat(stock)*1e6)/f;return'S2F = '+s.toFixed(1)+' (maior = mais escasso)';}
+function calcPortfolioRF({selic_pct,cdb_pct,lca_pct}){const cap=50000,a=2,s=(parseFloat(selic_pct)/100)*cap,c=(parseFloat(cdb_pct)/100)*cap,l=(parseFloat(lca_pct)/100)*cap;const rS=s*(Math.pow(1.1375,a)-1)*0.825,rC=c*(Math.pow(1.1512,a)-1)*0.825,rL=l*(Math.pow(1.1265,a)-1);const tot=rS+rC+rL;return'R$ '+fmt(tot)+' ('+((tot/cap)*100).toFixed(1)+'% sobre R$ '+fmt(cap)+')';}
+function calcDCF({fcl,g,r}){const v=parseFloat(fcl)/((parseFloat(r)/100)-(parseFloat(g)/100));return'R$ '+fmt(v)+' ('+((v/parseFloat(fcl)).toFixed(1))+'x o fluxo anual)';}
+function calcRR({entrada,stop,alvo}){const ri=Math.abs(parseFloat(entrada)-parseFloat(stop)),re=Math.abs(parseFloat(alvo)-parseFloat(entrada)),rr=re/ri;return rr.toFixed(2)+':1 — '+(rr>=2?'✅ VÁLIDA (≥2:1)':'❌ NÃO OPERAR (<2:1)');}
+function calcAlocacao({rf_pct,acoes_pct,inter_pct,alt_pct}){const cap=30000,s=parseFloat(rf_pct)+parseFloat(acoes_pct)+parseFloat(inter_pct)+parseFloat(alt_pct);if(Math.abs(s-100)>0.5)return'⚠️ Soma = '+s+'% (deve ser 100%)';return'RF:R$'+fmt((parseFloat(rf_pct)/100)*cap)+' | Ações:R$'+fmt((parseFloat(acoes_pct)/100)*cap)+' | Inter:R$'+fmt((parseFloat(inter_pct)/100)*cap)+' | Alt:R$'+fmt((parseFloat(alt_pct)/100)*cap);}
+function calcSharpe({ret_cart,taxa_lr,desvio}){const sh=(parseFloat(ret_cart)-parseFloat(taxa_lr))/parseFloat(desvio);const r=sh>1?'Excelente ✅':sh>0.5?'Bom 👍':sh>0?'Regular ⚠️':'Ruim ❌';return sh.toFixed(2)+' — '+r;}
+function calcPositionSize({capital_total,risco_pct,stop_pct}){const risco_rs=parseFloat(capital_total)*parseFloat(risco_pct)/100;const pos=risco_rs/(parseFloat(stop_pct)/100);return'R$ '+fmt(pos)+' (risco: R$ '+fmt(risco_rs)+')';}
+[calcCDB,calcDY,calcFIIDY,calcFIICotas,calcJurosComp,calcRegra72,calcIndFin,calcHalving,calcS2F,calcPortfolioRF,calcDCF,calcRR,calcAlocacao,calcSharpe,calcPositionSize].forEach(fn=>window[fn.name]=fn);
+
+function escStr(s){return(s||'').replace(/\'/g,"&apos;").replace(/"/g,'&quot;');}
+
+function openLesson(id,level){
+  level=level||currentLevel||'init';
   const l=LESSONS[id]; if(!l) return;
   const overlay=document.getElementById('lesson-overlay');
   overlay.classList.add('open');
   document.getElementById('lpf').style.width='100%';
+  const exs=EXERCISES[id]?.[level]||[];
+  const lc={init:'🌱 Iniciante',med:'📈 Intermediário',avd:'🚀 Avançado'}[level];
+  const lco={init:'var(--green)',med:'var(--yellow)',avd:'var(--red)'}[level];
   document.getElementById('lesson-content').innerHTML=
-    `<div style="display:flex;align-items:center;gap:14px;margin-bottom:24px"><div style="font-size:40px">${l.icon}</div><h2 style="font-size:20px;line-height:1.3">${l.title}</h2></div>`+
+    `<div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+      <div style="font-size:40px">${l.icon}</div>
+      <div style="flex:1">
+        <div style="font-size:11px;font-weight:700;color:${lco};margin-bottom:4px">${lc}</div>
+        <h2 style="font-size:19px;line-height:1.3">${l.title}</h2>
+      </div>
+      <button class="btn btn-s btn-sm" onclick="pickLevel('${id}')">Trocar nível</button>
+    </div>`+
     l.sections.map(s=>{
-      if(s.type==='text') return `<div class="lesson-section"><div class="lesson-h">${s.h}</div><div class="lesson-p">${s.p}</div></div>`;
-      if(s.type==='list') return `<div class="lesson-section"><div class="lesson-h">${s.h}</div><ul style="padding-left:18px;display:flex;flex-direction:column;gap:8px;margin-top:8px">${s.items.map(i=>`<li style="font-size:13px;color:var(--text2);line-height:1.6">${i}</li>`).join('')}</ul></div>`;
-      if(s.type==='box') return `<div class="lesson-section"><div class="lesson-h">${s.h}</div><div class="lesson-box ${s.color||''}"><div class="lesson-p">${s.p}</div></div></div>`;
-      return '';
+      if(s.type==='text')return`<div class="lesson-section"><div class="lesson-h">${s.h}</div><div class="lesson-p">${s.p}</div></div>`;
+      if(s.type==='list')return`<div class="lesson-section"><div class="lesson-h">${s.h}</div><ul style="padding-left:18px;display:flex;flex-direction:column;gap:8px;margin-top:8px">${s.items.map(i=>`<li style="font-size:13px;color:var(--text2);line-height:1.6">${i}</li>`).join('')}</ul></div>`;
+      if(s.type==='box')return`<div class="lesson-section"><div class="lesson-h">${s.h}</div><div class="lesson-box ${s.color||''}"><div class="lesson-p">${s.p}</div></div></div>`;
+      return'';
     }).join('')+
-    `<div style="text-align:center;padding:20px 0"><div style="font-size:32px;margin-bottom:10px">✅</div><div style="font-size:16px;font-weight:700;margin-bottom:6px">Lição concluída!</div></div>`;
-  document.getElementById('lesson-nav').innerHTML=`<button class="btn btn-p" onclick="closeLesson()" style="flex:1">Voltar aos estudos</button>`;
+    (exs.length?renderExercises(exs,id,level):'<div style="text-align:center;padding:20px 0"><div style="font-size:32px;margin-bottom:10px">✅</div><div style="font-size:15px;font-weight:700">Lição concluída!</div></div>');
+  document.getElementById('lesson-nav').innerHTML=
+    `<button class="btn btn-s" onclick="pickLevel('${id}')" style="flex:1">Trocar nível</button>
+     <button class="btn btn-p" onclick="closeLesson()" style="flex:2">Concluir lição ✅</button>`;
+  setTimeout(()=>{document.querySelectorAll('.ex-calc-input').forEach(el=>el.dispatchEvent(new Event('input')));},150);
 }
 function closeLesson(){document.getElementById('lesson-overlay').classList.remove('open');}
+
+function renderExercises(exs,lid,level){
+  const dots=exs.map((_,i)=>`<div class="ex-prog-dot" id="exdot-${lid}-${i}"></div>`).join('');
+  return`<div class="exercise-section">
+    <div class="ex-header">
+      <div style="font-size:22px">✏️</div>
+      <div class="ex-title">Exercícios</div>
+      <span class="ex-badge ${level==='avd'?'interactive':'simple'}">${level==='avd'?'Interativo':'Prática'}</span>
+      <div style="margin-left:auto;font-size:12px;color:var(--text3)">${exs.length} exercícios</div>
+    </div>
+    <div class="lesson-ex-progress">${dots}</div>
+    ${exs.map((ex,i)=>renderSingleEx(ex,lid,i,exs.length)).join('')}
+  </div>`;
+}
+
+function renderSingleEx(ex,lid,idx,total){
+  const exId=`ex-${lid}-${idx}`;
+  if(ex.type==='mcq')return`<div class="ex-card" id="${exId}"><div style="font-size:11px;color:var(--text3);margin-bottom:8px">Exercício ${idx+1} de ${total}</div><div class="ex-q">${ex.q}</div><div class="ex-opts">${ex.opts.map((o,i)=>`<button class="ex-opt" onclick="answerEx('${lid}',${idx},${i},this,${ex.c},'${escStr(ex.exp)}')">${o}</button>`).join('')}</div><div class="ex-feedback" id="${exId}-fb"></div></div>`;
+  if(ex.type==='tf')return`<div class="ex-card" id="${exId}"><div style="font-size:11px;color:var(--text3);margin-bottom:8px">Exercício ${idx+1} de ${total} — V ou F</div><div class="ex-q">${ex.q}</div><div class="ex-opts"><button class="ex-opt" onclick="answerTF('${lid}',${idx},true,this,${ex.answer},'${escStr(ex.exp)}')">✅ Verdadeiro</button><button class="ex-opt" onclick="answerTF('${lid}',${idx},false,this,${ex.answer},'${escStr(ex.exp)}')">❌ Falso</button></div><div class="ex-feedback" id="${exId}-fb"></div></div>`;
+  if(ex.type==='calc'){
+    const inps=ex.inputs.map(inp=>`<div class="ex-calc-row"><span class="ex-calc-lbl">${inp.label}</span><input type="number" class="ex-calc-input" id="${exId}-${inp.id}" value="${inp.val}" oninput="runCalc('${lid}',${idx},'${ex.fn}','${exId}')"></div>`).join('');
+    return`<div class="ex-card" id="${exId}"><div style="font-size:11px;color:var(--text3);margin-bottom:8px">Exercício ${idx+1} de ${total} — Calculadora 🧮</div><div class="ex-q">${ex.q}</div>${ex.desc?`<div style="font-size:12px;color:var(--text2);margin-bottom:12px;line-height:1.6">${ex.desc}</div>`:''}<div class="ex-calc">${inps}</div><div class="ex-result" style="margin-top:12px"><div class="ex-result-lbl">${ex.resultLabel}</div><div class="ex-result-val" id="${exId}-val">—</div></div></div>`;
+  }
+  if(ex.type==='candle'){
+    const candles=[{o:50,h:80,l:30,c:75,bull:true,name:'Alta forte'},{o:60,h:65,l:20,c:25,bull:false,name:'Baixa forte'},{o:50,h:55,l:45,c:51,bull:true,name:'Doji'},{o:40,h:85,l:38,c:70,bull:true,name:'Martelo'}];
+    const sc=h=>Math.round((100-h)*1.2);
+    const cHtml=candles.map((c,ci)=>{const col=c.bull?'#22d3a5':'#f87171';const bH=Math.max(6,Math.abs(sc(c.c)-sc(c.o)));const bT=Math.min(sc(c.o),sc(c.c));const wH=sc(c.h),wB=sc(c.l);return`<div class="candle-item" onclick="answerCandle('${lid}',${idx},${ci},this,${ci===2})" title="${c.name}"><div style="position:relative;width:18px;height:120px"><div class="candle-stick" style="position:absolute;left:8px;top:${wH}px;height:${wB-wH}px;background:${col}"></div><div class="candle-body" style="position:absolute;left:0;top:${bT}px;height:${bH}px;background:${col};width:18px"></div></div><div class="candle-label">${String.fromCharCode(65+ci)}</div></div>`;}).join('');
+    return`<div class="ex-card" id="${exId}"><div style="font-size:11px;color:var(--text3);margin-bottom:8px">Exercício ${idx+1} de ${total} — Leitura de gráfico 📊</div><div class="ex-q">${ex.q}</div>${ex.desc?`<div style="font-size:12px;color:var(--text2);margin-bottom:14px">${ex.desc}</div>`:''}<div class="candle-exercise"><div class="candle-display">${cHtml}</div><div class="ex-feedback" id="${exId}-fb" style="width:100%"></div></div></div>`;
+  }
+  return'';
+}
+
+function answerEx(lid,idx,chosen,btn,correct,exp){
+  const exId=`ex-${lid}-${idx}`;
+  document.querySelectorAll(`#${exId} .ex-opt`).forEach(b=>b.onclick=null);
+  btn.classList.add(chosen===correct?'correct':'wrong');
+  document.querySelectorAll(`#${exId} .ex-opt`)[correct].classList.add('correct');
+  showExFb(exId,chosen===correct,exp);markExDot(lid,idx,chosen===correct);
+}
+function answerTF(lid,idx,chosen,btn,correct,exp){
+  const exId=`ex-${lid}-${idx}`;
+  document.querySelectorAll(`#${exId} .ex-opt`).forEach(b=>b.onclick=null);
+  const ok=chosen===correct; btn.classList.add(ok?'correct':'wrong');
+  if(!ok)document.querySelectorAll(`#${exId} .ex-opt`)[correct?0:1].classList.add('correct');
+  showExFb(exId,ok,exp);markExDot(lid,idx,ok);
+}
+function answerCandle(lid,idx,chosen,btn,isCorrect){
+  const exId=`ex-${lid}-${idx}`;
+  document.querySelectorAll(`#${exId} .candle-item`).forEach(b=>b.onclick=null);
+  btn.style.outline=`3px solid ${isCorrect?'var(--green)':'var(--red)'}`;btn.style.borderRadius='8px';
+  if(!isCorrect){const items=document.querySelectorAll(`#${exId} .candle-item`);if(items[2])items[2].style.outline='3px solid var(--green)';}
+  showExFb(exId,isCorrect,isCorrect?'Correto! O Doji (C) tem corpo mínimo — abertura ≈ fechamento, sinal de indecisão.':'Incorreto. O Doji é o C — corpo mínimo. Os outros têm corpos grandes indicando força direcional.');
+  markExDot(lid,idx,isCorrect);
+}
+function showExFb(exId,ok,exp){
+  const fb=document.getElementById(exId+'-fb');if(!fb)return;
+  fb.className=`ex-feedback ${ok?'ok':'err'}`;
+  fb.innerHTML=`${ok?'✅ Correto!':'❌ Incorreto.'} ${exp||''}`;fb.style.display='block';
+}
+function markExDot(lid,idx,ok){
+  const dot=document.getElementById(`exdot-${lid}-${idx}`);if(!dot)return;
+  dot.className=`ex-prog-dot ${ok?'done':''}`;if(!ok)dot.style.background='var(--red)';
+}
+function runCalc(lid,idx,fn,exId){
+  const allExs=Object.values(EXERCISES).flatMap(l=>Object.values(l).flat());
+  const ex=allExs.find(e=>e.fn===fn&&e.type==='calc');if(!ex)return;
+  const vals={};
+  ex.inputs.forEach(inp=>{const el=document.getElementById(`${exId}-${inp.id}`);vals[inp.id]=el?parseFloat(el.value)||0:0;});
+  try{const r=window[fn]?window[fn](vals):'—';const el=document.getElementById(`${exId}-val`);if(el)el.textContent=r;markExDot(lid,idx,true);}catch(e){console.warn(e);}
+}
 
 const QUIZZES={
   inv:[
